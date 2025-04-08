@@ -9,15 +9,15 @@
 
 <body>
     <h1>Reset Password</h1>
-    <form method="post" action="login.html">
+    <form id="resetForm" onsubmit="return validatePassword(event)">
         <table>
             <tr>
                 <td><label for="newPass">New Password:</label></td>
-                <td><input id="newPass" type="password" name="newPass" placeholder="Enter new password"/></td>
+                <td><input id="newPass" type="password" name="newPass" placeholder="Enter new password" required /></td>
             </tr>
             <tr>
                 <td><label for="confirmPass">Confirm Password:</label></td>
-                <td><input id="confirmPass" type="password" name="confirmPass" placeholder="Confirm password"/></td>
+                <td><input id="confirmPass" type="password" name="confirmPass" placeholder="Confirm password" required /></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -26,8 +26,10 @@
                 </td>
             </tr>
         </table>
+        <p id="passError" style="color: red;"></p>
     </form>
-    <script src = "../../controllers/auth/resetPass.js"></script>
+
+    <script src="../../controllers/auth/resetPass.js"></script>
 </body>
 
 </html>
