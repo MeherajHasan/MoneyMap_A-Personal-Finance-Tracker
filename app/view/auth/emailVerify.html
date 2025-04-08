@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verification</title>
+</head>
+
+<body>
+    <h1>Email Verification</h1>
+    <form method="get">
+        <table>
+            <tr>
+                <td><label for="code">Enter Verification Code:</label></td>
+                <td><input id="code" type="text" name="code" placeholder="Enter code here" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" formaction="emailVerify.html">Resend Code</button>
+                    <button type="submit" formaction="resetPass.html">Send</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p>Entered wrong email? <a href="forgetPass.html">Go back</a></p>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
