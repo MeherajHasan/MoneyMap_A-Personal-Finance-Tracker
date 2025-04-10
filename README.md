@@ -49,4 +49,57 @@
 
 ---
 
+## 📁 Project Structure
+
+<pre>
+MoneyMap/
+├── app/
+│   ├── controllers/
+│   │   └── auth/
+│   ├── helpers/
+│   ├── models/
+│   ├── services/
+│   ├── styles/
+│   └── view/
+│       └── auth/
+│           ├── emailVerify.html
+│           ├── forgetPass.html
+│           ├── login.html
+│           ├── resetPass.html
+│           └── singup.html
+├── config/
+├── core/
+├── files/
+├── public/
+│   ├── assets/
+│   ├── index.html
+│   └── loader.js
+├── storage/
+└── README.md
+</pre>
+
+---
+
+## ⚙️  Clone the repository
+```bash
+git clone https://github.com/your-username/MoneyMap.git
+```
+---
+
+## 📇 **Author Information**
+
+
+**🖋️ Name:** *Meheraj Hasan*  
+**🎓 Student ID:** `22-49363-3`  
+**📚 Course:** *Web Technologies [C]*  
+**📅 Semester:** *Spring 2024–2025*  
+**🏫 Institution:** *American International University–Bangladesh (AIUB)*  
+**📍 Location:** *Dhaka-1229, Bangladesh*
+
+---
+
+
+
+
+
 
