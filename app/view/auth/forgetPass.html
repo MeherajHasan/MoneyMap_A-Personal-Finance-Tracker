@@ -5,29 +5,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forgot Password</title>
+    <link rel="stylesheet" href="../../styles/auth.css">
+    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon">
 </head>
 
 <body>
-    <h1>Forgot Password</h1>
-    <form method="get">
-        <table>
-            <tr>
-                <td><label for="email">Email:</label></td>
-                <td><input id="email" type="email" name="email" placeholder="xyz@gmail.com" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit" formaction="HomePage.html">Cancel</button>
-                    <button type="submit" formaction="emailVerify.html">Submit</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <p>Remembered your password? <a href="login.html">Login here</a></p>
-                </td>
-            </tr>
-        </table>
-    </form>
-</body>
+    <header>
+        <h1>Forgot Password</h1>
+    </header>
 
+    <main>
+        <form id="forgetForm" action="emailVerify.html" method="post">
+            <label for="email">Enter your email:</label>
+            <input id="email" type="text" name="email" placeholder="xyz@gmail.com"/>
+            <br>
+
+            <button type="button" onclick="window.location.href='login.html'">Cancel</button>
+
+            <button id="forgotSubmitBtn" type="submit">Submit</button>
+
+            <p id="forgotMSG"></p>
+
+            <p>Remembered your password? <a href="login.html">Login here</a></p>
+        </form>
+    </main>
+
+    <script src="../../controllers/auth/forgetPass.js"></script>
+
+</body>
 </html>

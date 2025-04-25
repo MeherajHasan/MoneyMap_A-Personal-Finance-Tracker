@@ -5,29 +5,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Email Verification</title>
+    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../styles/auth.css">
 </head>
 
 <body>
-    <h1>Email Verification</h1>
-    <form method="get">
-        <table>
-            <tr>
-                <td><label for="code">Enter Verification Code:</label></td>
-                <td><input id="code" type="text" name="code" placeholder="Enter code here" /></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit" formaction="emailVerify.html">Resend Code</button>
-                    <button type="submit" formaction="resetPass.html">Send</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <p>Entered wrong email? <a href="forgetPass.html">Go back</a></p>
-                </td>
-            </tr>
-        </table>
-    </form>
+
+    <header>
+        <h1>Email Verification</h1>
+    </header>
+
+    <main>
+        <form action="" id="emailVerifyForm" method="post">
+            <label for="verifyCode">Enter Verification Code:</label>
+            <input id="verifyCode" type="text" name="verifyCode" placeholder="Must be 6 digits"/>
+            <br>
+
+            <a href="login.html"><button type="button">Cancel</button></a>
+            <button type="reset">Reset</button>
+            <button type="submit" id="verifyConfirmBtn" formaction="verify.html">Confirm</button>
+
+            <p id="verifyMSG"></p>
+
+            <div>Entered wrong email? <a href="forgetPass.html">Go back</a></div>
+        </form>
+        <script src="../../controllers/auth/emailVerify.js"></script>
+    </main>
 </body>
 
 </html>

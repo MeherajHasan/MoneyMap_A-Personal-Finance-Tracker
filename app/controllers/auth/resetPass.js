@@ -1,33 +1,40 @@
-function validatePassword(event) {
-    event.preventDefault();  // Prevent the default form submission
+const form = document.getElementById("resetPassForm");
+const newPassInput = document.getElementById("newPass");
+const confirmPassInput = document.getElementById("confirmPass");
+const passErrorMSG1 = document.getElementById("passErrorMSG1");
+const passErrorMSG2 = document.getElementById("passErrorMSG2");
+const submitBtn = document.getElementById("resetPassBtn");
 
-    const newPass = document.getElementById('newPass').value.trim();
-    const confirmPass = document.getElementById('confirmPass').value.trim();
-    const errorElement = document.getElementById('passError');
-    let errorMsg = '';
+submitBtn.disabled = true;
 
-    errorElement.textContent = '';
+function validate() {
+  const newPass = newPassInput.value.trim();
+  const confirmPass = confirmPassInput.value.trim();
 
-    // Check if either password field is empty
-    if (newPass === '' || confirmPass === '') {
-        errorMsg = 'Password fields cannot be empty';
-    }
-    // Check if both passwords have at least 8 characters
-    else if (newPass.length < 8 || confirmPass.length < 8) {
-        errorMsg = 'Passwords must be at least 8 characters long';
-    }
-    // Check if both passwords match
-    else if (newPass !== confirmPass) {
-        errorMsg = 'Passwords do not match';
-    }
+  let isValid = true;
 
-    // If there's an error message, show it and prevent form submission
-    if (errorMsg !== '') {
-        errorElement.textContent = errorMsg;
-        return false;
-    }
+  passErrorMSG1.textContent = "";
+  passErrorMSG2.textContent = "";
 
-    // If everything is valid, redirect to login.html
-    window.location.href = 'login.html';
-    return false;  // Prevent form submission to the server
+  if (!newPass) {
+    passErrorMSG1.textContent = "Please enter a new password.";
+    isValid = false;
+  } else if (newPass.length < 8) {
+    passErrorMSG1.textContent = "Password must be at least 8 characters long.";
+    isValid = false;
+  }
+
+  if (confirmPass && confirmPass !== newPass) {
+    passErrorMSG2.textContent = "Passwords do not match.";
+    isValid = false;
+  }
+
+  submitBtn.disabled = !isValid;
 }
+
+newPassInput.addEventListener("input", validate);
+confirmPassInput.addEventListener("input", validate);
+
+form.addEventListener("submit", (e) => {
+  if (submitBtn.disabled) e.preventDefault();
+});
