@@ -5,47 +5,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Form</title>
+    <link rel="stylesheet" href="../../styles/auth.css">
+    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon" />
 </head>
 
 <body>
-    <h1>Login Form</h1>
-    <form> <!--<form action="HomePage.html" method="get">-->
-        <table>
-            <tr>
-                <td><label for="email">Email:</label></td>
-                <td><input id="email" type="email" name="email" placeholder="xyz@gmail.com" required /></td>
-            </tr>
+    <header>
+        <h1>Login Form</h1>
+    </header>
 
-            <tr>
-                <td><label for="password">Password:</label></td>
-                <td><input id="password" type="password" name="password" placeholder="Enter your password" required /></td>
-            </tr>
+    <main>
+        <form action="" method="POST" id="loginForm">
+            <label for="email">Email:</label>
+            <input id="email" type="email" name="email" placeholder="xyz@gmail.com" />
+            <p id="emailError"></p>
 
-            <tr>
-                <td colspan="2">
-                    <input id="remember" type="checkbox" name="remember" />
-                    <label for="remember">Remember me</label>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <p><a href="ForgetPass.html">Forgot Password?</a></p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
-                    <button type="reset">Reset</button>
-                    <button type="submit">Login</button> 
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <p>Don't have an account? <a href="singup.html">Register here</a></p>
-                </td>
-            </tr>
-        </table>
-    </form>
+            <label for="password">Password:</label>
+            <input id="password" type="password" name="password" placeholder="Enter your password" />
+            <p id="passwordError"></p>
+
+            <input id="remember" type="checkbox" name="remember" />
+            <label for="remember">Remember me</label>
+
+            <p><a href="forgetPass.html">Forgot Password?</a></p>
+
+            <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
+            <button type="reset">Reset</button>
+            <button type="submit" id="loginSubmitBtn">Login</button>
+
+            <p>Don't have an account? <a href="signup.html">Register here</a></p>
+
+        </form>
+    </main>
+    <script src="../../controllers/auth/login.js"></script>
 </body>
 
 </html>
