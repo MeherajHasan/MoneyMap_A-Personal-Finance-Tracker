@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../../styles/dashboard/dashboard.css" type="text/css">
+    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <nav class="sidebar">
+            <img id="MoneyMap-logo" src="../../../storage/fullLogo.png" alt="MoneyMap-logo">
+            <ul class="nav-menu">
+                <li>
+                    <a href="#"><img class="menu-icon" id="income-icon" src="../../../storage/income.png" alt="income-icon">Income</a>
+                    <ul class="submenu">
+                        <li><a href="#">Income Manager</a></li>
+                        <li><a href="#">Add Secondary Income</a></li>
+                        <li><a href="#">Transactions</a></li>
+                        <li><a href="#">Analytics</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><img class="menu-icon" id="expense-icon" src="../../../storage/expense.png" alt="expense-icon">Expenses</a>
+                    <ul class="submenu">
+                        <li><a href="#">Expense Manager</a></li>
+                        <li><a href="#">Transactions</a></li>
+                        <li><a href="#">Analytics</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><img class="menu-icon" id="budget-goal-icon" src="../../../storage/budget.png" alt="budget-goal-icon">Budget Goals</a>
+                    <ul class="submenu">
+                        <li><a href="#">Goal Dashboard</a></li>
+                        <li><a href="#">Add New Goal</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><img class="menu-icon" id="bill-icon" src="../../../storage/bill.png" alt="bill-icon">Bills</a>
+                    <ul class="submenu">
+                        <li><a href="#">Bill Dashboard</a></li>
+                        <li><a href="#">Add New Bill</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><img class="menu-icon" id="report-icon" src="../../../storage/report.png" alt="report-icon">Reports</a>
+                    <ul class="submenu">
+                        <li><a href="#">Spending Trends</a></li>
+                        <li><a href="#">Income vs Expense</a></li>
+                        <li><a href="#">Net Worth</a></li>
+                        <li><a href="#">Net Spending</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><img class="menu-icon" id="debt-icon" src="../../../storage/debt.png" alt="debt-icon">Debt Tracking</a></li>
+                <li><a href="#"><img class="menu-icon" id="goals-icon" src="../../../storage/savings.png" alt="goals-icon">Saving Goals</a></li>
+                <li><a href="#"><img class="menu-icon" id="linking-icon" src="../../../storage/linking.png" alt="linking-icon">Account Linking</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-right">
+                    <button class="navigation-btn" id="profileBtn"><img id="profile-img" src="../../../storage/profile.png" alt="profile-img"></button>
+                    <button class="navigation-btn" id="notificationBtn"><img id="notification-icon" src="../../../storage/notification-white.png" alt="notification-icon"></button>
+                    <button class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../storage/logout.png" alt="logout-icon"></button>
+                </div>
+            </header>
+
+            <section class="dashboard-widgets">
+                <h1>Welcome to Your Dashboard!</h1>
+                <p>Select a feature from the sidebar to get started.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../app/view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../controllers/dashboard/dashboard.js"></script>
+</body>
+</html>
