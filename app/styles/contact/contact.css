@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f4e3;
+    color: #003366; 
+}
+
+header {
+    width: 100%;
+    height: 38vh;
+    background-color: #003366;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#moneyMap-logo {
+    text-align: center; /* Center the logo container */
+    width: 80%;
+}
+
+#moneyMap-logo img {
+    max-height: 80%;
+    width: 40%;
+    display: block;
+    margin: 0 auto; /* Center the logo image */
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #003366; 
+}
+
+.contact-container h1 {
+    font-size: 2rem;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-container p {
+    font-size: 1rem;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 220px;
+    display: block;
+    color: #003366;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 220px;
+    border: 1px solid #003366;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #003366;
+    background-color: #f1f1f1; 
+}
+
+textarea {
+    resize: vertical;
+}
+
+p[id$="Error"] {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+#captchaDisplay {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #003366;
+    margin-left: 220px;
+}
+
+input[type="text"]#captcha {
+    width: 40%;
+}
+
+
+#btn-submit {
+    margin-left: 250px;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #003366;
+    font-weight: bold;
+    color: #f9f4e3; 
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;  
+}
+
+button:hover {
+    background-color: #002244; 
+}
+
+footer {
+    background-color: #003366;
+    color: #f9f4e3;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

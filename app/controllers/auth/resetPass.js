@@ -13,19 +13,19 @@ function validate() {
 
   let isValid = true;
 
-  passErrorMSG1.textContent = "";
-  passErrorMSG2.textContent = "";
+  passErrorMSG1.innerHTML = "";
+  passErrorMSG2.innerHTML = "";
 
   if (!newPass) {
-    passErrorMSG1.textContent = "Please enter a new password.";
+    passErrorMSG1.innerHTML = "Please enter a new password.";
     isValid = false;
   } else if (newPass.length < 8) {
-    passErrorMSG1.textContent = "Password must be at least 8 characters long.";
+    passErrorMSG1.innerHTML = "Password must be at least 8 characters long.";
     isValid = false;
   }
 
   if (confirmPass && confirmPass !== newPass) {
-    passErrorMSG2.textContent = "Passwords do not match.";
+    passErrorMSG2.innerHTML = "Passwords do not match.";
     isValid = false;
   }
 
