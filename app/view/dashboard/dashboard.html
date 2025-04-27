@@ -56,12 +56,16 @@
                 <li><a href="#"><img class="menu-icon" id="debt-icon" src="../../../storage/debt.png" alt="debt-icon">Debt Tracking</a></li>
                 <li><a href="#"><img class="menu-icon" id="goals-icon" src="../../../storage/savings.png" alt="goals-icon">Saving Goals</a></li>
                 <li><a href="#"><img class="menu-icon" id="linking-icon" src="../../../storage/linking.png" alt="linking-icon">Account Linking</a></li>
+                <li><a href="#"><img class="menu-icon" id="settings-icon" src="../../../storage/settings.png" alt="settings-icon">Settings</a></li>
+                <li><a href="../../view/contact/contract.html"><img class="menu-icon" id="support-icon" src="../../../storage/support.png" alt="support-icon">Feedback & Support</a></li>
             </ul>
         </nav>
 
         <main class="main-content">
             <header class="dashboard-header">
                 <div class="header-right">
+                    <span class="navigation-btn" id="sync-status"></span>
+                    <button class="navigation-btn" id="syncBtn"><img id="sync-icon" src="../../../storage/sync.png" alt="sync-icon"></button>
                     <button class="navigation-btn" id="profileBtn"><img id="profile-img" src="../../../storage/profile.png" alt="profile-img"></button>
                     <button class="navigation-btn" id="notificationBtn"><img id="notification-icon" src="../../../storage/notification-white.png" alt="notification-icon"></button>
                     <button class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../storage/logout.png" alt="logout-icon"></button>
@@ -69,8 +73,39 @@
             </header>
 
             <section class="dashboard-widgets">
-                <h1>Welcome to Your Dashboard!</h1>
+                <h1>Welcome to Your Dathshboard!</h1>
                 <p>Select a feature from the sidebar to get started.</p>
+                 
+                <div class="widget" id="income-widget">
+                    <h2 class="widget-title">Income</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div> 
+                <div class="widget" id="expense-widget">
+                    <h2 class="widget-title">Expenses</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div> 
+                <div class="widget" id="budget-widget">
+                    <h2 class="widget-title">Budget Goals</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div> 
+                <div class="widget" id="savings-widget">
+                    <h2 class="widget-title">Savings</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div> 
+                <div class="widget" id="debt-widget">
+                    <h2 class="widget-title">Debt</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div> 
+                <div class="widget" id="net-worth-widget">
+                    <h2 class="widget-title">Net Worth</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div>
             </section>
         </main>
     </div>

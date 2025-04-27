@@ -6,31 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Email Verification</title>
     <link rel="icon" href="../../../storage/logo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../../styles/auth.css">
+    <link rel="stylesheet" href="../../styles/auth/emailVerify.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Email Verification</h1>
+    <header id="header">
+        <img src="../../../storage/fullLogo.png" alt="MoneyMap-logo" id="logo" />
     </header>
 
-    <main>
+    <main id="emailVerifyMain">
         <form action="" id="emailVerifyForm" method="post">
-            <label for="verifyCode">Enter Verification Code:</label>
-            <input id="verifyCode" type="text" name="verifyCode" placeholder="Must be 6 digits"/>
+            <h1 id="verificationTitle">Email Verification</h1>
+            <label for="verifyCode" class="inputLabel">Enter Verification Code:</label>
+            <input id="verifyCode" class="inputField" type="text" name="verifyCode" placeholder="Must be 6 digits" />
             <br>
 
-            <a href="login.html"><button type="button">Cancel</button></a>
-            <button type="reset">Reset</button>
-            <button type="submit" id="verifyConfirmBtn" formaction="verify.html">Confirm</button>
+            <a href="login.html" class="cancelBtnLink"><button type="button" class="cancelBtn">Cancel</button></a>
+            <button type="reset" class="resetBtn">Reset</button>
+            <button type="submit" id="verifyConfirmBtn" class="submitBtn" formaction="verify.html">Confirm</button>
 
-            <p id="verifyMSG"></p>
+            <p id="verifyMSG" class="verificationMessage"></p>
 
-            <div>Entered wrong email? <a href="forgetPass.html">Go back</a></div>
+            <div class="emailErrorLink">Entered wrong email? <a href="forgetPass.html" class="errorLink">Go back</a>
+            </div>
         </form>
-        <script src="../../controllers/auth/emailVerify.js"></script>
     </main>
+
+    <footer id="footer">
+        <p>&copy; 2025 <a href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+ 
+    <script src="../../controllers/auth/emailVerify.js"></script>
 </body>
 
 </html>

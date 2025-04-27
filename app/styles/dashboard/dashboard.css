@@ -1,182 +1,235 @@
-/* ===== Reset default styles ===== */
+/* Reset some basic styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
-/* ===== Dashboard Container ===== */
+/* Dashboard container */
 .dashboard-container {
     display: flex;
-    flex-direction: row;
     min-height: 100vh;
-    background-color: #f9f4e3; /* Soft cream */
 }
 
-/* ===== Sidebar ===== */
+/* Sidebar */
 .sidebar {
     width: 250px;
-    background-color: #003366; /* Dark blue */
+    background-color: #0D1B2A; /* deep blue */
     color: #ffffff;
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 20px 0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
 }
 
-/* Logo in Sidebar */
 #MoneyMap-logo {
     width: 180px;
-    height: auto;
-    margin-bottom: 30px;
+    margin: 0 auto 30px auto;
 }
 
 /* Nav Menu */
 .nav-menu {
     list-style: none;
-    width: 100%;
 }
 
 .nav-menu > li {
-    margin-bottom: 15px;
-    position: relative;
+    padding: 10px 20px;
 }
 
 .nav-menu > li > a {
-    display: flex;
-    align-items: center;
     text-decoration: none;
     color: #ffffff;
-    font-weight: 600;
-    padding: 10px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
 }
 
-.nav-menu > li > a:hover {
-    background-color: #003366e3; /* Slightly lighter blue */
-}
-
-/* ===== Menu Icons ===== */
 .menu-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
-    vertical-align: middle;
 }
 
-/* ===== Submenu ===== */
+/* Submenu */
 .submenu {
     list-style: none;
-    margin-top: 5px;
-    margin-left: 30px;
+    padding-left: 40px;
+    margin-top: 8px;
     display: none;
 }
 
+/* No hover-to-open submenu now */
+.nav-menu li:hover .submenu {
+    display: none;
+}
+
+/* You'll expand submenu manually with JavaScript or other logic */
+
 .submenu li {
-    margin-bottom: 8px;
+    margin: 5px 0;
 }
 
 .submenu li a {
     text-decoration: none;
-    color: #dcdde1;
+    color: #c0c0c0;
     font-size: 14px;
-    display: block;
-    padding: 6px 0;
-    transition: color 0.3s ease;
 }
 
 .submenu li a:hover {
-    color: papayawhip;
+    color: #ffffff;
 }
 
-/* ===== Main Content ===== */
+/* Main content */
 .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    margin-left: 250px;
     padding: 20px;
-    background-color: #f9f4e3;
-    overflow-y: auto;
+    flex: 1;
+    background-color: #f4f6f8;
+    min-height: 100vh;
 }
 
-/* ===== Dashboard Header ===== */
+/* Header */
 .dashboard-header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: #003366; /* Dark blue background */
-    padding: 20px;
-    height: 150px; /* Fixed height */
-    border-radius: 12px;
+    padding: 10px 0;
+    background-color: #1B263B;
+    padding-right: 20px;
+    border-radius: 8px;
     margin-bottom: 20px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== Header Buttons ===== */
 .header-right {
     display: flex;
+    align-items: center;
     gap: 15px;
 }
 
 .navigation-btn {
-    background-color: #003366;
+    background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.navigation-btn:hover {
-    background-color: #003366e3;
+    position: relative;
 }
 
 .navigation-btn img {
-    width: 28px;
-    height: 28px;
-    object-fit: cover;
+    width: 30px;
+    height: 30px;
 }
 
-/* ===== Dashboard Widgets ===== */
+#sync-status {
+    color: #ffffff;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/* Dashboard widgets */
 .dashboard-widgets {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 .dashboard-widgets h1 {
-    margin-bottom: 20px;
-    font-size: 32px;
-    color: #003366;
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #1B263B;
+    display: block;  /* Ensures it's a block-level element */
+    text-align: center;
+    width: 100%;
 }
 
 .dashboard-widgets p {
-    font-size: 18px;
-    color: #555;
+    margin-bottom: 20px;
+    color: #3d3d3d;
+    display: block;  /* Ensures it's a block-level element */
+    text-align: center;
+    width: 100%;
 }
 
-/* ===== Footer ===== */
-footer {
-    width: 100%;
-    background-color: #003366;
+
+/* Widgets Layout */
+.dashboard-widgets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Widget card */
+.widget {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    flex: 0 0 calc(50% - 20px); /* 2 widgets per row with 20px gap */
+}
+
+/* Center the last widget if odd number */
+.widget:last-child:nth-child(odd) {
+    flex-basis: 100%;
+    max-width: 400px;
+}
+
+/* Widget content */
+.widget-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #0D1B2A;
+}
+
+.widget-amount {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.widget-action-btn {
+    background-color: #1B263B;
     color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.widget-action-btn:hover {
+    background-color: #0D1B2A;
+}
+
+/* Sync widget special styling */
+#lastSynced-widget .widget-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#lastSynced-widget img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Footer */
+footer {
     text-align: center;
     padding: 15px 0;
-    font-size: 1rem;
-    position: relative;
+    background-color: #0D1B2A;
+    color: #ffffff;
+    font-size: 14px;
 }
 
 footer a {
-    color: white;
+    color: #4FC3F7;
     text-decoration: none;
-    font-style: italic;
-    transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: papayawhip;
+    text-decoration: underline;
 }
