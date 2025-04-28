@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Hustle Tracker</title>
+    <link rel="stylesheet" href="../../styles/income/side-hustle-tracker.css">
+    <link rel="icon" href="../../../storage/logo.png">
+</head>
+
+<body>
+    <header>
+        <img id="MoneyMap-logo" src="../../../storage/fullLogo.png" alt="MoneyMap Logo">
+    </header>
+
+    <main>
+        <h1>Track Side Hustle</h1>
+        <form id="side-hustle-form" onsubmit="return false;">
+            <label for="hustle-name"><strong>Hustle Name:</strong></label>
+            <input type="text" id="hustle-name" name="hustle-name" required>
+
+            <label for="amount"><strong>Amount Earned:</strong></label>
+            <input type="number" id="amount" name="amount" min="0" required>
+
+            <label for="date"><strong>Earned Date:</strong></label>
+            <input type="date" id="date" name="date" required>
+
+            <p id="errorMSG"></p>
+
+            <button type="button" class="btn" id="save-btn">Save</button>
+            <button type="button" class="btn" id="cancel-btn">Cancel</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../controllers/income/side-hustle-tracker.js"></script>
+</body>
+</html>
