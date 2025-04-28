@@ -22,14 +22,13 @@ syncBtn.addEventListener('click', () => {
     const lastSyncedDate = currentDate.toLocaleString(); 
 
     syncStatus.innerHTML = `Last Synced: ${lastSyncedDate}`;
-    // Update the sync status in the UI
+    
     syncBtn.disabled = false;
-  }, 2000); // Simulate a 2-second sync process
+  }, 2000); 
 });
 
-// Profile Button Event Listener
 profileBtn.addEventListener('click', () => {
-  window.location.href = '../'; // Redirect to profile page --> not complete
+  window.location.href = '../../view/profile/profile.html'; 
 });
 
 // Notification Button Event Listener
@@ -42,41 +41,37 @@ logoutBtn.addEventListener('click', () => {
   window.location.href = '../../view/auth/login.html'; //logout logic --> not complete
 });
 
-// Sidebar Item Click Handling
 sidebarItems.forEach(item => {
   item.addEventListener('click', (event) => {
     const submenu = item.nextElementSibling;
     
-    // Check if the next sibling is a submenu and toggle display
     if (submenu && submenu.classList.contains('submenu')) {
-      // Toggle submenu display using inline styles (no CSS involved)
+      
       if (submenu.style.display === 'block') {
-        submenu.style.display = 'none'; // Hide the submenu
+        submenu.style.display = 'none'; 
       } else {
-        submenu.style.display = 'block'; // Show the submenu
+        submenu.style.display = 'block'; 
       }
     } else {
-      // If no submenu, navigate to the corresponding page (or handle action)
+      
       const href = item.getAttribute('href');
       if (href && href !== "#") {
-        window.location.href = href; // Navigate to the link (if any)
+        window.location.href = href; 
       }
     }
   });
 });
 
-// Submenu Item Click Handling
 const submenuItems = document.querySelectorAll('.submenu > li > a');
 submenuItems.forEach(submenuItem => {
   submenuItem.addEventListener('click', (event) => {
     const href = submenuItem.getAttribute('href');
     if (href && href !== "#") {
-      window.location.href = href; // Navigate to the corresponding page
+      window.location.href = href; 
     }
   });
 });
 
-// Simulate setting dynamic data for widgets
 const setWidgetData = () => {
   incomeWidgetAmount.textContent = "$5000";
   expenseWidgetAmount.textContent = "$2000";
