@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Manager</title>
+    <link rel="stylesheet" href="../../styles/expense/category-manager.css">
+    <link rel="icon" href="../../../storage/logo.png">
+</head>
+
+<body>
+    <header>
+        <img id="MoneyMap-logo" src="../../../storage/fullLogo.png" alt="MoneyMap-logo">
+    </header>
+
+    <main>
+        <h1>Manage Categories</h1>
+        <form id="add-category-form" onsubmit="return false;">
+            <label for="category-name"><strong>New Category Name:</strong></label>
+            <input type="text" id="category-name" name="category-name" required>
+
+            <p id="errorMSG"></p>
+
+            <button type="button" class="btn" id="add-category-btn">Add Category</button>
+        </form>
+
+        <section id="categories-list">
+            <h2>Existing Categories</h2>
+            <ul id="category-items">
+                <!-- Categories will be listed here dynamically -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../controllers/expense/category-manager.js"></script>
+</body>
+</html>
