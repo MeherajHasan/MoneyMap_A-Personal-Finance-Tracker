@@ -1,0 +1,130 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+header {
+    background-color: #1B263B;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#MoneyMap-logo {
+    width: 350px;
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Main Section */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #0D1B2A;
+}
+
+/* Form */
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Current Name */
+form p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #1B263B;
+}
+
+form strong {
+    color: #1B263B;
+}
+
+/* Labels and Inputs */
+label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #1B263B;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Error Message */
+#errorMSG {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Buttons */
+.btn {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #3A506B;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #27394d;
+}
+
+/* Footer */
+footer {
+    background-color: #1B263B;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

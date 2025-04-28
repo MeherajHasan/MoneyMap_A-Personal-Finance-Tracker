@@ -77,23 +77,23 @@ fileInput.addEventListener('change', (event) => {
 
 // Edit Button Redirections
 editNameBtn.addEventListener('click', () => {
-    window.location.href = 'name-edit.html';
+    window.location.href = 'edit-name.html';
 });
 
 identityEditBtn.addEventListener('click', () => {
-    window.location.href = 'identity-edit.html';
+    window.location.href = 'edit-identity.html';
 });
 
 mailEditBtn.addEventListener('click', () => {
-    window.location.href = 'mail-edit.html';
+    window.location.href = 'edit-mail.html';
 });
 
 phoneEditBtn.addEventListener('click', () => {
-    window.location.href = 'phone-edit.html';
+    window.location.href = 'edit-phone.html';
 });
 
 addressEditBtn.addEventListener('click', () => {
-    window.location.href = 'address-edit.html';
+    window.location.href = 'edit-address.html';
 });
 
 linkedAccEditBtn.addEventListener('click', () => {
