@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Setup Recurring Income</title>
     <link rel="stylesheet" href="../../styles/income/recurring-income-setup.css">
-    <link rel="icon" href="../../../storage/logo.png">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <img id="MoneyMap-logo" src="../../../storage/fullLogo.png" alt="MoneyMap Logo">
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo">
     </header>
 
     <main>
         <h1>Setup Recurring Income</h1>
         <form id="recurring-form" onsubmit="return false;">
             <label for="source-name"><strong>Source Name:</strong></label>
-            <input type="text" id="source-name" name="source-name" required>
+            <input type="text" id="source-name" name="source-name"> <br>
 
             <label for="amount"><strong>Monthly Amount:</strong></label>
-            <input type="number" id="amount" name="amount" min="0" required>
+            <input type="number" id="amount" name="amount"> <br>
 
             <label for="start-date"><strong>Start Date:</strong></label>
-            <input type="date" id="start-date" name="start-date" required>
+            <input type="date" id="start-date" name="start-date">
 
             <p id="errorMSG"></p>
 
@@ -36,6 +36,6 @@
         <p>&copy; 2025 <a href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
     </footer>
 
-    <script src="../../controllers/income/recurring-income-setup.js"></script>
+    <script src="../../validation/income/recurring-income-setup.js"></script>
 </body>
 </html>
