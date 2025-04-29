@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <img id="MoneyMap-logo" src="../../../storage/fullLogo.png" alt="MoneyMap Logo">
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo">
     </header>
 
     <main>
@@ -33,16 +33,6 @@
         <p>&copy; 2025 <a id="about" href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
     </footer>
 
-    <script>
-        document.getElementById('log-paycheck-btn').onclick = function() {
-            window.location.href = '../../view/income/paycheck-log.html';
-        };
-        document.getElementById('setup-recurring-btn').onclick = function() {
-            window.location.href = '../../view/income/recurring-income-setup.html';
-        };
-        document.getElementById('track-side-hustle-btn').onclick = function() {
-            window.location.href = '../../view/income/side-hustle-tracker.html';
-        };
-    </script>
+    <script src="../../validation/income/income-recording.js"></script>
 </body>
 </html>

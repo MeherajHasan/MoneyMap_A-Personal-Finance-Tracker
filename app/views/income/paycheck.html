@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Paycheck</title>
-    <link rel="stylesheet" href="../../styles/income/paycheck-log.css">
-    <link rel="icon" href="../../../storage/logo.png">
+    <link rel="stylesheet" href="../../styles/income/paycheck.css">
+    <link rel="icon" href="../../../public/assets/logo.png">
 </head>
 
 <body>
     <header>
-        <img id="MoneyMap-logo" src="../../../storage/fullLogo.png" alt="MoneyMap Logo">
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo">
     </header>
 
     <main>
         <h1>Log Paycheck</h1>
         <form id="paycheck-form" onsubmit="return false;">
             <label for="payee-name"><strong>Payee Name:</strong></label>
-            <input type="text" id="payee-name" name="payee-name" required>
+            <input type="text" id="payee-name" name="payee-name"><br>
 
             <label for="amount"><strong>Amount:</strong></label>
-            <input type="number" id="amount" name="amount" min="0" required>
+            <input type="number" id="amount" name="amount" min="0"><br>
 
             <label for="date"><strong>Payment Date:</strong></label>
-            <input type="date" id="date" name="date" required>
+            <input type="date" id="date" name="date">
 
             <p id="errorMSG"></p>
 
@@ -36,6 +36,6 @@
         <p>&copy; 2025 <a href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
     </footer>
 
-    <script src="../../controllers/income/paycheck-log.js"></script>
+    <script src="../../validation/income/paycheck.js"></script>
 </body>
 </html>
