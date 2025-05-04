@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
     <link rel="stylesheet" href="../../styles/landing/about.css">
-    <link rel="icon" href="../../../storage/logo.png" type="image/png">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/png">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
     <header>
-        <h1>About MoneyMap</h1>
+        <div id="moneyMap-logo"><img src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo"></div>
     </header>
 
     <main>
         <section>
-            <h2>Welcome to MoneyMap!</h2>
-            <p>MoneyMap is a personal finance management tool designed to help you track your expenses, manage your budget, and achieve your financial goals.</p>
+            <h1>About MoneyMap</h1>
+            <p>MoneyMap is a personal finance management tool designed to help you track your expenses, manage your
+                budget, and achieve your financial goals.</p>
         </section>
 
-        <section>
+        <section id="features">
             <h2>Features</h2>
             <ul>
                 <li>Expense Tracking</li>
@@ -30,28 +33,52 @@
             </ul>
         </section>
 
-        <section>
-            <h2>Developer's Information</h2>
-            <h3>Meheraj Hasan</h3>
-            <p>Contact me at: meheraj.hasan@example.com</p>
+        <section id="instructor">
+            <h2>Instructor's Information</h2>
+            <img class="image" id="instructor-image" src="../../../public/assets/instructor.jpg" alt="instructor-img">
+            <h3>MD. AL-AMIN</h3>
+            <p>Lecturer, Department of Computer Science</p>
+            <p>American International University-Bangladesh (AIUB)</p>
+            <p>Email: <a href="mailto:alamin@aiub.edu">alamin@aiub.edu</a></p>
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank" aria-label="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/alamin200290/" target="_blank" aria-label="LinkedIn Profile">
                     <i class="fab fa-linkedin fa-2x"></i>
                 </a>
-                <a href="https://github.com/your-github-username" target="_blank" aria-label="GitHub Profile">
+                <a href="https://github.com/alamin200290" target="_blank" aria-label="GitHub Profile">
                     <i class="fab fa-github fa-2x"></i>
                 </a>
             </div>
         </section>
 
-        <section> 
-            <h3><a href="../../view/contact/contact.html">Click Here to Contact Us</a></h3>
+        <section id="developer">
+            <h2>Developer's Information</h2>
+            <img class="image" id="developer-image" src="../../../public/assets/developer.png" alt="developer-img">
+            <h3>MEHERAJ HASAN</h3>
+            <p>Contact me at: <a href="mailto:meherajhasanofficial@gmail.com">meherajhasanofficial@gmail.com</a></p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/meheraj-hasan/" target="_blank" aria-label="LinkedIn Profile">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="https://github.com/MeherajHasan" target="_blank" aria-label="GitHub Profile">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+            </div>
         </section>
     </main>
 
+    <div class="back-to-home-container">
+        <button id="back-to-home">← Back to Home</button>
+    </div>
+    
+
     <footer>
-        <p>&copy; 2025 MoneyMap. All rights reserved.</p>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
     </footer>
 
+    <script src="../../validation/landing/about.js"></script>
+
 </body>
+
+</body>
+
 </html>

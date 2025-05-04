@@ -1,83 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonial Section</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .testimonials-section {
-            background-color: #fff;
-            padding: 50px;
-            text-align: center;
-        }
-
-        .testimonial {
-            margin: 20px auto;
-            width: 80%;
-            max-width: 800px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .testimonial p {
-            font-style: italic;
-            color: #555;
-        }
-
-        .testimonial .author {
-            font-weight: bold;
-            margin-top: 10px;
-            color: #333;
-        }
-
-        .testimonial .position {
-            font-size: 0.9em;
-            color: #777;
-        }
-
-        .testimonial .author-info {
-            text-align: left;
-        }
-    </style>
+    <title>Testimonials</title>
+    <link rel="stylesheet" href="../../styles/landing/testimonial.css">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/png">
 </head>
+
 <body>
+    <header>
+        <div id="moneyMap-logo"><img src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo"></div>
+    </header>
 
-    <div class="testimonials-section">
-        <h2>What Our Users Are Saying</h2>
-
-        <div class="testimonial">
-            <p>"This system has transformed how we handle our tasks. The interface is user-friendly, and the results are always accurate. It has saved us so much time!"</p>
-            <div class="author-info">
-                <div class="author">John Doe</div>
-                <div class="position">Product Manager at ExampleCorp</div>
+    <main>
+        <section>
+            <h1>User Testimonials</h1>
+            <div class="testimonial">
+                <p class="quote">"MoneyMap completely changed the way I manage my finances. The interface is simple and
+                    powerful!"</p>
+                <p class="author">– Sarah A., Entrepreneur</p>
             </div>
-        </div>
-
-        <div class="testimonial">
-            <p>"A game changer for our team! The efficiency improvements are noticeable immediately. I highly recommend this tool to anyone looking to streamline their workflow."</p>
-            <div class="author-info">
-                <div class="author">Jane Smith</div>
-                <div class="position">Lead Developer at TechSolutions</div>
+            <div class="testimonial">
+                <p class="quote">"Thanks to MoneyMap, I now track my expenses daily and finally have control over my
+                    spending."</p>
+                <p class="author">– Rafiq H., Student</p>
             </div>
-        </div>
-
-        <div class="testimonial">
-            <p>"I’ve used several similar systems, but none compare to this one. The integration with our current tools was seamless, and the customer support is exceptional."</p>
-            <div class="author-info">
-                <div class="author">Alice Johnson</div>
-                <div class="position">CTO at InnovateTech</div>
+            <div class="testimonial">
+                <p class="quote">"Clean design, smart features, and insightful reports. Highly recommended!"</p>
+                <p class="author">– Maria K., Teacher</p>
             </div>
-        </div>
-    </div>
+        </section>
+        <button id="back-to-home">Back to Home</button>
+    </main>
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../validation/landing/testimonial.js"></script>
 
 </body>
+
 </html>
