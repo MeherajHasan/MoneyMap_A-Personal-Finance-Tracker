@@ -28,7 +28,7 @@ syncBtn.addEventListener('click', () => {
 });
 
 profileBtn.addEventListener('click', () => {
-  window.location.href = '../../view/profile/profile.html'; 
+  window.location.href = '../../views/profile/profile.html'; 
 });
 
 // Notification Button Event Listener
@@ -38,7 +38,7 @@ notificationBtn.addEventListener('click', () => {
 
 // Logout Button Event Listener
 logoutBtn.addEventListener('click', () => {
-  window.location.href = '../../view/auth/login.html'; //logout logic --> not complete
+  window.location.href = '../../views/auth/login.html'; //logout logic --> not complete
 });
 
 sidebarItems.forEach(item => {
