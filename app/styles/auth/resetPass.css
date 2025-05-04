@@ -1,0 +1,120 @@
+/* styles/auth/resetPass.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header#header {
+    background-color: #0D1B2A;
+    padding: 20px;
+    text-align: center;
+}
+
+header#header img#logo {
+    max-height: 420px;
+    width: auto;
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #0D1B2A;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1B263B;
+}
+
+input[type="password"] {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #1B263B;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.button-group button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button-group button[type="submit"]#resetPassBtn {
+    background-color: #0D1B2A;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button[type="submit"]#resetPassBtn:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+.button-group button[type="reset"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.button-group button[type="reset"]:hover {
+    background-color: #ff7961;
+}
+
+p#passErrorMSG1,
+p#passErrorMSG2 {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+footer#footer {
+    background-color: #0D1B2A;
+    color: #f4f6f8;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+footer#footer a {
+    color: #4FC3F7;
+    text-decoration: none;
+}
+
+footer#footer a:hover {
+    text-decoration: underline;
+}

@@ -36,10 +36,13 @@ emailInput.addEventListener("input", () => {
 });
 
 form.addEventListener("submit", function (e) {
+  e.preventDefault(); 
+
   const email = emailInput.value.trim();
-  if (!validateEmail(email)) {
-    e.preventDefault();
-    errorEl.textContent = "Please enter a valid email address.";
-    submitBtn.disabled = true;
+  if (validateEmail(email)) {
+      window.location.href = 'emailVerify.html';
+  } else {
+      errorEl.textContent = "Please enter a valid email address.";
+      submitBtn.disabled = true;
   }
 });

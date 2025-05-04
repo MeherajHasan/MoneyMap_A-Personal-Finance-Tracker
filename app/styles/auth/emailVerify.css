@@ -1,144 +1,141 @@
-/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f6f8; /* Light background */
     margin: 0;
-    padding: 0;
-    color: #1B263B; /* Deep Blue */
-    transition: opacity 0.5s ease;
-}
-
-header {
-    background-color: #1B263B;  /* Dark Blue background */
-    padding: 5px 0; /* Reduced header padding */
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
     display: flex;
-    justify-content: center; /* Centering horizontally */
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-#logo {
-    max-height: 80px; /* 1.5x smaller size compared to the original height */
-    width: auto;
-    display: block;
-    margin: 0 auto; /* Ensures centering */
-}
-
-/* Main Section */
-#emailVerifyMain {
-    width: 100%;
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 40px;
-    background-color: #ffffff; /* White background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+header#header {
+    background-color: #0D1B2A;
+    padding: 20px;
     text-align: center;
 }
 
-/* Form Heading */
-#verificationTitle {
+header#header img#logo {
+    max-height: 420px;
+    width: auto;
+}
+
+main#emailVerifyMain {
+    padding: 30px 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+form#emailVerifyForm {
+    text-align: center;
+}
+
+h1#verificationTitle {
     font-size: 2rem;
-    color: #1B263B; /* Deep Blue */
-    margin-bottom: 20px;
+    color: #0D1B2A;
+    margin-bottom: 30px;
 }
 
-/* Form Elements */
-.inputLabel {
-    font-size: 1rem;
-    color: #1B263B; /* Deep Blue */
-    margin-bottom: 10px;
+label.inputLabel {
     display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1B263B;
 }
 
-.inputField {
-    padding: 10px;
-    width: 80%;
+input#verifyCode.inputField {
+    width: calc(100% - 12px);
+    padding: 8px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #1B263B;
 }
 
-button {
-    padding: 12px 20px;
-    background-color: #1B263B; /* Deep Blue */
-    color: #f4f6f8; /* Light color */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: center; /* Center the buttons */
+}
+
+.button-group button {
+    padding: 10px 15px;
     border: none;
     border-radius: 4px;
-    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
+    font-size: 1rem;
+}
+
+.button-group button.cancelBtn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.button-group button.cancelBtn:hover {
+    background-color: #ddd;
+}
+
+.button-group button.resetBtn {
+    background-color: #f44336;
+    color: white;
+}
+
+.button-group button.resetBtn:hover {
+    background-color: #ff7961;
+}
+
+.button-group button.submitBtn {
+    background-color: #0D1B2A;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button.submitBtn:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+p#verifyMSG.verificationMessage {
+    color: red; /* Or any color for messages */
+    margin-top: 10px;
+}
+
+div.emailErrorLink {
     margin-top: 20px;
-    width: 100%;
+    font-size: 0.9rem;
+    color: #555;
 }
 
-button:hover {
-    background-color: #0D1B2A; /* Darker Deep Blue */
-}
-
-.cancelBtnLink {
+div.emailErrorLink a.errorLink {
+    color: #4FC3F7;
     text-decoration: none;
 }
 
-.cancelBtn {
-    background-color: #f4f6f8;
-    color: #1B263B;
-    margin-top: 10px;
+div.emailErrorLink a.errorLink:hover {
+    text-decoration: underline;
 }
 
-.cancelBtn:hover {
-    background-color: #ccc;
-}
-
-.resetBtn {
-    background-color: #f4f6f8;
-    color: #1B263B;
-}
-
-.submitBtn {
-    background-color: #1B263B; /* Deep Blue */
+footer#footer {
+    background-color: #0D1B2A;
     color: #f4f6f8;
-    width: 100%;
-}
-
-.submitBtn:hover {
-    background-color: #0D1B2A; /* Darker Deep Blue */
-}
-
-/* Verification Message */
-.verificationMessage {
-    color: #1B263B; /* Deep Blue */
-    margin-top: 10px;
-}
-
-/* Email Error Link */
-.emailErrorLink {
-    margin-top: 20px;
-    color: #1B263B; /* Deep Blue */
-}
-
-.errorLink {
-    color: #4FC3F7; /* Light Blue */
-}
-
-.errorLink:hover {
-    color: #003366; /* Darker Blue */
-}
-
-/* Footer Styles */
-#footer {
-    background-color: #1B263B; /* Deep Blue */
-    color: #f4f6f8; /* Light color */
     text-align: center;
-    padding: 20px 0;
-    font-size: 1rem;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 0.875rem;
 }
 
-#about {
-    font-style: italic;
-    margin-top: 10px;
-    color: #fff;
+footer#footer a {
+    color: #4FC3F7;
+    text-decoration: none;
 }
 
-#about:hover {
-    color: #4FC3F7; /* Light Blue */
+footer#footer a:hover {
+    text-decoration: underline;
 }

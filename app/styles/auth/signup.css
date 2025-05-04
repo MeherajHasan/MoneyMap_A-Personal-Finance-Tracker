@@ -1,3 +1,168 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #0D1B2A;
+    padding: 20px;
+    text-align: center;
+}
+
+#MoneyMap-logo {
+    max-height: 350px;
+    width: auto;
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #0D1B2A;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #1B263B;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+select,
+textarea,
+input[type="file"] {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #1B263B;
+}
+
+.phone-container label {
+    margin-bottom: 5px;
+}
+
+.phone-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.phone-input select {
+    width: auto;
+    flex-shrink: 0;
+}
+
+.phone-input input[type="number"] {
+    flex-grow: 1;
+}
+
+#idInputContainer,
+#passportExpiryContainer {
+    margin-bottom: 15px;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-weight: bold;
+    color: #1B263B;
+    margin-bottom: 10px;
+}
+
+fieldset input[type="radio"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+fieldset label {
+    display: inline;
+    font-weight: normal;
+    margin-left: 0;
+    vertical-align: middle;
+}
+
+fieldset br {
+    margin-bottom: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #0D1B2A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+button[type="reset"] {
+    background-color: #f44336;
+}
+
+button[type="reset"]:hover {
+    background-color: #ff7961;
+}
+
+p[id$="Error"] {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 .hidden {
     display: none;
+}
+
+footer {
+    background-color: #0D1B2A;
+    color: #f4f6f8;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: #4FC3F7;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }

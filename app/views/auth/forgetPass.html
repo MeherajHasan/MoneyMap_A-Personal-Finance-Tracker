@@ -5,30 +5,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forgot Password</title>
-    <link rel="stylesheet" href="../../styles/auth.css">
-    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../styles/auth/forgetPass.css">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
 
 <body>
     <header>
-        <h1>Forgot Password</h1>
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
     </header>
 
     <main>
-        <form id="forgetForm" action="emailVerify.html" method="post">
+        <h1>Forgot Password</h1>
+        <form id="forgetForm" action="" method="post">
             <label for="email">Enter your email:</label>
             <input id="email" type="text" name="email" placeholder="xyz@gmail.com"/>
             <br>
 
-            <button type="button" onclick="window.location.href='login.html'">Cancel</button>
-
-            <button id="forgotSubmitBtn" type="submit">Submit</button>
+            <div class="button-group">
+                <button type="button" onclick="window.location.href='login.html'">Cancel</button>
+                <button id="forgotSubmitBtn" type="submit">Submit</button>
+            </div>
 
             <p id="forgotMSG"></p>
 
             <p>Remembered your password? <a href="login.html">Login here</a></p>
         </form>
     </main>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
 
     <script src="../../validation/auth/forgetPass.js"></script>
 

@@ -63,7 +63,8 @@ emailInput.addEventListener("input", validateForm);
 passwordInput.addEventListener("input", validateForm);
 
 form.addEventListener("submit", function (e) {
-    if (!validateForm()) {
-        e.preventDefault();
+    e.preventDefault();
+    if (validateForm()) {
+        window.location.href = '../../views/dashboard/dashboard.html';
     }
 });

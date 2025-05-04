@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registration Form</title>
     <link rel="stylesheet" href="../../styles/auth/signup.css">
-    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon" />
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
 
 <body>
     <header>
-        <h1>Registration Form</h1>
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
     </header>
 
     <main>
+        <h1>Registration Form</h1>
         <form action="" method="post" id="signupForm">
 
             <label for="fname">First Name:</label>
@@ -44,17 +45,21 @@
                 <p id="passportExpiryError"></p>
             </div>
 
-            <label for="phone">Phone Number:</label>
-            <select id="countryCode" name="countryCode">
-                <option value="" selected disabled>-- Select --</option>
-                <option value="+880">+880 (BD)</option>
-                <option value="+65">+65 (SG)</option>
-                <option value="+1">+1 (USA)</option>
-                <option value="+44">+44 (UK)</option>
-                <option value="+91">+91 (India)</option>
-            </select> 
-            <input id="phone" type="number" name="phone" value="" placeholder="Phone Number" />
-            <p id="phoneError"></p>
+            <div class="phone-container">
+                <label for="phone">Phone Number:</label>
+                <div class="phone-input">
+                    <select id="countryCode" name="countryCode">
+                        <option value="" selected disabled>-- Select --</option>
+                        <option value="+880">+880 (BD)</option>
+                        <option value="+65">+65 (SG)</option>
+                        <option value="+1">+1 (USA)</option>
+                        <option value="+44">+44 (UK)</option>
+                        <option value="+91">+91 (India)</option>
+                    </select>
+                    <input id="phone" type="number" name="phone" value="" placeholder="Phone Number" />
+                </div>
+                <p id="phoneError"></p>
+            </div>
 
             <label for="mail">Email:</label>
             <input id="mail" type="email" name="email" placeholder="xyz@gmail.com" />
@@ -96,6 +101,10 @@
             <button id="signupSubmitBtn" type="submit">Submit</button>
         </form>
     </main>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
 
     <script src="../../validation/auth/signup.js"></script>
 </body>

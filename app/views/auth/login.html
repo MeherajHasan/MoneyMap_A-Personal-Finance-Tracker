@@ -5,16 +5,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Form</title>
-    <link rel="stylesheet" href="../../styles/auth.css">
-    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../styles/auth/login.css">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
 
 <body>
     <header>
-        <h1>Login Form</h1>
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
     </header>
 
     <main>
+        <h1>Login Form</h1>
         <form action="" method="POST" id="loginForm">
             <label for="email">Email:</label>
             <input id="email" type="email" name="email" placeholder="xyz@gmail.com" />
@@ -24,19 +25,27 @@
             <input id="password" type="password" name="password" placeholder="Enter your password" />
             <p id="passwordError"></p>
 
-            <input id="remember" type="checkbox" name="remember" />
-            <label for="remember">Remember me</label>
+            <div class="remember-me">
+                <input id="remember" type="checkbox" name="remember" />
+                <label for="remember">Remember me</label>
+            </div>
 
             <p><a href="forgetPass.html">Forgot Password?</a></p>
 
-            <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
-            <button type="reset">Reset</button>
-            <button type="submit" id="loginSubmitBtn">Login</button>
+            <div class="button-group">
+                <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
+                <button type="reset">Reset</button>
+                <button type="submit" id="loginSubmitBtn">Login</button>
+            </div>
 
             <p>Don't have an account? <a href="signup.html">Register here</a></p>
-
         </form>
     </main>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
     <script src="../../validation/auth/login.js"></script>
 </body>
 

@@ -236,7 +236,8 @@ function validateForm() {
 
 idTypeSelect.addEventListener("change", handleIDSelection);
 form.addEventListener("submit", function (e) {
-    if (!validateForm()) {
-        e.preventDefault();
+    e.preventDefault();
+    if (validateForm()) {
+        window.location.href = 'login.html';
     }
 });

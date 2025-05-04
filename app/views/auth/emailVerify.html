@@ -5,14 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Email Verification</title>
-    <link rel="icon" href="../../../storage/logo.png" type="image/x-icon" />
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="../../styles/auth/emailVerify.css">
 </head>
 
 <body>
 
     <header id="header">
-        <img src="../../../storage/fullLogo.png" alt="MoneyMap-logo" id="logo" />
+        <img src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo" id="logo" />
     </header>
 
     <main id="emailVerifyMain">
@@ -22,9 +22,11 @@
             <input id="verifyCode" class="inputField" type="text" name="verifyCode" placeholder="Must be 6 digits" />
             <br>
 
-            <a href="login.html" class="cancelBtnLink"><button type="button" class="cancelBtn">Cancel</button></a>
-            <button type="reset" class="resetBtn">Reset</button>
-            <button type="submit" id="verifyConfirmBtn" class="submitBtn" formaction="verify.html">Confirm</button>
+            <div class="button-group">
+                <a href="login.html" class="cancelBtnLink"><button type="button" class="cancelBtn">Cancel</button></a>
+                <button type="reset" class="resetBtn">Reset</button>
+                <button type="submit" id="verifyConfirmBtn" class="submitBtn" formaction="verify.html">Confirm</button>
+            </div>
 
             <p id="verifyMSG" class="verificationMessage"></p>
 
@@ -34,9 +36,9 @@
     </main>
 
     <footer id="footer">
-        <p>&copy; 2025 <a href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+        <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
     </footer>
- 
+
     <script src="../../validation/auth/emailVerify.js"></script>
 </body>
 

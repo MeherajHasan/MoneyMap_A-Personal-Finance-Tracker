@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #0D1B2A;
+    padding: 20px;
+    text-align: center;
+}
+
+#MoneyMap-logo {
+    max-height: 420px;
+    width: auto;
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #0D1B2A;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #1B263B;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #1B263B;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.remember-me label {
+    font-weight: normal;
+    margin-left: 0;
+}
+
+p a {
+    color: #4FC3F7;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button-group button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-grow: 1;
+}
+
+.button-group button[type="submit"] {
+    background-color: #0D1B2A;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button[type="submit"]:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+.button-group button[type="reset"] {
+    background-color: #f44336;
+    color: white;
+}
+
+.button-group button[type="reset"]:hover {
+    background-color: #ff7961;
+}
+
+.button-group button[type="button"] {
+    background-color: #ccc;
+    color: #333;
+}
+
+.button-group button[type="button"]:hover {
+    background-color: #ddd;
+}
+
+p#emailError,
+p#passwordError {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #0D1B2A;
+    color: #f4f6f8;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 0.875rem;
+}
+
+footer a {
+    color: #4FC3F7;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
