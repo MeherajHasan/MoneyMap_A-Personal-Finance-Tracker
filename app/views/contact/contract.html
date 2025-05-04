@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="../../styles/contact/contact.css" type="text/css">
-    <link rel="icon" href="../../../storage/logo.png" type="image/png">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/png">
 </head>
 
 <body>
     <header>
-        <div id="moneyMap-logo"><img src="../../../storage/fullLogo.png" alt="MoneyMap-logo"></div>
+        <div id="moneyMap-logo"><img src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo"></div>
     </header>
 
     <main class="contact-container">
@@ -41,14 +41,14 @@
             <p id="captchaError"></p>
             <button type="submit" class="btn" id="btn-submit">Submit</button>
             <button type="reset" class="btn" id="btn-reset">Reset</button>
-            <button type="button" onclick="window.location.href='../../../public/assets/index.html'">Cancel</button>
+            <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
         </form>
     </main>
-    <script src="../../controllers/contact/contact.js"></script>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../validation/contact/contact.js"></script>
 </body>
-
-<footer>
-    <p>&copy; 2025 <a id="about" href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-</footer>
-
 </html>
