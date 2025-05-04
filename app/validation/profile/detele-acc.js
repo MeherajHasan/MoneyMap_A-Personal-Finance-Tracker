@@ -35,6 +35,6 @@ form.addEventListener("submit", (event) => {
 
     const confirmation = confirm("Are you sure you want to delete your account?");
     if (confirmation) {
-        form.submit(); 
+        window.location.href = "../../../public/index.html" 
     }
 });

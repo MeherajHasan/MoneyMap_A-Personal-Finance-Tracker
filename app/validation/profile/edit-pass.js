@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", function() {
             errorMessage.textContent = "New password cannot be the same as the current password!";
             errorMessage.style.color = "#e74c3c";
             errorMessage.style.fontWeight = "bold";
-        } else if (newPassword.length < 8 || confirmPassword.length < 8) {
-            errorMessage.textContent = "Password must be at least 8 characters long!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
         } else if (newPassword !== confirmPassword) {
             errorMessage.textContent = "New passwords do not match!";
+            errorMessage.style.color = "#e74c3c";
+            errorMessage.style.fontWeight = "bold";
+        } else if (newPassword.length < 8 || confirmPassword.length < 8) {
+            errorMessage.textContent = "Password must be at least 8 characters long!";
             errorMessage.style.color = "#e74c3c";
             errorMessage.style.fontWeight = "bold";
         } else {
