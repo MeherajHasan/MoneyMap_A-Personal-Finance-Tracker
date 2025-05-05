@@ -1,0 +1,147 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8; 
+    color: #1B263B; 
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #1B263B;
+}
+
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.header {
+    background-color: #0D1B2A;
+    padding: 1rem 0;
+}
+
+.logo {
+    width: 350px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.nav a {
+    margin: 0 1rem;
+    color: #f4f6f8;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #4FC3F7;
+}
+
+.main {
+    padding: 2rem 0;
+}
+
+.section-header h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #0D1B2A;
+}
+
+.expense-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(13, 27, 42, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #1B263B; 
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0D1B2A;
+}
+
+.btn-secondary {
+    background-color: #f4f6f8; 
+    color: #1B263B;
+    border: 1px solid #1B263B;
+    margin: 0.5rem 0.5rem 0 0;
+}
+
+.btn-secondary:hover {
+    background-color: #4FC3F7; 
+    color: #ffffff;
+}
+
+/* ---------- Navigation Buttons ---------- */
+.navigation-buttons {
+    margin-top: 2rem;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: #0D1B2A;
+    color: #f4f6f8;
+    margin-top: 3rem;
+}
+
+footer a {
+    color: #4FC3F7;
+    font-weight: bold;
+}

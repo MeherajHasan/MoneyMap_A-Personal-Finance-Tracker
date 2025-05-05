@@ -6,11 +6,13 @@ const incomeDate = document.getElementById('incomeDate');
 const sourceError = document.getElementById('sourceError');
 const amountError = document.getElementById('amountError');
 const dateError = document.getElementById('dateError');
+const emptyError = document.getElementById('emptyError'); 
 
 function clearErrors() {
     sourceError.textContent = '';
     amountError.textContent = '';
     dateError.textContent = '';
+    emptyError.textContent = ''; 
 }
 
 function containsIllegalCharacters(input) {
@@ -30,27 +32,21 @@ function containsIllegalCharacters(input) {
 form.addEventListener('submit', function (e) {
     let valid = true;
     clearErrors();
-
     const sourceValue = incomeSource.value.trim();
-    if (!sourceValue) {
-        sourceError.textContent = 'Source field cannot be empty.';
+    const amountValue = parseFloat(incomeAmount.value);
+    const dateValue = incomeDate.value.trim(); 
+
+    if (!sourceValue || isNaN(amountValue) || !dateValue) {
+        emptyError.textContent = 'All fields must be filled out.';
         valid = false;
     } else if (containsIllegalCharacters(sourceValue)) {
         sourceError.textContent = 'Source contains illegal characters.';
         valid = false;
-    }
-
-    const amountValue = parseFloat(incomeAmount.value);
-    if (isNaN(amountValue)) {
+    } else if (isNaN(amountValue)) {
         amountError.textContent = 'Amount must be a number.';
         valid = false;
     } else if (amountValue < 0) {
         amountError.textContent = 'Amount cannot be negative.';
-        valid = false;
-    }
-
-    if (!incomeDate.value) {
-        dateError.textContent = 'Date is required.';
         valid = false;
     }
 
