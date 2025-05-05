@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8; 
+    color: #1B263B; 
+}
+
+.header {
+    background-color: #0D1B2A; 
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 20px;
+    width: 350px;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+    background-color: #4FC3F7; 
+    color: #0D1B2A;
+}
+
+.section-header {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.section-header h2 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.expense-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+}
+
+.two-column-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-column {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-column label {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-column input,
+.form-column select,
+.form-column textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.form-column textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #4FC3F7;
+    color: #0D1B2A; 
+}
+
+.btn-primary:hover {
+    background-color: #1B263B; 
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #1B263B;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px 0 0;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #4FC3F7; 
+    color: #0D1B2A;
+}
+
+.navigation-buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #0D1B2A;
+    color: #ffffff;
+    margin-top: 40px;
+}
+
+footer a {
+    color: #4FC3F7; 
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
