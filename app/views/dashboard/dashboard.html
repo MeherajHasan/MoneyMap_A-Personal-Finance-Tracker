@@ -13,50 +13,19 @@
         <nav class="sidebar">
             <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
             <ul class="nav-menu">
-                <li>
-                    <a href="#"><img class="menu-icon" id="income-icon" src="../../../public/assets/income.png" alt="income-icon">Income</a>
-                    <ul class="submenu">
-                        <li><a href="../../views/income/income-recording.html">Income Recordings</a></li>
-                        <li><a href="../../views/income/paycheck.html">Paycheck Log</a></li>
-                        <li><a href="../../views/income/recurring-income-setup.html">Recurring Income</a></li>
-                        <li><a href="../../views/income/side-hustle-tracker.html">Side Hustle Tracker</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><img class="menu-icon" id="expense-icon" src="../../../public/assets/expense.png" alt="expense-icon">Expenses</a>
-                    <ul class="submenu">
-                        <li><a href="../../views/expense-category/transaction.html">Expense Transactions</a></li>
-                        <li><a href="../../views/expense-category/expense-category.html">Expense Manager</a></li>
-                        <li><a href="../../views/expense-category/custom-rule.html">Create Custom Rule</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><img class="menu-icon" id="budget-goal-icon" src="../../../public/assets/budget.png" alt="budget-goal-icon">Budget Goals</a>
-                    <ul class="submenu">
-                        <li><a href="#">Goal Dashboard</a></li>
-                        <li><a href="#">Add New Goal</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><img class="menu-icon" id="bill-icon" src="../../../public/assets/bill.png" alt="bill-icon">Bills</a>
-                    <ul class="submenu">
-                        <li><a href="#">Bill Dashboard</a></li>
-                        <li><a href="#">Add New Bill</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><img class="menu-icon" id="report-icon" src="../../../public/assets/report.png" alt="report-icon">Reports</a>
-                    <ul class="submenu">
-                        <li><a href="#">Spending Trends</a></li>
-                        <li><a href="#">Income vs Expense</a></li>
-                        <li><a href="#">Net Worth</a></li>
-                        <li><a href="#">Net Spending</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><img class="menu-icon" id="debt-icon" src="../../../public/assets/debt.png" alt="debt-icon">Debt Tracking</a></li>
-                <li><a href="#"><img class="menu-icon" id="goals-icon" src="../../../public/assets/savings.png" alt="goals-icon">Saving Goals</a></li>
+                <li><a href="../../views/income/income-dashboard.html"><img class="menu-icon" id="income-icon" src="../../../public/assets/income.png" alt="income-icon">Income</a></li>
+                <li><a href="../../views/expense/expense-dashboard.html"><img class="menu-icon" id="expense-icon" src="../../../public/assets/expense.png" alt="expense-icon">Expenses</a></li>
+                <li><a href="../../views/budget/budget-dashboard.html"><img class="menu-icon" id="budget-goal-icon" src="../../../public/assets/budget.png" alt="budget-goal-icon">Budget Goals</a></li>
+                <!--
+                <li><a href="#"><img class="menu-icon" id="bill-icon" src="../../../public/assets/bill.png" alt="bill-icon">Bills</a></li>
+                <li><a href="#"><img class="menu-icon" id="report-icon" src="../../../public/assets/report.png" alt="report-icon">Reports</a></li>
+                -->
+                <li><a href="../../views/debt/debt-dashboard.html"><img class="menu-icon" id="debt-icon" src="../../../public/assets/debt.png" alt="debt-icon">Debt Tracking</a></li>
+                <li><a href="../../views/savings/savings-dashboard.html"><img class="menu-icon" id="goals-icon" src="../../../public/assets/savings.png" alt="goals-icon">Saving Goals</a></li>
+                <!--
                 <li><a href="#"><img class="menu-icon" id="linking-icon" src="../../../public/assets/linking.png" alt="linking-icon">Account Linking</a></li>
                 <li><a href="#"><img class="menu-icon" id="settings-icon" src="../../../public/assets/settings.png" alt="settings-icon">Settings</a></li>
+                -->
                 <li><a href="../../views/contact/contract.html"><img class="menu-icon" id="support-icon" src="../../../public/assets/support.png" alt="support-icon">Feedback & Support</a></li>
             </ul>
         </nav>
@@ -73,7 +42,7 @@
             </header>
 
             <section class="dashboard-widgets">
-                <h1>Welcome to Your Dathshboard!</h1>
+                <h1>Welcome to Your Dashboard!</h1>
                 <p>Select a feature from the sidebar to get started.</p>
                  
                 <div class="widget" id="income-widget">

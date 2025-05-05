@@ -1,20 +1,17 @@
-/* Reset some basic styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Dashboard container */
 .dashboard-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* Sidebar */
 .sidebar {
     width: 250px;
-    background-color: #0D1B2A; /* deep blue */
+    background-color: #0D1B2A;
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -29,7 +26,6 @@
     margin: 0 auto 30px auto;
 }
 
-/* Nav Menu */
 .nav-menu {
     list-style: none;
 }
@@ -52,36 +48,6 @@
     margin-right: 10px;
 }
 
-/* Submenu */
-.submenu {
-    list-style: none;
-    padding-left: 40px;
-    margin-top: 8px;
-    display: none;
-}
-
-/* No hover-to-open submenu now */
-.nav-menu li:hover .submenu {
-    display: none;
-}
-
-/* You'll expand submenu manually with JavaScript or other logic */
-
-.submenu li {
-    margin: 5px 0;
-}
-
-.submenu li a {
-    text-decoration: none;
-    color: #c0c0c0;
-    font-size: 14px;
-}
-
-.submenu li a:hover {
-    color: #ffffff;
-}
-
-/* Main content */
 .main-content {
     margin-left: 250px;
     padding: 20px;
@@ -90,7 +56,6 @@
     min-height: 100vh;
 }
 
-/* Header */
 .dashboard-header {
     display: flex;
     justify-content: flex-end;
@@ -126,7 +91,6 @@
     margin-right: 10px;
 }
 
-/* Dashboard widgets */
 .dashboard-widgets {
     text-align: center;
 }
@@ -135,7 +99,7 @@
     margin-bottom: 10px;
     font-size: 28px;
     color: #1B263B;
-    display: block;  /* Ensures it's a block-level element */
+    display: block;
     text-align: center;
     width: 100%;
 }
@@ -143,13 +107,11 @@
 .dashboard-widgets p {
     margin-bottom: 20px;
     color: #3d3d3d;
-    display: block;  /* Ensures it's a block-level element */
+    display: block;
     text-align: center;
     width: 100%;
 }
 
-
-/* Widgets Layout */
 .dashboard-widgets {
     display: flex;
     flex-wrap: wrap;
@@ -157,7 +119,6 @@
     gap: 20px;
 }
 
-/* Widget card */
 .widget {
     background-color: #ffffff;
     border-radius: 8px;
@@ -166,16 +127,14 @@
     width: 400px;
     max-width: 90%;
     text-align: center;
-    flex: 0 0 calc(50% - 20px); /* 2 widgets per row with 20px gap */
+    flex: 0 0 calc(50% - 20px);
 }
 
-/* Center the last widget if odd number */
 .widget:last-child:nth-child(odd) {
     flex-basis: 100%;
     max-width: 400px;
 }
 
-/* Widget content */
 .widget-title {
     font-size: 20px;
     margin-bottom: 10px;
@@ -203,7 +162,6 @@
     background-color: #0D1B2A;
 }
 
-/* Sync widget special styling */
 #lastSynced-widget .widget-action-btn {
     display: flex;
     align-items: center;
@@ -216,7 +174,6 @@
     height: 20px;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 15px 0;

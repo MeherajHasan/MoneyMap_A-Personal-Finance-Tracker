@@ -4,7 +4,6 @@ const notificationBtn = document.getElementById('notificationBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 const sidebarItems = document.querySelectorAll('.nav-menu > li > a');
 const syncStatus = document.getElementById('sync-status');
-const widgetAmounts = document.querySelectorAll('.widget-amount');
 const incomeWidgetAmount = document.getElementById('income-widget').querySelector('.widget-amount');
 const expenseWidgetAmount = document.getElementById('expense-widget').querySelector('.widget-amount');
 const budgetWidgetAmount = document.getElementById('budget-widget').querySelector('.widget-amount');
@@ -16,58 +15,64 @@ syncBtn.addEventListener('click', () => {
   syncStatus.innerHTML = 'Syncing...';
   syncBtn.disabled = true;
 
-  // Simulate syncing process with a timeout
   setTimeout(() => {
     const currentDate = new Date();
-    const lastSyncedDate = currentDate.toLocaleString(); 
-
+    const lastSyncedDate = currentDate.toLocaleString();
     syncStatus.innerHTML = `Last Synced: ${lastSyncedDate}`;
-    
     syncBtn.disabled = false;
-  }, 2000); 
+  }, 2000);
 });
 
 profileBtn.addEventListener('click', () => {
-  window.location.href = '../../views/profile/profile.html'; 
+  window.location.href = '../../views/profile/profile.html';
 });
 
-// Notification Button Event Listener
 notificationBtn.addEventListener('click', () => {
-  window.location.href = '/notifications'; // Redirect to notifications page --> not complete
+  alert('Notification system is under development.');
+  //window.location.href = '/notifications';
 });
 
-// Logout Button Event Listener
 logoutBtn.addEventListener('click', () => {
-  window.location.href = '../../views/auth/login.html'; //logout logic --> not complete
+  window.location.href = '../../views/auth/login.html';
 });
 
 sidebarItems.forEach(item => {
-  item.addEventListener('click', (event) => {
+  item.addEventListener('click', event => {
     const submenu = item.nextElementSibling;
-    
     if (submenu && submenu.classList.contains('submenu')) {
-      
-      if (submenu.style.display === 'block') {
-        submenu.style.display = 'none'; 
-      } else {
-        submenu.style.display = 'block'; 
-      }
+      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     } else {
-      
       const href = item.getAttribute('href');
       if (href && href !== "#") {
-        window.location.href = href; 
+        window.location.href = href;
       }
     }
   });
 });
 
-const submenuItems = document.querySelectorAll('.submenu > li > a');
-submenuItems.forEach(submenuItem => {
-  submenuItem.addEventListener('click', (event) => {
-    const href = submenuItem.getAttribute('href');
-    if (href && href !== "#") {
-      window.location.href = href; 
+const widgetButtons = document.querySelectorAll('.widget-action-btn');
+widgetButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const widgetId = button.parentElement.id;
+    switch (widgetId) {
+      case 'income-widget':
+        window.location.href = '../../views/income/income-dashboard.html';
+        break;
+      case 'expense-widget':
+        window.location.href = '../../views/expense/expense-dashboard.html';
+        break;
+      case 'budget-widget':
+        window.location.href = '../../views/budget/budget-dashboard.html';
+        break;
+      case 'savings-widget':
+        window.location.href = '../../views/savings/savings-dashboard.html';
+        break;
+      case 'debt-widget':
+        window.location.href = '../../views/debt/debt-dashboard.html';
+        break;
+      case 'net-worth-widget':
+        alert('Net Worth feature is under development.');
+        break;
     }
   });
 });
@@ -81,5 +86,4 @@ const setWidgetData = () => {
   netWorthWidgetAmount.textContent = "$10,000";
 };
 
-// Call function to initialize widget data
 setWidgetData();
