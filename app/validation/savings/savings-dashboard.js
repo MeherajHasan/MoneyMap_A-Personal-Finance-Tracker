@@ -5,9 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: 'Buy A Car', targetAmount: 2000, savedAmount: 800, targetDate: 'Mar 2025' }
     ];
 
+    const tableBody = document.querySelector('.savings-table tbody');
+    const totalSavedElement = document.getElementById('total-saved');
+    const totalGoalsElement = document.getElementById('total-goals');
+    const goalsAchievedElement = document.getElementById('goals-achieved');
+
     function renderSavingsGoals() {
-        const tableBody = document.querySelector('.savings-table tbody');
-        tableBody.innerHTML = '';  
+        tableBody.innerHTML = '';
 
         let totalSaved = 0;
         let totalGoals = savingsGoals.length;
@@ -31,16 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${progressBar}</td>
                 <td>${goal.targetDate}</td>
                 <td>
-                    <a href="edit-savings.html" class="btn btn-secondary">Edit</a>
-                    <a href="#" class="btn btn-danger" onclick="deleteGoal('${goal.name}')">Delete</a>
+                    <div class="actions">
+                        <a href="edit-savings.html" class="btn btn-secondary">Edit</a>
+                        <a href="#" class="btn btn-danger" onclick="deleteGoal('${goal.name}')">Delete</a>
+                        <a href="add-money.html" class="btn btn-success">Add Money</a>
+                    </div>
                 </td>
             `;
             tableBody.appendChild(row);
         });
 
-        document.getElementById('total-saved').textContent = `$${totalSaved.toFixed(2)}`;
-        document.getElementById('total-goals').textContent = totalGoals;
-        document.getElementById('goals-achieved').textContent = goalsAchieved;
+        totalSavedElement.textContent = `$${totalSaved.toFixed(2)}`;
+        totalGoalsElement.textContent = totalGoals;
+        goalsAchievedElement.textContent = goalsAchieved;
     }
 
     window.deleteGoal = function (goalName) {

@@ -2,66 +2,104 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyMap || Edit Savings Goal</title>
-    <link rel="stylesheet" href="../../styles/savings/edit-savings.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyMap || Edit Savings</title>
+    <link rel="stylesheet" href="../../styles/savings/edit-savings.css" />
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
 
 <body>
     <header class="header">
         <div class="container">
-            <a href="../dashboard/dashboard.html" class="logo-link">
-                <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
-            </a>
+            <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
                 <a href="../dashboard/dashboard.html">Dashboard</a>
                 <a href="expenses.html">Expenses</a>
                 <a href="budget-dashboard.html">Budget</a>
-                <a href="../bills/bills-dashboard.html">Bills</a>
-                <a href="../debt/debt-dashboard.html">Debt</a>
-                <a href="../savings/savings-dashboard.html" class="active">Savings</a>
-                <a href="../reports/reports.html">Reports</a>
+                <a href="bills-dashboard.html">Bills</a>
+                <a href="debt-dashboard.html">Debt</a>
+                <a href="savings-dashboard.html">Savings</a>
+                <a href="reports.html">Reports</a>
                 <a href="../../../public/index.html">Logout</a>
             </nav>
         </div>
     </header>
 
     <main class="main container">
-        <div class="form-container">
+        <div class="section-header">
             <h2>Edit Savings Goal</h2>
-            <form id="edit-savings-form">
-                <div class="form-group">
-                    <label for="goal-name">Goal Name</label>
-                    <input type="text" id="goal-name" name="goal-name" placeholder="Enter goal name" value="Current Goal Name">
-                    <p id="nameError" class="errorMSG"></p>
-                </div>
-                <div class="form-group">
-                    <label for="target-amount">Target Amount</label>
-                    <input type="number" id="target-amount" name="target-amount" placeholder="Enter target amount" value="5000">
-                    <p id="amountError" class="errorMSG"></p>
-                </div>
-                <div class="form-group">
-                    <label for="current-amount">Current Amount</label>
-                    <input type="number" id="current-amount" name="current-amount" placeholder="Enter current amount" value="1000">
-                    <p id="currentAmountError" class="errorMSG"></p>
-                </div>
-                <div class="form-group">
-                    <label for="target-date">Target Date</label>
-                    <input type="date" id="target-date" name="target-date" value="2025-12-31">
-                    <p id="dateError" class="errorMSG"></p>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" placeholder="Enter a description (optional)">This is the goal description.</textarea>
-                    <p id="emptyError" class="errorMSG"></p>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
         </div>
+
+        <form action="" method="POST" class="savings-form two-column-form">
+            <div class="form-group-row">
+                <div class="form-column">
+                    <label>Previous Goal Name</label>
+                    <input type="text" value="Emergency Fund" readonly />
+                </div>
+                <div class="form-column">
+                    <label for="savingsGoalName">New Goal Name</label>
+                    <input type="text" id="savingsGoalName" name="savingsGoalName" placeholder="e.g., Emergency Fund, Vacation" />
+                    <p id="nameError" class="error-message"></p>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-column">
+                    <label>Previous Amount</label>
+                    <input type="text" value="$5000" readonly />
+                </div>
+                <div class="form-column">
+                    <label for="savingsAmount">New Amount</label>
+                    <input type="number" id="savingsAmount" name="savingsAmount" placeholder="Amount in $" />
+                    <p id="amountError" class="error-message"></p>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-column">
+                    <label>Previous Target Date</label>
+                    <input type="text" value="2025-12-31" readonly />
+                </div>
+                <div class="form-column">
+                    <label for="savingsTargetDate">New Target Date</label>
+                    <input type="date" id="savingsTargetDate" name="savingsTargetDate" />
+                    <p id="dateError" class="error-message"></p>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-column">
+                    <label>Previous Current Savings</label>
+                    <input type="text" value="$1500" readonly />
+                </div>
+                <div class="form-column">
+                    <label for="savingsCurrentAmount">New Current Savings</label>
+                    <input type="number" id="savingsCurrentAmount" name="savingsCurrentAmount" placeholder="Current Savings Amount" />
+                    <p id="currentAmountError" class="error-message"></p>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <div class="form-column">
+                    <label>Previous Notes</label>
+                    <textarea readonly>Saving for unexpected emergencies</textarea>
+                </div>
+                <div class="form-column">
+                    <label for="savingsNotes">New Notes</label>
+                    <textarea id="savingsNotes" name="savingsNotes" placeholder="Optional details about the savings goal"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Savings Goal</button>
+            <p id="emptyError" class="error-message"></p>
+
+            <div class="navigation-buttons">
+                <a href="savings-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+                <a href="add-savings.html" class="btn btn-secondary">Add New Savings Goal</a>
+                <a href="savings-report.html" class="btn btn-secondary">View Savings Report</a>
+            </div>
+        </form>
     </main>
 
     <footer>

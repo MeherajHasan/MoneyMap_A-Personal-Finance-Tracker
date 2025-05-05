@@ -6,8 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8;
-    color: #1B263B;
+    background-color: #f4f6f8; /* Light background */
+    color: #1B263B; /* Deep blue text */
     line-height: 1.6;
 }
 
@@ -23,7 +23,7 @@ a {
 }
 
 .header {
-    background-color: #0D1B2A;
+    background-color: #0D1B2A; /* Deep blue */
     padding: 1rem 0;
     display: flex;
     justify-content: center;
@@ -58,7 +58,7 @@ a {
 }
 
 .nav a:hover {
-    color: #4FC3F7;
+    color: #4FC3F7; /* Light blue hover */
 }
 
 .nav .active {
@@ -112,7 +112,8 @@ a {
     border-collapse: collapse;
 }
 
-.savings-table th, .savings-table td {
+.savings-table th,
+.savings-table td {
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -131,21 +132,32 @@ a {
     width: 100%;
 }
 
+.savings-table .actions {
+    display: flex; /* Make the action buttons a flex container */
+    gap: 0.5rem; /* Add some space between the buttons */
+    align-items: center; /* Vertically align items in the center */
+}
+
 .savings-table .btn {
     padding: 0.5rem 1rem;
     border-radius: 12px;
     font-weight: 500;
     text-decoration: none;
+    display: inline-block; /* Ensure buttons respect margin and padding */
 }
 
 .savings-table .btn-secondary {
-    background-color: #4FC3F7;
+    background-color: #4FC3F7; /* Light blue */
     color: #fff;
-    margin-right: 0.5rem;
+}
+
+.savings-table .btn-success {
+    background-color: #2ecc71; /* Green for Add Money */
+    color: #fff;
 }
 
 .savings-table .btn-danger {
-    background-color: #ff6b6b;
+    background-color: #ff6b6b; /* Red */
     color: #fff;
 }
 
@@ -153,24 +165,41 @@ a {
     opacity: 0.8;
 }
 
-.add-new-goal {
+.additional-actions {
     margin-top: 2rem;
     text-align: center;
+    display: flex; /* Arrange buttons horizontally */
+    justify-content: center; /* Center the buttons */
+    gap: 1rem; /* Add some space between the buttons */
 }
 
-.add-new-goal .btn-primary {
-    background-color: #1B263B;
-    color: #fff;
+.additional-actions .btn {
     padding: 0.75rem 1.5rem;
     font-weight: 600;
     border-radius: 12px;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
+    display: inline-block; /* Ensure proper spacing */
 }
 
-.add-new-goal .btn-primary:hover {
+.additional-actions .btn-primary {
+    background-color: #1B263B;
+    color: #fff;
+}
+
+.additional-actions .btn-primary:hover {
     background-color: #4FC3F7;
     color: #0D1B2A;
+}
+
+.additional-actions .btn-info {
+    background-color: #17a2b8; /* Example info color (teal) */
+    color: #fff;
+}
+
+.additional-actions .btn-info:hover {
+    background-color: #20c997; /* Slightly darker teal on hover */
+    color: #fff;
 }
 
 footer {
