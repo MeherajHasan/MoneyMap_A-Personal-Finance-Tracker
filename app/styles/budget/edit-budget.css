@@ -1,0 +1,170 @@
+/* =======================
+   Edit Budget Page Styles
+   ======================= */
+
+/* Color Scheme */
+:root {
+    --light-bg: #f4f6f8;         /* Background */
+    --deep-blue: #1B263B;        /* Text */
+    --header-footer: #0D1B2A;    /* Header/Footer */
+    --highlight: #4FC3F7;        /* Hover/Highlight */
+    --error-red: #d32f2f;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--deep-blue);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: var(--deep-blue);
+}
+
+a:hover {
+    color: var(--highlight);
+}
+
+/* Header */
+.header {
+    background-color: var(--header-footer);
+    padding: 1rem 0;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    width: 350px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav a {
+    margin: 0 10px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Main Content */
+.main.container {
+    flex: 1;
+    padding: 2rem;
+}
+
+.section-header h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    text-align: center;
+    color: var(--deep-blue);
+}
+
+.budget-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.two-column-form .form-group-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.form-column {
+    flex: 0 0 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input,
+select,
+textarea {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.error-message {
+    color: var(--error-red);
+    font-size: 0.875rem;
+    margin-top: 0.3rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--highlight);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #03a9f4;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: var(--deep-blue);
+}
+
+.btn-secondary:hover {
+    background-color: #bdbdbd;
+}
+
+.navigation-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--header-footer);
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+footer a {
+    color: var(--highlight);
+}

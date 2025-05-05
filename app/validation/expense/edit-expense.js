@@ -36,8 +36,8 @@ form.addEventListener('submit', function (e) {
     const categoryValue = expenseCategory.value.trim();
     const amountValue = parseFloat(expenseAmount.value);
 
-    if (!categoryValue || !expenseAmount.value.trim() || !expenseDate.value) {
-        emptyError.textContent = 'Please fill out all required fields.';
+    if (!categoryValue && !expenseAmount.value.trim() && !expenseDate.value) {
+        emptyError.textContent = 'At least one of the fields needs to be changed.';
         valid = false;
     } else if (containsIllegalCharacters(categoryValue)) {
         categoryError.textContent = 'Category contains illegal characters.';

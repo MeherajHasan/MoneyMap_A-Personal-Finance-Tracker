@@ -36,8 +36,8 @@ form.addEventListener('submit', function (e) {
     const sourceValue = incomeSource.value.trim();
     const amountValue = parseFloat(incomeAmount.value);
 
-    if (!incomeSource.value.trim() || !incomeAmount.value.trim() || !incomeDate.value) {
-        emptyError.textContent = 'Please fill out all required fields.';
+    if (!incomeSource.value.trim() && !incomeAmount.value.trim() && !incomeDate.value) {
+        emptyError.textContent = 'At least one of the fields needs to be changed.';
         valid = false;
     }
 
