@@ -1,0 +1,167 @@
+/* General Body and Container Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Header Styling */
+.header {
+    background-color: #0D1B2A;
+    color: white;
+    padding: 20px 0;
+}
+
+.logo-link {
+    display: block;
+    text-align: center;
+}
+
+.logo {
+    width: 350px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.nav a.active {
+    color: #4FC3F7;
+}
+
+/* Main Content Area */
+.main {
+    padding: 40px 0;
+}
+
+.debt-details-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #1B263B;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.debt-selector label {
+    font-size: 16px;
+    color: #1B263B;
+}
+
+.debt-selector select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.debt-info-section {
+    margin-top: 20px;
+}
+
+.debt-info-section h3 {
+    color: #1B263B;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.detail-item {
+    margin-bottom: 12px;
+}
+
+.label {
+    font-weight: bold;
+    color: #1B263B;
+}
+
+.value {
+    margin-left: 10px;
+    color: #4FC3F7;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #4FC3F7;
+}
+
+.btn-primary:hover {
+    background-color: #3ea9d6;
+}
+
+.btn-edit {
+    background-color: #FFB74D;
+}
+
+.btn-edit:hover {
+    background-color: #ffa726;
+}
+
+.btn-secondary {
+    background-color: #757575;
+}
+
+.btn-secondary:hover {
+    background-color: #616161;
+}
+
+#noDebtSelected {
+    font-size: 16px;
+    color: #888;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #0D1B2A;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #4FC3F7;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
