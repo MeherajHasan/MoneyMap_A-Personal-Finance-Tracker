@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header {
+    background-color: #0D1B2A;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.logo-link {
+    display: inline-block;
+}
+
+.logo {
+    width: 350px;
+    display: inline-block;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.nav a {
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #4FC3F7;
+}
+
+.main {
+    padding: 2rem 1rem;
+}
+
+.debt-report-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.debt-report-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.report-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.filter-group {
+    margin-bottom: 1rem;
+}
+
+.filter-group label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.filter-group select {
+    width: 200px;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    background-color: #1B263B;
+    color: #fff;
+}
+
+button.btn:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+.report-output-section {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-top: 2rem;
+    display: none;
+}
+
+#noReportGenerated {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #0D1B2A;
+    color: #ffffff;
+}
+
+footer a {
+    color: #4FC3F7;
+    text-decoration: underline;
+}

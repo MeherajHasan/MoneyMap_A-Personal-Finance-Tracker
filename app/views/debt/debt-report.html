@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMap || Debt Report</title>
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../styles/debt/debt-report.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../dashboard/dashboard.html" class="logo-link">
+                <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
+            </a>
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <a href="../expenses/expenses.html">Expenses</a>
+                <a href="../budget/budget-dashboard.html">Budget</a>
+                <a href="../bills/bills-dashboard.html">Bills</a>
+                <a href="../debt/debt-dashboard.html" class="active">Debt</a>
+                <a href="../savings/savings-dashboard.html">Savings</a>
+                <a href="../reports/reports.html">Reports</a>
+                <a href="../../../public/index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main container">
+        <div class="debt-report-container">
+            <h2>Debt Report</h2>
+
+            <div class="report-options">
+                <div class="filter-group">
+                    <label for="reportType">Report Type:</label>
+                    <select id="reportType">
+                        <option value="summary">Debt Summary</option>
+                        <option value="details">Detailed Debt List</option>
+                        <option value="payment-schedule">Payment Schedules</option>
+                        </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortBy">Sort By:</label>
+                    <select id="sortBy">
+                        <option value="name">Debt Name</option>
+                        <option value="principal">Principal Amount</option>
+                        <option value="interestRate">Interest Rate</option>
+                        <option value="minimumPayment">Minimum Payment</option>
+                        <option value="debtDate">Debt Date</option>
+                        </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortOrder">Sort Order:</label>
+                    <select id="sortOrder">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+
+                <button id="generateReportBtn" class="btn btn-primary">Generate Report</button>
+            </div>
+
+            <div id="reportOutput" class="report-output-section">
+                </div>
+
+            <p id="noReportGenerated" style="display:none; text-align: center; font-style: italic; color: #888;">Click "Generate Report" to view debt information.</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.
+        </div>
+    </footer>
+
+    <script src="../../validation/debt/debt-report.js"></script>
+</body>
+
+</html>
