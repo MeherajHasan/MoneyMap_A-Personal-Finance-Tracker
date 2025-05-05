@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMap || Debt Dashboard</title>
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../styles/debt/debt-dashboard.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../dashboard/dashboard.html" class="logo-link">
+                <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
+            </a>
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <a href="../expenses/expenses.html">Expenses</a>
+                <a href="../budget/budget-dashboard.html">Budget</a>
+                <a href="../bills/bills-dashboard.html">Bills</a>
+                <a href="../debt/debt-dashboard.html" class="active">Debt</a>
+                <a href="../savings/savings-dashboard.html">Savings</a>
+                <a href="../reports/reports.html">Reports</a>
+                <a href="../../../public/index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main container">
+        <div class="debt-dashboard-container">
+            <h2>Debt Overview</h2>
+
+            <section class="debt-summary">
+                <h3>Summary</h3>
+                <div class="summary-metrics">
+                    <div class="metric-card">
+                        <h4>Total Debt</h4>
+                        <p id="totalDebt">$0.00</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Total Minimum Payment</h4>
+                        <p id="totalMinimumPayment">$0.00</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Total Interest Rate</h4>
+                        <p id="totalInterestRate">-</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="current-debts">
+                <h3>Current Debts</h3>
+                <ul id="debtList">
+                    <li>
+                        <div class="debt-info">
+                            <span class="debt-name">Credit Card</span>
+                            <span class="debt-amount">$1,200.00</span>
+                        </div>
+                        <div class="debt-actions">
+                            <a href="edit-debt.html" class="btn-edit">Edit</a>
+                            <a href="debt-details.html" class="btn-details">Details</a>
+                            <a href="debt-pay.html" class="btn-pay">Pay</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="debt-info">
+                            <span class="debt-name">Student Loan</span>
+                            <span class="debt-amount">$15,500.00</span>
+                        </div>
+                        <div class="debt-actions">
+                            <a href="edit-debt.html" class="btn-edit">Edit</a>
+                            <a href="debt-details.html" class="btn-details">Details</a>
+                            <a href="debt-pay.html" class="btn-pay">Pay</a>
+                        </div>
+                    </li>
+                    </ul>
+                <p id="noDebts" style="display:none;">No debts recorded yet.</p>
+            </section>
+
+            <div class="actions">
+                <a href="add-debt.html" class="btn btn-primary">Add New Debt</a>
+                <a href="debt-report.html" class="btn btn-info">Debt Report</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../scripts/debt/debt-dashboard.js"></script>
+</body>
+
+</html>
