@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMap || Savings Dashboard</title>
+    <link rel="stylesheet" href="../../styles/savings/savings-dashboard.css">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="../dashboard/dashboard.html" class="logo-link">
+                <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
+            </a>
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <a href="expenses.html">Expenses</a>
+                <a href="budget-dashboard.html">Budget</a>
+                <a href="../bills/bills-dashboard.html">Bills</a>
+                <a href="../debt/debt-dashboard.html">Debt</a>
+                <a href="../savings/savings-dashboard.html" class="active">Savings</a>
+                <a href="../reports/reports.html">Reports</a>
+                <a href="../../../public/index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main container">
+        <div class="overview-cards">
+            <div class="overview-card">
+                <h3>Total Saved</h3>
+                <p id="total-saved">$0.00</p>
+            </div>
+            <div class="overview-card">
+                <h3>Total Goals</h3>
+                <p id="total-goals">0</p>
+            </div>
+            <div class="overview-card">
+                <h3>Goals Achieved</h3>
+                <p id="goals-achieved">0</p>
+            </div>
+        </div>
+
+        <div class="savings-table">
+            <h2>My Savings Goals</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Goal Name</th>
+                        <th>Target Amount</th>
+                        <th>Amount Saved</th>
+                        <th>Progress</th>
+                        <th>Target Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example row, dynamic content will be added by JavaScript -->
+                    <tr>
+                        <td>Vacation Fund</td>
+                        <td>$5,000.00</td>
+                        <td>$1,200.00</td>
+                        <td><progress value="24" max="100"></progress></td>
+                        <td>Dec 2025</td>
+                        <td>
+                            <a href="edit-savings.html" class="btn btn-secondary">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="add-new-goal">
+            <a href="add-savings.html" class="btn btn-primary">Add New Goal</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../validation/savings/savings-dashboard.js"></script>
+</body>
+
+</html>

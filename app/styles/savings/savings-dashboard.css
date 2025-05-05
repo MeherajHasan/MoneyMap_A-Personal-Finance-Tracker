@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header {
+    background-color: #0D1B2A;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    width: 350px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.nav a {
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #4FC3F7;
+}
+
+.nav .active {
+    color: #4FC3F7;
+}
+
+.main {
+    padding: 2rem 1rem;
+}
+
+.overview-cards {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
+.overview-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 28%;
+}
+
+.overview-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.overview-card p {
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.savings-table {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.savings-table h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.savings-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.savings-table th, .savings-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.savings-table th {
+    background-color: #f4f6f8;
+    font-size: 1.125rem;
+}
+
+.savings-table td {
+    font-size: 1rem;
+}
+
+.savings-table td progress {
+    width: 100%;
+}
+
+.savings-table .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.savings-table .btn-secondary {
+    background-color: #4FC3F7;
+    color: #fff;
+    margin-right: 0.5rem;
+}
+
+.savings-table .btn-danger {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+.savings-table .btn:hover {
+    opacity: 0.8;
+}
+
+.add-new-goal {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.add-new-goal .btn-primary {
+    background-color: #1B263B;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.add-new-goal .btn-primary:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #0D1B2A;
+    color: #ffffff;
+}
+
+footer a {
+    color: #4FC3F7;
+    text-decoration: underline;
+}
