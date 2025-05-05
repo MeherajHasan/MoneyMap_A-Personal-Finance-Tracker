@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .header {
+    background-color: #0D1B2A;
+    padding: 1rem 0;
+    text-align: center;
+  }
+  
+  .logo-link {
+    display: inline-block;
+  }
+  
+  .logo {
+    width: 350px;
+    display: inline-block;
+  }
+  
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+  
+  .nav a {
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav a:hover {
+    color: #4FC3F7;
+  }
+  
+  .main {
+    padding: 2rem 1rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .section-header p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+  
+  .filters {
+    background-color: #ffffff;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  .filter-group {
+    margin-bottom: 1rem;
+  }
+  
+  .filter-group label {
+    display: inline-block;
+    margin-right: 1rem;
+    font-weight: 500;
+  }
+  
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .btn-primary {
+    background-color: #1B263B;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+  }
+  
+  .btn-secondary {
+    background-color: #4FC3F7;
+    color: #0D1B2A;
+    margin-right: 1rem;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #1B263B;
+    color: #fff;
+  }
+  
+  .budget-overview {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+  }
+  
+  .overview-details p {
+    margin: 0.5rem 0;
+  }
+  
+  .chart-section {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+  }
+  
+  .chart-container {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .budget-table {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 2rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  th, td {
+    text-align: center;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+  }
+  
+  th {
+    background-color: #1B263B;
+    color: #fff;
+  }
+  
+  .total-row {
+    background-color: #f0f0f0;
+    font-weight: 600;
+  }
+  
+  .applied-filters {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 2rem;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #0D1B2A;
+    color: #ffffff;
+  }
+  
+  footer a {
+    color: #4FC3F7;
+    text-decoration: underline;
+  }
+  
