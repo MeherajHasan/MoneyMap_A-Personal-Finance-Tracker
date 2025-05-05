@@ -1,0 +1,163 @@
+/* Layout & Structure */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f8; /* Light */
+    color: #1B263B; /* Deep Blue */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background-color: #0D1B2A; /* Deep Blue */
+    padding: 1rem 0;
+}
+
+.logo {
+    width: 350px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.nav {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.nav a {
+    color: #f4f6f8; /* Light */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #4FC3F7; /* Light Blue */
+}
+
+/* Main Section */
+.main {
+    padding: 2rem 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #0D1B2A; /* Deep Blue */
+    color: #f4f6f8; /* Light */
+}
+
+.btn-primary:hover {
+    background-color: #4FC3F7; /* Light Blue */
+    color: #0D1B2A; /* Deep Blue */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #0D1B2A;
+    color: #0D1B2A;
+}
+
+.btn-secondary:hover {
+    background-color: #4FC3F7; /* Light Blue */
+    border-color: #4FC3F7;
+    color: #0D1B2A;
+}
+
+/* Form Styling */
+.income-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    color: #1B263B; /* Deep Blue */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4FC3F7; /* Light Blue */
+    outline: none;
+}
+
+/* Error Messages */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+/* Navigation Buttons Under Form */
+.navigation-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #0D1B2A; /* Deep Blue */
+    color: #f4f6f8; /* Light */
+    margin-top: 2rem;
+}
+
+footer a {
+    color: #4FC3F7; /* Light Blue */
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
