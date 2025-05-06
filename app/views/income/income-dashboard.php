@@ -1,0 +1,193 @@
+<?php
+    session_start();
+
+    if (!isset($_COOKIE['status'])) {
+        header('Location: ../../views/auth/login.php');
+        exit();
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyMap || Income Dashboard</title>
+    <link rel="stylesheet" href="../../styles/income/income-dashboard.css" />
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <a href="expenses.html">Expenses</a>
+                <a href="budget-dashboard.html">Budget</a>
+                <a href="bills-dashboard.html">Bills</a>
+                <a href="debt-dashboard.html">Debt</a>
+                <a href="savings-dashboard.html">Savings</a>
+                <a href="reports.html">Reports</a>
+                <a href="../../../public/index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main container">
+        <section class="summary-cards">
+            <div class="card income-main">
+                <h3>Regular Main Income</h3>
+                <p>$5,000</p>
+            </div>
+            <div class="card income-side">
+                <h3>Regular Side Income</h3>
+                <p>$1,200</p>
+            </div>
+            <div class="card income-irregular">
+                <h3>Irregular Income</h3>
+                <p>$600</p>
+            </div>
+            <div class="card income-total">
+                <h3>Total Income</h3>
+                <p>$6,800</p>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h2>Income Records</h2>
+            <a href="add-income.html" class="btn btn-primary">+ Add Income</a>
+        </div>
+
+        <div class="filters">
+            <label for="typeFilter">Type:</label>
+            <select id="typeFilter">
+                <option value="all">All</option>
+                <option value="main">Regular Main</option>
+                <option value="side">Regular Side</option>
+                <option value="irregular">Irregular</option>
+            </select>
+
+            <label for="dateFilter">Date:</label>
+            <input type="month" id="dateFilter" />
+        </div>
+
+        <table class="income-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Source</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="incomeTableBody">
+                <tr>
+                    <td>Regular Main</td>
+                    <td>Job Salary</td>
+                    <td>$4,000</td>
+                    <td>2025-05-01</td>
+                    <td>April Salary</td>
+                    <td>
+                        <a href="edit-income.html?id=1" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Regular Side</td>
+                    <td>Freelancing</td>
+                    <td>$800</td>
+                    <td>2025-05-03</td>
+                    <td>Web design project</td>
+                    <td>
+                        <a href="edit-income.html?id=2" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Irregular</td>
+                    <td>Gift</td>
+                    <td>$200</td>
+                    <td>2025-04-28</td>
+                    <td>Birthday gift from uncle</td>
+                    <td>
+                        <a href="edit-income.html?id=3" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Regular Side</td>
+                    <td>Online Course</td>
+                    <td>$400</td>
+                    <td>2025-05-05</td>
+                    <td>Udemy payout</td>
+                    <td>
+                        <a href="edit-income.html?id=4" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Regular Main</td>
+                    <td>Part-time Job</td>
+                    <td>$1,000</td>
+                    <td>2025-04-30</td>
+                    <td>Weekend cashier</td>
+                    <td>
+                        <a href="edit-income.html?id=5" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Irregular</td>
+                    <td>Sold Bike</td>
+                    <td>$500</td>
+                    <td>2025-04-25</td>
+                    <td>Old bike sale</td>
+                    <td>
+                        <a href="edit-income.html?id=6" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Regular Side</td>
+                    <td>YouTube Revenue</td>
+                    <td>$300</td>
+                    <td>2025-05-02</td>
+                    <td>Monthly payout</td>
+                    <td>
+                        <a href="edit-income.html?id=7" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Irregular</td>
+                    <td>Refund</td>
+                    <td>$100</td>
+                    <td>2025-04-20</td>
+                    <td>Tax refund</td>
+                    <td>
+                        <a href="edit-income.html?id=8" class="btn-small edit">Edit</a>
+                        <button class="btn-small delete">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div class="action-buttons">
+            <a href="edit-income.html" class="btn">Edit Income</a>
+            <a href="income-report.html" class="btn">View Income Report</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a href="../../view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../validation/income/income-dashboard.js"></script>
+</body>
+
+</html>

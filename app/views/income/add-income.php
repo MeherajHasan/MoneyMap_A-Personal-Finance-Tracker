@@ -1,0 +1,94 @@
+<?php
+    session_start();
+
+    if (!isset($_COOKIE['status'])) {
+        header('Location: ../../views/auth/login.php');
+        exit();
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyMap || Add Income</title>
+    <link rel="stylesheet" href="../../styles/income/add-income.css" />
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <a href="expenses.html">Expenses</a>
+                <a href="budget-dashboard.html">Budget</a>
+                <a href="bills-dashboard.html">Bills</a>
+                <a href="debt-dashboard.html">Debt</a>
+                <a href="savings-dashboard.html">Savings</a>
+                <a href="reports.html">Reports</a>
+                <a href="../../../public/index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main container">
+        <div class="section-header">
+            <h2>Add Income</h2>
+        </div>
+
+        <form action="add-income-action.html" method="POST" class="income-form">
+            <div class="form-group">
+                <label for="incomeType">Income Type</label>
+                <select id="incomeType" name="incomeType" required>
+                    <option value="main">Regular Main Income</option>
+                    <option value="side">Regular Side Income</option>
+                    <option value="irregular">Irregular Income</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="incomeSource">Source</label>
+                <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Job Salary, Freelancing" />
+                <p id="sourceError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="incomeAmount">Amount</label>
+                <input type="number" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" />
+                <p id="amountError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="incomeDate">Date</label>
+                <input type="date" id="incomeDate" name="incomeDate" />
+                <p id="dateError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="incomeNotes">Notes (Optional)</label>
+                <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Income</button>
+            <p id="emptyError" class="error-message"></p>
+
+            <div class="navigation-buttons">
+                <a href="income-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+                <a href="edit-income.html" class="btn btn-secondary">Edit Income</a>
+                <a href="income-report.html" class="btn btn-secondary">View Income Report</a>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../validation/income/add-income.js"></script>
+</body>
+
+</html>

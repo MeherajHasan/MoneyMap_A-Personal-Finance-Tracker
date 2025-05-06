@@ -1,0 +1,58 @@
+<?php
+    session_start();
+
+    if (!isset($_COOKIE['status'])) {
+        header('Location: ../../views/auth/login.php');
+        exit();
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account</title>
+    <link rel="stylesheet" href="../../styles/profile/delete-acc.css">
+    <link rel="icon" href="../../../public/assets/logo.png">
+</head>
+
+<body>
+    <header>
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
+    </header>
+
+    <main class="container">
+        <h1>Delete Your Account</h1>
+        <p>We're sorry to see you go.</p>
+        <p>Please mention the reason for deleting your account:</p>
+
+        <form id="accDelete-form" action="" method="POST">
+            <div class="reason">
+                <label><input type="checkbox" name="reason" value="Account is no longer needed"> Account is no longer needed</label><br>
+                <label><input type="checkbox" name="reason" value="Privacy concerns"> Privacy concerns</label><br>
+                <label><input type="checkbox" name="reason" value="Not satisfied with the service"> Not satisfied with the service</label><br>
+                <label><input type="checkbox" name="reason" value="Other" id="other-reason"> Other</label>
+                
+                <div id="other-reason-text" style="display: none;">
+                    <textarea name="other-reason-detail" rows="4" cols="50" placeholder="Please specify other reason..."></textarea>
+                </div>
+            </div>
+
+            <p id="errorMSG"></p>
+            
+            <button type="submit" class="delete-button">Delete Account</button>
+        </form>
+
+        <div class="back-to-dashboard">
+            <a href="../../views/dashboard/dashboard.html">Back to Dashboard</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
+    </footer>
+
+    <script src="../../validation/profile/detele-acc.js"></script>
+</body>
+</html>
