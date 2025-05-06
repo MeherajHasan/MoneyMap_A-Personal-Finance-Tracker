@@ -18,7 +18,7 @@ const overspentCategories = [
   
     acknowledgeBtn.addEventListener('click', () => {
       notification.style.display = 'none';
-      window.location.href = 'budget-dashboard.html';
+      window.location.href = '../../views/budget/budget-dashboard.php';
     });
   });
   

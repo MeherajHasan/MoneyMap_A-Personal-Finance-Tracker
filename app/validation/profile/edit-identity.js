@@ -64,9 +64,9 @@ saveBtn.addEventListener('click', function () {
             return;
         }
     }
-    window.location.href = '../../views/profile/profile.html';
+    window.location.href = '../../views/profile/profile.php';
 });
 
 cancelBtn.addEventListener('click', function () {
-    window.location.href = '../../views/profile/profile.html';
+    window.location.href = '../../views/dashboard/dashboard.php';
 });

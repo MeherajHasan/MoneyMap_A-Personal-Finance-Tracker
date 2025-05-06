@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="income-dashboard.html">Income</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>a>
             </nav>
         </div>
     </header>
@@ -77,7 +77,7 @@
 
         <div class="section-header">
             <h2>Expense Records</h2>
-            <a href="add-expense.html" class="btn btn-primary">+ Add Expense</a>
+            <a href="add-expense.php" class="btn btn-primary">+ Add Expense</a>
         </div>
 
         <div class="filters">
@@ -117,7 +117,7 @@
                     <td>2025-05-01</td>
                     <td>May Rent</td>
                     <td>
-                        <a href="edit-expense.html?id=1" class="btn-small edit">Edit</a>
+                        <a href="edit-expense.php?id=1" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -128,7 +128,7 @@
                     <td>2025-05-03</td>
                     <td>Daily commute</td>
                     <td>
-                        <a href="edit-expense.html?id=2" class="btn-small edit">Edit</a>
+                        <a href="edit-expense.php?id=2" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -139,7 +139,7 @@
                     <td>2025-04-28</td>
                     <td>Spring collection</td>
                     <td>
-                        <a href="edit-expense.html?id=3" class="btn-small edit">Edit</a>
+                        <a href="edit-expense.php?id=3" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -150,7 +150,7 @@
                     <td>2025-05-02</td>
                     <td>Weekly shopping</td>
                     <td>
-                        <a href="edit-expense.html?id=4" class="btn-small edit">Edit</a>
+                        <a href="edit-expense.php?id=4" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -161,7 +161,7 @@
                     <td>2025-04-30</td>
                     <td>Regular checkup</td>
                     <td>
-                        <a href="edit-expense.html?id=5" class="btn-small edit">Edit</a>
+                        <a href="edit-expense.php?id=5" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -169,9 +169,9 @@
         </table>
 
         <div class="action-buttons">
-            <a href="expense-category.html" class="btn">Manage Categories</a>
-            <a href="expense-report.html" class="btn">View Expense Report</a>
-            <a href="edit-expense.html" class="btn">Edit Expense</a>
+            <a href="expense-category.php" class="btn">Manage Categories</a>
+            <a href="expense-report.php" class="btn">View Expense Report</a>
+            <a href="edit-expense.php" class="btn">Edit Expense</a>
         </div>
     </main>
 

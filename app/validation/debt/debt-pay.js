@@ -28,15 +28,17 @@ function validatePaymentAmount(paymentAmountValue) {
 }
 
 form.addEventListener('submit', function (e) {
+    e.preventDefault(); 
 
     const paymentAmountValue = parseFloat(paymentAmount.value);
 
     if (validatePaymentAmount(paymentAmountValue)) {
         debtDetails.remainingAmount -= paymentAmountValue;
-
         document.getElementById('payableAmountDisplay').textContent = `$${debtDetails.remainingAmount}`;
-        window.location.href = 'debt-dashboard.html';
+
+        window.location.href = '../../views/debt/debt-dashboard.php';
     } else {
-        paymentError.style.display = 'block';  
+        paymentError.style.display = 'block';
     }
 });
+

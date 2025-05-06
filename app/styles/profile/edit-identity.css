@@ -1,11 +1,9 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
@@ -15,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 header {
     background-color: #1B263B;
     padding: 20px 0;
@@ -29,7 +26,6 @@ header {
     height: auto;
 }
 
-/* Main Section */
 main {
     flex: 1;
     display: flex;
@@ -38,7 +34,6 @@ main {
     padding: 30px 20px;
 }
 
-/* Heading */
 h1 {
     text-align: center;
     margin-bottom: 30px;
@@ -46,7 +41,6 @@ h1 {
     color: #0D1B2A;
 }
 
-/* Form */
 form {
     background-color: #ffffff;
     padding: 40px;
@@ -58,7 +52,6 @@ form {
     flex-direction: column;
 }
 
-/* Labels and Inputs */
 label {
     margin-top: 15px;
     margin-bottom: 5px;
@@ -77,20 +70,17 @@ select {
     color: #333;
 }
 
-/* Passport Expiry Section */
 #passport-expiry {
     margin-top: 20px;
     display: none;
 }
 
-/* Error Message */
 #errorMSG {
     color: red;
     font-size: 0.9rem;
     margin-top: 10px;
 }
 
-/* Buttons */
 .btn {
     margin-top: 20px;
     padding: 10px;
@@ -107,7 +97,6 @@ select {
     background-color: #27394d;
 }
 
-/* Footer */
 footer {
     background-color: #1B263B;
     color: #ffffff;

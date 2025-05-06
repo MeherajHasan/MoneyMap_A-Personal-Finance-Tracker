@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${goal.targetDate}</td>
                 <td>
                     <div class="actions">
-                        <a href="edit-savings.html" class="btn btn-secondary">Edit</a>
+                        <a href="edit-savings.php" class="btn btn-secondary">Edit</a>
                         <a href="#" class="btn btn-danger" onclick="deleteGoal('${goal.name}')">Delete</a>
-                        <a href="add-money.html" class="btn btn-success">Add Money</a>
+                        <a href="add-money.php" class="btn btn-success">Add Money</a>
                     </div>
                 </td>
             `;

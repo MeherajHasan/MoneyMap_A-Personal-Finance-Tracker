@@ -1,11 +1,9 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
@@ -15,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 header {
     background-color: #1B263B;
     padding: 20px 0;
@@ -26,10 +23,9 @@ header {
 
 #MoneyMap-logo {
     width: 350px;
-    height: auto; /* Maintain aspect ratio */
+    height: auto; 
 }
 
-/* Form Container */
 main {
     background-color: #ffffff;
     margin: 30px auto;
@@ -47,7 +43,6 @@ main h1 {
     color: #0D1B2A;
 }
 
-/* Form Fields */
 form {
     display: flex;
     flex-direction: column;
@@ -65,7 +60,6 @@ form label {
     color: #1B263B;
 }
 
-/* Adjusting Address Textarea */
 form textarea {
     padding: 10px;
     border: 1px solid #ccc;
@@ -73,19 +67,18 @@ form textarea {
     font-size: 1rem;
     outline: none;
     width: 100%;
-    max-width: 400px;  /* Ensure textarea doesn't stretch too wide */
-    resize: vertical; /* Allow resizing only vertically */
+    max-width: 400px;  
+    resize: vertical; 
 }
 
 form textarea:focus {
     border-color: #3A506B;
 }
 
-/* Buttons Container */
 form .btn-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Space between the buttons */
+    gap: 10px; 
     width: 100%;
 }
 
@@ -98,14 +91,13 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 150px; /* Fixed width for buttons */
+    width: 150px; 
 }
 
 button:hover {
     background-color: #27394d;
 }
 
-/* Error Message */
 #errorMSG {
     color: #e74c3c;
     font-size: 0.9rem;
@@ -113,7 +105,6 @@ button:hover {
     margin-top: 10px;
 }
 
-/* Footer */
 footer {
     background-color: #1B263B;
     color: #ffffff;

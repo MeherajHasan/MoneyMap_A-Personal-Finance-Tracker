@@ -57,6 +57,6 @@ form.addEventListener('submit', function (e) {
         e.preventDefault();
     } else {
         e.preventDefault();
-        window.location.href = 'expense-dashboard.html';
+        window.location.href = '../../views/expense/expense-dashboard.php';
     }
 });

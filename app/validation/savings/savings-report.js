@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const transactionsBody = document.getElementById('transactionsBody');
     const noTransactionsElement = document.getElementById('noTransactions');
 
-    // In a real application, you would fetch this data from your backend
     const savingsGoals = [
         { name: 'Vacation', targetAmount: 5000, savedAmount: 1500 },
         { name: 'Emergency Fund', targetAmount: 10000, savedAmount: 6000 },

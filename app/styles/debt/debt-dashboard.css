@@ -1,4 +1,3 @@
-/* Reset and Base */
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +6,8 @@
   
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
     line-height: 1.6;
   }
   
@@ -17,16 +16,14 @@
     text-decoration: none;
   }
   
-  /* Container */
   .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
   }
   
-  /* Header */
   .header {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
     padding: 1rem 0;
   }
   
@@ -59,10 +56,9 @@
   
   .nav a:hover,
   .nav a.active {
-    color: #4FC3F7; /* Light Blue */
+    color: #4FC3F7; 
   }
   
-  /* Main Content */
   .main {
     padding: 2rem 0;
   }
@@ -105,7 +101,6 @@
     font-weight: bold;
   }
   
-  /* Current Debts */
   .current-debts {
     margin-bottom: 2rem;
   }
@@ -195,7 +190,6 @@
     text-align: center;
   }
   
-  /* Action Buttons */
   .actions {
     display: flex;
     justify-content: flex-end;
@@ -229,7 +223,6 @@
     background-color: #039BE5;
   }
   
-  /* Footer */
   footer {
     text-align: center;
     padding: 1rem 0;

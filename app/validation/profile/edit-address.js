@@ -28,12 +28,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const confirmation = window.confirm("Address updated successfully! Do you want to go back to the profile?");
             if (confirmation) {
-                window.location.href = "profile.html";
+                window.location.href = "../../views/profile/profile.php";
             }
         }
     });
 
     cancelButton.addEventListener('click', function() {
-        window.location.href = "profile.html";
+        window.location.href = "../../views/dashboard/dashboard.php";
     });
 });

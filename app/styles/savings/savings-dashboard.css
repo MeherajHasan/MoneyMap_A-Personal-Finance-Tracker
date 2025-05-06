@@ -6,8 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
     line-height: 1.6;
 }
 
@@ -23,7 +23,7 @@ a {
 }
 
 .header {
-    background-color: #0D1B2A; /* Deep blue */
+    background-color: #0D1B2A; 
     padding: 1rem 0;
     display: flex;
     justify-content: center;
@@ -58,7 +58,7 @@ a {
 }
 
 .nav a:hover {
-    color: #4FC3F7; /* Light blue hover */
+    color: #4FC3F7; 
 }
 
 .nav .active {
@@ -133,9 +133,9 @@ a {
 }
 
 .savings-table .actions {
-    display: flex; /* Make the action buttons a flex container */
-    gap: 0.5rem; /* Add some space between the buttons */
-    align-items: center; /* Vertically align items in the center */
+    display: flex; 
+    gap: 0.5rem; 
+    align-items: center;
 }
 
 .savings-table .btn {
@@ -143,21 +143,21 @@ a {
     border-radius: 12px;
     font-weight: 500;
     text-decoration: none;
-    display: inline-block; /* Ensure buttons respect margin and padding */
+    display: inline-block;
 }
 
 .savings-table .btn-secondary {
-    background-color: #4FC3F7; /* Light blue */
+    background-color: #4FC3F7; 
     color: #fff;
 }
 
 .savings-table .btn-success {
-    background-color: #2ecc71; /* Green for Add Money */
+    background-color: #2ecc71; 
     color: #fff;
 }
 
 .savings-table .btn-danger {
-    background-color: #ff6b6b; /* Red */
+    background-color: #ff6b6b; 
     color: #fff;
 }
 
@@ -168,9 +168,9 @@ a {
 .additional-actions {
     margin-top: 2rem;
     text-align: center;
-    display: flex; /* Arrange buttons horizontally */
-    justify-content: center; /* Center the buttons */
-    gap: 1rem; /* Add some space between the buttons */
+    display: flex; 
+    justify-content: center;
+    gap: 1rem; 
 }
 
 .additional-actions .btn {
@@ -179,7 +179,7 @@ a {
     border-radius: 12px;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
-    display: inline-block; /* Ensure proper spacing */
+    display: inline-block; 
 }
 
 .additional-actions .btn-primary {
@@ -193,12 +193,12 @@ a {
 }
 
 .additional-actions .btn-info {
-    background-color: #17a2b8; /* Example info color (teal) */
+    background-color: #17a2b8; 
     color: #fff;
 }
 
 .additional-actions .btn-info:hover {
-    background-color: #20c997; /* Slightly darker teal on hover */
+    background-color: #20c997; 
     color: #fff;
 }
 

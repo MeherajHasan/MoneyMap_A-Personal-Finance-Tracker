@@ -82,6 +82,6 @@ form.addEventListener('submit', function (e) {
         e.preventDefault();
     } else {
         e.preventDefault(); 
-        window.location.href = 'savings-dashboard.html';
+        window.location.href = '../../views/savings/savings-dashboard.php';
     }
 });

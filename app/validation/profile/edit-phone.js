@@ -45,12 +45,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 errorMessage.style.fontWeight = "bold";
             } else {
                 localStorage.setItem('phone', newPhone);
-                window.location.href = "profile.html";
+                window.location.href = "../../views/profile/profile.php";
             }
         }
     });
 
     cancelButton.addEventListener('click', function() {
-        window.location.href = "profile.html";
+        window.location.href = "../../views/dashboard/dashboard.php";
     });
 });

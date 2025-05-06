@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="../expense/expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="../bills/bills-dashboard.html">Bills</a>
-                <a href="../debt/debt-dashboard.html">Debt</a>
-                <a href="../savings/savings-dashboard.html">Savings</a>
-                <a href="../reports/reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -125,9 +125,9 @@
             <p id="emptyError" class="error-message"></p>
 
             <div class="navigation-buttons">
-                <a href="budget-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
-                <a href="add-budget.html" class="btn btn-secondary">Add New Budget</a>
-                <a href="budget-report.html" class="btn btn-secondary">View Budget Report</a>
+                <a href="budget-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+                <a href="add-budget.php" class="btn btn-secondary">Add New Budget</a>
+                <a href="budget-report.php" class="btn btn-secondary">View Budget Report</a>
             </div>
         </form>
     </main>

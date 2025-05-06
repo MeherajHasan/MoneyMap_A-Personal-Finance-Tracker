@@ -22,12 +22,12 @@
         <nav class="sidebar">
             <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
             <ul class="nav-menu">
-                <li><a href="../../views/income/income-dashboard.html"><img class="menu-icon" id="income-icon" src="../../../public/assets/income.png" alt="income-icon">Income</a></li>
-                <li><a href="../../views/expense/expense-dashboard.html"><img class="menu-icon" id="expense-icon" src="../../../public/assets/expense.png" alt="expense-icon">Expenses</a></li>
-                <li><a href="../../views/budget/budget-dashboard.html"><img class="menu-icon" id="budget-goal-icon" src="../../../public/assets/budget.png" alt="budget-goal-icon">Budget Goals</a></li>
-                <li><a href="../../views/debt/debt-dashboard.html"><img class="menu-icon" id="debt-icon" src="../../../public/assets/debt.png" alt="debt-icon">Debt Tracking</a></li>
-                <li><a href="../../views/savings/savings-dashboard.html"><img class="menu-icon" id="goals-icon" src="../../../public/assets/savings.png" alt="goals-icon">Saving Goals</a></li>
-                <li><a href="../../views/contact/contract.html"><img class="menu-icon" id="support-icon" src="../../../public/assets/support.png" alt="support-icon">Feedback & Support</a></li>
+                <li><a href="../../views/income/income-dashboard.php"><img class="menu-icon" id="income-icon" src="../../../public/assets/income.png" alt="income-icon">Income</a></li>
+                <li><a href="../../views/expense/expense-dashboard.php"><img class="menu-icon" id="expense-icon" src="../../../public/assets/expense.png" alt="expense-icon">Expenses</a></li>
+                <li><a href="../../views/budget/budget-dashboard.php"><img class="menu-icon" id="budget-goal-icon" src="../../../public/assets/budget.png" alt="budget-goal-icon">Budget Goals</a></li>
+                <li><a href="../../views/debt/debt-dashboard.php"><img class="menu-icon" id="debt-icon" src="../../../public/assets/debt.png" alt="debt-icon">Debt Tracking</a></li>
+                <li><a href="../../views/savings/savings-dashboard.php"><img class="menu-icon" id="goals-icon" src="../../../public/assets/savings.png" alt="goals-icon">Saving Goals</a></li>
+                <li><a href="../../views/contact/contact.php"><img class="menu-icon" id="support-icon" src="../../../public/assets/support.png" alt="support-icon">Feedback & Support</a></li>
             </ul>
         </nav>
 

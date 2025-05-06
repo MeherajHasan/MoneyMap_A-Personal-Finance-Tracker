@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -40,7 +40,7 @@
             <h2>Add Income</h2>
         </div>
 
-        <form action="add-income-action.html" method="POST" class="income-form">
+        <form action="" method="POST" class="income-form">
             <div class="form-group">
                 <label for="incomeType">Income Type</label>
                 <select id="incomeType" name="incomeType" required>
@@ -77,9 +77,9 @@
             <p id="emptyError" class="error-message"></p>
 
             <div class="navigation-buttons">
-                <a href="income-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
-                <a href="edit-income.html" class="btn btn-secondary">Edit Income</a>
-                <a href="income-report.html" class="btn btn-secondary">View Income Report</a>
+                <a href="income-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+                <a href="edit-income.php" class="btn btn-secondary">Edit Income</a>
+                <a href="income-report.php" class="btn btn-secondary">View Income Report</a>
             </div>
         </form>
     </main>

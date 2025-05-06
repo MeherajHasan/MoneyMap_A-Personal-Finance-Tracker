@@ -60,6 +60,6 @@ form.addEventListener('submit', function (e) {
         e.preventDefault();
     } else {
         e.preventDefault();
-        window.location.href = 'income-dashboard.html';
+        window.location.href = '../../views/income/income-dashboard.php';
     }
 });

@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         <span class="debt-amount">$${debt.principal.toFixed(2)}</span>
                     </div>
                     <div class="debt-actions">
-                        <a href="edit-debt.html?id=${debt.id}" class="btn-edit">Edit</a>
-                        <a href="debt-details.html?id=${debt.id}" class="btn-details">Details</a>
-                        <a href="debt-pay.html?id=${debt.id}" class="btn-pay">Pay</a>
+                        <a href="edit-debt.php?id=${debt.id}" class="btn-edit">Edit</a>
+                        <a href="debt-details.php?id=${debt.id}" class="btn-details">Details</a>
+                        <a href="debt-pay.php?id=${debt.id}" class="btn-pay">Pay</a>
                     </div>
                 `;
                 debtList.appendChild(listItem);

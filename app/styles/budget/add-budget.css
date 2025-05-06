@@ -1,15 +1,13 @@
-/* Base Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
     margin: 0;
     padding: 0;
 }
 
-/* Header */
 header {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
     padding: 20px 0;
 }
 
@@ -32,10 +30,9 @@ header .nav a {
 }
 
 header .nav a:hover {
-    color: #4FC3F7; /* Light Blue hover effect */
+    color: #4FC3F7; 
 }
 
-/* Main Content */
 .main {
     padding: 40px 20px;
 }
@@ -47,7 +44,7 @@ header .nav a:hover {
 
 .section-header h2 {
     font-size: 24px;
-    color: #0D1B2A; /* Deep Blue */
+    color: #0D1B2A; 
     margin-bottom: 20px;
 }
 
@@ -81,7 +78,7 @@ form .form-group textarea {
 form .form-group input:focus,
 form .form-group select:focus,
 form .form-group textarea:focus {
-    border-color: #4FC3F7; /* Light Blue */
+    border-color: #4FC3F7; 
     outline: none;
 }
 
@@ -91,11 +88,10 @@ form .error-message {
     margin-top: 5px;
 }
 
-/* Button Styling */
 .btn {
     display: inline-block;
     padding: 12px 25px;
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7; 
     color: #ffffff;
     font-weight: bold;
     text-align: center;
@@ -105,10 +101,9 @@ form .error-message {
 }
 
 .btn:hover {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
 }
 
-/* Secondary Button */
 .btn-secondary {
     background-color: #ddd;
     color: #0D1B2A;
@@ -119,7 +114,6 @@ form .error-message {
     color: #fff;
 }
 
-/* Navigation Buttons */
 .navigation-buttons {
     margin-top: 30px;
     display: flex;
@@ -127,9 +121,8 @@ form .error-message {
     justify-content: center;
 }
 
-/* Footer */
 footer {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
     color: #ffffff;
     text-align: center;
     padding: 15px 0;

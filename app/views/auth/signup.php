@@ -1,10 +1,8 @@
 <?php
-// Handle form submission
 $errors = [];
 $success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Trim and sanitize inputs
     function sanitize($data) {
         return htmlspecialchars(stripslashes(trim($data)));
     }
@@ -166,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input id="photo" type="file" name="photo" accept="image/*" />
             <p id="photoError"><?= $errors['photo'] ?? '' ?></p>
 
-            <button type="button" onclick="window.location.href='login.html'">Cancel</button>
+            <button type="button" onclick="window.location.href='login.php'">Cancel</button>
             <button type="reset" onclick="return confirm('Are you sure you want to reset the form?')">Reset</button>
             <button id="signupSubmitBtn" type="submit">Submit</button>
         </form>

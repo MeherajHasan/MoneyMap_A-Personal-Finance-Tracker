@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -90,9 +90,9 @@
 
             <!-- Additional navigation buttons -->
             <div class="navigation-buttons">
-                <a href="budget-dashboard.html" class="btn btn-secondary">Back to Budget Dashboard</a>
-                <a href="edit-budget.html" class="btn btn-secondary">Edit Budget</a>
-                <a href="budget-report.html" class="btn btn-secondary">View Budget Report</a>
+                <a href="budget-dashboard.php" class="btn btn-secondary">Back to Budget Dashboard</a>
+                <a href="edit-budget.php" class="btn btn-secondary">Edit Budget</a>
+                <a href="budget-report.php" class="btn btn-secondary">View Budget Report</a>
             </div>
         </form>
     </main>

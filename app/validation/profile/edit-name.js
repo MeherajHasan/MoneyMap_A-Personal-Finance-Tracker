@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (isValid) {
                     localStorage.setItem('name', nameValue);
-                    window.location.href = "profile.html";
+                    window.location.href = "../../views/profile/profile.php";
                 } else {
                     errorMessage.textContent = "Invalid character in name!";
                     errorMessage.style.color = "#red";
@@ -53,6 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     cancelButton.addEventListener('click', function() {
-        window.location.href = "profile.html";
+        window.location.href = "../../views/dashboard/dashboard.php";
     });
 });

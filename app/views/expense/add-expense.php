@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -40,11 +40,11 @@
             <h2>Add Expense</h2>
         </div>
 
-        <form action="add-expense-action.html" method="POST" class="expense-form">
+        <form action="" method="POST" class="expense-form">
             <div class="form-group">
                 <label for="expenseCategory">Category:</label>
                 <select id="expenseCategory" name="expenseCategory">
-                    <option value="">Select Category</option>
+                    <option value="" disabled selected>Select Category</option>
                     <option value="House Rent">House Rent</option>
                     <option value="Transportation">Transportation</option>
                     <option value="Shopping">Shopping</option>
@@ -86,9 +86,9 @@
 
             <!-- Additional navigation buttons -->
             <div class="navigation-buttons">
-                <a href="expense-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
-                <a href="edit-expense.html" class="btn btn-secondary">Edit Expense</a>
-                <a href="expense-report.html" class="btn btn-secondary">View Expense Report</a>
+                <a href="expense-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+                <a href="edit-expense.php" class="btn btn-secondary">Edit Expense</a>
+                <a href="expense-report.php" class="btn btn-secondary">View Expense Report</a>
             </div>
         </form>
     </main>

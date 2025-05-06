@@ -45,7 +45,7 @@
         </form>
 
         <div class="back-to-dashboard">
-            <a href="../../views/dashboard/dashboard.html">Back to Dashboard</a>
+            <a href="../../views/dashboard/dashboard.php">Back to Dashboard</a>
         </div>
     </main>
 

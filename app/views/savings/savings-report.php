@@ -21,18 +21,18 @@
 <body>
     <header class="header">
         <div class="container">
-            <a href="../dashboard/dashboard.html" class="logo-link">
+            <a href="../dashboard/dashboard.php" class="logo-link">
                 <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             </a>
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="../expenses/expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="../bills/bills-dashboard.html">Bills</a>
-                <a href="../debt/debt-dashboard.html">Debt</a>
-                <a href="../savings/savings-dashboard.html" class="active">Savings</a>
-                <a href="../reports/reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -116,7 +116,7 @@
             </section>
 
             <div class="actions">
-                <a href="savings-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+                <a href="savings-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
                 </div>
         </div>
     </main>

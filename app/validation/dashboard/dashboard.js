@@ -24,7 +24,7 @@ syncBtn.addEventListener('click', () => {
 });
 
 profileBtn.addEventListener('click', () => {
-  window.location.href = '../../views/profile/profile.html';
+  window.location.href = '../../views/profile/profile.php';
 });
 
 notificationBtn.addEventListener('click', () => {
@@ -32,9 +32,9 @@ notificationBtn.addEventListener('click', () => {
   //window.location.href = '/notifications';
 });
 
-logoutBtn.addEventListener('click', () => {
-  window.location.href = '../../views/auth/login.html';
-});
+// logoutBtn.addEventListener('click', () => {
+//   window.location.href = '../../views/auth/login.html';
+// });
 
 sidebarItems.forEach(item => {
   item.addEventListener('click', event => {
@@ -56,19 +56,19 @@ widgetButtons.forEach(button => {
     const widgetId = button.parentElement.id;
     switch (widgetId) {
       case 'income-widget':
-        window.location.href = '../../views/income/income-dashboard.html';
+        window.location.href = '../../views/income/income-dashboard.php';
         break;
       case 'expense-widget':
-        window.location.href = '../../views/expense/expense-dashboard.html';
+        window.location.href = '../../views/expense/expense-dashboard.php';
         break;
       case 'budget-widget':
-        window.location.href = '../../views/budget/budget-dashboard.html';
+        window.location.href = '../../views/budget/budget-dashboard.php';
         break;
       case 'savings-widget':
-        window.location.href = '../../views/savings/savings-dashboard.html';
+        window.location.href = '../../views/savings/savings-dashboard.php';
         break;
       case 'debt-widget':
-        window.location.href = '../../views/debt/debt-dashboard.html';
+        window.location.href = '../../views/debt/debt-dashboard.php';
         break;
       case 'net-worth-widget':
         alert('Net Worth feature is under development.');

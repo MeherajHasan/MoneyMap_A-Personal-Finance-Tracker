@@ -1,9 +1,7 @@
-/* File: edit-budget.css */
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
     margin: 0;
     padding: 0;
 }
@@ -16,7 +14,7 @@ body {
 }
 
 .header {
-    background-color: #0D1B2A; /* Deep Blue header */
+    background-color: #0D1B2A;
     padding: 20px 0;
 }
 
@@ -39,7 +37,7 @@ body {
 }
 
 .nav a:hover {
-    color: #4FC3F7; /* Light Blue hover */
+    color: #4FC3F7; 
 }
 
 .main {
@@ -119,13 +117,13 @@ textarea {
 }
 
 .btn-primary {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
     color: #fff;
     margin-top: 20px;
 }
 
 .btn-primary:hover {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7; 
     color: #0D1B2A;
 }
 

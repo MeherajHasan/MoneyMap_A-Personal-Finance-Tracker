@@ -21,18 +21,18 @@
 <body>
     <header class="header">
         <div class="container">
-            <a href="../dashboard/dashboard.html" class="logo-link">
+            <a href="../dashboard/dashboard.php" class="logo-link">
                 <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             </a>
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="../expenses/expenses.html">Expenses</a>
-                <a href="../budget/budget-dashboard.html">Budget</a>
-                <a href="../bills/bills-dashboard.html">Bills</a>
-                <a href="../debt/debt-dashboard.html" class="active">Debt</a>
-                <a href="../savings/savings-dashboard.html">Savings</a>
-                <a href="../reports/reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -68,9 +68,9 @@
                             <span class="debt-amount">$1,200.00</span>
                         </div>
                         <div class="debt-actions">
-                            <a href="edit-debt.html" class="btn-edit">Edit</a>
-                            <a href="debt-details.html" class="btn-details">Details</a>
-                            <a href="debt-pay.html" class="btn-pay">Pay</a>
+                            <a href="edit-debt.php" class="btn-edit">Edit</a>
+                            <a href="debt-details.php" class="btn-details">Details</a>
+                            <a href="debt-pay.php" class="btn-pay">Pay</a>
                         </div>
                     </li>
                     <li>
@@ -79,9 +79,9 @@
                             <span class="debt-amount">$15,500.00</span>
                         </div>
                         <div class="debt-actions">
-                            <a href="edit-debt.html" class="btn-edit">Edit</a>
-                            <a href="debt-details.html" class="btn-details">Details</a>
-                            <a href="debt-pay.html" class="btn-pay">Pay</a>
+                            <a href="edit-debt.php" class="btn-edit">Edit</a>
+                            <a href="debt-details.php" class="btn-details">Details</a>
+                            <a href="debt-pay.php" class="btn-pay">Pay</a>
                         </div>
                     </li>
                     </ul>
@@ -89,8 +89,8 @@
             </section>
 
             <div class="actions">
-                <a href="add-debt.html" class="btn btn-primary">Add New Debt</a>
-                <a href="debt-report.html" class="btn btn-info">Debt Report</a>
+                <a href="add-debt.php" class="btn btn-primary">Add New Debt</a>
+                <a href="debt-report.php" class="btn btn-info">Debt Report</a>
             </div>
         </div>
     </main>

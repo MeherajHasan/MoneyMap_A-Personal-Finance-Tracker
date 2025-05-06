@@ -7,13 +7,13 @@ const description = document.getElementById('description');
 const nameError = document.getElementById('nameError');
 const amountError = document.getElementById('amountError');
 const dateError = document.getElementById('dateError');
-const emptyError = document.getElementById('emptyError'); // Get the emptyError paragraph
+const emptyError = document.getElementById('emptyError'); 
 
 function clearErrors() {
     nameError.textContent = '';
     amountError.textContent = '';
     dateError.textContent = '';
-    emptyError.textContent = ''; // Clear the empty error as well
+    emptyError.textContent = '';
 }
 
 function containsIllegalCharacters(input) {
@@ -38,7 +38,6 @@ form.addEventListener('submit', function (e) {
     const dateValue = targetDate.value.trim();
     const descriptionValue = description.value.trim();
 
-    // Check if any required fields are empty
     if (!nameValue || isNaN(amountValue) || !dateValue) {
         emptyError.textContent = 'All fields must be filled out.';
         valid = false;
@@ -53,7 +52,6 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Ensure target date is greater than the current date
     const currentDate = new Date();
     const targetDateValue = new Date(dateValue);
 
@@ -66,6 +64,6 @@ form.addEventListener('submit', function (e) {
         e.preventDefault();
     } else {
         e.preventDefault();
-        window.location.href = 'savings-dashboard.html';
+        window.location.href = '../../views/savings/savings-dashboard.php';
     }
 });

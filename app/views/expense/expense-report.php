@@ -24,14 +24,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -41,7 +41,6 @@
             <h2>Expense Report</h2>
         </div>
 
-        <!-- Filter Panel -->
         <section class="filters">
             <div class="filter-group">
                 <label>Report Type:</label>
@@ -118,7 +117,7 @@
         <!-- Download Button -->
         <div class="navigation-buttons">
             <a href="#" id="downloadBtn" class="btn btn-secondary">Download Report</a>
-            <a href="expense-dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="expense-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </main>
 

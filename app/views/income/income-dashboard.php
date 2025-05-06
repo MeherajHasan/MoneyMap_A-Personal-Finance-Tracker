@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -57,7 +57,7 @@
 
         <div class="section-header">
             <h2>Income Records</h2>
-            <a href="add-income.html" class="btn btn-primary">+ Add Income</a>
+            <a href="add-income.php" class="btn btn-primary">+ Add Income</a>
         </div>
 
         <div class="filters">
@@ -92,7 +92,7 @@
                     <td>2025-05-01</td>
                     <td>April Salary</td>
                     <td>
-                        <a href="edit-income.html?id=1" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=1" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -103,7 +103,7 @@
                     <td>2025-05-03</td>
                     <td>Web design project</td>
                     <td>
-                        <a href="edit-income.html?id=2" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=2" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -114,7 +114,7 @@
                     <td>2025-04-28</td>
                     <td>Birthday gift from uncle</td>
                     <td>
-                        <a href="edit-income.html?id=3" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=3" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -125,7 +125,7 @@
                     <td>2025-05-05</td>
                     <td>Udemy payout</td>
                     <td>
-                        <a href="edit-income.html?id=4" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=4" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -136,7 +136,7 @@
                     <td>2025-04-30</td>
                     <td>Weekend cashier</td>
                     <td>
-                        <a href="edit-income.html?id=5" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=5" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -147,7 +147,7 @@
                     <td>2025-04-25</td>
                     <td>Old bike sale</td>
                     <td>
-                        <a href="edit-income.html?id=6" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=6" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -158,7 +158,7 @@
                     <td>2025-05-02</td>
                     <td>Monthly payout</td>
                     <td>
-                        <a href="edit-income.html?id=7" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=7" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -169,7 +169,7 @@
                     <td>2025-04-20</td>
                     <td>Tax refund</td>
                     <td>
-                        <a href="edit-income.html?id=8" class="btn-small edit">Edit</a>
+                        <a href="edit-income.php?id=8" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -178,8 +178,8 @@
         </table>
 
         <div class="action-buttons">
-            <a href="edit-income.html" class="btn">Edit Income</a>
-            <a href="income-report.html" class="btn">View Income Report</a>
+            <a href="edit-income.php" class="btn">Edit Income</a>
+            <a href="income-report.php" class="btn">View Income Report</a>
         </div>
     </main>
 

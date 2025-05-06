@@ -21,7 +21,6 @@ const phoneEditBtn = document.getElementById('phone-edit');
 const addressEditBtn = document.getElementById('address-edit');
 const linkedAccEditBtn = document.getElementById('linked-acc-edit');
 
-// Dummy User Data
 const userData = {
     fullName: "John Doe",
     idType: "Passport",
@@ -31,10 +30,9 @@ const userData = {
     phone: "+880123456789",
     address: "123, Example Street, Dhaka, Bangladesh",
     linkedAccounts: "Bank A, Bank B",
-    photoUrl: "../../../storage/check.png"
+    photoUrl: "../../../public/assets/check.png"
 };
 
-// Load Profile Data
 const loadProfileData = () => {
     fullNameField.innerText = userData.fullName;
     idTypeField.innerText = userData.idType;
@@ -48,18 +46,16 @@ const loadProfileData = () => {
     if (userData.photoUrl) {
         userPhoto.src = userData.photoUrl;
     } else {
-        userPhoto.src = "../../../storage/profile.png";
+        userPhoto.src = "../../../public/assets/profile.png";
     }
 };
 
-// Create Hidden File Input for Upload
 const fileInput = document.createElement('input');
 fileInput.type = 'file';
 fileInput.accept = 'image/*';
 fileInput.style.display = 'none';
 document.body.appendChild(fileInput);
 
-// Upload Button Handler
 uploadBtn.addEventListener('click', () => {
     fileInput.click();
 });
@@ -75,37 +71,34 @@ fileInput.addEventListener('change', (event) => {
     }
 });
 
-// Edit Button Redirections
 editNameBtn.addEventListener('click', () => {
-    window.location.href = 'edit-name.html';
+    window.location.href = 'edit-name.php';
 });
 
 identityEditBtn.addEventListener('click', () => {
-    window.location.href = 'edit-identity.html';
+    window.location.href = 'edit-identity.php';
 });
 
 mailEditBtn.addEventListener('click', () => {
-    window.location.href = 'edit-mail.html';
+    window.location.href = 'edit-mail.php';
 });
 
 phoneEditBtn.addEventListener('click', () => {
-    window.location.href = 'edit-phone.html';
+    window.location.href = 'edit-phone.php';
 });
 
 addressEditBtn.addEventListener('click', () => {
-    window.location.href = 'edit-address.html';
+    window.location.href = 'edit-address.php';
 });
 
 linkedAccEditBtn.addEventListener('click', () => {
-    window.location.href = '../../view/account-linking/account-linking.html';
+    alert("This feature is under development process.");
 });
 
-// Delete Account Handler
 deleteBtn.addEventListener('click', () => {
     if (confirm("Are you sure you want to delete your account?")) {
-        window.location.href = 'delete-acc.html';
+        window.location.href = 'delete-acc.php';
     }
 });
 
-// Initialize
 window.addEventListener('DOMContentLoaded', loadProfileData);

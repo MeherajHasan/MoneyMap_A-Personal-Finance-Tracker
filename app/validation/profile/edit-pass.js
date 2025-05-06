@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const errorMessage = document.getElementById('errorMSG');
 
     const demoPassword = "11111111";  // Default password if no stored password is available
-    const storedPassword = localStorage.getItem('password') || demoPassword; // Fallback to demoPassword if no password is stored
+    const storedPassword = localStorage.getItem('password') || demoPassword; 
 
     saveButton.addEventListener('click', function() {
         const currentPassword = currentPasswordField.value.trim();
@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function() {
             errorMessage.style.color = "#e74c3c";
             errorMessage.style.fontWeight = "bold";
         } else {
-            localStorage.setItem('password', newPassword);  // Save the new password
-            window.location.href = "profile.html";
+            localStorage.setItem('password', newPassword); 
+            window.location.href = "../../views/profile/profile.php";
         }
     });
 
     cancelButton.addEventListener('click', function() {
-        window.location.href = "profile.html";
+        window.location.href = "../../views/dashboard/dashboard.php";
     });
 });

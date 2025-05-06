@@ -1,9 +1,8 @@
-/* === General Styles === */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
 }
 
 .container {
@@ -13,9 +12,8 @@ body {
     padding: 20px;
 }
 
-/* === Header === */
 .header {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
     padding: 20px 0;
     text-align: center;
 }
@@ -38,17 +36,15 @@ body {
 }
 
 .nav a:hover {
-    color: #4FC3F7; /* Light Blue */
+    color: #4FC3F7; 
 }
 
-/* === Section Header === */
 .section-header h2 {
     font-size: 28px;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* === Filter Section === */
 .filters {
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +79,6 @@ body {
     border: 1px solid #ccc;
 }
 
-/* === Buttons === */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -93,7 +88,7 @@ body {
 }
 
 .btn-primary {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7; 
     color: #fff;
 }
 
@@ -102,7 +97,7 @@ body {
 }
 
 .btn-secondary {
-    background-color: #1B263B; /* Deep Blue */
+    background-color: #1B263B; 
     color: #fff;
     margin-top: 10px;
     text-decoration: none;
@@ -114,7 +109,6 @@ body {
     background-color: #324c6b;
 }
 
-/* === Chart === */
 .chart-container {
     background-color: #ffffff;
     padding: 20px;
@@ -123,7 +117,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-/* === Table === */
 #incomeTable {
     width: 100%;
     border-collapse: collapse;
@@ -141,7 +134,7 @@ body {
 }
 
 #incomeTable th {
-    background-color: #1B263B; /* Deep Blue */
+    background-color: #1B263B; 
     color: #ffffff;
 }
 
@@ -149,7 +142,6 @@ body {
     background-color: #f1faff;
 }
 
-/* === Footer === */
 footer {
     text-align: center;
     padding: 20px;

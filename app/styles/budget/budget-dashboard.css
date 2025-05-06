@@ -1,11 +1,8 @@
-/* income-dashboard.css */
-
-/* Base Styles */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
 }
 
 a {
@@ -19,9 +16,8 @@ a {
     margin: 0 auto;
 }
 
-/* Header */
 .header {
-    background-color: #0D1B2A; /* Deep Blue header */
+    background-color: #0D1B2A; 
     padding: 1rem 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -46,15 +42,13 @@ a {
 }
 
 .nav a:hover {
-    color: #4FC3F7; /* Light Blue highlight */
+    color: #4FC3F7;
 }
 
-/* Main Section */
 .main {
     padding: 2rem 0;
 }
 
-/* Summary Cards */
 .summary-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -73,7 +67,7 @@ a {
 .card h3 {
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
-    color: #0D1B2A; /* Header font color */
+    color: #0D1B2A; 
 }
 
 .card p {
@@ -82,7 +76,6 @@ a {
     color: #1B263B;
 }
 
-/* Section Header */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -97,7 +90,7 @@ a {
 
 .btn,
 .btn-primary {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7; 
     color: #ffffff;
     padding: 0.5rem 1rem;
     border: none;
@@ -112,7 +105,6 @@ a {
     background-color: #29b6f6;
 }
 
-/* Filters */
 .filters {
     display: flex;
     flex-wrap: wrap;
@@ -132,7 +124,6 @@ a {
     border: 1px solid #ccc;
 }
 
-/* Income Table */
 .income-table {
     width: 100%;
     border-collapse: collapse;
@@ -150,7 +141,7 @@ a {
 }
 
 .income-table th {
-    background-color: #0D1B2A; /* Deep Blue header */
+    background-color: #0D1B2A; 
     color: #ffffff;
 }
 
@@ -168,7 +159,7 @@ a {
 }
 
 .edit {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7; 
     color: #fff;
     border: none;
 }
@@ -178,7 +169,7 @@ a {
 }
 
 .delete {
-    background-color: #e57373; /* Red-ish delete */
+    background-color: #e57373; 
     color: #fff;
     border: none;
 }
@@ -187,7 +178,6 @@ a {
     background-color: #ef5350;
 }
 
-/* Action Buttons */
 .action-buttons {
     display: flex;
     justify-content: center;
@@ -195,9 +185,8 @@ a {
     margin-top: 2rem;
 }
 
-/* Footer */
 footer {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A; 
     color: #ffffff;
     text-align: center;
     padding: 1rem 0;

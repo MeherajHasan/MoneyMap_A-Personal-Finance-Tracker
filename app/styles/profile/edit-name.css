@@ -1,11 +1,9 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
@@ -15,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 header {
     background-color: #1B263B;
     padding: 20px 0;
@@ -26,10 +23,9 @@ header {
 
 #MoneyMap-logo {
     width: 350px;
-    height: auto; /* Maintain aspect ratio */
+    height: auto; 
 }
 
-/* Main Section */
 main {
     flex: 1;
     display: flex;
@@ -38,7 +34,6 @@ main {
     padding: 30px 20px;
 }
 
-/* Heading */
 h1 {
     text-align: center;
     margin-bottom: 30px;
@@ -46,7 +41,6 @@ h1 {
     color: #0D1B2A;
 }
 
-/* Form */
 form {
     background-color: #ffffff;
     padding: 40px;
@@ -58,7 +52,6 @@ form {
     flex-direction: column;
 }
 
-/* Current Name */
 form p {
     margin-bottom: 20px;
     font-size: 1rem;
@@ -69,7 +62,6 @@ form strong {
     color: #1B263B;
 }
 
-/* Labels and Inputs */
 label {
     margin-top: 15px;
     margin-bottom: 5px;
@@ -86,14 +78,12 @@ input[type="text"] {
     color: #333;
 }
 
-/* Error Message */
 #errorMSG {
     color: red;
     font-size: 0.9rem;
     margin-top: 10px;
 }
 
-/* Buttons */
 .btn {
     margin-top: 20px;
     padding: 10px;
@@ -110,7 +100,6 @@ input[type="text"] {
     background-color: #27394d;
 }
 
-/* Footer */
 footer {
     background-color: #1B263B;
     color: #ffffff;

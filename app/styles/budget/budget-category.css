@@ -10,7 +10,6 @@ body {
     color: #1B263B;
 }
 
-/* Header Styles */
 .header {
     background-color: #0D1B2A;
     padding: 20px 0;
@@ -43,7 +42,6 @@ body {
     color: #4FC3F7;
 }
 
-/* Main Section Styles */
 .main {
     padding: 40px 20px;
 }
@@ -108,7 +106,6 @@ body {
     background-color: #c62828;
 }
 
-/* Add Category Section */
 .add-category {
     display: flex;
     gap: 10px;
@@ -135,14 +132,12 @@ body {
     background-color: #1B263B;
 }
 
-/* Error Message */
 #emptyError {
     color: #f44336;
     font-size: 14px;
     margin-top: 10px;
 }
 
-/* Navigation Buttons */
 .navigation-buttons {
     margin-top: 20px;
     display: flex;
@@ -164,7 +159,6 @@ body {
     color: #fff;
 }
 
-/* Footer Styles */
 footer {
     background-color: #0D1B2A;
     color: #f4f6f8;

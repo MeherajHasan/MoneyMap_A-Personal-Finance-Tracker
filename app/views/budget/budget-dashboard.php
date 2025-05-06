@@ -23,14 +23,14 @@
         <div class="container">
             <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
             <nav class="nav">
-                <a href="../dashboard/dashboard.html">Dashboard</a>
-                <a href="expenses.html">Expenses</a>
-                <a href="budget-dashboard.html">Budget</a>
-                <a href="bills-dashboard.html">Bills</a>
-                <a href="debt-dashboard.html">Debt</a>
-                <a href="savings-dashboard.html">Savings</a>
-                <a href="reports.html">Reports</a>
-                <a href="../../../public/index.html">Logout</a>
+                <a href="../dashboard/dashboard.php">Dashboard</a>
+                <a href="../expense/expense-dashboard.php">Expenses</a>
+                <a href="../budget/budget-dashboard.php">Budget</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+                <a href="../debt/debt-dashboard.php">Debt</a>
+                <a href="../savings/savings-dashboard.php">Savings</a>
+                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+                <a href="../../controllers/auth/logout.php">Logout</a>
             </nav>
         </div>
     </header>
@@ -53,7 +53,7 @@
 
         <div class="section-header">
             <h2>Budget Allocations</h2>
-            <a href="add-budget.html" class="btn btn-primary">+ Add Budget</a>
+            <a href="add-budget.php" class="btn btn-primary">+ Add Budget</a>
         </div>
 
         <div class="filters">
@@ -95,7 +95,7 @@
                     <td>2025-05-31</td>
                     <td>Rent and utilities</td>
                     <td>
-                        <a href="edit-budget.html?id=1" class="btn-small edit">Edit</a>
+                        <a href="edit-budget.php?id=1" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -108,7 +108,7 @@
                     <td>2025-05-31</td>
                     <td>Groceries and dining out</td>
                     <td>
-                        <a href="edit-budget.html?id=2" class="btn-small edit">Edit</a>
+                        <a href="edit-budget.php?id=2" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -121,7 +121,7 @@
                     <td>2025-05-31</td>
                     <td>Gas and public transit</td>
                     <td>
-                        <a href="edit-budget.html?id=3" class="btn-small edit">Edit</a>
+                        <a href="edit-budget.php?id=3" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -134,7 +134,7 @@
                     <td>2025-05-31</td>
                     <td>Movies, games</td>
                     <td>
-                        <a href="edit-budget.html?id=4" class="btn-small edit">Edit</a>
+                        <a href="edit-budget.php?id=4" class="btn-small edit">Edit</a>
                         <button class="btn-small delete">Delete</button>
                     </td>
                 </tr>
@@ -142,9 +142,9 @@
         </table>
 
         <div class="action-buttons">
-            <a href="budget-report.html" class="btn">View Budget Report</a>
-            <a href="budget-category.html" class="btn">View Budget Categories</a>
-            <a href="overspend-notify.html" class="btn">Overspend Notification</a>
+            <a href="budget-report.php" class="btn">View Budget Report</a>
+            <a href="budget-category.php" class="btn">View Budget Categories</a>
+            <a href="overspend-notify.php" class="btn">Overspend Notification</a>
         </div>
     </main>
 

@@ -115,7 +115,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
   } else {
     e.preventDefault();
-    window.location.href = "confirmation.html";
+    window.location.href = "../../views/contact/confirmation.php";
   }
 });
 

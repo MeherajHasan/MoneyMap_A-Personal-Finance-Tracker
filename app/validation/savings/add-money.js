@@ -7,24 +7,21 @@ const notesInput = document.getElementById('notes');
 const nameError = document.getElementById('nameError');
 const amountError = document.getElementById('amountError');
 const dateError = document.getElementById('dateError');
-const emptyError = document.getElementById('emptyError'); // Get the emptyError paragraph
+const emptyError = document.getElementById('emptyError'); 
 
-// Pre-defined goals
 const availableGoals = [
     { name: 'Vacation' },
     { name: 'Emergency' },
     { name: 'Buy A Car' }
 ];
 
-// Function to clear error messages
 function clearErrors() {
     nameError.textContent = '';
     amountError.textContent = '';
     dateError.textContent = '';
-    emptyError.textContent = ''; // Clear the empty error as well
+    emptyError.textContent = ''; 
 }
 
-// Function to check for illegal characters
 function containsIllegalCharacters(input) {
     for (let i = 0; i < input.length; i++) {
         const char = input[i];
@@ -39,7 +36,6 @@ function containsIllegalCharacters(input) {
     return false;
 }
 
-// Populate the goal name select dropdown
 availableGoals.forEach(goal => {
     const option = document.createElement('option');
     option.value = goal.name;
@@ -47,17 +43,15 @@ availableGoals.forEach(goal => {
     goalNameSelect.appendChild(option);
 });
 
-// Form submit event listener
 form.addEventListener('submit', function (e) {
     let isValid = true;
-    clearErrors(); // Clear any existing error messages
+    clearErrors(); 
 
     const goalNameValue = goalNameSelect.value.trim();
     const amountValue = parseFloat(amountInput.value);
     const transactionDateValue = transactionDateInput.value.trim();
     const notesValue = notesInput.value.trim();
 
-    // Check if required fields are filled out
     if (!goalNameValue || isNaN(amountValue) || !transactionDateValue) {
         emptyError.textContent = 'All fields must be filled out.';
         isValid = false;
@@ -92,6 +86,6 @@ form.addEventListener('submit', function (e) {
         };
 
         console.log('Form Data:', formData);
-        window.location.href = 'savings-dashboard.html'; 
+        window.location.href = '../../views/savings/savings-dashboard.php'; 
     }
 });

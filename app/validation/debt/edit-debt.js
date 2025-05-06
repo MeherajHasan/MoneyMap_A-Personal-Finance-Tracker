@@ -78,6 +78,6 @@ form.addEventListener('submit', function (e) {
         e.preventDefault();
     } else {
         e.preventDefault();
-        window.location.href = 'debt-dashboard.html';
+        window.location.href = '../../views/debt/debt-dashboard.php';
     }
 });
