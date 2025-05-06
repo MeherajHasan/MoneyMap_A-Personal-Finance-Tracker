@@ -5,16 +5,13 @@ if (isset($_COOKIE['status'])) {
     exit();
 }
 
-// Initialize variables
 $email = $password = '';
 $emailError = $passwordError = '';
 
-// Validation logic after form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    // Email validation
     if (empty($email)) {
         $emailError = "Please enter an email address.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -23,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailError = "Email not recognized.";
     }
 
-    // Password validation
     if (empty($password)) {
         if (empty($emailError)) {
             $passwordError = "Please enter your password.";
@@ -61,11 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Login Form</h1>
         <form action="login.php" method="POST" id="loginForm">
             <label for="email">Email:</label>
-            <input id="email" type="email" name="email" placeholder="xyz@gmail.com" value="<?php echo htmlspecialchars($email); ?>" />
+            <input id="email" type="email" name="email" placeholder="xyz@gmail.com" value="xyz@gmail.com" /> <!--value="<?php echo htmlspecialchars($email); ?>"-->
             <p id="emailError" class="error"><?php echo $emailError; ?></p>
 
             <label for="password">Password:</label>
-            <input id="password" type="password" name="password" placeholder="Enter your password" />
+            <input id="password" type="password" name="password" placeholder="Enter your password" value="11111111"/>
             <p id="passwordError" class="error"><?php echo $passwordError; ?></p>
 
             <div class="remember-me">

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+
+    if (!isset($_COOKIE['status'])) {
+        header('Location: ../../views/auth/login.php');
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

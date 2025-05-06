@@ -38,7 +38,7 @@
                     <button class="navigation-btn" id="syncBtn"><img id="sync-icon" src="../../../public/assets/sync.png" alt="sync-icon"></button>
                     <button class="navigation-btn" id="profileBtn"><img id="profile-img" src="../../../public/assets/profile.png" alt="profile-img"></button>
                     <button class="navigation-btn" id="notificationBtn"><img id="notification-icon" src="../../../public/assets/notification-white.png" alt="notification-icon"></button>
-                    <button class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../public/assets/logout.png" alt="logout-icon"></button>
+                    <a href="../../controllers/auth/logout.php" class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../public/assets/logout.png" alt="logout-icon"></a>
                 </div>
             </header>
 
