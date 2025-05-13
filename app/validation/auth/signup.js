@@ -238,6 +238,6 @@ idTypeSelect.addEventListener("change", handleIDSelection);
 form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (validateForm()) {
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
     }
 });
