@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($dob)) $errors['dob'] = "Date of birth is required.";
     if (empty($address)) $errors['address'] = "Address is required.";
 
-    // Validate photo upload
     if ($photo && $photo['error'] == 0) {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (!in_array($photo['type'], $allowedTypes)) {
@@ -46,21 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['photo'] = "Photo upload is required.";
     }
 
-    // If no errors, proceed
     if (empty($errors)) {
-        // Move uploaded photo to target directory
-        $targetDir = "uploads/";
+        $targetDir = __DIR__ . '/../../../uploads/';
         if (!file_exists($targetDir)) mkdir($targetDir, 0777, true);
-        $photoName = basename($photo["name"]);
-        $targetFilePath = $targetDir . time() . "_" . $photoName;
-        move_uploaded_file($photo["tmp_name"], $targetFilePath);
+        $photoName = time() . "_" . basename($photo["name"]);
+        $targetFilePath = $targetDir . $photoName;
 
-        // Set cookies (example: store user's name and email)
-        setcookie("fname", $fname, time() + 3600, "/");
-        setcookie("email", $email, time() + 3600, "/");
-
-        // Normally, here you'd save data to a database
-        $success = true;
+        if (move_uploaded_file($photo["tmp_name"], $targetFilePath)) {
+        // Success
+        } else {
+            $errors['photo'] = "Error uploading the photo.";
+        }
     }
 }
 ?>
@@ -75,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
 <body>
-    <header>
+    <header> 
         <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
     </header>
 
@@ -84,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if ($success): ?>
             <p style="color: green;">Registration successful! Cookies have been set.</p>
         <?php endif; ?>
+        
         <form action="" method="post" id="signupForm" enctype="multipart/form-data">
             <label for="fname">First Name:</label>
             <input id="fname" type="text" name="fname" value="<?= htmlspecialchars($_POST['fname'] ?? '') ?>" placeholder="First Name" />
