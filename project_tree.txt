@@ -1,0 +1,270 @@
+Folder PATH listing
+Volume serial number is 60EB-C109
+C:.
+|   .gitignore
+|   project_tree.txt
+|   README.md
+|   
++---app
+|   +---controllers
+|   |   |   .gitkeep
+|   |   |   
+|   |   \---auth
+|   |           loginCheck.php
+|   |           logout.php
+|   |           uploadImage.php
+|   |           
+|   +---helpers
+|   |       .gitkeep
+|   |       
+|   +---models
+|   |       .gitkeep
+|   |       
+|   +---services
+|   |       .gitkeep
+|   |       
+|   +---styles
+|   |   +---auth
+|   |   |       emailVerify.css
+|   |   |       forgetPass.css
+|   |   |       login.css
+|   |   |       resetPass.css
+|   |   |       signup.css
+|   |   |       
+|   |   +---bills
+|   |   +---budget
+|   |   |       add-budget.css
+|   |   |       budget-category.css
+|   |   |       budget-dashboard.css
+|   |   |       budget-report.css
+|   |   |       edit-budget.css
+|   |   |       overspend-notify.css
+|   |   |       
+|   |   +---contact
+|   |   |       confirmation.css
+|   |   |       contact.css
+|   |   |       
+|   |   +---dashboard
+|   |   |       dashboard.css
+|   |   |       
+|   |   +---debt
+|   |   |       add-debt.css
+|   |   |       debt-dashboard.css
+|   |   |       debt-details.css
+|   |   |       debt-pay.css
+|   |   |       debt-report.css
+|   |   |       edit-debt.css
+|   |   |       
+|   |   +---expense
+|   |   |       add-expense.css
+|   |   |       edit-expense.css
+|   |   |       expense-category.css
+|   |   |       expense-dashboard.css
+|   |   |       expense-report.css
+|   |   |       
+|   |   +---income
+|   |   |       add-income.css
+|   |   |       edit-income.css
+|   |   |       income-dashboard.css
+|   |   |       income-report.css
+|   |   |       
+|   |   +---landing
+|   |   |       about.css
+|   |   |       testimonial.css
+|   |   |       
+|   |   +---profile
+|   |   |       delete-acc.css
+|   |   |       edit-address.css
+|   |   |       edit-identity.css
+|   |   |       edit-mail.css
+|   |   |       edit-name.css
+|   |   |       edit-pass.css
+|   |   |       edit-phone.css
+|   |   |       profile.css
+|   |   |       
+|   |   \---savings
+|   |           add-money.css
+|   |           add-savings.css
+|   |           edit-savings.css
+|   |           savings-dashboard.css
+|   |           savings-report.css
+|   |           
+|   +---validation
+|   |   +---auth
+|   |   |       emailVerify.js
+|   |   |       forgetPass.js
+|   |   |       login.js
+|   |   |       resetPass.js
+|   |   |       signup.js
+|   |   |       
+|   |   +---bills
+|   |   +---budget
+|   |   |       add-budget.js
+|   |   |       budget-category.js
+|   |   |       budget-dashboard.js
+|   |   |       budget-report.js
+|   |   |       edit-budget.js
+|   |   |       overspend-notify.js
+|   |   |       
+|   |   +---contact
+|   |   |       confirmation.js
+|   |   |       contact.js
+|   |   |       
+|   |   +---dashboard
+|   |   |       dashboard.js
+|   |   |       
+|   |   +---debt
+|   |   |       add-debt.js
+|   |   |       debt-dashboard.js
+|   |   |       debt-details.js
+|   |   |       debt-pay.js
+|   |   |       debt-report.js
+|   |   |       edit-debt.js
+|   |   |       
+|   |   +---expense
+|   |   |       add-expense.js
+|   |   |       edit-expense.js
+|   |   |       expense-category.js
+|   |   |       expense-dashboard.js
+|   |   |       expense-report.js
+|   |   |       
+|   |   +---income
+|   |   |       add-income.js
+|   |   |       edit-income.js
+|   |   |       income-dashboard.js
+|   |   |       income-report.js
+|   |   |       
+|   |   +---landing
+|   |   |       about.js
+|   |   |       testimonial.js
+|   |   |       
+|   |   +---profile
+|   |   |       detele-acc.js
+|   |   |       edit-address.js
+|   |   |       edit-identity.js
+|   |   |       edit-mail.js
+|   |   |       edit-name.js
+|   |   |       edit-pass.js
+|   |   |       edit-phone.js
+|   |   |       profile.js
+|   |   |       
+|   |   \---savings
+|   |           add-money.js
+|   |           add-savings.js
+|   |           edit-savings.js
+|   |           savings-dashboard.js
+|   |           savings-report.js
+|   |           
+|   \---views
+|       +---auth
+|       |       emailVerify.html
+|       |       forgetPass.html
+|       |       login.php
+|       |       resetPass.html
+|       |       signup.php
+|       |       
+|       +---bills
+|       +---budget
+|       |       add-budget.php
+|       |       budget-category.php
+|       |       budget-dashboard.php
+|       |       budget-report.php
+|       |       edit-budget.php
+|       |       overspend-notify.php
+|       |       
+|       +---contact
+|       |       confirmation.php
+|       |       contact.php
+|       |       
+|       +---dashboard
+|       |       dashboard.php
+|       |       
+|       +---debt
+|       |       add-debt.php
+|       |       debt-dashboard.php
+|       |       debt-details.php
+|       |       debt-pay.php
+|       |       debt-report.php
+|       |       edit-debt.php
+|       |       
+|       +---expense
+|       |       add-expense.php
+|       |       edit-expense.php
+|       |       expense-category.php
+|       |       expense-dashboard.php
+|       |       expense-report.php
+|       |       
+|       +---income
+|       |       add-income.php
+|       |       edit-income.php
+|       |       income-dashboard.php
+|       |       income-report.php
+|       |       
+|       +---landing
+|       |       about.html
+|       |       testimonial.html
+|       |       
+|       +---profile
+|       |       delete-acc.php
+|       |       edit-address.php
+|       |       edit-identity.php
+|       |       edit-mail.php
+|       |       edit-name.php
+|       |       edit-pass.php
+|       |       edit-phone.php
+|       |       profile.php
+|       |       
+|       \---savings
+|               add-money.php
+|               add-savings.php
+|               edit-savings.php
+|               savings-dashboard.php
+|               savings-report.php
+|               
++---config
+|       .gitkeep
+|       
++---core
+|       .gitkeep
+|       
++---files
+|       Common Features.pdf
+|       Pages Per Feature.docx
+|       Personal Finance Tracker.pdf
+|       
++---public
+|   |   index.php
+|   |   loader.js
+|   |   style.css
+|   |   
+|   \---assets
+|           .gitkeep
+|           bill.png
+|           budget.png
+|           check.png
+|           debt.png
+|           developer.png
+|           download.png
+|           expense.png
+|           feedback.png
+|           fullLogo.png
+|           income.png
+|           instructor.jpg
+|           linking.png
+|           logo.png
+|           logout.png
+|           notification-white.png
+|           notification.png
+|           profile.png
+|           report.png
+|           savings.png
+|           settings.png
+|           support.png
+|           sync.png
+|           
++---storage
+|       .gitkeep
+|       
+\---uploads
+        .gitignore
+        

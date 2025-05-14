@@ -5,6 +5,6 @@ session_destroy();
 
 setcookie('status', '', time() - 3600, '/');
 
-header("Location: ../../../public/index.html");
+header("Location: ../../../public/index.php");
 exit();
 ?>

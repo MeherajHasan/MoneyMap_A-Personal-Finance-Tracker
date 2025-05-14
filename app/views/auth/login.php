@@ -72,12 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p><a href="forgetPass.html">Forgot Password?</a></p>
 
             <div class="button-group">
-                <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
+                <button type="button" onclick="window.location.href='../../../public/index.php'">Cancel</button>
                 <button type="reset">Reset</button>
                 <button type="submit" id="loginSubmitBtn">Login</button>
             </div>
 
-            <p>Don't have an account? <a href="signup.html">Register here</a></p>
+            <p>Don't have an account? <a href="signup.php">Register here</a></p>
         </form>
     </main>
 

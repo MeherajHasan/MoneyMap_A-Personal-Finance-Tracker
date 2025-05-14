@@ -1,9 +1,12 @@
 <?php
+session_start();
+
 $errors = [];
 $success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    function sanitize($data) {
+    function sanitize($data)
+    {
         return htmlspecialchars(stripslashes(trim($data)));
     }
 
@@ -22,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = sanitize($_POST['address'] ?? '');
     $photo = $_FILES['photo'] ?? null;
 
-    // Validate each field
     if (empty($fname)) $errors['fname'] = "First name is required.";
     if (empty($lname)) $errors['lname'] = "Last name is required.";
     if (empty($idType)) $errors['idType'] = "Identification type is required.";
@@ -46,15 +48,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $targetDir = __DIR__ . '/../../../uploads/';
-        if (!file_exists($targetDir)) mkdir($targetDir, 0777, true);
-        $photoName = time() . "_" . basename($photo["name"]);
-        $targetFilePath = $targetDir . $photoName;
+        $uploadDir = __DIR__ . '/../../../uploads/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
 
-        if (move_uploaded_file($photo["tmp_name"], $targetFilePath)) {
-        // Success
+        $photoName = time() . "_" . basename($photo["name"]);
+        $uploadPath = $uploadDir . $photoName;
+
+        if (!move_uploaded_file($photo['tmp_name'], $uploadPath)) {
+            $errors['photo'] = "Failed to upload image.";
         } else {
-            $errors['photo'] = "Error uploading the photo.";
+            // Save form data + photo filename in session if needed
+            $_SESSION['form_data'] = $_POST;
+            $_SESSION['photo_name'] = $photoName;
+
+            // Then redirect
+            header("Location: ../../views/auth/login.php");
+            exit();
         }
     }
 }
@@ -62,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,8 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../styles/auth/signup.css">
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
+
 <body>
-    <header> 
+    <header>
         <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
     </header>
 
@@ -79,29 +92,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if ($success): ?>
             <p style="color: green;">Registration successful! Cookies have been set.</p>
         <?php endif; ?>
-        
+
         <form action="" method="post" id="signupForm" enctype="multipart/form-data">
             <label for="fname">First Name:</label>
-            <input id="fname" type="text" name="fname" value="<?= htmlspecialchars($_POST['fname'] ?? '') ?>" placeholder="First Name" />
+            <input id="fname" type="text" name="fname" value="<?= htmlspecialchars($_POST['fname'] ?? 'Meheraj') ?>" placeholder="First Name" />
             <p id="fnameError"><?= $errors['fname'] ?? '' ?></p>
 
             <label for="lname">Last Name:</label>
-            <input id="lname" type="text" name="lname" value="<?= htmlspecialchars($_POST['lname'] ?? '') ?>" placeholder="Last Name" />
+            <input id="lname" type="text" name="lname" value="<?= htmlspecialchars($_POST['lname'] ?? 'Hasan') ?>" placeholder="Last Name" />
             <p id="lnameError"><?= $errors['lname'] ?? '' ?></p>
+
 
             <label for="idType">Identification Type:</label>
             <select id="idType" name="idType" onchange="handleIDSelection()">
                 <option value="" disabled <?= empty($_POST['idType']) ? 'selected' : '' ?>>-- Select Identification Type --</option>
-                <option value="nid" <?= ($_POST['idType'] ?? '') === 'nid' ? 'selected' : '' ?>>NID</option>
+                <option value="nid" <?= ($_POST['idType'] ?? 'nid') === 'nid' ? 'selected' : '' ?>>NID</option>
                 <option value="passport" <?= ($_POST['idType'] ?? '') === 'passport' ? 'selected' : '' ?>>Passport</option>
             </select>
             <p id="idTypeError"><?= $errors['idType'] ?? '' ?></p>
 
             <div id="idInputContainer" class="<?= empty($_POST['idType']) ? 'hidden' : '' ?>">
-                <label id="idLabel" for="idInput"><?= ucfirst($_POST['idType'] ?? '') ?> Number:</label>
-                <input id="idInput" type="text" name="idInput" value="<?= htmlspecialchars($_POST['idInput'] ?? '') ?>" placeholder="<?= ucfirst($_POST['idType'] ?? '') ?> Number" />
+                <label id="idLabel" for="idInput"><?= ucfirst($_POST['idType'] ?? 'nid') ?> Number:</label>
+                <input id="idInput" type="text" name="idInput" value="<?= htmlspecialchars($_POST['idInput'] ?? '1111111111') ?>" placeholder="<?= ucfirst($_POST['idType'] ?? 'nid') ?> Number" />
                 <p id="idError"><?= $errors['idInput'] ?? '' ?></p>
             </div>
+
 
             <div id="passportExpiryContainer" class="<?= ($_POST['idType'] ?? '') === 'passport' ? '' : 'hidden' ?>">
                 <label for="passportExpiry">Passport Expiry Date:</label>
@@ -117,44 +132,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php
                         $codes = ['+880', '+65', '+1', '+44', '+91'];
                         foreach ($codes as $code) {
-                            $selected = ($_POST['countryCode'] ?? '') === $code ? 'selected' : '';
+                            $selected = ($_POST['countryCode'] ?? '+880') === $code ? 'selected' : '';
                             echo "<option value=\"$code\" $selected>$code</option>";
                         }
                         ?>
                     </select>
-                    <input id="phone" type="number" name="phone" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>" placeholder="Phone Number" />
+                    <input id="phone" type="number" name="phone" value="<?= htmlspecialchars($_POST['phone'] ?? '11111111') ?>" placeholder="Phone Number" />
                 </div>
                 <p id="phoneError"><?= $errors['phone'] ?? '' ?></p>
             </div>
 
             <label for="mail">Email:</label>
-            <input id="mail" type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="xyz@gmail.com" />
+            <input id="mail" type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? 'xyz@gmail.com') ?>" placeholder="xyz@gmail.com" />
             <p id="mailError"><?= $errors['email'] ?? '' ?></p>
 
             <label for="password">Password:</label>
-            <input id="password" type="password" name="password" placeholder="8 characters minimum" />
+            <input id="password" type="password" name="password" placeholder="8 characters minimum" value="<?= htmlspecialchars($_POST['password'] ?? '11111111') ?>" />
             <p id="passError"><?= $errors['password'] ?? '' ?></p>
 
             <label for="confirmPassword">Confirm Password:</label>
-            <input id="confirmPassword" type="password" name="confirmPassword" placeholder="8 characters minimum" />
+            <input id="confirmPassword" type="password" name="confirmPassword" placeholder="8 characters minimum" value="<?= htmlspecialchars($_POST['confirmPassword'] ?? '11111111') ?>" />
             <p id="confirmPassError"><?= $errors['confirmPassword'] ?? '' ?></p>
 
             <fieldset>
                 <legend>Gender: </legend>
-                <input id="male" type="radio" name="gender" value="male" <?= ($_POST['gender'] ?? '') === 'male' ? 'checked' : '' ?> />
+
+                <input id="male" type="radio" name="gender" value="male" <?= ($_POST['gender'] ?? 'male') === 'male' ? 'checked' : '' ?> />
                 <label for="male">Male</label><br>
+
                 <input id="female" type="radio" name="gender" value="female" <?= ($_POST['gender'] ?? '') === 'female' ? 'checked' : '' ?> />
                 <label for="female">Female</label>
+
                 <div id="genderError"><?= $errors['gender'] ?? '' ?></div>
             </fieldset>
 
+
             <label for="dob">Date of Birth:</label>
-            <input id="dob" type="date" name="dob" value="<?= htmlspecialchars($_POST['dob'] ?? '') ?>" />
+            <input id="dob" type="date" name="dob" value="<?= htmlspecialchars($_POST['dob'] ?? '2002-10-30') ?>" />
             <p id="dobError"><?= $errors['dob'] ?? '' ?></p>
 
             <label for="address">Address: </label>
-            <textarea id="address" name="address" rows="2" cols="20" placeholder="Enter your area"><?= htmlspecialchars($_POST['address'] ?? '') ?></textarea>
+            <textarea id="address" name="address" rows="2" cols="20" placeholder="Enter your area"><?= htmlspecialchars($_POST['address'] ?? 'Nikunja-2, Dhaka') ?></textarea>
             <p id="addressError"><?= $errors['address'] ?? '' ?></p>
+
 
             <label for="photo">Upload Your Photo:</label>
             <input id="photo" type="file" name="photo" accept="image/*" />
@@ -172,4 +192,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="../../validation/auth/signup.js"></script>
 </body>
+
 </html>
