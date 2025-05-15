@@ -46,28 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $errors['photo'] = "Photo upload is required.";
     }
-
-    if (empty($errors)) {
-        $uploadDir = __DIR__ . '/../../../uploads/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-
-        $photoName = time() . "_" . basename($photo["name"]);
-        $uploadPath = $uploadDir . $photoName;
-
-        if (!move_uploaded_file($photo['tmp_name'], $uploadPath)) {
-            $errors['photo'] = "Failed to upload image.";
-        } else {
-            // Save form data + photo filename in session if needed
-            $_SESSION['form_data'] = $_POST;
-            $_SESSION['photo_name'] = $photoName;
-
-            // Then redirect
-            header("Location: ../../views/auth/login.php");
-            exit();
-        }
-    }
 }
 ?>
 
@@ -90,10 +68,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
         <h1>Registration Form</h1>
         <?php if ($success): ?>
-            <p style="color: green;">Registration successful! Cookies have been set.</p>
+            <p style="color: green;">Registration successful!</p>
         <?php endif; ?>
 
-        <form action="" method="post" id="signupForm" enctype="multipart/form-data">
+        <?php if (!empty($errors)): ?>
+            <div style="background: #ffebee; padding: 10px; margin: 10px; border: 1px solid #ffcdd2;">
+                <h3>Errors:</h3>
+                <?php foreach ($errors as $error): ?>
+                    <p style="color: red;"><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="../../controllers/auth/uploadImage.php" method="post" id="signupForm" enctype="multipart/form-data">
             <label for="fname">First Name:</label>
             <input id="fname" type="text" name="fname" value="<?= htmlspecialchars($_POST['fname'] ?? 'Meheraj') ?>" placeholder="First Name" />
             <p id="fnameError"><?= $errors['fname'] ?? '' ?></p>
@@ -102,27 +89,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input id="lname" type="text" name="lname" value="<?= htmlspecialchars($_POST['lname'] ?? 'Hasan') ?>" placeholder="Last Name" />
             <p id="lnameError"><?= $errors['lname'] ?? '' ?></p>
 
-
             <label for="idType">Identification Type:</label>
             <select id="idType" name="idType" onchange="handleIDSelection()">
-                <option value="" disabled <?= empty($_POST['idType']) ? 'selected' : '' ?>>-- Select Identification Type --</option>
-                <option value="nid" <?= ($_POST['idType'] ?? 'nid') === 'nid' ? 'selected' : '' ?>>NID</option>
+                <option value="" disabled>-- Select Identification Type --</option>
+                <option value="nid" <?= (!isset($_POST['idType']) || $_POST['idType'] === 'nid') ? 'selected' : '' ?>>NID</option>
                 <option value="passport" <?= ($_POST['idType'] ?? '') === 'passport' ? 'selected' : '' ?>>Passport</option>
             </select>
             <p id="idTypeError"><?= $errors['idType'] ?? '' ?></p>
 
-            <div id="idInputContainer" class="<?= empty($_POST['idType']) ? 'hidden' : '' ?>">
-                <label id="idLabel" for="idInput"><?= ucfirst($_POST['idType'] ?? 'nid') ?> Number:</label>
-                <input id="idInput" type="text" name="idInput" value="<?= htmlspecialchars($_POST['idInput'] ?? '1111111111') ?>" placeholder="<?= ucfirst($_POST['idType'] ?? 'nid') ?> Number" />
+            <div id="idInputContainer" class="<?= empty($_POST['idType']) ? '' : '' ?>">
+                <label id="idLabel" for="idInput">NID Number:</label>
+                <input id="idInput"
+                    type="text"
+                    name="idInput"
+                    value="<?= htmlspecialchars($_POST['idInput'] ?? '1111111111') ?>"
+                    placeholder="Enter NID Number" />
                 <p id="idError"><?= $errors['idInput'] ?? '' ?></p>
             </div>
-
 
             <div id="passportExpiryContainer" class="<?= ($_POST['idType'] ?? '') === 'passport' ? '' : 'hidden' ?>">
                 <label for="passportExpiry">Passport Expiry Date:</label>
                 <input id="passportExpiry" type="date" name="passportExpiry" value="<?= htmlspecialchars($_POST['passportExpiry'] ?? '') ?>" />
                 <p id="passportExpiryError"><?= $errors['passportExpiry'] ?? '' ?></p>
             </div>
+
 
             <div class="phone-container">
                 <label for="phone">Phone Number:</label>
@@ -166,7 +156,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div id="genderError"><?= $errors['gender'] ?? '' ?></div>
             </fieldset>
 
-
             <label for="dob">Date of Birth:</label>
             <input id="dob" type="date" name="dob" value="<?= htmlspecialchars($_POST['dob'] ?? '2002-10-30') ?>" />
             <p id="dobError"><?= $errors['dob'] ?? '' ?></p>
@@ -175,14 +164,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <textarea id="address" name="address" rows="2" cols="20" placeholder="Enter your area"><?= htmlspecialchars($_POST['address'] ?? 'Nikunja-2, Dhaka') ?></textarea>
             <p id="addressError"><?= $errors['address'] ?? '' ?></p>
 
-
             <label for="photo">Upload Your Photo:</label>
             <input id="photo" type="file" name="photo" accept="image/*" />
             <p id="photoError"><?= $errors['photo'] ?? '' ?></p>
 
             <button type="button" onclick="window.location.href='login.php'">Cancel</button>
             <button type="reset" onclick="return confirm('Are you sure you want to reset the form?')">Reset</button>
-            <button id="signupSubmitBtn" type="submit">Submit</button>
+            <button id="signupSubmitBtn" type="submit" name="submit" value="submit">Submit</button>
         </form>
     </main>
 
@@ -190,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
     </footer>
 
-    <script src="../../validation/auth/signup.js"></script>
+    <!-- <script src="../../validation/auth/signup.js"></script> -->
 </body>
 
 </html>
