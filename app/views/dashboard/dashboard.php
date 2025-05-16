@@ -80,9 +80,7 @@
         </main>
     </div>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../app/view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/dashboard/dashboard.js"></script>
 </body>

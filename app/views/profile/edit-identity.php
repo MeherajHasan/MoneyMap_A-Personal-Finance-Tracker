@@ -1,10 +1,10 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_COOKIE['status'])) {
-        header('Location: ../../views/auth/login.php');
-        exit();
-    }
+if (!isset($_COOKIE['status'])) {
+    header('Location: ../../views/auth/login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
     <header>
         <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
     </header>
-    
+
     <main>
         <h1>Edit Identity</h1>
         <form id="edit-identity" action="" method="post" onsubmit="return false;">
@@ -39,22 +39,22 @@
 
             <label for="id-number"><strong>New ID Number: </strong></label>
             <input type="text" id="id-number" name="id-number" class="id-number">
-            
+
             <div id="passport-expiry" style="display: none;">
                 <label for="passport-expiry-date"><strong>Passport Expiry Date: </strong></label>
                 <input type="date" id="passport-expiry-date" name="passport-expiry-date">
             </div>
 
             <p id="errorMSG"></p>
-            
-            <button type="button" class="btn" id="save-btn">Save</button>
-            <button type="button" class="btn" id="cancel-btn">Cancel</button>
+
+            <div class="btn-container">
+                <button type="button" class="btn" id="save-btn">Save</button>
+                <button type="button" class="btn" id="cancel-btn">Cancel</button>
+            </div>
         </form>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/profile/edit-identity.js"></script>
 </body>

@@ -27,90 +27,101 @@ header {
 }
 
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 20px;
+    background-color: #ffffff;
+    margin: 30px auto;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+main h1 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #0D1B2A;
 }
 
-form {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
+form#edit-identity {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
-label {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
+form#edit-identity p {
+    font-size: 1rem;
     color: #1B263B;
 }
 
-input[type="text"],
-input[type="date"],
-select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    color: #333;
+form#edit-identity label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #1B263B;
 }
 
-#passport-expiry {
-    margin-top: 20px;
-    display: none;
+form#edit-identity select,
+form#edit-identity input[type="text"],
+form#edit-identity input[type="date"] {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+form#edit-identity select:focus,
+form#edit-identity input[type="text"]:focus,
+form#edit-identity input[type="date"]:focus {
+    border-color: #3A506B;
+    outline: none;
 }
 
 #errorMSG {
-    color: red;
-    font-size: 0.9rem;
+    color: #e74c3c;
+    font-weight: 600;
+    min-height: 1.2em;
+}
+
+#passport-expiry {
     margin-top: 10px;
 }
 
+/* Buttons container for horizontal centering */
+form#edit-identity > .btn-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    justify-content: center; /* center horizontally */
+}
+
 .btn {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #3A506B;
     color: #ffffff;
     border: none;
     border-radius: 6px;
+    padding: 10px 28px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-width: 100px; /* consistent width */
 }
 
-.btn:hover {
+/* Save button styles */
+#save-btn {
+    background-color: #1B263B;
+}
+
+#save-btn:hover {
     background-color: #27394d;
 }
 
-footer {
-    background-color: #1B263B;
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
+/* Cancel button styles */
+#cancel-btn {
+    background-color: #e74c3c;
 }
 
-footer a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-footer a:hover {
-    text-decoration: underline;
+#cancel-btn:hover {
+    background-color: #c0392b;
 }

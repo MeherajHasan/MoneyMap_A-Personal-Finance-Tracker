@@ -1,160 +1,136 @@
+/* General Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; 
-    color: #1B263B; 
-    line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  color: #1B263B;
+  line-height: 1.6;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 .container {
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem 0; 
-}
-
-.header {
-    background-color: #0D1B2A; 
-    padding: 1rem 0;
-    margin-bottom: 2rem; 
-}
-
-.header .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    width: 200px;
-    height: auto;
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem; 
-}
-
-.nav a {
-    color: #ffffff;
-    font-weight: 500;
-    padding: 0.6rem 1rem; 
-    border-radius: 6px;
-    transition: color 0.3s;
-}
-
-.nav a:hover,
-.nav a.active {
-    color: #4FC3F7; 
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .main {
-    padding: 0; 
+  padding: 2rem 0;
 }
 
+/* Add Debt Container */
 .add-debt-container {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 1.5rem; 
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .add-debt-container h2 {
-    font-size: 1.8rem; 
-    margin-bottom: 1.5rem;
-    text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Form Styles */
+form {
+  display: grid;
+  gap: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 1rem; 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-    margin-bottom: 0.3rem;
-    font-weight: 600;
-    font-size: 0.9rem; 
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #0D1B2A;
 }
 
-input,
+input[type="text"],
+input[type="date"],
+input[type="number"],
 textarea {
-    padding: 0.7rem; 
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #4FC3F7;
+  outline: none;
 }
 
 textarea {
-    resize: vertical;
-    min-height: 80px;
+  resize: vertical;
+  min-height: 100px;
 }
 
+/* Error Message */
 .error-message {
-    color: #f44336; 
-    font-size: 0.8rem; 
-    margin-top: 0.2rem;
+  color: #f44336;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
 }
 
+/* Form Actions */
 .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.8rem; 
-    margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
+/* Button Styles */
 .btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-size: 0.9rem; 
-    font-weight: 500;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
+/* Primary Button */
 .btn-primary {
-    background-color: #0D1B2A;
-    color: #ffffff;
+  background-color: #0D1B2A;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
-    background-color: #1B263B;
+  background-color: #1B263B;
 }
 
+/* Secondary Button */
 .btn-secondary {
-    background-color: #4FC3F7;
-    color: #0D1B2A;
+  background-color: #4FC3F7;
+  color: #0D1B2A;
 }
 
 .btn-secondary:hover {
-    background-color: #039BE5;
+  background-color: #039BE5;
 }
 
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background-color: #0D1B2A;
-    color: #ffffff;
-    font-size: 0.85rem;
-    margin-top: 2rem;
+.form-actions {
+  display: flex;
+  justify-content: center; /* Center-align the buttons */
+  gap: 1rem;
 }
 
-footer a {
-    color: #4FC3F7;
-}

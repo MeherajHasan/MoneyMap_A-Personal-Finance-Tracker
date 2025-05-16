@@ -1,5 +1,3 @@
-// loader.js
-
 // Wait until the page is fully loaded
 window.addEventListener('load', () => {
     // Hide the loader

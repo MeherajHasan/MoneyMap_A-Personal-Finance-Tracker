@@ -1,11 +1,10 @@
-/* ====== Loader Styles ====== */
 #loader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #f4f6f8;  /* Light background */
+    background-color: #f4f6f8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,15 +15,14 @@
 }
 
 .loader-icon {
-    border: 6px solid #f4f6f8;  /* Light border */
-    border-top: 6px solid #1B263B;  /* Deep Blue */
+    border: 6px solid #f4f6f8;
+    border-top: 6px solid #1B263B;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     animation: spin 1.5s linear infinite;
 }
 
-/* Spinner Animation */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -32,7 +30,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f6f8;  /* Light background */
+    background-color: #f4f6f8;
     margin: 0;
     padding: 0;
     opacity: 0;
@@ -44,11 +42,11 @@ body.loaded {
 }
 
 header {
-    background-color: #ffffff;  /* White background */
+    background-color: #ffffff;
     padding: 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: flex-end; /* Align items to the right */
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -62,7 +60,7 @@ header nav ul {
 
 header nav ul li a {
     text-decoration: none;
-    color: #1B263B;  /* Deep Blue */
+    color: #1B263B;
     font-size: 1rem;
     font-weight: 500;
 }
@@ -72,19 +70,19 @@ header nav ul li a:hover {
 }
 
 header nav ul li .login-btn {
-    background-color: #1B263B;  /* Deep Blue */
-    color: #f4f6f8;  /* Light color */
+    background-color: #1B263B;
+    color: #f4f6f8;
     padding: 10px 15px;
     border-radius: 25px;
     font-weight: bold;
 }
 
 header nav ul li .login-btn:hover {
-    background-color: #0D1B2A;  /* Darker Deep Blue */
+    background-color: #0D1B2A;
 }
 
 .logo {
-    background-color: #1B263B;  /* Deep Blue */
+    background-color: #1B263B;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,14 +91,13 @@ header nav ul li .login-btn:hover {
     padding-bottom: 0;
 }
 
- .logo img {
+.logo img {
     max-height: 800px; 
 }
 
-/* Hero Section */
 .hero {
-    background: #ffffff;  /* White background */
-    color: #1B263B;  /* Deep Blue */
+    background: #ffffff;
+    color: #1B263B;
     padding: 60px 20px;
     text-align: center;
 }
@@ -108,17 +105,18 @@ header nav ul li .login-btn:hover {
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
+    margin-top: 70px;
 }
 
 .hero p {
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 150px;
 }
 
 .cta-btn {
     padding: 15px 25px;
-    background-color: #1B263B;  /* Deep Blue */
-    color: #f4f6f8;  /* Light text */
+    background-color: #1B263B;
+    color: #f4f6f8;
     font-size: 1.1rem;
     font-weight: 600;
     border-radius: 50px;
@@ -127,20 +125,20 @@ header nav ul li .login-btn:hover {
 }
 
 .cta-btn:hover {
-    background-color: #0D1B2A;  /* Darker Deep Blue */
+    background-color: #0D1B2A;
     color: #ffffff;
 }
 
 .features {
     padding: 50px 20px;
-    background-color: #ffffff;  /* White background */
+    background-color: #ffffff;
     text-align: center;
 }
 
 .features h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #1B263B;  /* Deep Blue */
+    color: #1B263B;
 }
 
 .feature-list {
@@ -154,7 +152,7 @@ header nav ul li .login-btn:hover {
     flex-basis: 22%;
     text-align: center;
     padding: 20px;
-    background-color: #f4f6f8;  /* Light background */
+    background-color: #f4f6f8;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -166,7 +164,7 @@ header nav ul li .login-btn:hover {
 }
 
 .feature-item i {
-    color: #1B263B;  /* Deep Blue */
+    color: #1B263B;
     margin-bottom: 15px;
 }
 
@@ -181,18 +179,18 @@ header nav ul li .login-btn:hover {
 }
 
 footer {
-    background-color: #1B263B;  /* Deep Blue */
-    color: #f4f6f8;  /* Light color */
+    background-color: #1B263B;
+    color: #f4f6f8;
     text-align: center;
     padding: 20px;
     font-size: 1rem;
 }
 
 #about {
-    color: #f4f6f8;  /* Light color */
+    color: #f4f6f8;
     font-style: italic;
 }
 
 #about:hover {
-    color: #4FC3F7;  /* Light Blue */
+    color: #4FC3F7;
 }

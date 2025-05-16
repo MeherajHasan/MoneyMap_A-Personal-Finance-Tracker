@@ -115,22 +115,3 @@ button {
 button:hover {
     background-color: #0D1B2A;  
 }
-
-footer {
-    background-color: #0D1B2A;  
-    color: #f4f6f8; 
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-#about {
-    color: #f4f6f8;  
-    font-style: italic;
-}
-
-#about:hover {
-    color: #4FC3F7; 
-}

@@ -174,19 +174,39 @@
     height: 20px;
 }
 
-footer {
+.widget {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 20px 20px 30px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 400px;
+    max-width: 90%;
     text-align: center;
-    padding: 15px 0;
-    background-color: #0D1B2A;
-    color: #ffffff;
-    font-size: 14px;
+    flex: 0 0 calc(50% - 20px);
+    position: relative;
+    border-left: 6px solid transparent; 
 }
 
-footer a {
-    color: #4FC3F7;
-    text-decoration: none;
+#income-widget {
+    border-left-color: #4CAF50; 
 }
 
-footer a:hover {
-    text-decoration: underline;
+#expense-widget {
+    border-left-color: #F44336; 
+}
+
+#budget-widget {
+    border-left-color: #4FC3F7;
+}
+
+#savings-widget {
+    border-left-color: #FF9800;
+}
+
+#debt-widget {
+    border-left-color: #9C27B0; 
+}
+
+#net-worth-widget {
+    border-left-color: #2196F3; 
 }

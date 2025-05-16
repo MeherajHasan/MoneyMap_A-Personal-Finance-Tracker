@@ -23,97 +23,101 @@ header {
 
 #MoneyMap-logo {
     width: 350px;
-    height: auto; 
+    height: auto;
 }
 
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 20px;
+    background-color: #ffffff;
+    margin: 30px auto;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+main h1 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #0D1B2A;
 }
 
-form {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
+form#edit-name {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
-form p {
-    margin-bottom: 20px;
+form#edit-name p {
     font-size: 1rem;
     color: #1B263B;
 }
 
-form strong {
-    color: #1B263B;
-}
-
-label {
-    margin-top: 15px;
-    margin-bottom: 5px;
+form#edit-name label {
+    display: block;
     font-weight: bold;
+    margin-bottom: 6px;
     color: #1B263B;
 }
 
-input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    color: #333;
+form#edit-name input[type="text"] {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 1.1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+form#edit-name input[type="text"]:focus {
+    border-color: #3A506B;
+    outline: none;
 }
 
 #errorMSG {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 10px;
+    color: #e74c3c;
+    font-weight: 600;
+    min-height: 1.2em;
+}
+
+/* Buttons container for horizontal centering */
+form#edit-name > .btn-container,
+form#edit-name > button.btn {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    justify-content: center; /* center horizontally */
+    flex-wrap: wrap;
 }
 
 .btn {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #3A506B;
     color: #ffffff;
     border: none;
     border-radius: 6px;
+    padding: 10px 28px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-width: 100px;
 }
 
-.btn:hover {
+/* Save button styles */
+#save-btn {
+    background-color: #1B263B;
+}
+
+#save-btn:hover {
     background-color: #27394d;
 }
 
-footer {
-    background-color: #1B263B;
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
+/* Cancel button styles */
+#cancel-btn {
+    background-color: #e74c3c;
 }
 
-footer a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-footer a:hover {
-    text-decoration: underline;
+#cancel-btn:hover {
+    background-color: #c0392b;
 }

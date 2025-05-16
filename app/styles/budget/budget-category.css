@@ -1,176 +1,241 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f4f6f8;
-    color: #1B263B;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8; /* Light background */
+    color: #1B263B; /* Deep Blue text */
+    line-height: 1.5;
 }
 
-.header {
-    background-color: #0D1B2A;
-    padding: 20px 0;
+.container {
+    width: 95%;
+    max-width: 700px;
+    margin: 30px auto;
 }
 
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header .logo {
-    width: 150px;
-    height: auto;
-}
-
-.nav {
-    display: flex;
-    gap: 15px;
-}
-
-.nav a {
-    color: #f4f6f8;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.nav a:hover {
-    color: #4FC3F7;
-}
-
-.main {
-    padding: 40px 20px;
-}
-
+/* Section headers */
 .section-header h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #0D1B2A;
+    color: #0D1B2A; /* Deep Blue header */
+    font-weight: 700;
     margin-bottom: 20px;
+    text-align: center;
 }
 
+/* Table styling */
 .category-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.category-table thead {
+    background-color: #0D1B2A; /* Deep Blue header background */
+    color: #fff;
 }
 
 .category-table th,
 .category-table td {
-    padding: 12px;
+    padding: 12px 15px;
     text-align: left;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
-.category-table th {
-    background-color: #0D1B2A;
-    color: #fff;
+.category-table tbody tr:hover {
+    background-color: #f1f9ff; /* subtle highlight on hover */
 }
 
-.category-table td {
-    background-color: #fff;
-}
-
-.category-table tr:hover {
-    background-color: #f4f6f8;
-}
-
-.category-table .btn {
-    padding: 6px 12px;
-    font-size: 14px;
+/* Buttons in table */
+.btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    border: none;
+    color: #fff;
 }
 
 .btn-edit {
-    background-color: #4FC3F7;
-    color: #fff;
-    border: none;
+    background-color: #4FC3F7; /* Light Blue */
     margin-right: 8px;
 }
 
 .btn-edit:hover {
-    background-color: #1B263B;
+    background-color: #399ad6;
 }
 
 .btn-delete {
-    background-color: #f44336;
-    color: #fff;
-    border: none;
+    background-color: #dc3545; /* Red */
 }
 
 .btn-delete:hover {
-    background-color: #c62828;
+    background-color: #b52b3a;
 }
 
+/* Add category section */
 .add-category {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
+    margin-bottom: 25px;
+}
+
+.add-category input[type="text"] {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+.add-category input[type="text"]:focus {
+    border-color: #4FC3F7; /* Light Blue focus */
+    outline: none;
+}
+
+/* Error message */
+#emptyError {
+    color: #dc3545; /* Red */
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-align: center;
     margin-bottom: 20px;
+    min-height: 18px;
 }
 
-.add-category input {
-    padding: 10px;
-    font-size: 16px;
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+/* Navigation buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
-.add-category button {
-    padding: 10px 20px;
-    background-color: #4FC3F7;
+.btn-secondary {
+    background-color: #0D1B2A; /* Deep Blue */
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
     color: #fff;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.add-category button:hover {
+.btn-secondary:hover {
     background-color: #1B263B;
 }
 
-#emptyError {
-    color: #f44336;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-.navigation-buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
-}
-
-.navigation-buttons .btn {
-    padding: 10px 20px;
-    background-color: #f4f6f8;
-    color: #1B263B;
-    border: 1px solid #ddd;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-.navigation-buttons .btn:hover {
-    background-color: #4FC3F7;
+#addCategoryBtn {
+    background-color: #4FC3F7; 
     color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-footer {
-    background-color: #0D1B2A;
-    color: #f4f6f8;
+#addCategoryBtn:hover {
+    background-color: #399ad6; 
+}
+
+.main.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #f4f6f8;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(27, 38, 59, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1B263B;
+}
+
+.category-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category {
+    width: 100%;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(11, 44, 91, 0.15);
+    background-color: #fff;
     text-align: center;
-    padding: 20px;
 }
 
-footer a {
+.category h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #4FC3F7;
+}
+
+#category-message {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+#category-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+#category-list li {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    margin: 0.3rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.category p a {
     color: #4FC3F7;
     text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 
-footer a:hover {
+.category p a:hover {
+    color: #399ad6;
     text-decoration: underline;
+}
+
+#add-category-btn {
+    background-color: #4FC3F7;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+#add-category-btn:hover {
+    background-color: #399ad6;
 }

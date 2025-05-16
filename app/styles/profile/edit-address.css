@@ -1,3 +1,4 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -30,10 +31,11 @@ main {
     background-color: #ffffff;
     margin: 30px auto;
     padding: 40px;
-    max-width: 800px;
+    max-width: 600px;
     width: 90%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
 }
 
 main h1 {
@@ -43,85 +45,83 @@ main h1 {
     color: #0D1B2A;
 }
 
-form {
+/* Form Styles */
+form#edit-address {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
-}
-
-form p {
     font-size: 1rem;
     color: #1B263B;
 }
 
-form label {
-    font-size: 1rem;
-    color: #1B263B;
-}
-
-form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
+form#edit-address p, 
+form#edit-address label {
     width: 100%;
-    max-width: 400px;
-    resize: vertical;
+    text-align: left;
+    font-weight: 600;
 }
 
-form textarea:focus {
-    border-color: #3A506B;
+form#edit-address span#current-address {
+    font-weight: normal;
+    color: #3A506B;
 }
 
-button {
-    background-color: #3A506B;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
+textarea.address {
+    width: 100%;
+    padding: 12px;
     font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 150px;
-    margin-top: 10px;
+    font-family: inherit;
+    border-radius: 6px;
+    border: 1.5px solid #1B263B;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #27394d;
-}
-
-form button:nth-child(3),
-form button:nth-child(4) {
-    margin: 5px;
-}
-
-form button {
-    display: inline-block;
+textarea.address:focus {
+    outline: none;
+    border-color: #4FC3F7;
+    box-shadow: 0 0 5px rgba(79, 195, 247, 0.5);
 }
 
 #errorMSG {
     color: #e74c3c;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-top: 10px;
+    font-weight: 600;
+    min-height: 1.2em; /* reserve space for error messages */
 }
 
-footer {
+/* Buttons */
+.btn {
+    width: 150px;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
     background-color: #1B263B;
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
 }
 
-footer a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
+#save-btn:hover {
+    background-color: #4FC3F7;
+    color: #1B263B;
 }
 
-footer a:hover {
-    text-decoration: underline;
+#cancel-btn {
+    background-color: #e74c3c;
+    margin-left: 10px;
+}
+
+#cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+form#edit-address > .btn-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;  /* centers the buttons horizontally */
 }

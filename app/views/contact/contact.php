@@ -1,12 +1,3 @@
-<?php
-    session_start();
-
-    if (!isset($_COOKIE['status'])) {
-        header('Location: ../../views/auth/login.php');
-        exit();
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,9 +45,7 @@
         </form>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/contact/contact.js"></script>
 </body>

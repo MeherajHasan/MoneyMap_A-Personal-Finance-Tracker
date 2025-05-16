@@ -11,36 +11,6 @@ body {
     margin: 0 auto;
 }
 
-.header {
-    background-color: #0D1B2A; 
-    padding: 1rem 0;
-}
-
-.logo {
-    width: 350px;
-    display: block;
-    margin: 0 auto;
-}
-
-
-.nav {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.nav a {
-    color: #f4f6f8; 
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav a:hover {
-    color: #4FC3F7; 
-}
-
 .main {
     padding: 2rem 0;
 }
@@ -136,21 +106,4 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background-color: #0D1B2A; 
-    color: #f4f6f8; 
-    margin-top: 2rem;
-}
-
-footer a {
-    color: #4FC3F7; 
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }

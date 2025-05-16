@@ -23,21 +23,19 @@
             <br>
 
             <div class="button-group">
-                <a href="login.html" class="cancelBtnLink"><button type="button" class="cancelBtn">Cancel</button></a>
+                <a href="login.php" class="cancelBtnLink"><button type="button" class="cancelBtn">Cancel</button></a>
                 <button type="reset" class="resetBtn">Reset</button>
-                <button type="submit" id="verifyConfirmBtn" class="submitBtn" formaction="verify.html">Confirm</button>
+                <button type="submit" id="verifyConfirmBtn" class="submitBtn" formaction="verify.php">Confirm</button>
             </div>
 
             <p id="verifyMSG" class="verificationMessage"></p>
 
-            <div class="emailErrorLink">Entered wrong email? <a href="forgetPass.html" class="errorLink">Go back</a>
+            <div class="emailErrorLink">Entered wrong email? <a href="forgetPass.php" class="errorLink">Go back</a>
             </div>
         </form>
     </main>
 
-    <footer id="footer">
-        <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/auth/emailVerify.js"></script>
 </body>

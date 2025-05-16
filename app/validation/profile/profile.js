@@ -19,6 +19,7 @@ const genderEditBtn = document.getElementById('gender-edit');
 const mailEditBtn = document.getElementById('mail-edit');
 const phoneEditBtn = document.getElementById('phone-edit');
 const addressEditBtn = document.getElementById('address-edit');
+const passwordEditBtn = document.getElementById('password-edit');
 const linkedAccEditBtn = document.getElementById('linked-acc-edit');
 
 const userData = {
@@ -89,6 +90,10 @@ phoneEditBtn.addEventListener('click', () => {
 
 addressEditBtn.addEventListener('click', () => {
     window.location.href = 'edit-address.php';
+});
+
+passwordEditBtn.addEventListener('click', () => {
+    window.location.href = 'edit-pass.php';
 });
 
 linkedAccEditBtn.addEventListener('click', () => {

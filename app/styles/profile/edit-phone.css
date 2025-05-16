@@ -1,9 +1,11 @@
+/* Reset and box-sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body and font */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
@@ -13,6 +15,7 @@ body {
     flex-direction: column;
 }
 
+/* Header */
 header {
     background-color: #1B263B;
     padding: 20px 0;
@@ -21,21 +24,24 @@ header {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo */
 #MoneyMap-logo {
     width: 350px;
-    height: auto; 
+    height: auto;
 }
 
+/* Main container */
 main {
     background-color: #ffffff;
     margin: 30px auto;
     padding: 40px;
-    max-width: 800px;
+    max-width: 700px;
     width: 90%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Main heading */
 main h1 {
     text-align: center;
     margin-bottom: 30px;
@@ -43,76 +49,84 @@ main h1 {
     color: #0D1B2A;
 }
 
-form {
+/* Form layout */
+form#edit-phone {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    gap: 15px;
 }
 
-form label {
+/* Paragraphs inside form */
+form#edit-phone p {
     font-size: 1rem;
     color: #1B263B;
 }
 
-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+/* Labels */
+form#edit-phone label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #1B263B;
+}
+
+/* Input field style */
+form#edit-phone input[type="tel"] {
+    width: 100%;
+    padding: 8px 10px;
     font-size: 1rem;
-    outline: none;
-    width: 100%;
-    max-width: 400px;  
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
 }
 
-form input:focus {
+/* Input focus */
+form#edit-phone input[type="tel"]:focus {
     border-color: #3A506B;
+    outline: none;
 }
 
-form .btn-container {
+/* Error message */
+#errorMSG {
+    color: #e74c3c;
+    font-weight: 600;
+    min-height: 1.2em;
+}
+
+/* Buttons container for horizontal centering */
+form#edit-phone > .btn-container {
     display: flex;
-    justify-content: center;
-    gap: 10px; 
-    width: 100%;
+    gap: 12px;
+    margin-top: 15px;
+    justify-content: center; /* center horizontally */
 }
 
-button {
-    background-color: #3A506B;
+/* Common button styles */
+.btn {
     color: #ffffff;
     border: none;
-    padding: 10px 20px;
+    border-radius: 6px;
+    padding: 10px 28px;
     font-size: 1rem;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    width: 150px; 
+    transition: background-color 0.3s ease;
+    min-width: 100px; /* consistent width */
 }
 
-button:hover {
+/* Save button (dark blue) */
+#save-btn {
+    background-color: #1B263B;
+}
+
+#save-btn:hover {
     background-color: #27394d;
 }
 
-#errorMSG {
-    color: #e74c3c;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-top: 10px;
+/* Cancel button (red) */
+#cancel-btn {
+    background-color: #e74c3c;
 }
 
-footer {
-    background-color: #1B263B;
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
-}
-
-footer a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-footer a:hover {
-    text-decoration: underline;
+#cancel-btn:hover {
+    background-color: #c0392b;
 }

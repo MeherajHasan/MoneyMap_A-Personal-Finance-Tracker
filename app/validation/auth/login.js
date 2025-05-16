@@ -65,6 +65,6 @@ passwordInput.addEventListener("input", validateForm);
 form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (validateForm()) {
-        window.location.href = '../../views/dashboard/dashboard.html';
+        window.location.href = '../../views/dashboard/dashboard.php';
     }
 });

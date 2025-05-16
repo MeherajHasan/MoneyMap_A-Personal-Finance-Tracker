@@ -94,7 +94,7 @@ function validateForm() {
     if (captchaWrongAttempts >= 5) {
       alert("Too many wrong attempts! Redirecting to Home Page...");
 
-      window.location.href = "../../../public/index.html";
+      window.location.href = "../../../public/index.php";
       return false;
     } else if (captchaWrongAttempts >= 3) {
       captchaError.innerHTML =

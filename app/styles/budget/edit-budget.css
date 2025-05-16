@@ -1,159 +1,196 @@
+/* ../../styles/budget/edit-budget.css */
+
+/* === Colors === */
+:root {
+  --bg-color: #f4f6f8;            /* Light background */
+  --text-color: #1B263B;          /* Deep Blue text */
+  --header-footer-bg: #0D1B2A;    /* Dark Blue header/footer */
+  --primary-color: #4FC3F7;       /* Light Blue primary */
+  --primary-hover: #3AA9E0;       /* Darker Light Blue hover */
+  --secondary-color: #6c757d;     /* Gray secondary buttons (overridden below) */
+  --error-color: #e63946;         /* Red error messages */
+  --input-bg: #fff;               /* White input background */
+  --input-border: #ccc;           /* Light gray input border */
+  --input-focus: #4FC3F7;         /* Blue input focus */
+}
+
+/* === Base styles === */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8; 
-    color: #1B263B; 
-    margin: 0;
-    padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+a {
+  text-decoration: none;
+  color: var(--primary-color);
 }
 
-.header {
-    background-color: #0D1B2A;
-    padding: 20px 0;
+a:hover {
+  color: var(--primary-hover);
 }
 
-.logo {
-    display: block;
-    margin: 0 auto;
-    width: 350px;
+/* === Layout container === */
+.main.container {
+  max-width: 960px;
+  margin: 2rem auto 4rem;
+  padding: 0 1rem;
 }
 
-.nav {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.nav a {
-    color: #ffffff;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav a:hover {
-    color: #4FC3F7; 
-}
-
-.main {
-    margin-top: 40px;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
+/* Section header */
 .section-header h2 {
-    font-size: 28px;
-    color: #1B263B;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--header-footer-bg);
 }
 
+/* === Form styles === */
 .budget-form {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Two-column rows */
 .two-column-form .form-group-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
+/* Form columns */
 .form-column {
-    flex: 1;
-    min-width: 250px;
-    display: flex;
-    flex-direction: column;
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
 }
 
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
+.form-column label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: #f9f9f9;
+/* Inputs, selects, textareas */
+.form-column input[type="text"],
+.form-column input[type="number"],
+.form-column input[type="date"],
+.form-column select,
+.form-column textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--input-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+  resize: vertical;
+  min-height: 36px;
 }
 
-textarea {
-    resize: vertical;
-    height: 80px;
+/* Readonly inputs */
+.form-column input[readonly],
+.form-column textarea[readonly] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  color: #6c757d;
 }
 
+/* Focus states */
+.form-column input[type="text"]:focus,
+.form-column input[type="number"]:focus,
+.form-column input[type="date"]:focus,
+.form-column select:focus,
+.form-column textarea:focus {
+  outline: none;
+  border-color: var(--input-focus);
+}
+
+/* Textarea min height */
+.form-column textarea {
+  min-height: 80px;
+}
+
+/* Error message style */
 .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  min-height: 1.2rem; /* Reserve space even if no error */
 }
 
+/* === Buttons === */
 .btn {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    display: inline-block;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 0.55rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
 }
 
+/* Update Budget button - dark blue */
 .btn-primary {
-    background-color: #0D1B2A; 
-    color: #fff;
-    margin-top: 20px;
+  background-color: var(--header-footer-bg); /* #0D1B2A */
+  color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #4FC3F7; 
-    color: #0D1B2A;
+  background-color: #081523; /* Slightly darker */
 }
 
-.btn-secondary {
-    background-color: #e0e0e0;
-    color: #1B263B;
-    margin: 10px 10px 0 0;
-}
-
-.btn-secondary:hover {
-    background-color: #b0bec5;
-}
-
+/* Navigation buttons container - horizontal row */
 .navigation-buttons {
-    margin-top: 30px;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  gap: 1rem;
+  flex-wrap: wrap; /* wrap on small screens */
 }
 
-footer {
-    background-color: #0D1B2A;
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 50px;
+/* Other buttons - sky blue */
+.navigation-buttons .btn-secondary {
+  background-color: var(--primary-color); /* #4FC3F7 */
+  color: #fff;
+  margin-left: 0;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  padding: 0.55rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-footer a {
-    color: #4FC3F7;
-    text-decoration: none;
+.navigation-buttons .btn-secondary:hover {
+  background-color: var(--primary-hover); /* #3AA9E0 */
 }
 
-footer a:hover {
-    text-decoration: underline;
+/* Submit button width and center */
+.budget-form > button[type="submit"] {
+  margin: 1rem auto 0 auto; /* top margin + horizontal auto */
+  display: block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }

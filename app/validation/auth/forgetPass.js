@@ -40,7 +40,7 @@ form.addEventListener("submit", function (e) {
 
   const email = emailInput.value.trim();
   if (validateEmail(email)) {
-      window.location.href = 'emailVerify.html';
+      window.location.href = 'emailVerify.php';
   } else {
       errorEl.textContent = "Please enter a valid email address.";
       submitBtn.disabled = true;

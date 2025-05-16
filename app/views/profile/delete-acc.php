@@ -49,9 +49,7 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/profile/detele-acc.js"></script>
 </body>

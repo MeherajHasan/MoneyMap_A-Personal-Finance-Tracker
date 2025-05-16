@@ -22,7 +22,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault(); 
 
     if (validateCode()) {
-        window.location.href = 'resetPass.html';
+        window.location.href = 'resetPass.php';
     }
 });
 

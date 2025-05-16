@@ -18,7 +18,8 @@
             <ul>
                 <li><a href="#features">Features</a></li>
                 <li><a href="../app/views/landing/about.html">About</a></li>
-                <li><a href="../app/views/contact/contract.html">Contact</a></li>
+                <li><a href="../app/views/landing/testimonial.html">Testimonials</a></li>
+                <li><a href="../app/views/contact/contact.php">Contact</a></li>
                 <li><a href="../app/views/auth/login.php" class="login-btn">Login</a></li>
             </ul>
         </nav>
@@ -62,9 +63,7 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../app/view/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../app/views/header-footer/footer.php' ?>
 
     <script src="loader.js"></script>
 </body>

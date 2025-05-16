@@ -31,13 +31,10 @@
                 <button type="reset">Clear</button>
             </div>
         </form>
-
-        <footer id="footer">
-            <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-        </footer>
-
         <script src="../../validation/auth/resetPass.js"></script>
     </main>
+
+    <?php include '../header-footer/footer.php' ?>
 </body>
 
 </html>

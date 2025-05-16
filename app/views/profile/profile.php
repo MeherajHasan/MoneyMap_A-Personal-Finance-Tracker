@@ -1,10 +1,10 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_COOKIE['status'])) {
-        header('Location: ../../views/auth/login.php');
-        exit();
-    }
+if (!isset($_COOKIE['status'])) {
+    header('Location: ../../views/auth/login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +49,9 @@
                 <p><strong>Address:</strong> <span id="address"></span></p>
                 <button class="edit" id="address-edit">Edit</button>
 
+                <p><strong>Password:</strong> ********</p>
+                <button class="edit" id="password-edit">Change Password</button>
+
                 <p><strong>Linked Accounts:</strong> <span id="linked-acc"></span></p>
                 <button class="edit" id="linked-acc-edit">Manage</button>
             </div>
@@ -59,10 +62,9 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/profile/profile.js"></script>
 </body>
+
 </html>

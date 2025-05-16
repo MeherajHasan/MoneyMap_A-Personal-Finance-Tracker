@@ -104,6 +104,20 @@ section p {
     margin-bottom: 5px;
 }
 
+.profession {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 10px auto 15px auto;
+    max-width: 600px;
+    color: #1B263B;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.profession li {
+    margin-bottom: 10px;
+}
+
 .social-links {
     margin-top: 15px;
 }

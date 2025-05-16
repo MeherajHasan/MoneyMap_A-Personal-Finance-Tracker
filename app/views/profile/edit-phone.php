@@ -1,10 +1,10 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_COOKIE['status'])) {
-        header('Location: ../../views/auth/login.php');
-        exit();
-    }
+if (!isset($_COOKIE['status'])) {
+    header('Location: ../../views/auth/login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,15 +32,16 @@
             <input type="tel" id="phone" name="phone" class="phone">
 
             <p id="errorMSG"></p>
-            
-            <button type="button" class="btn" id="save-btn">Save</button>
-            <button type="button" class="btn" id="cancel-btn">Cancel</button>
+
+            <div class="btn-container">
+                <button type="button" class="btn" id="save-btn">Save</button>
+                <button type="button" class="btn" id="cancel-btn">Cancel</button>
+            </div>
+
         </form>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/profile/edit-phone.js"></script>
 </body>

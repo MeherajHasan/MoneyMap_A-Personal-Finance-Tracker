@@ -20,21 +20,7 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="container">
-            <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
-            <nav class="nav">
-                <a href="../dashboard/dashboard.php">Dashboard</a>
-                <a href="../expense/expense-dashboard.php">Expenses</a>
-                <a href="../budget/budget-dashboard.php">Budget</a>
-                <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
-                <a href="../debt/debt-dashboard.php">Debt</a>
-                <a href="../savings/savings-dashboard.php">Savings</a>
-                <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
-                <a href="../../controllers/auth/logout.php">Logout</a>
-            </nav>
-        </div>
-    </header>
+    <?php include '../header-footer/header.php' ?>
 
     <main class="main container">
         <div class="section-header">
@@ -121,9 +107,7 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/expense/expense-report.js"></script>
 </body>

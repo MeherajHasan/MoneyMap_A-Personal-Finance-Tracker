@@ -12,33 +12,6 @@ body {
     padding: 20px;
 }
 
-.header {
-    background-color: #0D1B2A; 
-    padding: 20px 0;
-    text-align: center;
-}
-
-.logo {
-    width: 350px;
-    display: block;
-    margin: 0 auto;
-}
-
-.nav {
-    margin-top: 15px;
-}
-
-.nav a {
-    color: #ffffff;
-    text-decoration: none;
-    margin: 0 12px;
-    font-weight: 500;
-}
-
-.nav a:hover {
-    color: #4FC3F7; 
-}
-
 .section-header h2 {
     font-size: 28px;
     text-align: center;
@@ -140,21 +113,4 @@ body {
 
 #incomeTable tr:hover {
     background-color: #f1faff;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #0D1B2A;
-    color: #ffffff;
-    margin-top: 40px;
-}
-
-footer a {
-    color: #4FC3F7;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }

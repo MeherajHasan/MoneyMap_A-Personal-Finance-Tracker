@@ -1,20 +1,23 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body & Layout */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8;
-    color: #1B263B;
+    background-color: #f4f6f8; /* Light Background */
+    color: #1B263B; /* Deep Blue Text */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+/* Header */
 header {
-    background-color: #1B263B;
+    background-color: #1B263B; /* Deep Blue */
     padding: 20px 0;
     display: flex;
     justify-content: center;
@@ -23,14 +26,15 @@ header {
 
 #MoneyMap-logo {
     width: 350px;
-    height: auto; 
+    height: auto;
 }
 
+/* Main Container */
 main {
     background-color: #ffffff;
-    margin: 30px auto;
-    padding: 40px;
-    max-width: 800px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    max-width: 600px;
     width: 90%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -39,80 +43,69 @@ main {
 main h1 {
     text-align: center;
     margin-bottom: 30px;
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: #0D1B2A;
 }
 
-form {
+/* Form Styling */
+form#edit-password {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
 }
 
 form label {
     font-size: 1rem;
-    color: #1B263B;
+    color: #0D1B2A;
 }
 
-form input {
-    padding: 10px;
+form input[type="password"] {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-    width: 100%;
-    max-width: 400px; 
+    background-color: #f9f9f9;
+    outline-color: #4FC3F7;
 }
 
-form input:focus {
-    border-color: #3A506B;
-}
-
-form .btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px; 
-    width: 100%;
-}
-
-button {
-    background-color: #3A506B;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 150px;
-}
-
-button:hover {
-    background-color: #27394d;
-}
-
+/* Error Message */
 #errorMSG {
     color: #e74c3c;
     font-size: 0.9rem;
-    text-align: center;
+}
+
+/* Buttons Container for Horizontal Centering */
+form#edit-password > .btn-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* Centers the buttons horizontally */
     margin-top: 10px;
 }
 
-footer {
-    background-color: #1B263B;
+/* Button Styling */
+.btn {
+    background-color: #0D1B2A; /* Deep Blue */
     color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(13, 27, 42, 0.5);
+    min-width: 100px;
 }
 
-footer a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
+.btn:hover {
+    background-color: #07101A; /* Darker shade on hover */
 }
 
-footer a:hover {
-    text-decoration: underline;
+/* Cancel Button Styles */
+#cancel-btn {
+    background-color: #e74c3c;
+}
+
+#cancel-btn:hover {
+    background-color: #c0392b;
 }

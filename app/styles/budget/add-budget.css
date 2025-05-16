@@ -1,139 +1,127 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f6f8; 
-    color: #1B263B; 
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #0D1B2A; 
-    padding: 20px 0;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-header .logo {
-    width: 150px;
-}
-
-header .nav a {
-    color: #f4f6f8;
-    text-decoration: none;
-    margin: 0 10px;
-    font-weight: bold;
-}
-
-header .nav a:hover {
-    color: #4FC3F7; 
-}
-
-.main {
-    padding: 40px 20px;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    line-height: 1.5;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 95%;
+    max-width: 700px;
+    margin: 30px auto;
 }
 
 .section-header h2 {
-    font-size: 24px;
-    color: #0D1B2A; 
-    margin-bottom: 20px;
+    text-align: center;
+    color: #0D1B2A;
+    font-weight: 700;
+    margin-bottom: 25px;
 }
 
-form {
-    background-color: #ffffff;
-    padding: 30px;
+.budget-form {
+    background-color: #fff;
+    padding: 30px 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-form .form-group {
+.form-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-form .form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1B263B;
 }
 
-form .form-group input,
-form .form-group select,
-form .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    padding: 10px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
 }
 
-form .form-group input:focus,
-form .form-group select:focus,
-form .form-group textarea:focus {
-    border-color: #4FC3F7; 
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #4FC3F7;
     outline: none;
 }
 
-form .error-message {
-    color: red;
-    font-size: 14px;
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: 600;
+    font-size: 0.875rem;
     margin-top: 5px;
+    min-height: 18px;
 }
 
 .btn {
     display: inline-block;
-    padding: 12px 25px;
-    background-color: #4FC3F7; 
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
     text-decoration: none;
-    border-radius: 5px;
+    text-align: center;
     transition: background-color 0.3s ease;
+    user-select: none;
 }
 
-.btn:hover {
-    background-color: #0D1B2A; 
+.btn-primary {
+    background-color: #4FC3F7;
+    color: #fff;
+    border: none;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #399ad6;
 }
 
 .btn-secondary {
-    background-color: #ddd;
-    color: #0D1B2A;
+    background-color: #0D1B2A;
+    color: #fff;
+    border: none;
+    margin: 10px 10px 0 0;
+    padding: 10px 20px;
+    font-weight: 600;
+    display: inline-block;
 }
 
 .btn-secondary:hover {
-    background-color: #0D1B2A;
-    color: #fff;
+    background-color: #1B263B;
 }
 
 .navigation-buttons {
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
     justify-content: center;
-}
-
-footer {
-    background-color: #0D1B2A; 
-    color: #ffffff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 40px;
-}
-
-footer a {
-    color: #4FC3F7;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
 }

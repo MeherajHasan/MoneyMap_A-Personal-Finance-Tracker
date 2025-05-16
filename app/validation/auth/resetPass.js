@@ -43,6 +43,6 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     if (validate()) {
-        window.location.href = '../../views/auth/login.html';
+        window.location.href = '../../views/auth/login.php';
     }
 });

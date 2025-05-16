@@ -22,19 +22,17 @@
             <br>
 
             <div class="button-group">
-                <button type="button" onclick="window.location.href='login.html'">Cancel</button>
+                <button type="button" onclick="window.location.href='login.php'">Cancel</button>
                 <button id="forgotSubmitBtn" type="submit">Submit</button>
             </div>
 
             <p id="forgotMSG"></p>
 
-            <p>Remembered your password? <a href="login.html">Login here</a></p>
+            <p>Remembered your password? <a href="login.php">Login here</a></p>
         </form>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/auth/forgetPass.js"></script>
 

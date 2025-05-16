@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="remember">Remember me</label>
             </div>
 
-            <p><a href="forgetPass.html">Forgot Password?</a></p>
+            <p><a href="forgetPass.php">Forgot Password?</a></p>
 
             <div class="button-group">
                 <button type="button" onclick="window.location.href='../../../public/index.php'">Cancel</button>
@@ -81,9 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </main>
 
-    <footer>
-        <p>&copy; 2025 <a id="about" href="../../views/landing/about.html">MoneyMap.</a> All rights reserved.</p>
-    </footer>
+    <?php include '../header-footer/footer.php' ?>
 
     <!--<script src="../../validation/auth/login.js"></script>--> 
 </body>
