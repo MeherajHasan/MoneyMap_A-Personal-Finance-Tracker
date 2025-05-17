@@ -1,11 +1,16 @@
 <?php
 session_start();
 if (isset($_COOKIE['status'])) {
-    header('Location: dashboard.php');
+    if (isset($_COOKIE['role']) && $_COOKIE['role'] === 'admin') {
+        header('Location: ../../views/admin/admin-dashboard.php');
+    } else {
+        header('Location: ../../views/dashboard/dashboard.php');
+    }
     exit();
 }
 
-$email = $password = '';
+$email = "xyz@gmail.com"; // Default autofill
+$password = "11111111";   // Default autofill
 $emailError = $passwordError = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailError = "Please enter an email address.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailError = "Please enter a valid email address.";
-    } elseif ($email !== "xyz@gmail.com") {
+    } elseif ($email !== "abc@gmail.com" && $email !== "xyz@gmail.com") {
         $emailError = "Email not recognized.";
     }
 
@@ -32,11 +37,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($emailError) && empty($passwordError)) {
         setcookie("status", "loggedin", time() + 3600, "/");
-        header('Location: ../../views/dashboard/dashboard.php');
+
+        if ($email === "abc@gmail.com") {
+            setcookie("role", "admin", time() + 3600, "/");
+            header('Location: ../../views/admin/admin-dashboard.php');
+        } else {
+            setcookie("role", "user", time() + 3600, "/");
+            header('Location: ../../views/dashboard/dashboard.php');
+        }
         exit();
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,11 +70,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Login Form</h1>
         <form action="login.php" method="POST" id="loginForm">
             <label for="email">Email:</label>
-            <input id="email" type="email" name="email" placeholder="xyz@gmail.com" value="xyz@gmail.com" /> <!--value="<?php echo htmlspecialchars($email); ?>"-->
+            <input id="email" type="email" name="email" placeholder="xyz@gmail.com"
+                   value="<?php echo htmlspecialchars($email); ?>" />
             <p id="emailError" class="error"><?php echo $emailError; ?></p>
 
             <label for="password">Password:</label>
-            <input id="password" type="password" name="password" placeholder="Enter your password" value="11111111"/>
+            <input id="password" type="password" name="password" placeholder="Enter your password"
+                   value="<?php echo htmlspecialchars($password); ?>" />
             <p id="passwordError" class="error"><?php echo $passwordError; ?></p>
 
             <div class="remember-me">
@@ -82,8 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </main>
 
     <?php include '../header-footer/footer.php' ?>
-
-    <!--<script src="../../validation/auth/login.js"></script>--> 
 </body>
-
+<!--script src="../../validation/auth/login.js"></script>-->
 </html>
