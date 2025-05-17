@@ -1,4 +1,8 @@
 <?php
+include '../../../config/db.php';
+?>
+
+<?php
 session_start();
 
 $errors = [];

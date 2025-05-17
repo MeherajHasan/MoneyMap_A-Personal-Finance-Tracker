@@ -1,15 +1,18 @@
 <?php
+include '../../../config/db.php';
 session_start();
-if (isset($_COOKIE['status'])) {
-    if (isset($_COOKIE['role']) && $_COOKIE['role'] === 'admin') {
-        header('Location: ../../views/admin/admin-dashboard.php');
-    } else {
-        header('Location: ../../views/dashboard/dashboard.php');
-    }
-    exit();
-}
 
-$email = "xyz@gmail.com"; // Default autofill
+// Commented out for now, uncomment if you want auto-redirect on active login
+// if (isset($_COOKIE['status'])) {
+//     if (isset($_COOKIE['role']) && $_COOKIE['role'] === 'admin') {
+//         header('Location: ../../views/admin/admin-dashboard.php');
+//     } else {
+//         header('Location: ../../views/dashboard/dashboard.php');
+//     }
+//     exit();
+// }
+
+$email = "admin@gmail.com"; // Default autofill
 $password = "11111111";   // Default autofill
 $emailError = $passwordError = '';
 
@@ -21,31 +24,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailError = "Please enter an email address.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailError = "Please enter a valid email address.";
-    } elseif ($email !== "abc@gmail.com" && $email !== "xyz@gmail.com") {
-        $emailError = "Email not recognized.";
     }
 
     if (empty($password)) {
         if (empty($emailError)) {
             $passwordError = "Please enter your password.";
         }
-    } elseif ($password !== "11111111") {
-        if (empty($emailError)) {
-            $passwordError = "Incorrect password.";
-        }
     }
 
     if (empty($emailError) && empty($passwordError)) {
-        setcookie("status", "loggedin", time() + 3600, "/");
+        try {
+            // Escape email to prevent SQL injection
+            $emailEscaped = mysqli_real_escape_string($con, $email);
 
-        if ($email === "abc@gmail.com") {
-            setcookie("role", "admin", time() + 3600, "/");
-            header('Location: ../../views/admin/admin-dashboard.php');
-        } else {
-            setcookie("role", "user", time() + 3600, "/");
-            header('Location: ../../views/dashboard/dashboard.php');
+            // Adjust field names below according to your DB
+            $sql = "SELECT password_hash, role FROM users WHERE mail = '$emailEscaped'";
+            $result = mysqli_query($con, $sql);
+
+            if ($result && mysqli_num_rows($result) == 1) {
+                $row = mysqli_fetch_assoc($result);
+                $db_password_hash = $row['password_hash'];
+                $role = $row['role'];
+
+                if ($password === $db_password_hash) {      //hashing need to be implemented
+                    setcookie("status", "loggedin", time() + 3600, "/");
+                    setcookie("role", $role, time() + 3600, "/");
+
+                    if ($role === 'admin') {
+                        header('Location: ../../views/admin/admin-dashboard.php');
+                    } else {
+                        header('Location: ../../views/dashboard/dashboard.php');
+                    }
+                    exit();
+                } else {
+                    $passwordError = "Incorrect password.";
+                }
+            } else {
+                $emailError = "Email not recognized.";
+            }
+        } catch (Exception $e) {
+            echo "<div style='color: red; font-size: 18px; text-align: center; margin-top: 20px;'>
+                    <strong>Error:</strong> Unable to process your request. Please try again later.
+                  </div>";
+            exit();
         }
-        exit();
     }
 }
 ?>
@@ -71,12 +93,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="login.php" method="POST" id="loginForm">
             <label for="email">Email:</label>
             <input id="email" type="email" name="email" placeholder="xyz@gmail.com"
-                   value="<?php echo htmlspecialchars($email); ?>" />
+                value="<?php echo htmlspecialchars($email); ?>" />
             <p id="emailError" class="error"><?php echo $emailError; ?></p>
 
             <label for="password">Password:</label>
             <input id="password" type="password" name="password" placeholder="Enter your password"
-                   value="<?php echo htmlspecialchars($password); ?>" />
+                value="<?php echo htmlspecialchars($password); ?>" />
             <p id="passwordError" class="error"><?php echo $passwordError; ?></p>
 
             <div class="remember-me">
@@ -99,4 +121,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include '../header-footer/footer.php' ?>
 </body>
 <!--script src="../../validation/auth/login.js"></script>-->
+
 </html>
