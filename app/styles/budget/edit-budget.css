@@ -1,20 +1,16 @@
-/* ../../styles/budget/edit-budget.css */
-
-/* === Colors === */
 :root {
-  --bg-color: #f4f6f8;            /* Light background */
-  --text-color: #1B263B;          /* Deep Blue text */
-  --header-footer-bg: #0D1B2A;    /* Dark Blue header/footer */
-  --primary-color: #4FC3F7;       /* Light Blue primary */
-  --primary-hover: #3AA9E0;       /* Darker Light Blue hover */
-  --secondary-color: #6c757d;     /* Gray secondary buttons (overridden below) */
-  --error-color: #e63946;         /* Red error messages */
-  --input-bg: #fff;               /* White input background */
-  --input-border: #ccc;           /* Light gray input border */
-  --input-focus: #4FC3F7;         /* Blue input focus */
+  --bg-color: #f4f6f8;
+  --text-color: #1B263B;
+  --header-footer-bg: #0D1B2A;
+  --primary-color: #4FC3F7;
+  --primary-hover: #3AA9E0;
+  --secondary-color: #6c757d;
+  --error-color: #e63946;
+  --input-bg: #fff;
+  --input-border: #ccc;
+  --input-focus: #4FC3F7;
 }
 
-/* === Base styles === */
 * {
   box-sizing: border-box;
 }
@@ -36,21 +32,18 @@ a:hover {
   color: var(--primary-hover);
 }
 
-/* === Layout container === */
 .main.container {
   max-width: 960px;
   margin: 2rem auto 4rem;
   padding: 0 1rem;
 }
 
-/* Section header */
 .section-header h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: var(--header-footer-bg);
 }
 
-/* === Form styles === */
 .budget-form {
   background: #fff;
   padding: 1.5rem 2rem;
@@ -58,7 +51,6 @@ a:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Two-column rows */
 .two-column-form .form-group-row {
   display: flex;
   justify-content: space-between;
@@ -67,7 +59,6 @@ a:hover {
   flex-wrap: wrap;
 }
 
-/* Form columns */
 .form-column {
   flex: 1 1 45%;
   display: flex;
@@ -79,7 +70,6 @@ a:hover {
   margin-bottom: 0.4rem;
 }
 
-/* Inputs, selects, textareas */
 .form-column input[type="text"],
 .form-column input[type="number"],
 .form-column input[type="date"],
@@ -96,7 +86,6 @@ a:hover {
   min-height: 36px;
 }
 
-/* Readonly inputs */
 .form-column input[readonly],
 .form-column textarea[readonly] {
   background-color: #e9ecef;
@@ -104,7 +93,6 @@ a:hover {
   color: #6c757d;
 }
 
-/* Focus states */
 .form-column input[type="text"]:focus,
 .form-column input[type="number"]:focus,
 .form-column input[type="date"]:focus,
@@ -114,20 +102,17 @@ a:hover {
   border-color: var(--input-focus);
 }
 
-/* Textarea min height */
 .form-column textarea {
   min-height: 80px;
 }
 
-/* Error message style */
 .error-message {
   color: var(--error-color);
   font-size: 0.875rem;
   margin-top: 0.25rem;
-  min-height: 1.2rem; /* Reserve space even if no error */
+  min-height: 1.2rem;
 }
 
-/* === Buttons === */
 .btn {
   display: inline-block;
   padding: 0.55rem 1.3rem;
@@ -142,28 +127,25 @@ a:hover {
   white-space: nowrap;
 }
 
-/* Update Budget button - dark blue */
 .btn-primary {
-  background-color: var(--header-footer-bg); /* #0D1B2A */
+  background-color: var(--header-footer-bg);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background-color: #081523; /* Slightly darker */
+  background-color: #081523;
 }
 
-/* Navigation buttons container - horizontal row */
 .navigation-buttons {
   margin-top: 2rem;
   display: flex;
-  justify-content: center; /* center horizontally */
+  justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap; /* wrap on small screens */
+  flex-wrap: wrap;
 }
 
-/* Other buttons - sky blue */
 .navigation-buttons .btn-secondary {
-  background-color: var(--primary-color); /* #4FC3F7 */
+  background-color: var(--primary-color);
   color: #fff;
   margin-left: 0;
   display: inline-block;
@@ -179,12 +161,11 @@ a:hover {
 }
 
 .navigation-buttons .btn-secondary:hover {
-  background-color: var(--primary-hover); /* #3AA9E0 */
+  background-color: var(--primary-hover);
 }
 
-/* Submit button width and center */
 .budget-form > button[type="submit"] {
-  margin: 1rem auto 0 auto; /* top margin + horizontal auto */
+  margin: 1rem auto 0 auto;
   display: block;
   width: 100%;
   max-width: 300px;

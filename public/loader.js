@@ -1,9 +1,9 @@
 // Wait until the page is fully loaded
 window.addEventListener('load', () => {
-    // Hide the loader
-    document.getElementById('loader').style.opacity = '0';
-    document.getElementById('loader').style.visibility = 'hidden';
-    
-    // Add the 'loaded' class to body
+    const loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    loader.style.visibility = 'hidden';
+    loader.style.pointerEvents = 'none'; 
+
     document.body.classList.add('loaded');
 });

@@ -1,4 +1,3 @@
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -82,12 +81,11 @@ form#edit-mail input[type="email"]:focus {
     min-height: 1.2em;
 }
 
-/* Buttons container for horizontal centering */
 form#edit-mail > .btn-container {
     display: flex;
     gap: 12px;
     margin-top: 15px;
-    justify-content: center; /* center horizontally */
+    justify-content: center;
 }
 
 .btn {
@@ -98,10 +96,9 @@ form#edit-mail > .btn-container {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    min-width: 100px; /* consistent width */
+    min-width: 100px;
 }
 
-/* Save button styles */
 #save-btn {
     background-color: #1B263B;
 }
@@ -110,7 +107,6 @@ form#edit-mail > .btn-container {
     background-color: #27394d;
 }
 
-/* Cancel button styles */
 #cancel-btn {
     background-color: #e74c3c;
 }

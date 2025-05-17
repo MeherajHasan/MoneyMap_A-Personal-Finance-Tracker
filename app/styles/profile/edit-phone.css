@@ -1,11 +1,9 @@
-/* Reset and box-sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body and font */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
@@ -15,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 header {
     background-color: #1B263B;
     padding: 20px 0;
@@ -24,13 +21,11 @@ header {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo */
 #MoneyMap-logo {
     width: 350px;
     height: auto;
 }
 
-/* Main container */
 main {
     background-color: #ffffff;
     margin: 30px auto;
@@ -41,7 +36,6 @@ main {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Main heading */
 main h1 {
     text-align: center;
     margin-bottom: 30px;
@@ -49,20 +43,17 @@ main h1 {
     color: #0D1B2A;
 }
 
-/* Form layout */
 form#edit-phone {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Paragraphs inside form */
 form#edit-phone p {
     font-size: 1rem;
     color: #1B263B;
 }
 
-/* Labels */
 form#edit-phone label {
     display: block;
     font-weight: bold;
@@ -70,7 +61,6 @@ form#edit-phone label {
     color: #1B263B;
 }
 
-/* Input field style */
 form#edit-phone input[type="tel"] {
     width: 100%;
     padding: 8px 10px;
@@ -80,28 +70,24 @@ form#edit-phone input[type="tel"] {
     transition: border-color 0.3s ease;
 }
 
-/* Input focus */
 form#edit-phone input[type="tel"]:focus {
     border-color: #3A506B;
     outline: none;
 }
 
-/* Error message */
 #errorMSG {
     color: #e74c3c;
     font-weight: 600;
     min-height: 1.2em;
 }
 
-/* Buttons container for horizontal centering */
 form#edit-phone > .btn-container {
     display: flex;
     gap: 12px;
     margin-top: 15px;
-    justify-content: center; /* center horizontally */
+    justify-content: center;
 }
 
-/* Common button styles */
 .btn {
     color: #ffffff;
     border: none;
@@ -110,10 +96,9 @@ form#edit-phone > .btn-container {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    min-width: 100px; /* consistent width */
+    min-width: 100px;
 }
 
-/* Save button (dark blue) */
 #save-btn {
     background-color: #1B263B;
 }
@@ -122,7 +107,6 @@ form#edit-phone > .btn-container {
     background-color: #27394d;
 }
 
-/* Cancel button (red) */
 #cancel-btn {
     background-color: #e74c3c;
 }

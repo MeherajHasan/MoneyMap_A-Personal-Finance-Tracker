@@ -1,18 +1,14 @@
-/* budget-dashboard.css */
-
-/* Container and layout */
 .main.container {
     max-width: 1100px;
     margin: 2rem auto;
     padding: 1.5rem;
-    background-color: #f4f6f8; /* Light background */
+    background-color: #f4f6f8;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(27, 38, 59, 0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #1B263B; /* Deep Blue text */
+    color: #1B263B; 
 }
 
-/* Summary cards section */
 .summary-cards {
     display: flex;
     gap: 1.5rem;
@@ -41,20 +37,18 @@
     font-weight: 700;
 }
 
-/* Different colors for summary cards */
 .budget-total {
-    border-left: 5px solid #4FC3F7; /* Light Blue */
+    border-left: 5px solid #4FC3F7; 
 }
 
 .budget-used {
-    border-left: 5px solid #f44336; /* Red */
+    border-left: 5px solid #f44336;
 }
 
 .budget-remaining {
-    border-left: 5px solid #43a047; /* Green */
+    border-left: 5px solid #43a047; 
 }
 
-/* Section header with Add Budget button */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -68,7 +62,7 @@
 }
 
 .btn-primary {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7;
     color: #fff;
     border: none;
     padding: 10px 26px;
@@ -81,10 +75,9 @@
 }
 
 .btn-primary:hover {
-    background-color: #399ad6; /* Darker Blue */
+    background-color: #399ad6;
 }
 
-/* Filters */
 .filters {
     display: flex;
     gap: 1.5rem;
@@ -112,7 +105,6 @@
     border-color: #4FC3F7;
 }
 
-/* Budget Table */
 .budget-table {
     width: 100%;
     border-collapse: collapse;
@@ -123,7 +115,7 @@
 }
 
 .budget-table thead {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A;
     color: #fff;
     text-align: left;
 }
@@ -139,7 +131,6 @@
     background-color: #f4f9ff;
 }
 
-/* Buttons in table */
 .btn-small {
     padding: 6px 14px;
     border-radius: 6px;
@@ -168,7 +159,6 @@
     background-color: #d32f2f;
 }
 
-/* Action buttons container */
 .action-buttons {
     margin-top: 2rem;
     display: flex;
@@ -177,9 +167,8 @@
     flex-wrap: wrap;
 }
 
-/* Buttons inside action-buttons */
 .action-buttons .btn {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7;
     color: #fff;
     padding: 12px 30px;
     border-radius: 8px;
@@ -194,14 +183,12 @@
     box-shadow: 0 4px 8px rgba(79, 195, 247, 0.4);
 }
 
-/* Hover effect */
 .action-buttons .btn:hover {
-    background-color: #399ad6; /* Darker Blue */
+    background-color: #399ad6;
     box-shadow: 0 6px 12px rgba(57, 154, 214, 0.6);
     text-decoration: none;
 }
 
-/* Focus effect for accessibility */
 .action-buttons .btn:focus {
     outline: 3px solid #4FC3F7;
     outline-offset: 2px;

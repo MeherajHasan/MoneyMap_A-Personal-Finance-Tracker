@@ -1,4 +1,3 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8; 
+    color: #1B263B; 
     line-height: 1.5;
 }
 
@@ -18,15 +17,13 @@ body {
     margin: 30px auto;
 }
 
-/* Section headers */
 .section-header h2 {
-    color: #0D1B2A; /* Deep Blue header */
+    color: #0D1B2A; 
     font-weight: 700;
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* Table styling */
 .category-table {
     width: 100%;
     border-collapse: collapse;
@@ -38,7 +35,7 @@ body {
 }
 
 .category-table thead {
-    background-color: #0D1B2A; /* Deep Blue header background */
+    background-color: #0D1B2A;
     color: #fff;
 }
 
@@ -50,10 +47,9 @@ body {
 }
 
 .category-table tbody tr:hover {
-    background-color: #f1f9ff; /* subtle highlight on hover */
+    background-color: #f1f9ff;
 }
 
-/* Buttons in table */
 .btn {
     padding: 7px 14px;
     border-radius: 6px;
@@ -67,7 +63,7 @@ body {
 }
 
 .btn-edit {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7; 
     margin-right: 8px;
 }
 
@@ -76,14 +72,13 @@ body {
 }
 
 .btn-delete {
-    background-color: #dc3545; /* Red */
+    background-color: #dc3545;
 }
 
 .btn-delete:hover {
     background-color: #b52b3a;
 }
 
-/* Add category section */
 .add-category {
     display: flex;
     justify-content: center;
@@ -103,13 +98,12 @@ body {
 }
 
 .add-category input[type="text"]:focus {
-    border-color: #4FC3F7; /* Light Blue focus */
+    border-color: #4FC3F7;
     outline: none;
 }
 
-/* Error message */
 #emptyError {
-    color: #dc3545; /* Red */
+    color: #dc3545; 
     font-weight: 600;
     font-size: 0.875rem;
     text-align: center;
@@ -117,7 +111,6 @@ body {
     min-height: 18px;
 }
 
-/* Navigation buttons */
 .navigation-buttons {
     display: flex;
     justify-content: center;
@@ -127,7 +120,7 @@ body {
 }
 
 .btn-secondary {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A;
     padding: 10px 22px;
     border-radius: 6px;
     font-weight: 600;

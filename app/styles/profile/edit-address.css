@@ -1,4 +1,3 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +44,6 @@ main h1 {
     color: #0D1B2A;
 }
 
-/* Form Styles */
 form#edit-address {
     display: flex;
     flex-direction: column;
@@ -87,10 +85,9 @@ textarea.address:focus {
 #errorMSG {
     color: #e74c3c;
     font-weight: 600;
-    min-height: 1.2em; /* reserve space for error messages */
+    min-height: 1.2em; 
 }
 
-/* Buttons */
 .btn {
     width: 150px;
     padding: 10px 0;
@@ -123,5 +120,5 @@ form#edit-address > .btn-container {
     display: flex;
     gap: 10px;
     margin-top: 10px;
-    justify-content: center;  /* centers the buttons horizontally */
+    justify-content: center; 
 }

@@ -1,11 +1,9 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body & Layout */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
@@ -15,7 +13,6 @@ body {
     flex-direction: column;
 }
 
-/* Header */
 header {
     background-color: #1B263B;
     padding: 20px 0;
@@ -29,7 +26,6 @@ header {
     height: auto;
 }
 
-/* Profile Container */
 .profile-container {
     background-color: #fff;
     margin: 30px auto;
@@ -47,7 +43,6 @@ header {
     color: #0D1B2A;
 }
 
-/* Profile Details Layout */
 .profile-details {
     display: flex;
     flex-wrap: wrap;
@@ -56,7 +51,6 @@ header {
     justify-content: center;
 }
 
-/* Profile Photo */
 .profile-photo {
     flex: 0 0 150px;
     height: 150px;
@@ -75,7 +69,6 @@ header {
     object-fit: cover;
 }
 
-/* Upload Button Overlay */
 .profile-photo button.upload {
     position: absolute;
     bottom: 0;
@@ -97,7 +90,6 @@ header {
     opacity: 1;
 }
 
-/* Profile Info */
 .profile-info {
     flex: 1 1 300px;
     display: flex;
@@ -118,9 +110,8 @@ header {
     color: #1B263B;
 }
 
-/* Edit Buttons */
 .profile-info button.edit {
-    background-color: #0D1B2A; /* Dark Blue */
+    background-color: #0D1B2A;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -131,15 +122,14 @@ header {
     align-self: flex-start;
     white-space: nowrap;
     min-width: 70px;
-    box-shadow: 0 2px 4px rgba(13, 27, 42, 0.6); /* matching dark blue shadow */
+    box-shadow: 0 2px 4px rgba(13, 27, 42, 0.6);
 }
 
 .profile-info button.edit:hover {
-    background-color: #07101A; /* Darker shade on hover */
+    background-color: #07101A;
     box-shadow: 0 4px 8px rgba(7, 16, 26, 0.8);
 }
 
-/* Delete Account Section */
 .delete-acc {
     text-align: center;
     margin-top: 20px;

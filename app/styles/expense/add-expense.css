@@ -1,4 +1,3 @@
-/* Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +23,6 @@ a {
     padding: 2rem 0;
 }
 
-/* Section Header */
 .section-header {
     margin-bottom: 1.5rem;
 }
@@ -34,7 +32,6 @@ a {
     color: #0D1B2A;
 }
 
-/* Form Styles */
 .expense-form {
     background-color: #ffffff;
     padding: 2rem;
@@ -75,7 +72,6 @@ textarea:focus {
     outline: none;
 }
 
-/* Button Styles */
 .btn {
     padding: 0.7rem 1.5rem;
     border-radius: 8px;
@@ -102,13 +98,11 @@ textarea:focus {
     background-color: #039BE5;
 }
 
-/* Error Messages */
 .error-message {
     color: #f44336;
     font-size: 0.875rem;
 }
 
-/* Navigation Buttons */
 .navigation-buttons {
     display: flex;
     justify-content: center;

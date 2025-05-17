@@ -28,6 +28,10 @@
     100% { transform: rotate(360deg); }
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f6f8;
@@ -105,7 +109,7 @@ header nav ul li .login-btn:hover {
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 15px;
-    margin-top: 70px;
+    /* margin-top: 20px; */
 }
 
 .hero p {
@@ -193,4 +197,8 @@ footer {
 
 #about:hover {
     color: #4FC3F7;
+}
+
+#features {
+    scroll-margin-top: 80px; 
 }

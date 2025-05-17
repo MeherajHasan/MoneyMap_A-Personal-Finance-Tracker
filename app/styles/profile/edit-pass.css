@@ -1,23 +1,20 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body & Layout */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; /* Light Background */
-    color: #1B263B; /* Deep Blue Text */
+    background-color: #f4f6f8;
+    color: #1B263B;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Header */
 header {
-    background-color: #1B263B; /* Deep Blue */
+    background-color: #1B263B;
     padding: 20px 0;
     display: flex;
     justify-content: center;
@@ -29,7 +26,6 @@ header {
     height: auto;
 }
 
-/* Main Container */
 main {
     background-color: #ffffff;
     margin: 40px auto;
@@ -47,7 +43,6 @@ main h1 {
     color: #0D1B2A;
 }
 
-/* Form Styling */
 form#edit-password {
     display: flex;
     flex-direction: column;
@@ -69,23 +64,20 @@ form input[type="password"] {
     outline-color: #4FC3F7;
 }
 
-/* Error Message */
 #errorMSG {
     color: #e74c3c;
     font-size: 0.9rem;
 }
 
-/* Buttons Container for Horizontal Centering */
 form#edit-password > .btn-container {
     display: flex;
     gap: 15px;
-    justify-content: center; /* Centers the buttons horizontally */
+    justify-content: center;
     margin-top: 10px;
 }
 
-/* Button Styling */
 .btn {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -98,10 +90,9 @@ form#edit-password > .btn-container {
 }
 
 .btn:hover {
-    background-color: #07101A; /* Darker shade on hover */
+    background-color: #07101A;
 }
 
-/* Cancel Button Styles */
 #cancel-btn {
     background-color: #e74c3c;
 }

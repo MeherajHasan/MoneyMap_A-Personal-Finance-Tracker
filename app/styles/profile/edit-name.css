@@ -83,13 +83,12 @@ form#edit-name input[type="text"]:focus {
     min-height: 1.2em;
 }
 
-/* Buttons container for horizontal centering */
 form#edit-name > .btn-container,
 form#edit-name > button.btn {
     display: flex;
     gap: 12px;
     margin-top: 15px;
-    justify-content: center; /* center horizontally */
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -104,7 +103,6 @@ form#edit-name > button.btn {
     min-width: 100px;
 }
 
-/* Save button styles */
 #save-btn {
     background-color: #1B263B;
 }
@@ -113,7 +111,6 @@ form#edit-name > button.btn {
     background-color: #27394d;
 }
 
-/* Cancel button styles */
 #cancel-btn {
     background-color: #e74c3c;
 }

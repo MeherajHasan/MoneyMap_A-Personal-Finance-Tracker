@@ -1,18 +1,14 @@
-/* overspend-notify.css */
-
-/* Container and layout */
 .main.container {
     max-width: 900px;
     margin: 2rem auto;
     padding: 1.5rem;
-    background-color: #f4f6f8; /* Light background */
+    background-color: #f4f6f8;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(27, 38, 59, 0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #1B263B; /* Deep Blue text */
+    color: #1B263B;
 }
 
-/* Notification box */
 .notification-container {
     display: flex;
     justify-content: center;
@@ -29,23 +25,20 @@
 }
 
 .notification.warning {
-    border-left: 6px solid #f44336; /* Red accent for warning */
+    border-left: 6px solid #f44336;
 }
 
-/* Heading */
 .notification h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #f44336; /* Red color for alert */
+    color: #f44336;
 }
 
-/* Message paragraph */
 #overspent-message {
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 
-/* Overspent categories list */
 #overspent-categories {
     list-style: none;
     padding-left: 0;
@@ -53,8 +46,8 @@
 }
 
 #overspent-categories li {
-    background-color: #fdecea; /* Light red background */
-    color: #d32f2f; /* Darker red text */
+    background-color: #fdecea;
+    color: #d32f2f;
     margin: 0.3rem 0;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -62,22 +55,20 @@
     font-size: 1rem;
 }
 
-/* Link */
 .notification p a {
-    color: #4FC3F7; /* Light Blue */
+    color: #4FC3F7;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
 .notification p a:hover {
-    color: #399ad6; /* Darker blue */
+    color: #399ad6;
     text-decoration: underline;
 }
 
-/* Acknowledge Button */
 #acknowledge-btn {
-    background-color: #4FC3F7; /* Light Blue */
+    background-color: #4FC3F7;
     color: #fff;
     border: none;
     padding: 12px 28px;
@@ -90,5 +81,5 @@
 }
 
 #acknowledge-btn:hover {
-    background-color: #399ad6; /* Darker blue on hover */
+    background-color: #399ad6;
 }

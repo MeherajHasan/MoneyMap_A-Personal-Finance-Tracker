@@ -1,4 +1,3 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8; /* Light background */
-    color: #1B263B; /* Deep Blue text */
+    background-color: #f4f6f8;
+    color: #1B263B;
     line-height: 1.6;
 }
 
@@ -18,7 +17,6 @@ body {
     margin: 30px auto;
 }
 
-/* Main report container */
 .savings-report-container {
     background-color: #fff;
     padding: 30px 25px;
@@ -27,20 +25,18 @@ body {
 }
 
 .savings-report-container h2 {
-    color: #0D1B2A; /* Deep Blue */
+    color: #0D1B2A;
     margin-bottom: 25px;
     text-align: center;
     font-weight: 700;
 }
 
-/* Section headings */
 h3 {
     color: #0D1B2A;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-/* Overview metrics */
 .report-overview .overview-metrics {
     display: flex;
     gap: 20px;
@@ -67,10 +63,9 @@ h3 {
 .metric-card p {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #4FC3F7; /* Light Blue */
+    color: #4FC3F7;
 }
 
-/* Goal progress summary */
 .goal-progress-summary ul {
     list-style: none;
     margin-bottom: 30px;
@@ -112,7 +107,6 @@ h3 {
     font-size: 0.9rem;
 }
 
-/* Recent transactions table */
 .recent-transactions {
     overflow-x: auto;
 }
@@ -123,7 +117,7 @@ h3 {
 }
 
 .transactions-table thead {
-    background-color: #0D1B2A; /* Deep Blue */
+    background-color: #0D1B2A;
     color: white;
 }
 
@@ -139,7 +133,6 @@ h3 {
     background-color: #f4f9ff;
 }
 
-/* No transactions message */
 #noTransactions {
     text-align: center;
     color: #dc3545;
@@ -147,7 +140,6 @@ h3 {
     margin-top: 20px;
 }
 
-/* Actions buttons */
 .actions {
     margin-top: 25px;
     text-align: center;
