@@ -1,0 +1,166 @@
+/* Container */
+.report-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #0D1B2A;
+  background-color: #f4f6f8;
+}
+
+/* Header */
+.report-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.report-header h2 {
+  color: #1B263B;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.report-header p {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Filters */
+.report-filters {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.report-filters input[type="month"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Summary Cards */
+.report-summary {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.summary-card {
+  flex: 1;
+  min-width: 200px;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-left: 6px solid #1B263B;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(13, 27, 42, 0.05);
+  text-align: center;
+}
+
+.summary-card h3 {
+  margin-bottom: 10px;
+  color: #1B263B;
+}
+
+.summary-card p {
+  font-size: 1.5rem;
+  color: #0D1B2A;
+  font-weight: bold;
+}
+
+/* Transaction Analysis */
+.report-analysis h2 {
+  margin-bottom: 15px;
+  color: #0D1B2A;
+}
+
+/* Custom Date Range Filters */
+.custom-range {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.custom-range input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.custom-range .error {
+  font-weight: bold;
+  color: red;
+  margin-top: 10px;
+  flex-basis: 100%;
+}
+
+/* Table */
+.report-table {
+  overflow-x: auto;
+  margin-bottom: 40px;
+}
+
+.report-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.report-table th,
+.report-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.report-table th {
+  background-color: #1B263B;
+  color: #ffffff;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.report-table tbody tr:hover {
+  background-color: #eef2f7;
+}
+
+/* Graph Section */
+.report-graph {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.report-graph h3 {
+  margin-bottom: 20px;
+  color: #0D1B2A;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 18px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #1B263B;
+  color: #fff;
+  border: 1px solid #1B263B;
+}
+
+.btn-primary:hover {
+  background-color: #0D1B2A;
+  border-color: #0D1B2A;
+}

@@ -28,7 +28,7 @@
                 <li><a href="../../views/debt/debt-dashboard.php"><img class="menu-icon" id="debt-icon" src="../../../public/assets/debt.png" alt="debt-icon">Debt Tracking</a></li>
                 <li><a href="../../views/savings/savings-dashboard.php"><img class="menu-icon" id="goals-icon" src="../../../public/assets/savings.png" alt="goals-icon">Saving Goals</a></li>
                 <li><a href="../../views/bills/bill-dashboard.php"><img class="menu-icon" id="bill-icon" src="../../../public/assets/bill.png" alt="bill-icon">Bills</a></li>
-                <li><a href="../../views/reports/report.php"><img class="menu-icon" id="report-icon" src="../../../public/assets/report.png" alt="report-icon">Reports</a></li>
+                <li><a href="../../views/reports/report.php"><img class="menu-icon" id="report-icon" src="../../../public/assets/report.png" alt="report-icon">Analysis & Reports</a></li>
                 <li><a href="../../views/contact/contact.php"><img class="menu-icon" id="support-icon" src="../../../public/assets/support.png" alt="support-icon">Feedback & Support</a></li>
             </ul>
         </nav>
@@ -79,7 +79,7 @@
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="reports-widget">
-                    <h2 class="widget-title">View Reports</h2>
+                    <h2 class="widget-title">Analysis & Reports</h2>
                     <p id="widget-amount" class="widget-amount"></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
