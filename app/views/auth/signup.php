@@ -3,8 +3,6 @@
 ?>
 
 <?php
-session_start();
-
 $errors = [];
 $success = false;
 
