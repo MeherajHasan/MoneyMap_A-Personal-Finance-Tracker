@@ -177,22 +177,22 @@
 .widget {
     background-color: #ffffff;
     border-radius: 8px;
-    padding: 20px 20px 20px 30px; 
+    padding: 20px 20px 20px 30px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     width: 400px;
     max-width: 90%;
     text-align: center;
     flex: 0 0 calc(50% - 20px);
     position: relative;
-    border-left: 6px solid transparent; 
+    border-left: 6px solid transparent;
 }
 
 #income-widget {
-    border-left-color: #4CAF50; 
+    border-left-color: #9C27B0;
 }
 
 #expense-widget {
-    border-left-color: #F44336; 
+    border-left-color: #F44336;
 }
 
 #budget-widget {
@@ -204,9 +204,13 @@
 }
 
 #debt-widget {
-    border-left-color: #9C27B0; 
+    border-left-color: #4CAF50;
 }
 
-#net-worth-widget {
-    border-left-color: #2196F3; 
+#bills-widget {
+    border-left-color: #00BCD4; /* Teal color for Bills */
+}
+
+#reports-widget {
+    border-left-color: #673AB7; /* Deep Purple color for Reports */
 }

@@ -27,6 +27,8 @@
                 <li><a href="../../views/budget/budget-dashboard.php"><img class="menu-icon" id="budget-goal-icon" src="../../../public/assets/budget.png" alt="budget-goal-icon">Budget Goals</a></li>
                 <li><a href="../../views/debt/debt-dashboard.php"><img class="menu-icon" id="debt-icon" src="../../../public/assets/debt.png" alt="debt-icon">Debt Tracking</a></li>
                 <li><a href="../../views/savings/savings-dashboard.php"><img class="menu-icon" id="goals-icon" src="../../../public/assets/savings.png" alt="goals-icon">Saving Goals</a></li>
+                <li><a href="../../views/bills/bill-dashboard.php"><img class="menu-icon" id="bill-icon" src="../../../public/assets/bill.png" alt="bill-icon">Bills</a></li>
+                <li><a href="../../views/reports/report.php"><img class="menu-icon" id="report-icon" src="../../../public/assets/report.png" alt="report-icon">Reports</a></li>
                 <li><a href="../../views/contact/contact.php"><img class="menu-icon" id="support-icon" src="../../../public/assets/support.png" alt="support-icon">Feedback & Support</a></li>
             </ul>
         </nav>
@@ -71,8 +73,13 @@
                     <p id="widget-amount" class="widget-amount"></p>
                     <button class="widget-action-btn">View Details</button>
                 </div> 
-                <div class="widget" id="net-worth-widget">
-                    <h2 class="widget-title">Net Worth</h2>
+                <div class="widget" id="bills-widget">
+                    <h2 class="widget-title">Bills</h2>
+                    <p id="widget-amount" class="widget-amount"></p>
+                    <button class="widget-action-btn">View Details</button>
+                </div>
+                <div class="widget" id="reports-widget">
+                    <h2 class="widget-title">View Reports</h2>
                     <p id="widget-amount" class="widget-amount"></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>

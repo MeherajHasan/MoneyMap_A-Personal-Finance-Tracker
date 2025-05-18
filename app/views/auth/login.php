@@ -12,8 +12,8 @@ session_start();
 //     exit();
 // }
 
-$email = "admin@gmail.com"; // Default autofill
-$password = "11111111";   // Default autofill
+$email = "john.doe@gmail.com"; // Default autofill
+$password = "hashed_password_1";   // Default autofill
 $emailError = $passwordError = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

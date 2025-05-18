@@ -5,10 +5,10 @@
             <a href="../dashboard/dashboard.php">Dashboard</a>
             <a href="../expense/expense-dashboard.php">Expenses</a>
             <a href="../budget/budget-dashboard.php">Budget</a>
-            <a href="#" onclick="alert('This feature is under development.'); return false;">Bills</a>
+            <a href="../bills/bill-dashboard.php">Bills</a>
             <a href="../debt/debt-dashboard.php">Debt</a>
             <a href="../savings/savings-dashboard.php">Savings</a>
-            <a href="#" onclick="alert('This feature is under development.'); return false;">Reports</a>
+            <a href="../reports/report.php">Reports</a>
             <a href="../../controllers/auth/logout.php">Logout</a>
         </nav>
     </div>
