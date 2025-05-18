@@ -1,0 +1,127 @@
+/* Container for the whole page */
+.edit-bill-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  gap: 40px;
+  font-family: Arial, sans-serif;
+  color: #0D1B2A;
+}
+
+/* Left side: current bill info */
+.current-bill {
+  flex: 1;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.current-bill h2 {
+  margin-bottom: 15px;
+  color: #1B263B;
+  border-bottom: 2px solid #0D1B2A;
+  padding-bottom: 8px;
+}
+
+.current-bill p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+/* Right side: edit form */
+.edit-bill-form {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #0D1B2A;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(13, 27, 42, 0.1);
+}
+
+.edit-bill-form h2 {
+  margin-bottom: 20px;
+  color: #0D1B2A;
+  border-bottom: 2px solid #1B263B;
+  padding-bottom: 8px;
+}
+
+/* Form elements styling */
+.edit-bill-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.edit-bill-form input[type="text"],
+.edit-bill-form input[type="number"],
+.edit-bill-form input[type="date"],
+.edit-bill-form select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.edit-bill-form input[type="text"]:focus,
+.edit-bill-form input[type="number"]:focus,
+.edit-bill-form input[type="date"]:focus,
+.edit-bill-form select:focus {
+  border-color: #1B263B;
+  outline: none;
+}
+
+/* Buttons container */
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Buttons styling */
+.btn {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  user-select: none;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #1B263B;
+  color: #fff;
+  border: 1px solid #1B263B;
+}
+
+.btn-primary:hover {
+  background-color: #0D1B2A;
+  border-color: #0D1B2A;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #0D1B2A;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #ddd;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}

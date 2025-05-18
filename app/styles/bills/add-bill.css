@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #0D1B2A;
+}
+
+.add-bill-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(13, 27, 42, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0D1B2A;
+}
+
+.bill-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #0D1B2A;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #0D1B2A;
+}
+
+input:focus,
+select:focus {
+    border-color: #0D1B2A;
+    outline: none;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 3px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #0D1B2A;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #10263f;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: #0D1B2A;
+    border: 2px solid #0D1B2A;
+}
+
+.btn-secondary:hover {
+    background-color: #f0f0f0;
+}
