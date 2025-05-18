@@ -9,7 +9,7 @@
             <a href="../debt/debt-dashboard.php">Debt</a>
             <a href="../savings/savings-dashboard.php">Savings</a>
             <a href="../reports/report.php">Reports</a>
-            <a href="../../controllers/auth/logout.php">Logout</a>
+            <a href="../../controllers/logout.php">Logout</a>
         </nav>
     </div>
 </header>

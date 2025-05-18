@@ -1,12 +1,6 @@
 <?php
-session_start();
+require_once('../../controllers/adminAuth.php');
 
-if (!isset($_COOKIE['status']) || $_COOKIE['role'] !== 'admin') {
-    header('Location: ../../views/auth/login.php');
-    exit();
-}
-
-// Dummy data (replace with real DB values as needed)
 $adminData = [
     'photo' => '../../../public/assets/admin-default.png',
     'name' => 'Admin User',

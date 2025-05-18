@@ -8,7 +8,7 @@
             <a href="data-oversight.php">Data Oversight</a>
             <a href="backup.php">Backup & Export</a>
             <a href="contact-response.php">Contact Response</a>
-            <a href="../../controllers/auth/logout.php">Logout</a>
+            <a href="../../controllers/logout.php">Logout</a>
         </nav>
     </div>
 </header>

@@ -1,10 +1,6 @@
 <?php
-    session_start();
+    require_once('../../controllers/userAuth.php');
 
-    if (!isset($_COOKIE['status'])) {
-        header('Location: ../../views/auth/login.php');
-        exit();
-    }
 ?>
 
 <!DOCTYPE html>

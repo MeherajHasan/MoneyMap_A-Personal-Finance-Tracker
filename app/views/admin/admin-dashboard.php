@@ -1,10 +1,5 @@
 <?php
-    session_start();
-
-    if (!isset($_COOKIE['status']) || $_COOKIE['role'] !== 'admin') {
-        header('Location: ../../views/auth/login.php');
-        exit();
-    }
+require_once('../../controllers/adminAuth.php');
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +30,7 @@
                 <div class="header-right">
                     <button class="navigation-btn" id="profileBtn"><img id="profile-img" src="../../../public/assets/profile.png" alt="admin-profile-img"></button>
                     <button class="navigation-btn" id="notificationBtn"><img id="notification-icon" src="../../../public/assets/notification-white.png" alt="notification-icon"></button>
-                    <a href="../../controllers/auth/logout.php" class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../public/assets/logout.png" alt="logout-icon"></a>
+                    <a href="../../controllers/logout.php" class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../public/assets/logout.png" alt="logout-icon"></a>
                 </div>
             </header>
 

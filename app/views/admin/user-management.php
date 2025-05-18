@@ -1,10 +1,6 @@
 <?php
-session_start();
 
-if (!isset($_COOKIE['status']) || $_COOKIE['role'] !== 'admin') {
-    header('Location: ../../views/auth/login.php');
-    exit();
-}
+require_once('../../controllers/adminAuth.php');
 
 include '../../../config/db.php';
 

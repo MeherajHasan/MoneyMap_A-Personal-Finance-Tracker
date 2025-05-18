@@ -1,5 +1,5 @@
 <?php
-    // No Session, No Database Required
+require_once('../../controllers/adminAuth.php');
 ?>
 
 <!DOCTYPE html>

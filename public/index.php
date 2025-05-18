@@ -1,5 +1,5 @@
 <?php
-include '../config/db.php';
+    require_once('../app/models/db.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,8 @@ include '../config/db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoneyMap | Personal Finance Tracker</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="../../storage/logo.png" type="image/png">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>

@@ -6,65 +6,51 @@ const passwordError = document.getElementById("passwordError");
 const submitBtn = document.getElementById("loginSubmitBtn");
 
 function validateEmail(email) {
+    if (!email) return false;
     const parts = email.trim().split("@");
     if (parts.length !== 2) return false;
 
     const local = parts[0];
-    const domainParts = parts[1].split(".");
-
     if (!local || local.length > 64) return false;
+
+    const domainParts = parts[1].split(".");
     if (domainParts.length < 2) return false;
 
     for (let part of domainParts) {
         if (!part || part.length > 63) return false;
     }
-
     return true;
 }
 
 function validateForm() {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
+    let valid = true;
 
-    let emailValid = true;
-    let passwordValid = false;
-
-    if (email === "") {
-        emailError.textContent = "Please enter an email address.";
-        emailValid = false;
-    } else if (!validateEmail(email)) {
+    if (emailInput.value.trim() === "") {
+        emailError.textContent = "Please enter your email.";
+        valid = false;
+    } else if (!validateEmail(emailInput.value.trim())) {
         emailError.textContent = "Please enter a valid email address.";
-        emailValid = false;
-    } else if (email !== "xyz@gmail.com") {
-        emailError.textContent = "Email not recognized.";
-        emailValid = false;
+        valid = false;
     } else {
         emailError.textContent = "";
     }
 
-    if (emailValid) {
-        if (password === "") {
-            passwordError.textContent = "Please enter your password.";
-        } else if (password !== "11111111") {
-            passwordError.textContent = "Incorrect password.";
-        } else {
-            passwordError.textContent = "";
-            passwordValid = true;
-        }
+    if (passwordInput.value.trim() === "") {
+        passwordError.textContent = "Please enter your password.";
+        valid = false;
     } else {
         passwordError.textContent = "";
     }
 
-    submitBtn.disabled = !(emailValid && passwordValid);
-    return emailValid && passwordValid;
+    submitBtn.disabled = !valid;
+    return valid;
 }
 
 emailInput.addEventListener("input", validateForm);
 passwordInput.addEventListener("input", validateForm);
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    if (validateForm()) {
-        window.location.href = '../../views/dashboard/dashboard.php';
+form.addEventListener("submit", function(e) {
+    if (!validateForm()) {
+        e.preventDefault(); 
     }
 });

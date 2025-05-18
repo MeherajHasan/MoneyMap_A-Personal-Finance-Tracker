@@ -1,16 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_COOKIE['status']) || $_COOKIE['role'] !== 'admin') {
-    header('Location: ../../views/auth/login.php');
-    exit();
-}
-
-// include '../../../config/db.php';
-
-// $query = "SELECT * FROM contact_responses ORDER BY response_date DESC";
-// $result = mysqli_query($con, $query);
-?> 
+require_once('../../controllers/adminAuth.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">

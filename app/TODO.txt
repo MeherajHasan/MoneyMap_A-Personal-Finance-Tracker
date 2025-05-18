@@ -1,0 +1,2 @@
+1. changed directory controllers/auth -> controllers 
+2. config/db.php -> app/models/db.php
