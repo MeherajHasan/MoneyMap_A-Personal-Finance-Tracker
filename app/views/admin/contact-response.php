@@ -10,7 +10,7 @@ if (!isset($_COOKIE['status']) || $_COOKIE['role'] !== 'admin') {
 
 // $query = "SELECT * FROM contact_responses ORDER BY response_date DESC";
 // $result = mysqli_query($con, $query);
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">

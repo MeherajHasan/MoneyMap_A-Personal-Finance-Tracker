@@ -10,7 +10,7 @@ body {
     width: 90%;
     margin: 20px auto;
 }
-
+ 
 h2 {
     text-align: center;
     color: #8B0000;
@@ -81,4 +81,32 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    min-width: 100px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    margin: 2px;
+}
+
+.btn-reply {
+    background-color: #4FC3F7;
+}
+
+.btn-reply:hover {
+    background-color: #56bce5;
+}
+
+.btn-delete {
+    background-color: #FF5C5C;
+}
+
+.btn-delete:hover {
+    background-color: #e14a4a;
 }

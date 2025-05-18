@@ -1,66 +1,139 @@
-/* Admin Profile Page CSS */
-body {
-    background-color: #f4f6f8; /* Light Background */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* admin-profile.css */
+
+* {
     margin: 0;
     padding: 0;
-    color: #1B263B; /* Deep Blue */
-}
-
-.profile-container {
-    max-width: 800px;
-    margin: 40px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #0D1B2A;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    color: #0D1B2A;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
     box-sizing: border-box;
 }
 
-#save-profile {
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #333; /* Darker text for better contrast */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #8B0000; /* Dark Red */
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#MoneyMap-logo {
+    width: 350px;
+    height: auto;
+}
+
+.profile-container {
+    background-color: #fff;
+    margin: 30px auto;
+    padding: 40px 30px;
+    max-width: 800px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    color: #8B0000; /* Dark Red */
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #8B0000; /* Dark Red */
+    margin-bottom: 10px;
+}
+
+.profile-photo input[type="file"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.profile-info label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.profile-info input[type="text"],
+.profile-info input[type="email"],
+.profile-info input[type="password"],
+.profile-info textarea {
     width: 100%;
     padding: 10px;
-    background-color: #4FC3F7; /* Light Blue */
-    color: white;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.profile-info textarea {
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.save-btn,
+.reset-btn {
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.save-btn {
+    background-color: #8B0000; /* Dark Red */
+    color: #fff;
+}
+
+.save-btn:hover {
+    background-color: #660000; /* Darker Red */
+}
+
+.reset-btn {
+    background-color: #ddd;
+    color: #333;
+}
+
+.reset-btn:hover {
+    background-color: #ccc;
+}
+
+#errorMSG {
+    color: #dc3545; /* Bootstrap's danger color */
     margin-top: 10px;
-    transition: background-color 0.3s;
-}
-
-#save-profile:hover {
-    background-color: #32a8d9;
-}
-
-button:focus,
-input:focus {
-    outline: none;
-    border-color: #4FC3F7;
-    box-shadow: 0 0 5px rgba(79, 195, 247, 0.5);
+    font-size: 0.9rem;
 }
