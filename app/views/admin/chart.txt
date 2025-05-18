@@ -1,0 +1,27 @@
+<?php
+// Fetch the transaction data for the selected status and date range
+$transactions = [];
+
+if (isset($_POST['status'], $_POST['from_date'], $_POST['to_date'])) {
+    $status = $_POST['status'];
+    $from_date = $_POST['from_date'];
+    $to_date = $_POST['to_date'];
+
+    $query = "SELECT date, amount FROM transactions WHERE date BETWEEN '$from_date' AND '$to_date'";
+
+    if ($status !== 'all') {
+        $query .= " AND account_status = '$status'";
+    }
+
+    $result = mysqli_query($con, $query);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $transactions[] = $row;
+    }
+}
+?>
+
+<script>
+    // Inject the PHP data as JSON into the JavaScript context
+    const transactionData = <?= json_encode($transactions) ?>;
+</script>

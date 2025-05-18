@@ -65,14 +65,18 @@ $pendingUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 3
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
     <link rel="stylesheet" href="../../styles/admin/user-management.css">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon">
 </head>
+
 <body>
     <?php include '../header-footer/admin-header.php' ?>
+
     <h2>User Management</h2>
 
     <!-- Search Form -->
@@ -142,4 +146,7 @@ $pendingUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 3
     ?>
     <?php include '../header-footer/admin-footer.php' ?>
 </body>
+
+<script src="../../validation/admin/user-management.js"></script>
+
 </html>

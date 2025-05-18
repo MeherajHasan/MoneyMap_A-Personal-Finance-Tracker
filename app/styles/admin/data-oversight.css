@@ -1,0 +1,159 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f0f0;
+    color: #4a0d0d;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #4a0d0d;
+    font-size: 2rem;
+}
+
+/* Overview Container */
+.overview-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 10px;
+}
+
+/* Card Styling */
+.card {
+    background-color: #fdecea;
+    border: 1px solid #884a48;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #4a0d0d;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #4a0d0d;
+}
+
+.card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4a0d0d;
+}
+
+/* Card Hover Effects */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Search Section */
+.custom-search {
+    max-width: 600px;
+    margin: 40px auto 60px auto;
+    padding: 20px;
+    background-color: #fdecea;
+    border: 1px solid #884a48;
+    border-radius: 8px;
+    color: #4a0d0d;
+}
+
+.custom-search h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.7rem;
+}
+
+.custom-search form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-search label {
+    flex: 0 0 100px;
+    font-weight: 600;
+    padding-top: 6px;
+    text-align: right;
+}
+
+.custom-search select,
+.custom-search input[type="date"] {
+    flex: 1 1 150px;
+    padding: 8px 10px;
+    border: 1px solid #884a48;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #4a0d0d;
+    background-color: white;
+    transition: border-color 0.3s ease;
+}
+
+.custom-search select:focus,
+.custom-search input[type="date"]:focus {
+    outline: none;
+    border-color: #b74a47;
+}
+
+.custom-search button {
+    flex: 0 0 100px;
+    padding: 10px 15px;
+    background-color: #884a48;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-search button:hover {
+    background-color: #b74a47;
+}
+
+.custom-search form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    /* Remove align-items: center to avoid vertical centering issues */
+}
+
+.custom-search label {
+    flex: 0 0 100px;
+    font-weight: 600;
+    padding-top: 6px;
+    text-align: right;
+    display: flex;
+    align-items: center; /* vertically center label text */
+    margin: 0; /* remove extra margin */
+}
+
+.custom-search select,
+.custom-search input[type="date"] {
+    flex: 1 1 150px;
+    padding: 8px 10px;
+    border: 1px solid #884a48;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #4a0d0d;
+    background-color: white;
+    transition: border-color 0.3s ease;
+    margin: 0; /* remove extra margin */
+}
+
+/* Wrap each label+input in a container for better grouping */
+.custom-search .form-group {
+    display: flex;
+    flex: 1 1 250px; /* ensures consistent width */
+    align-items: center;
+    gap: 10px;
+}

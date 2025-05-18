@@ -1,0 +1,84 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #1B263B;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+h2 {
+    text-align: center;
+    color: #8B0000;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background-color: #4FC3F7;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-delete {
+    background-color: #FF5C5C;
+}
+
+.btn:hover {
+    background-color: #56bce5;
+}
+
+.btn-delete:hover {
+    background-color: #e14a4a;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.styled-table thead tr {
+    background-color: #8B0000;
+    color: white;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #8B0000;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #e1f5fe;
+}
+
+a {
+    color: #1B263B;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

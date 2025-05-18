@@ -1,0 +1,158 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f0f0;
+    color: #4a0d0d;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #4a0d0d;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #4a0d0d;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+    background-color: #fdecea;
+    border: 1px solid #884a48;
+    border-radius: 8px;
+}
+
+ul li {
+    padding: 10px;
+    border-bottom: 1px solid #884a48;
+    text-align: center;
+    color: #4a0d0d;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+/* Forms */
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #884a48;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #4a0d0d;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3c0a0a;
+}
+
+/* Display Areas */
+#expense-category-list,
+#budget-category-list {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #884a48;
+    border-radius: 8px;
+    background-color: #fff5f5;
+    text-align: center;
+}
+
+/* Category Item Styling */
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #fff5f5;
+    border-radius: 4px;
+    border: 1px solid #d6a9a9;
+}
+
+.category-name {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.edit-btn, .delete-btn {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    background-color: #4a0d0d;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #c92a2a;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #3c0a0a;
+}
+
+.delete-btn:hover {
+    background-color: #a62626;
+}
+
+/* Error Message Styling */
+.error-msg {
+    color: red;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Save Button Styling */
+.save-btn {
+    background-color: #2a9d8f;
+    color: white;
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.save-btn:hover {
+    background-color: #21867a;
+}
+
+.category-name[contenteditable="true"] {
+    border: 1px dashed #4a0d0d;
+    padding: 2px;
+}
