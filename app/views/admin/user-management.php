@@ -2,7 +2,7 @@
 
 require_once('../../controllers/adminAuth.php');
 
-include '../../../config/db.php';
+include '../../models/db.php';
 
 $searchEmail = '';
 $selectedUser = null;

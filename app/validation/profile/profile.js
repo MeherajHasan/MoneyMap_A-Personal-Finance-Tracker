@@ -96,10 +96,6 @@ passwordEditBtn.addEventListener('click', () => {
     window.location.href = 'edit-pass.php';
 });
 
-linkedAccEditBtn.addEventListener('click', () => {
-    alert("This feature is under development process.");
-});
-
 deleteBtn.addEventListener('click', () => {
     if (confirm("Are you sure you want to delete your account?")) {
         window.location.href = 'delete-acc.php';

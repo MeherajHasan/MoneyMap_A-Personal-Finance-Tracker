@@ -1,6 +1,25 @@
 <?php
 require_once('../../controllers/userAuth.php');
 
+$errorMSG = '';
+$successMSG = '';
+
+// Hardcoded 
+$currentEmail = 'user@example.com';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $newEmail = trim($_POST['email'] ?? '');
+
+    if (empty($newEmail)) {
+        $errorMSG = "Email is required.";
+    } elseif (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+        $errorMSG = "Invalid email format.";
+    } else {
+        // db
+        $successMSG = "Email updated successfully.";
+        $currentEmail = $newEmail;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,19 +40,19 @@ require_once('../../controllers/userAuth.php');
 
     <main>
         <h1>Edit Email</h1>
-        <form id="edit-mail" action="" method="post" onsubmit="return false;">
-            <p><strong>Current Email: </strong> <span id="current-email"></span></p>
+        <form id="edit-mail" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <p><strong>Current Email: </strong> <span id="current-email"><?php echo htmlspecialchars($currentEmail); ?></span></p>
 
             <label for="email"><strong>New Email: </strong></label>
-            <input type="email" id="email" name="email" class="email">
+            <input type="email" id="email" name="email" class="email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
 
-            <p id="errorMSG"></p>
+            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
+            <p id="successMSG" style="color:green;"><?php echo $successMSG; ?></p>
 
             <div class="btn-container">
-                <button type="button" class="btn" id="save-btn">Save</button>
+                <button type="submit" class="btn" id="save-btn">Save</button>
                 <button type="button" class="btn" id="cancel-btn">Cancel</button>
             </div>
-
         </form>
     </main>
 

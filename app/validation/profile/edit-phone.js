@@ -1,56 +1,45 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const saveButton = document.getElementById('save-btn');
-    const cancelButton = document.getElementById('cancel-btn');
-    const phoneField = document.getElementById('phone');
-    const errorMessage = document.getElementById('errorMSG');
-    const currentPhone = document.getElementById('current-phone');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('edit-phone');
+    const phoneInput = document.getElementById('phone');
+    const errorMSG = document.getElementById('errorMSG');
+    const successMSG = document.getElementById('successMSG');
+    const saveBtn = document.getElementById('save-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
 
-    const demoPhone = "1234567890";
-
-    const loadCurrentPhone = () => {
-        const storedPhone = localStorage.getItem('phone'); 
-        if (storedPhone) {
-            currentPhone.textContent = storedPhone;
-        } else {
-            currentPhone.textContent = demoPhone;
-        }
-    };
-
-    loadCurrentPhone();
-
-    saveButton.addEventListener('click', function() {
-        const newPhone = phoneField.value.trim();
-
-        if (newPhone === "") {
-            errorMessage.textContent = "Phone number cannot be empty!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else {
-            let isValid = true;
-            for (let i = 0; i < newPhone.length; i++) {
-                const char = newPhone[i];
-                if (char < '0' || char > '9') {
-                    isValid = false;
-                    break;
-                }
-            }
-
-            if (!isValid) {
-                errorMessage.textContent = "Phone number must contain only digits!";
-                errorMessage.style.color = "#e74c3c";
-                errorMessage.style.fontWeight = "bold";
-            } else if (newPhone.length < 6) {
-                errorMessage.textContent = "Phone number must be at least 6 characters long!";
-                errorMessage.style.color = "#e74c3c";
-                errorMessage.style.fontWeight = "bold";
-            } else {
-                localStorage.setItem('phone', newPhone);
-                window.location.href = "../../views/profile/profile.php";
+    function isDigitsOnly(str) {
+        for (let i = 0; i < str.length; i++) {
+            const ch = str[i];
+            if (ch < '0' || ch > '9') {
+                return false;
             }
         }
+        return true;
+    }
+
+    saveBtn.addEventListener('click', function () {
+        errorMSG.textContent = '';
+        successMSG.textContent = '';
+
+        const phone = phoneInput.value.trim();
+
+        if (phone === '') {
+            errorMSG.textContent = 'New phone number is required.';
+            return;
+        }
+        if (!isDigitsOnly(phone)) {
+            errorMSG.textContent = 'Phone number can contain digits only.';
+            return;
+        }
+        if (phone.length < 6) {
+            errorMSG.textContent = 'Phone number must be at least 6 digits.';
+            return;
+        }
+        form.submit();
     });
 
-    cancelButton.addEventListener('click', function() {
-        window.location.href = "../../views/dashboard/dashboard.php";
+    cancelBtn.addEventListener('click', function () {
+        phoneInput.value = '';
+        errorMSG.textContent = '';
+        successMSG.textContent = '';
     });
 });

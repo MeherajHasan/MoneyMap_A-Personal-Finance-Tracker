@@ -1,58 +1,43 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const saveButton = document.getElementById('save-btn');
-    const cancelButton = document.getElementById('cancel-btn');
-    const nameField = document.getElementById('name');
-    const errorMessage = document.getElementById('errorMSG');
-    const currentName = document.getElementById('current-name');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('edit-name');
+  const nameInput = document.getElementById('name');
+  const errorMSG = document.getElementById('errorMSG');
+  const saveBtn = document.getElementById('save-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
 
-    const demoName = "John Doe";
+  function isValidBillName(name) {
+    for (let i = 0; i < name.length; i++) {
+      const char = name[i];
+      if (!(
+        (char >= 'a' && char <= 'z') ||
+        (char >= 'A' && char <= 'Z') ||
+        (char >= '0' && char <= '9') ||
+        char === ' ' || char === '.' || char === ',' || char === '-'
+      )) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-    const loadCurrentName = () => {
-        const storedName = localStorage.getItem('name');
-        if (storedName) {
-            currentName.textContent = storedName;
-        } else {
-            currentName.textContent = demoName;
-        }
-    };
+  saveBtn.addEventListener('click', () => {
+    const nameVal = nameInput.value.trim();
 
-    loadCurrentName();
+    if (nameVal === '') {
+      errorMSG.textContent = 'Name cannot be empty.';
+      return;
+    }
 
-    saveButton.addEventListener('click', function() {
-        const nameValue = nameField.value.trim();
-        if (nameValue === "") {
-            errorMessage.textContent = "Name cannot be empty!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else {
-            const parts = nameValue.split(" ");
-            if (parts.length < 2) {
-                errorMessage.textContent = "Name must have two parts!";
-                errorMessage.style.color = "#e74c3c";
-                errorMessage.style.fontWeight = "bold";
-            } else {
-                let isValid = true;
-                for (let i = 0; i < nameValue.length; i++) {
-                    const char = nameValue.charAt(i);
-                    if (!( (char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z') || char === ' ' || char === '.' || char === '-' )) {
-                        isValid = false;
-                        break;
-                    }
-                }
+    if (!isValidBillName(nameVal)) {
+      errorMSG.textContent = 'Name contains invalid characters.';
+      return;
+    }
 
-                if (isValid) {
-                    localStorage.setItem('name', nameValue);
-                    window.location.href = "../../views/profile/profile.php";
-                } else {
-                    errorMessage.textContent = "Invalid character in name!";
-                    errorMessage.style.color = "#red";
-                    errorMessage.style.fontWeight = "bold";
-                }
-            }
-        }
-    });
+    errorMSG.textContent = '';
+    form.submit();
+  });
 
-    cancelButton.addEventListener('click', function() {
-        window.location.href = "../../views/dashboard/dashboard.php";
-    });
+  cancelBtn.addEventListener('click', () => {
+    window.history.back();
+  });
 });

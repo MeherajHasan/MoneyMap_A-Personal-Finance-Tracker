@@ -1,46 +1,86 @@
 <?php
 require_once('../../controllers/userAuth.php');
 
+$errorMSG = '';
+$successMSG = '';
+
+// Hardcoded
+$currentName = 'John Doe';
+
+function isValidBillName($name) {
+    for ($i = 0; $i < strlen($name); $i++) {
+        $char = $name[$i];
+        if (!(($char >= 'a' && $char <= 'z') ||
+              ($char >= 'A' && $char <= 'Z') ||
+              ($char >= '0' && $char <= '9') ||
+              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $newName = trim($_POST['name'] ?? '');
+
+    if ($newName === '') {
+        $errorMSG = "Name cannot be empty.";
+    } elseif (!isValidBillName($newName)) {
+        $errorMSG = "Name contains invalid characters.";
+    } else {
+        // db
+
+        $successMSG = "Name updated successfully.";
+        $currentName = $newName;
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Edit Name</title>
-    <link rel="stylesheet" href="../../styles/profile/edit-name.css">
-    <link rel="icon" href="../../../public/assets/logo.png">
+    <link rel="stylesheet" href="../../styles/profile/edit-name.css" />
+    <link rel="icon" href="../../../public/assets/logo.png" />
 </head>
 
 <body>
     <header>
-        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo" />
     </header>
 
     <main>
         <h1>Edit Name</h1>
-        <form id="edit-name" action="" method="post" onsubmit="return false;">
-            <p><strong>Current Name: </strong> <span id="current-name"></span></p>
+        <form id="edit-name" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <p><strong>Current Name: </strong> <span id="current-name"><?php echo htmlspecialchars($currentName); ?></span></p>
 
             <label for="name"><strong>New Name: </strong></label>
-            <input type="text" id="name" name="name" class="name">
+            <input
+                type="text"
+                id="name"
+                name="name"
+                class="name"
+                value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>"
+            />
 
-            <p id="errorMSG"></p>
+            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
+            <?php if ($successMSG): ?>
+                <p style="color:green;"><?php echo $successMSG; ?></p>
+            <?php endif; ?>
 
             <div class="btn-container">
-                <button type="button" class="btn" id="save-btn">Save</button>
+                <button type="submit" class="btn" id="save-btn">Save</button>
                 <button type="button" class="btn" id="cancel-btn">Cancel</button>
             </div>
-
         </form>
     </main>
 
     <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/profile/edit-name.js"></script>
-
 </body>
 
 </html>

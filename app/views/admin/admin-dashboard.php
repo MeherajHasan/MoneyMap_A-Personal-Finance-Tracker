@@ -1,7 +1,7 @@
 <?php
 require_once('../../controllers/adminAuth.php');
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>

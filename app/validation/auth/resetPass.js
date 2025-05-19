@@ -1,48 +1,38 @@
-const form = document.getElementById("resetPassForm");
-const newPassInput = document.getElementById("newPass");
-const confirmPassInput = document.getElementById("confirmPass");
-const passErrorMSG1 = document.getElementById("passErrorMSG1");
-const passErrorMSG2 = document.getElementById("passErrorMSG2");
-const submitBtn = document.getElementById("resetPassBtn");
+document.getElementById('resetPassForm').addEventListener('submit', function (e) {
+    const newPassInput = document.getElementById('newPass');
+    const confirmPassInput = document.getElementById('confirmPass');
+    const error1 = document.getElementById('passErrorMSG1');
+    const error2 = document.getElementById('passErrorMSG2');
 
-submitBtn.disabled = true;
+    let valid = true;
 
-function validate() {
+    error1.textContent = '';
+    error2.textContent = '';
+
     const newPass = newPassInput.value.trim();
     const confirmPass = confirmPassInput.value.trim();
 
-    let isValid = true;
-
-    passErrorMSG1.innerHTML = "";
-    passErrorMSG2.innerHTML = "";
-
-    if (!newPass) {
-        passErrorMSG1.innerHTML = "Please enter a new password.";
-        isValid = false;
+    if (newPass.length === 0) {
+        error1.textContent = 'New password is required.';
+        valid = false;
+        newPassInput.focus();
     } else if (newPass.length < 8) {
-        passErrorMSG1.innerHTML = "Password must be at least 8 characters long.";
-        isValid = false;
+        error1.textContent = 'Password must be at least 8 characters.';
+        valid = false;
+        newPassInput.focus();
     }
 
-    if (!confirmPass) {
-        passErrorMSG2.innerHTML = "Please confirm your new password.";
-        isValid = false;
-    } else if (confirmPass !== newPass) {
-        passErrorMSG2.innerHTML = "Passwords do not match.";
-        isValid = false;
+    if (confirmPass.length === 0) {
+        error2.textContent = 'Confirm password is required.';
+        valid = false;
+        if (valid) confirmPassInput.focus(); // focus only if not already focused
+    } else if (newPass !== confirmPass) {
+        error2.textContent = 'Passwords do not match.';
+        valid = false;
+        if (valid) confirmPassInput.focus();
     }
 
-    submitBtn.disabled = !isValid;
-    return isValid;
-}
-
-newPassInput.addEventListener("input", validate);
-confirmPassInput.addEventListener("input", validate);
-
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    if (validate()) {
-        window.location.href = '../../views/auth/login.php';
+    if (!valid) {
+        e.preventDefault();
     }
 });

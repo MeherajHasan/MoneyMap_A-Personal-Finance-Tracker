@@ -1,46 +1,41 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const saveButton = document.getElementById('save-btn');
-    const cancelButton = document.getElementById('cancel-btn');
-    const currentPasswordField = document.getElementById('current-password');
-    const newPasswordField = document.getElementById('new-password');
-    const confirmPasswordField = document.getElementById('confirm-password');
-    const errorMessage = document.getElementById('errorMSG');
+window.addEventListener('load', () => {
+  const form = document.getElementById('edit-password');
+  const currentPasswordInput = document.getElementById('current-password');
+  const newPasswordInput = document.getElementById('new-password');
+  const confirmPasswordInput = document.getElementById('confirm-password');
+  const errorMSG = document.getElementById('errorMSG');
 
-    const demoPassword = "11111111";  // Default password if no stored password is available
-    const storedPassword = localStorage.getItem('password') || demoPassword; 
+  form.addEventListener('submit', (e) => {
+    errorMSG.textContent = '';
 
-    saveButton.addEventListener('click', function() {
-        const currentPassword = currentPasswordField.value.trim();
-        const newPassword = newPasswordField.value.trim();
-        const confirmPassword = confirmPasswordField.value.trim();
+    const currentPassword = currentPasswordInput.value.trim();
+    const newPassword = newPasswordInput.value.trim();
+    const confirmPassword = confirmPasswordInput.value.trim();
 
-        if (currentPassword === "" || newPassword === "" || confirmPassword === "") {
-            errorMessage.textContent = "All fields are required!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else if (currentPassword !== storedPassword && currentPassword !== demoPassword) {
-            errorMessage.textContent = "Current password is incorrect!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else if (newPassword === currentPassword) {
-            errorMessage.textContent = "New password cannot be the same as the current password!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else if (newPassword !== confirmPassword) {
-            errorMessage.textContent = "New passwords do not match!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else if (newPassword.length < 8 || confirmPassword.length < 8) {
-            errorMessage.textContent = "Password must be at least 8 characters long!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else {
-            localStorage.setItem('password', newPassword); 
-            window.location.href = "../../views/profile/profile.php";
-        }
-    });
+    if (currentPassword === '' || newPassword === '' || confirmPassword === '') {
+      errorMSG.textContent = 'All fields are required.';
+      e.preventDefault();
+      return false;
+    }
 
-    cancelButton.addEventListener('click', function() {
-        window.location.href = "../../views/dashboard/dashboard.php";
-    });
+    if (newPassword.length < 8) {
+      errorMSG.textContent = 'New password must be at least 8 characters long.';
+      e.preventDefault();
+      return false;
+    }
+
+    if (newPassword !== confirmPassword) {
+      errorMSG.textContent = 'New password and confirm password do not match.';
+      e.preventDefault();
+      return false;
+    }
+
+    // If no errors, allow form submission
+    return true;
+  });
+
+  // Cancel button can just go back
+  document.getElementById('cancel-btn').addEventListener('click', () => {
+    window.history.back();
+  });
 });

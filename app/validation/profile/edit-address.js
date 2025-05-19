@@ -1,39 +1,33 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const saveButton = document.getElementById('save-btn');
-    const cancelButton = document.getElementById('cancel-btn');
+document.getElementById('save-btn').addEventListener('click', function () {
     const addressField = document.getElementById('address');
-    const errorMessage = document.getElementById('errorMSG');
-    const currentAddress = document.getElementById('current-address');
+    const errorMSG = document.getElementById('errorMSG');
+    const form = document.getElementById('edit-address');
+    const address = addressField.value.trim();
 
-    const demoAddress = "1234, MoneyMap Street, City, Country";
+    errorMSG.textContent = '';
 
-    const loadCurrentAddress = () => {
-        const storedAddress = localStorage.getItem('address'); 
-        if (storedAddress) {
-            currentAddress.textContent = storedAddress;
-        } else {
-            currentAddress.textContent = demoAddress;
+    if (address === '') {
+        errorMSG.textContent = "Address cannot be empty.";
+        return;
+    }
+
+    for (let i = 0; i < address.length; i++) {
+        const ch = address[i];
+        if (!(
+            (ch >= 'a' && ch <= 'z') ||
+            (ch >= 'A' && ch <= 'Z') ||
+            (ch >= '0' && ch <= '9') ||
+            ch === ' ' || ch === ',' || ch === '.' || ch === '-' || ch === '/' ||
+            ch === '(' || ch === ')' || ch === '#'
+        )) {
+            errorMSG.textContent = "Address contains invalid characters.";
+            return;
         }
-    };
+    }
 
-    loadCurrentAddress();
+    form.submit();
+});
 
-    saveButton.addEventListener('click', function() {
-        if (addressField.value.trim() === "") {
-            errorMessage.textContent = "Address cannot be empty!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else {
-            localStorage.setItem('address', addressField.value.trim());
-
-            const confirmation = window.confirm("Address updated successfully! Do you want to go back to the profile?");
-            if (confirmation) {
-                window.location.href = "../../views/profile/profile.php";
-            }
-        }
-    });
-
-    cancelButton.addEventListener('click', function() {
-        window.location.href = "../../views/dashboard/dashboard.php";
-    });
+document.getElementById('cancel-btn').addEventListener('click', function () {
+    window.location.href = 'profile.php';
 });

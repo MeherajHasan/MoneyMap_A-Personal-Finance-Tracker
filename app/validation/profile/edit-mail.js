@@ -1,55 +1,31 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const saveButton = document.getElementById('save-btn');
-    const cancelButton = document.getElementById('cancel-btn');
-    const emailField = document.getElementById('email');
-    const errorMessage = document.getElementById('errorMSG');
-    const currentEmail = document.getElementById('current-email');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('edit-mail');
+  const emailInput = document.getElementById('email');
+  const errorMSG = document.getElementById('errorMSG');
+  const saveBtn = document.getElementById('save-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
 
-    const demoEmail = "demo@moneyMap.com";
+  saveBtn.addEventListener('click', () => {
+    const email = emailInput.value.trim();
+    errorMSG.textContent = '';
 
-    const loadCurrentEmail = () => {
-        const storedEmail = localStorage.getItem('email'); 
-        if (storedEmail) {
-            currentEmail.textContent = storedEmail;
-        } else {
-            currentEmail.textContent = demoEmail;
-        }
-    };
+    if (email === '') {
+      errorMSG.textContent = 'Email is required.';
+      return;
+    }
 
-    loadCurrentEmail();
+    const atPos = email.indexOf('@');
+    const dotPos = email.lastIndexOf('.');
 
-    const isValidEmail = (email) => {
-        const parts = email.split('@');
-        if (parts.length !== 2) return false;
+    if (atPos === -1 || dotPos === -1 || atPos > dotPos) {
+      errorMSG.textContent = 'Invalid email format.';
+      return;
+    }
 
-        const domainParts = parts[1].split('.');
-        if (domainParts.length < 2) return false;
+    form.submit();
+  });
 
-        return true;
-    };
-
-    saveButton.addEventListener('click', function() {
-        const email = emailField.value.trim();
-        
-        if (email === "") {
-            errorMessage.textContent = "Email cannot be empty!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else if (!isValidEmail(email)) {
-            errorMessage.textContent = "Invalid email format!";
-            errorMessage.style.color = "#e74c3c";
-            errorMessage.style.fontWeight = "bold";
-        } else {
-            localStorage.setItem('email', email);
-
-            const confirmation = window.confirm("Email updated successfully! Do you want to go back to the profile?");
-            if (confirmation) {
-                window.location.href = "../../views/profile/profile.php";
-            }
-        }
-    });
-
-    cancelButton.addEventListener('click', function() {
-        window.location.href = "../../views/dashboard/dashboard.php";
-    });
+  cancelBtn.addEventListener('click', () => {
+    window.location.href = 'profile.php';
+  });
 });

@@ -1,39 +1,73 @@
 <?php
 require_once('../../controllers/userAuth.php');
 
-?>
+// hardcoded
+$currentAddress = "123 Main St, City, Country";
 
+$errorMSG = "";
+$successMSG = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $newAddress = trim($_POST['address'] ?? '');
+
+    if (empty($newAddress)) {
+        $errorMSG = "Address cannot be empty.";
+    } else {
+        $valid = true;
+        for ($i = 0; $i < strlen($newAddress); $i++) {
+            $ch = $newAddress[$i];
+            if (!(($ch >= 'a' && $ch <= 'z') || ($ch >= 'A' && $ch <= 'Z') || ($ch >= '0' && $ch <= '9') ||
+                $ch === ' ' || $ch === ',' || $ch === '.' || $ch === '-' || $ch === '/' ||
+                $ch === '(' || $ch === ')' || $ch === '#')) {
+                $valid = false;
+                break;
+            }
+        }
+
+        if (!$valid) {
+            $errorMSG = "Address contains invalid characters.";
+        } else {
+            // db
+
+            header("Location: profile.php");
+            exit;
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Edit Address</title>
-    <link rel="stylesheet" href="../../styles/profile/edit-address.css">
-    <link rel="icon" href="../../../public/assets/logo.png">
+    <link rel="stylesheet" href="../../styles/profile/edit-address.css" />
+    <link rel="icon" href="../../../public/assets/logo.png" />
 </head>
 
 <body>
     <header>
-        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
+        <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo" />
     </header>
 
     <main>
         <h1>Edit Address</h1>
-        <form id="edit-address" action="" method="post" onsubmit="return false;">
-            <p><strong>Current Address: </strong> <span id="current-address"></span></p>
+        <form id="edit-address" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <p><strong>Current Address: </strong> <span id="current-address"><?php echo htmlspecialchars($currentAddress); ?></span></p>
 
             <label for="address"><strong>New Address: </strong></label>
-            <textarea id="address" name="address" class="address" rows="4"></textarea>
+            <textarea id="address" name="address" class="address" rows="4"><?php echo htmlspecialchars($_POST['address'] ?? ''); ?></textarea>
 
-            <p id="errorMSG"></p>
+            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
+            <?php if ($successMSG): ?>
+                <p style="color:green;"><?php echo $successMSG; ?></p>
+            <?php endif; ?>
 
             <div class="btn-container">
-                <button type="button" class="btn" id="save-btn">Save</button>
+                <button type="submit" class="btn" id="save-btn">Save</button>
                 <button type="button" class="btn" id="cancel-btn">Cancel</button>
             </div>
-
         </form>
     </main>
 

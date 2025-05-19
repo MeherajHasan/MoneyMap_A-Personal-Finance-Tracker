@@ -47,9 +47,6 @@ require_once('../../controllers/userAuth.php');
 
                 <p><strong>Password:</strong> ********</p>
                 <button class="edit" id="password-edit">Change Password</button>
-
-                <p><strong>Linked Accounts:</strong> <span id="linked-acc"></span></p>
-                <button class="edit" id="linked-acc-edit">Manage</button>
             </div>
         </div>
         </div>
