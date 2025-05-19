@@ -1,5 +1,55 @@
 <?php
 require_once('../../controllers/userAuth.php');
+
+$billName = $amount = $dueDate = $status = '';
+$errors = ['bill_name' => '', 'amount' => '', 'due_date' => '', 'status' => ''];
+
+function isValidBillName($name) {
+    for ($i = 0; $i < strlen($name); $i++) {
+        $char = $name[$i];
+        if (!(($char >= 'a' && $char <= 'z') ||
+              ($char >= 'A' && $char <= 'Z') ||
+              ($char >= '0' && $char <= '9') ||
+              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $billName = trim($_POST['bill_name']);
+    $amount = trim($_POST['amount']);
+    $dueDate = trim($_POST['due_date']);
+    $status = trim($_POST['status']);
+
+    if ($billName === '') {
+        $errors['bill_name'] = 'Bill name is required.';
+    } elseif (!isValidBillName($billName)) {
+        $errors['bill_name'] = 'Bill name contains invalid characters.';
+    }
+
+    if ($amount === '') {
+        $errors['amount'] = 'Amount is required.';
+    } elseif (!is_numeric($amount) || $amount <= 0) {
+        $errors['amount'] = 'Amount must be a positive number.';
+    }
+
+    if ($dueDate === '') {
+        $errors['due_date'] = 'Due date is required.';
+    }
+
+    if ($status === '') {
+        $errors['status'] = 'Status is required.';
+    }
+
+    // insert into DB here if no errors
+    if (!array_filter($errors)) {
+        // saveBillToDB($billName, $amount, $dueDate, $status);
+        header("Location: bill-dashboard.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,26 +67,26 @@ require_once('../../controllers/userAuth.php');
     <main class="add-bill-container">
         <h1>Add New Bill</h1>
 
-        <form id="add-bill-form" action="" method="POST" class="bill-form">
+        <form id="add-bill-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" class="bill-form">
             <label for="bill-name"><strong>Bill Name:</strong></label>
-            <input type="text" id="bill-name" name="bill_name" />
-            <div class="error" id="error-name"></div>
+            <input type="text" id="bill-name" name="bill_name" value="<?= htmlspecialchars($billName) ?>" />
+            <div class="error"><?= $errors['bill_name'] ?></div>
 
             <label for="amount"><strong>Amount ($):</strong></label>
-            <input type="number" id="amount" name="amount" step="0.01" />
-            <div class="error" id="error-amount"></div>
+            <input type="number" id="amount" name="amount" step="0.01" value="<?= htmlspecialchars($amount) ?>" />
+            <div class="error"><?= $errors['amount'] ?></div>
 
             <label for="due-date"><strong>Due Date:</strong></label>
-            <input type="date" id="due-date" name="due_date" />
-            <div class="error" id="error-date"></div>
+            <input type="date" id="due-date" name="due_date" value="<?= htmlspecialchars($dueDate) ?>" />
+            <div class="error"><?= $errors['due_date'] ?></div>
 
             <label for="status"><strong>Status:</strong></label>
             <select id="status" name="status">
                 <option value="">-- Select Status --</option>
-                <option value="Paid">Paid</option>
-                <option value="Due">Due</option>
+                <option value="Paid" <?= $status === 'Paid' ? 'selected' : '' ?>>Paid</option>
+                <option value="Due" <?= $status === 'Due' ? 'selected' : '' ?>>Due</option>
             </select>
-            <div class="error" id="error-status"></div>
+            <div class="error"><?= $errors['status'] ?></div>
 
             <div class="form-buttons">
                 <button type="submit" class="btn btn-primary">Add Bill</button>

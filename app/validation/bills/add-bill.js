@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const dueDate = document.getElementById('due-date');
     const status = document.getElementById('status');
 
-    const errorName = document.getElementById('error-name');
-    const errorAmount = document.getElementById('error-amount');
-    const errorDate = document.getElementById('error-date');
-    const errorStatus = document.getElementById('error-status');
+    const errorName = billName.nextElementSibling;
+    const errorAmount = amount.nextElementSibling;
+    const errorDate = dueDate.nextElementSibling;
+    const errorStatus = status.nextElementSibling;
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -22,38 +22,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let isValid = true;
 
-        // Check all fields filled
-        if (billName.value.trim() === '' || amount.value.trim() === '' || dueDate.value === '' || status.value === '') {
-            errorStatus.textContent = 'All fields are required.';
+        // Required fields
+        if (billName.value.trim() === '') {
+            errorName.textContent = 'Bill name is required.';
+            isValid = false;
+        }
+        if (amount.value.trim() === '') {
+            errorAmount.textContent = 'Amount is required.';
+            isValid = false;
+        }
+        if (dueDate.value === '') {
+            errorDate.textContent = 'Due date is required.';
+            isValid = false;
+        }
+        if (status.value === '') {
+            errorStatus.textContent = 'Status is required.';
             isValid = false;
         }
 
-        // Bill name validation (only letters, digits, space, dash, underscore)
         const name = billName.value.trim();
         for (let i = 0; i < name.length; i++) {
             const c = name[i];
-            const code = c.charCodeAt(0);
-            const isLetter = (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
-            const isDigit = (code >= 48 && code <= 57);
-            const isOtherValid = c === ' ' || c === '-' || c === '_';
-
-            if (!isLetter && !isDigit && !isOtherValid) {
+            if (
+                !(c >= 'a' && c <= 'z') &&
+                !(c >= 'A' && c <= 'Z') &&
+                !(c >= '0' && c <= '9') &&
+                c !== ' ' && c !== '.' && c !== ',' && c !== '-'
+            ) {
                 errorName.textContent = 'Bill name contains invalid characters.';
                 isValid = false;
                 break;
             }
-        }
+    }
 
-        // Amount must be a number
+        // Amount validation
         const amountVal = amount.value.trim();
-        if (amountVal !== '' && isNaN(amountVal)) {
-            errorAmount.textContent = 'Amount must be a number.';
+        if (amountVal !== '' && (isNaN(amountVal) || Number(amountVal) <= 0)) {
+            errorAmount.textContent = 'Amount must be a positive number.';
             isValid = false;
         }
 
-        if (!isValid) return;
-
-        // Redirect after successful validation
-        window.location.href = 'bill-dashboard.php';
+        if (isValid) {
+            form.submit(); 
+        }
     });
 });

@@ -15,11 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let due = 0;
 
     bills.forEach(bill => {
-        // Count paid/due
         if (bill.status === 'Paid') paid++;
         else due++;
 
-        // Create row
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${bill.name}</td>
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         billTableBody.appendChild(row);
     });
 
-    // Update summary counters
     paidCount.textContent = paid;
     dueCount.textContent = due;
 });
