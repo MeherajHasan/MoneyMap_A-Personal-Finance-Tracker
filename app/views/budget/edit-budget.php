@@ -1,5 +1,67 @@
 <?php
     require_once('../../controllers/userAuth.php');
+
+    $category = $amount = $spent = $startDate = $endDate = $notes = "";
+    $categoryError = $amountError = $spentError = $startDateError = $endDateError = $emptyError = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $isValid = true;
+
+        if (empty($_POST["budgetCategory"])) {
+            $categoryError = "Please select a new category.";
+            $isValid = false;
+        } else {
+            $category = $_POST["budgetCategory"];
+        }
+
+        if (empty($_POST["budgetAmount"])) {
+            $amountError = "Please enter a new amount.";
+            $isValid = false;
+        } else {
+            $amount = $_POST["budgetAmount"];
+            if ($amount < 0) {
+                $amountError = "Amount cannot be negative.";
+                $isValid = false;
+            }
+        }
+
+        if (empty($_POST["budgetSpent"])) {
+            $spentError = "Please enter the spent amount.";
+            $isValid = false;
+        } else {
+            $spent = $_POST["budgetSpent"];
+            if ($spent < 0) {
+                $spentError = "Spent amount cannot be negative.";
+                $isValid = false;
+            }
+        }
+
+        if (empty($_POST["budgetStartDate"])) {
+            $startDateError = "Start date is required.";
+            $isValid = false;
+        } else {
+            $startDate = $_POST["budgetStartDate"];
+        }
+
+        if (empty($_POST["budgetEndDate"])) {
+            $endDateError = "End date is required.";
+            $isValid = false;
+        } else {
+            $endDate = $_POST["budgetEndDate"];
+        }
+
+        if (!empty($_POST["budgetNotes"])) {
+            $notes = trim($_POST["budgetNotes"]);
+        }
+
+        if (!$isValid) {
+            $emptyError = "Please correct the errors above.";
+        } else {
+            // db
+            header("Location: budget-dashboard.php");
+            exit();
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -31,15 +93,15 @@
                     <label for="budgetCategory">New Category</label>
                     <select id="budgetCategory" name="budgetCategory">
                         <option value="">Select</option>
-                        <option value="Groceries">Groceries</option>
-                        <option value="Utilities">Utilities</option>
-                        <option value="Transportation">Transportation</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Healthcare">Healthcare</option>
-                        <option value="Education">Education</option>
-                        <option value="Emergency Fund">Emergency Fund</option>
+                        <option value="Groceries" <?= $category === 'Groceries' ? 'selected' : '' ?>>Groceries</option>
+                        <option value="Utilities" <?= $category === 'Utilities' ? 'selected' : '' ?>>Utilities</option>
+                        <option value="Transportation" <?= $category === 'Transportation' ? 'selected' : '' ?>>Transportation</option>
+                        <option value="Entertainment" <?= $category === 'Entertainment' ? 'selected' : '' ?>>Entertainment</option>
+                        <option value="Healthcare" <?= $category === 'Healthcare' ? 'selected' : '' ?>>Healthcare</option>
+                        <option value="Education" <?= $category === 'Education' ? 'selected' : '' ?>>Education</option>
+                        <option value="Emergency Fund" <?= $category === 'Emergency Fund' ? 'selected' : '' ?>>Emergency Fund</option>
                     </select>
-                    <p id="categoryError" class="error-message"></p>
+                    <p id="categoryError" class="error-message"><?= $categoryError ?></p>
                 </div>
             </div>
 
@@ -50,8 +112,8 @@
                 </div>
                 <div class="form-column">
                     <label for="budgetAmount">New Amount</label>
-                    <input type="number" id="budgetAmount" name="budgetAmount" placeholder="Amount in $" />
-                    <p id="amountError" class="error-message"></p>
+                    <input type="number" id="budgetAmount" name="budgetAmount" value="<?= htmlspecialchars($amount) ?>" placeholder="Amount in $" />
+                    <p id="amountError" class="error-message"><?= $amountError ?></p>
                 </div>
             </div>
 
@@ -62,8 +124,8 @@
                 </div>
                 <div class="form-column">
                     <label for="budgetSpent">New Spent Amount</label>
-                    <input type="number" id="budgetSpent" name="budgetSpent" placeholder="Spent amount in $" />
-                    <p id="spentError" class="error-message"></p>
+                    <input type="number" id="budgetSpent" name="budgetSpent" value="<?= htmlspecialchars($spent) ?>" placeholder="Spent amount in $" />
+                    <p id="spentError" class="error-message"><?= $spentError ?></p>
                 </div>
             </div>
 
@@ -74,8 +136,8 @@
                 </div>
                 <div class="form-column">
                     <label for="budgetStartDate">New Start Date</label>
-                    <input type="date" id="budgetStartDate" name="budgetStartDate" />
-                    <p id="startDateError" class="error-message"></p>
+                    <input type="date" id="budgetStartDate" name="budgetStartDate" value="<?= htmlspecialchars($startDate) ?>" />
+                    <p id="startDateError" class="error-message"><?= $startDateError ?></p>
                 </div>
             </div>
 
@@ -86,8 +148,8 @@
                 </div>
                 <div class="form-column">
                     <label for="budgetEndDate">New End Date</label>
-                    <input type="date" id="budgetEndDate" name="budgetEndDate" />
-                    <p id="endDateError" class="error-message"></p>
+                    <input type="date" id="budgetEndDate" name="budgetEndDate" value="<?= htmlspecialchars($endDate) ?>" />
+                    <p id="endDateError" class="error-message"><?= $endDateError ?></p>
                 </div>
             </div>
 
@@ -98,12 +160,12 @@
                 </div>
                 <div class="form-column">
                     <label for="budgetNotes">New Notes</label>
-                    <textarea id="budgetNotes" name="budgetNotes" placeholder="Optional notes about this budget"></textarea>
+                    <textarea id="budgetNotes" name="budgetNotes" placeholder="Optional notes about this budget"><?= htmlspecialchars($notes) ?></textarea>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Budget</button>
-            <p id="emptyError" class="error-message"></p>
+            <p id="emptyError" class="error-message"><?= $emptyError ?></p>
 
             <div class="navigation-buttons">
                 <a href="budget-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>

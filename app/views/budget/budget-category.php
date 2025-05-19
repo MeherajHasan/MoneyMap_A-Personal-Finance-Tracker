@@ -1,5 +1,35 @@
 <?php
 require_once('../../controllers/userAuth.php');
+
+$newCategory = '';
+$emptyError = '';
+
+function isValidCategoryName($name) {
+    for ($i = 0; $i < strlen($name); $i++) {
+        $char = $name[$i];
+        if (!(($char >= 'a' && $char <= 'z') ||
+              ($char >= 'A' && $char <= 'Z') ||
+              ($char >= '0' && $char <= '9') ||
+              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $newCategory = trim($_POST['newCategory'] ?? '');
+
+    if ($newCategory === '') {
+        $emptyError = 'Category name is required.';
+    } elseif (!isValidCategoryName($newCategory)) {
+        $emptyError = 'Category name contains invalid characters.';
+    } else {
+        // db
+        header("Location: budget-category.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -86,11 +116,17 @@ require_once('../../controllers/userAuth.php');
             <h2>Add New Category</h2>
         </div>
 
-        <div class="add-category">
-            <input type="text" id="newCategory" placeholder="Enter new category name" />
-            <button id="addCategoryBtn" class="btn btn-primary">Add Category</button>
-        </div>
-        <p id="emptyError"></p>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="add-category">
+            <input 
+                type="text" 
+                id="newCategory" 
+                name="newCategory" 
+                placeholder="Enter new category name" 
+                value="<?php echo htmlspecialchars($newCategory); ?>" 
+            />
+            <button id="addCategoryBtn" class="btn btn-primary" type="button">Add Category</button>
+        </form>
+        <p id="emptyError"><?php echo htmlspecialchars($emptyError); ?></p>
 
         <div class="navigation-buttons">
             <a href="budget-dashboard.php" class="btn btn-secondary">Back to Budget Dashboard</a>

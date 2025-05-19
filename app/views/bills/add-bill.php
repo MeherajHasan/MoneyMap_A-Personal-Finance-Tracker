@@ -43,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors['status'] = 'Status is required.';
     }
 
-    // insert into DB here if no errors
     if (!array_filter($errors)) {
         // saveBillToDB($billName, $amount, $dueDate, $status);
         header("Location: bill-dashboard.php");

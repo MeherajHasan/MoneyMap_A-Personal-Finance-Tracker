@@ -22,22 +22,24 @@ function clearErrors() {
     emptyError.textContent = '';
 }
 
-function containsIllegalCharacters(input) {
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
-        const code = char.charCodeAt(0);
-        const isLetter = (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
-        const isDigit = code >= 48 && code <= 57;
-        const isAllowedSymbol = char === ' ' || char === ',' || char === '-';
-        if (!isLetter && !isDigit && !isAllowedSymbol) {
-            return true;
+function isValidCategoryNameManual(name) {
+    if (name.trim() === '') return { valid: false, message: 'Category name cannot be empty.' };
+
+    for (let i = 0; i < name.length; i++) {
+        const char = name[i];
+        if (!(
+            (char >= 'A' && char <= 'Z') ||
+            (char >= 'a' && char <= 'z') ||
+            char === ' '
+        )) {
+            return { valid: false, message: 'Only letters and spaces are allowed in the category name.' };
         }
     }
-    return false;
+
+    return { valid: true };
 }
 
 form.addEventListener('submit', function (e) {
-    e.preventDefault();
     clearErrors();
 
     let valid = true;
@@ -45,8 +47,9 @@ form.addEventListener('submit', function (e) {
     const categoryValue = budgetCategory.value.trim();
     const amountValue = parseFloat(budgetAmount.value);
     const spentValue = parseFloat(budgetSpent.value);
-    const startDate = budgetStartDate.value;
-    const endDate = budgetEndDate.value;
+    const startDate = budgetStartDate.value.trim();
+    const endDate = budgetEndDate.value.trim();
+    const notesValue = budgetNotes.value.trim();
 
     if (
         !categoryValue &&
@@ -54,39 +57,65 @@ form.addEventListener('submit', function (e) {
         !budgetSpent.value.trim() &&
         !startDate &&
         !endDate &&
-        !budgetNotes.value.trim()
+        !notesValue
     ) {
+        e.preventDefault();
         emptyError.textContent = 'At least one field has to be changed';
+        return;
+    }
+
+    if (categoryValue) {
+        const result = isValidCategoryNameManual(categoryValue);
+        if (!result.valid) {
+            e.preventDefault();
+            categoryError.textContent = result.message;
+            valid = false;
+        }
+    }
+
+    if (budgetAmount.value.trim()) {
+        if (isNaN(amountValue)) {
+            e.preventDefault();
+            amountError.textContent = 'Amount must be a number.';
+            valid = false;
+        } else if (amountValue < 0) {
+            e.preventDefault();
+            amountError.textContent = 'Amount cannot be negative.';
+            valid = false;
+        }
+    }
+
+    if (budgetSpent.value.trim()) {
+        if (isNaN(spentValue)) {
+            e.preventDefault();
+            spentError.textContent = 'Spent amount must be a number.';
+            valid = false;
+        } else if (spentValue < 0) {
+            e.preventDefault();
+            spentError.textContent = 'Spent amount cannot be negative.';
+            valid = false;
+        }
+    }
+
+    if (startDate && !endDate) {
+        e.preventDefault();
+        endDateError.textContent = 'End date is required if start date is given.';
         valid = false;
     }
 
-    if (categoryValue && containsIllegalCharacters(categoryValue)) {
-        categoryError.textContent = 'Category contains illegal characters.';
-        valid = false;
-    }
-
-    if (budgetAmount.value.trim() && isNaN(amountValue)) {
-        amountError.textContent = 'Amount must be a number.';
-        valid = false;
-    } else if (!isNaN(amountValue) && amountValue < 0) {
-        amountError.textContent = 'Amount cannot be negative.';
-        valid = false;
-    }
-
-    if (budgetSpent.value.trim() && isNaN(spentValue)) {
-        spentError.textContent = 'Spent amount must be a number.';
-        valid = false;
-    } else if (!isNaN(spentValue) && spentValue < 0) {
-        spentError.textContent = 'Spent amount cannot be negative.';
+    if (endDate && !startDate) {
+        e.preventDefault();
+        startDateError.textContent = 'Start date is required if end date is given.';
         valid = false;
     }
 
     if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+        e.preventDefault();
         endDateError.textContent = 'End date must be after start date.';
         valid = false;
     }
 
-    if (valid) {
-        window.location.href = 'budget-dashboard.html';
+    if (!valid) {
+        e.preventDefault();
     }
 });
