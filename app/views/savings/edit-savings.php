@@ -1,6 +1,67 @@
 <?php
 require_once('../../controllers/userAuth.php');
 
+$name = $amount = $targetDate = $currentAmount = $notes = "";
+$nameError = $amountError = $dateError = $currentAmountError = $emptyError = "";
+
+function isValidBillName($name) {
+    for ($i = 0; $i < strlen($name); $i++) {
+        $char = $name[$i];
+        if (!(($char >= 'a' && $char <= 'z') ||
+              ($char >= 'A' && $char <= 'Z') ||
+              ($char >= '0' && $char <= '9') ||
+              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = trim($_POST["savingsGoalName"]);
+    $amount = trim($_POST["savingsAmount"]);
+    $targetDate = $_POST["savingsTargetDate"];
+    $currentAmount = trim($_POST["savingsCurrentAmount"]);
+    $notes = trim($_POST["savingsNotes"]);
+
+    $isValid = true;
+
+    if ($name === "") {
+        $nameError = "Goal name is required.";
+        $isValid = false;
+    } elseif (!isValidBillName($name)) {
+        $nameError = "Only letters, digits, spaces, ., , and - are allowed.";
+        $isValid = false;
+    }
+
+    if ($amount === "") {
+        $amountError = "Amount is required.";
+        $isValid = false;
+    } elseif (!is_numeric($amount) || floatval($amount) <= 0) {
+        $amountError = "Enter a valid amount greater than 0.";
+        $isValid = false;
+    }
+
+    if ($targetDate === "") {
+        $dateError = "Target date is required.";
+        $isValid = false;
+    }
+
+    if ($currentAmount === "") {
+        $currentAmountError = "Current amount is required.";
+        $isValid = false;
+    } elseif (!is_numeric($currentAmount) || floatval($currentAmount) < 0) {
+        $currentAmountError = "Enter a valid non-negative amount.";
+        $isValid = false;
+    }
+
+    if (!$isValid) {
+        $emptyError = "Please fix the errors above.";
+    } else {
+        // Process the valid form data here (e.g., update DB)
+        // Redirect or show success message
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +91,8 @@ require_once('../../controllers/userAuth.php');
                 </div>
                 <div class="form-column">
                     <label for="savingsGoalName">New Goal Name</label>
-                    <input type="text" id="savingsGoalName" name="savingsGoalName" placeholder="e.g., Emergency Fund, Vacation" />
-                    <p id="nameError" class="error-message"></p>
+                    <input type="text" id="savingsGoalName" name="savingsGoalName" value="<?= htmlspecialchars($name) ?>" placeholder="e.g., Emergency Fund, Vacation" />
+                    <p id="nameError" class="error-message"><?= $nameError ?></p>
                 </div>
             </div>
 
@@ -42,8 +103,8 @@ require_once('../../controllers/userAuth.php');
                 </div>
                 <div class="form-column">
                     <label for="savingsAmount">New Amount</label>
-                    <input type="number" id="savingsAmount" name="savingsAmount" placeholder="Amount in $" />
-                    <p id="amountError" class="error-message"></p>
+                    <input type="number" id="savingsAmount" name="savingsAmount" value="<?= htmlspecialchars($amount) ?>" placeholder="Amount in $" />
+                    <p id="amountError" class="error-message"><?= $amountError ?></p>
                 </div>
             </div>
 
@@ -54,8 +115,8 @@ require_once('../../controllers/userAuth.php');
                 </div>
                 <div class="form-column">
                     <label for="savingsTargetDate">New Target Date</label>
-                    <input type="date" id="savingsTargetDate" name="savingsTargetDate" />
-                    <p id="dateError" class="error-message"></p>
+                    <input type="date" id="savingsTargetDate" name="savingsTargetDate" value="<?= htmlspecialchars($targetDate) ?>" />
+                    <p id="dateError" class="error-message"><?= $dateError ?></p>
                 </div>
             </div>
 
@@ -66,8 +127,8 @@ require_once('../../controllers/userAuth.php');
                 </div>
                 <div class="form-column">
                     <label for="savingsCurrentAmount">New Current Savings</label>
-                    <input type="number" id="savingsCurrentAmount" name="savingsCurrentAmount" placeholder="Current Savings Amount" />
-                    <p id="currentAmountError" class="error-message"></p>
+                    <input type="number" id="savingsCurrentAmount" name="savingsCurrentAmount" value="<?= htmlspecialchars($currentAmount) ?>" placeholder="Current Savings Amount" />
+                    <p id="currentAmountError" class="error-message"><?= $currentAmountError ?></p>
                 </div>
             </div>
 
@@ -78,12 +139,12 @@ require_once('../../controllers/userAuth.php');
                 </div>
                 <div class="form-column">
                     <label for="savingsNotes">New Notes</label>
-                    <textarea id="savingsNotes" name="savingsNotes" placeholder="Optional details about the savings goal"></textarea>
+                    <textarea id="savingsNotes" name="savingsNotes" placeholder="Optional details about the savings goal"><?= htmlspecialchars($notes) ?></textarea>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Savings Goal</button>
-            <p id="emptyError" class="error-message"></p>
+            <p id="emptyError" class="error-message"><?= $emptyError ?></p>
 
             <div class="navigation-buttons">
                 <a href="savings-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
@@ -94,8 +155,7 @@ require_once('../../controllers/userAuth.php');
     </main>
 
     <?php include '../header-footer/footer.php' ?>
-
-    <script src="../../validation/savings/edit-savings.js"></script>
+    <script src="../../scripts/savings/edit-savings.js"></script>
 </body>
 
 </html>

@@ -1,69 +1,59 @@
-const form = document.getElementById('add-savings-form');
-const goalName = document.getElementById('goal-name');
-const targetAmount = document.getElementById('target-amount');
-const targetDate = document.getElementById('target-date');
-const description = document.getElementById('description');
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("add-savings-form");
 
-const nameError = document.getElementById('nameError');
-const amountError = document.getElementById('amountError');
-const dateError = document.getElementById('dateError');
-const emptyError = document.getElementById('emptyError'); 
+    const goalNameInput = document.getElementById("goal-name");
+    const amountInput = document.getElementById("target-amount");
+    const dateInput = document.getElementById("target-date");
 
-function clearErrors() {
-    nameError.textContent = '';
-    amountError.textContent = '';
-    dateError.textContent = '';
-    emptyError.textContent = '';
-}
+    const nameError = document.getElementById("nameError");
+    const amountError = document.getElementById("amountError");
+    const dateError = document.getElementById("dateError");
 
-function containsIllegalCharacters(input) {
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
-        const code = char.charCodeAt(0);
-        const isLetter = (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
-        const isDigit = code >= 48 && code <= 57;
-        const isAllowedSymbol = char === ' ' || char === ',' || char === '-';
-        if (!isLetter && !isDigit && !isAllowedSymbol) {
-            return true;
+    form.addEventListener("submit", function (e) {
+        let isValid = true;
+
+        nameError.textContent = "";
+        amountError.textContent = "";
+        dateError.textContent = "";
+
+        const goalName = goalNameInput.value.trim();
+        const amount = amountInput.value.trim();
+        const date = dateInput.value;
+
+        if (goalName === "") {
+            nameError.textContent = "Goal name is required.";
+            isValid = false;
+        } else {
+            for (let i = 0; i < goalName.length; i++) {
+                const c = goalName[i];
+                if (!(
+                    (c >= 'a' && c <= 'z') ||
+                    (c >= 'A' && c <= 'Z') ||
+                    (c >= '0' && c <= '9') ||
+                    c === ' ' || c === '.' || c === ',' || c === '-'
+                )) {
+                    nameError.textContent = "Only letters, digits, spaces, ., , and - are allowed.";
+                    isValid = false;
+                    break;
+                }
+            }
         }
-    }
-    return false;
-}
 
-form.addEventListener('submit', function (e) {
-    let valid = true;
-    clearErrors();
-    const nameValue = goalName.value.trim();
-    const amountValue = parseFloat(targetAmount.value);
-    const dateValue = targetDate.value.trim();
-    const descriptionValue = description.value.trim();
+        if (amount === "") {
+            amountError.textContent = "Target amount is required.";
+            isValid = false;
+        } else if (isNaN(amount) || parseFloat(amount) <= 0) {
+            amountError.textContent = "Enter a valid amount greater than 0.";
+            isValid = false;
+        }
 
-    if (!nameValue || isNaN(amountValue) || !dateValue) {
-        emptyError.textContent = 'All fields must be filled out.';
-        valid = false;
-    } else if (containsIllegalCharacters(nameValue)) {
-        nameError.textContent = 'Goal name contains illegal characters.';
-        valid = false;
-    } else if (isNaN(amountValue)) {
-        amountError.textContent = 'Target amount must be a number.';
-        valid = false;
-    } else if (amountValue <= 0) {
-        amountError.textContent = 'Target amount must be greater than 0.';
-        valid = false;
-    }
+        if (date === "") {
+            dateError.textContent = "Target date is required.";
+            isValid = false;
+        }
 
-    const currentDate = new Date();
-    const targetDateValue = new Date(dateValue);
-
-    if (targetDateValue <= currentDate) {
-        dateError.textContent = 'Target date must be in the future.';
-        valid = false;
-    }
-
-    if (!valid) {
-        e.preventDefault();
-    } else {
-        e.preventDefault();
-        window.location.href = '../../views/savings/savings-dashboard.php';
-    }
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
 });

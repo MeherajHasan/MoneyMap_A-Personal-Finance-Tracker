@@ -1,87 +1,61 @@
-const form = document.querySelector('.savings-form');
-const goalName = document.getElementById('savingsGoalName');
-const amount = document.getElementById('savingsAmount');
-const targetDate = document.getElementById('savingsTargetDate');
-const currentAmount = document.getElementById('savingsCurrentAmount');
-const notes = document.getElementById('savingsNotes');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('.savings-form');
+    const nameInput = document.getElementById('savingsGoalName');
+    const amountInput = document.getElementById('savingsAmount');
+    const dateInput = document.getElementById('savingsTargetDate');
+    const currentInput = document.getElementById('savingsCurrentAmount');
 
-const nameError = document.getElementById('nameError');
-const amountError = document.getElementById('amountError');
-const dateError = document.getElementById('dateError');
-const currentAmountError = document.getElementById('currentAmountError');
-const emptyError = document.getElementById('emptyError');
+    const nameError = document.getElementById('nameError');
+    const amountError = document.getElementById('amountError');
+    const dateError = document.getElementById('dateError');
+    const currentError = document.getElementById('currentAmountError');
+    const emptyError = document.getElementById('emptyError');
 
-function clearErrors() {
-    nameError.textContent = '';
-    amountError.textContent = '';
-    dateError.textContent = '';
-    currentAmountError.textContent = '';
-    emptyError.textContent = '';
-}
+    form.addEventListener('submit', function (e) {
+        let valid = true;
 
-function containsIllegalCharacters(input) {
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
-        const code = char.charCodeAt(0);
-        const isLetter = (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
-        const isDigit = code >= 48 && code <= 57;
-        const isAllowedSymbol = char === ' ' || char === ',' || char === '-';
-        if (!isLetter && !isDigit && !isAllowedSymbol) {
-            return true;
-        }
-    }
-    return false;
-}
+        nameError.textContent = '';
+        amountError.textContent = '';
+        dateError.textContent = '';
+        currentError.textContent = '';
+        emptyError.textContent = '';
 
-form.addEventListener('submit', function (e) {
-    let valid = true;
-    clearErrors();
-
-    const goalNameValue = goalName.value.trim();
-    const amountValue = parseFloat(amount.value);
-    const currentValue = parseFloat(currentAmount.value);
-    const dateValue = targetDate.value.trim();
-
-    if (
-        !goalNameValue &&
-        !amount.value.trim() &&
-        !dateValue &&
-        !currentAmount.value.trim() &&
-        !notes.value.trim()
-    ) {
-        emptyError.textContent = 'At least one of the fields needs to be changed.';
-        valid = false;
-    }
-
-    if (goalNameValue && containsIllegalCharacters(goalNameValue)) {
-        nameError.textContent = 'Goal name contains illegal characters.';
-        valid = false;
-    }
-
-    if (amount.value.trim()) {
-        if (isNaN(amountValue)) {
-            amountError.textContent = 'Amount must be a number.';
+        const name = nameInput.value.trim();
+        if (name === '') {
+            nameError.textContent = 'Goal name is required.';
             valid = false;
-        } else if (amountValue < 0) {
-            amountError.textContent = 'Amount cannot be negative.';
+        } else {
+            for (let i = 0; i < name.length; i++) {
+                const c = name[i];
+                if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c === ' ')) {
+                    nameError.textContent = 'Only letters and spaces allowed.';
+                    valid = false;
+                    break;
+                }
+            }
+        }
+
+        const amount = parseFloat(amountInput.value);
+        if (isNaN(amount) || amount <= 0) {
+            amountError.textContent = 'Amount must be a positive number.';
             valid = false;
         }
-    }
 
-    if (currentAmount.value.trim()) {
-        if (isNaN(currentValue)) {
-            currentAmountError.textContent = 'Current savings must be a number.';
-            valid = false;
-        } else if (currentValue < 0) {
-            currentAmountError.textContent = 'Current savings cannot be negative.';
+        const dateValue = dateInput.value;
+        if (!dateValue) {
+            dateError.textContent = 'Target date is required.';
             valid = false;
         }
-    }
 
-    if (!valid) {
-        e.preventDefault();
-    } else {
-        e.preventDefault(); 
-        window.location.href = '../../views/savings/savings-dashboard.php';
-    }
+        const current = parseFloat(currentInput.value);
+        if (isNaN(current) || current < 0) {
+            currentError.textContent = 'Current savings must be a non-negative number.';
+            valid = false;
+        }
+
+        if (!valid) {
+            emptyError.textContent = 'Please correct the above errors.';
+            e.preventDefault();
+        }
+    });
 });
