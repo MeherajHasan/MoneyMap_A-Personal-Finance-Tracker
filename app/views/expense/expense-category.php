@@ -1,6 +1,67 @@
 <?php
-    require_once('../../controllers/userAuth.php');
+require_once('../../controllers/userAuth.php');
 
+// List of existing categories (normally from DB)
+$categories = [
+    "House Rent", "Transportation", "Shopping", "Food", "Cosmetics", "Pet", "Medical", "Education"
+];
+
+function isValidCategoryName($str) {
+    for ($i = 0; $i < strlen($str); $i++) {
+        $c = $str[$i];
+        if (!(($c >= 'a' && $c <= 'z') ||
+              ($c >= 'A' && $c <= 'Z') ||
+              ($c >= '0' && $c <= '9') ||
+              $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+$newCategory = "";
+$error = "";
+$success = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['action']) && $_POST['action'] === 'add') {
+        $newCategory = trim($_POST['newCategory'] ?? '');
+
+        if ($newCategory === '') {
+            $error = "Category name cannot be empty.";
+        } elseif (!isValidCategoryName($newCategory)) {
+            $error = "Category name contains invalid characters.";
+        } elseif (in_array($newCategory, $categories)) {
+            $error = "Category already exists.";
+        } else {
+            $categories[] = $newCategory; // Simulate adding to DB
+            $success = "Category added successfully.";
+        }
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'delete') {
+        $categoryToDelete = $_POST['category'];
+        if (($key = array_search($categoryToDelete, $categories)) !== false) {
+            unset($categories[$key]);
+            $categories = array_values($categories); // Re-index the array
+            $success = "Category deleted successfully.";
+        }
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'edit') {
+        $oldCategory = $_POST['oldCategory'];
+        $newCategory = trim($_POST['newCategory'] ?? '');
+
+        if ($newCategory === '') {
+            $error = "Category name cannot be empty.";
+        } elseif (!isValidCategoryName($newCategory)) {
+            $error = "Category name contains invalid characters.";
+        } elseif (in_array($newCategory, $categories)) {
+            $error = "Category already exists.";
+        } else {
+            if (($key = array_search($oldCategory, $categories)) !== false) {
+                $categories[$key] = $newCategory; // Simulate updating in DB
+                $success = "Category updated successfully.";
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +69,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MoneyMap || Expense Categories</title>
     <link rel="stylesheet" href="../../styles/expense/expense-category.css" />
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
@@ -30,63 +91,19 @@
                 </tr>
             </thead>
             <tbody id="categoryTableBody">
-                <!-- Existing categories will be dynamically populated here -->
-                <tr>
-                    <td>House Rent</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Transportation</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Shopping</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Food</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cosmetics</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pet</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Medical</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Education</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
+                <?php foreach ($categories as $cat): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($cat) ?></td>
+                        <td>
+                            <button class="btn btn-edit" data-category="<?= htmlspecialchars($cat) ?>">Edit</button>
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="category" value="<?= htmlspecialchars($cat) ?>">
+                                <button type="submit" class="btn btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 
@@ -94,11 +111,24 @@
             <h2>Add New Category</h2>
         </div>
 
-        <div class="add-category">
-            <input type="text" id="newCategory" placeholder="Enter new category name" />
-            <button id="addCategoryBtn" class="btn btn-primary">Add Category</button>
-        </div>
-        <p id="emptyError"></p>
+        <form method="post" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" class="add-category">
+            <input type="hidden" name="action" value="add">
+            <input
+                type="text"
+                id="newCategory"
+                name="newCategory"
+                placeholder="Enter new category name"
+                value="<?= htmlspecialchars($newCategory) ?>"
+                autocomplete="off"
+            />
+            <button type="submit" id="addCategoryBtn" class="btn btn-primary">Add Category</button>
+        </form>
+
+        <?php if ($error): ?>
+            <p id="emptyError" style="color: red;"><?= htmlspecialchars($error) ?></p>
+        <?php elseif ($success): ?>
+            <p style="color: green;"><?= htmlspecialchars($success) ?></p>
+        <?php endif; ?>
 
         <div class="navigation-buttons">
             <a href="expense-dashboard.php" class="btn btn-secondary">Back to Expense Dashboard</a>

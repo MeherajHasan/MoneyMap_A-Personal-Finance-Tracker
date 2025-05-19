@@ -1,6 +1,71 @@
 <?php
-    require_once('../../controllers/userAuth.php');
+require_once('../../controllers/userAuth.php');
 
+function isValidNameString($str) {
+    for ($i = 0; $i < strlen($str); $i++) {
+        $c = $str[$i];
+        if (!(($c >= 'a' && $c <= 'z') ||
+              ($c >= 'A' && $c <= 'Z') ||
+              ($c >= '0' && $c <= '9') ||
+              $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
+            return false;
+        }
+    }
+    return true;
+}
+
+$category = $name = $amount = $date = $notes = "";
+$categoryError = $nameError = $amountError = $dateError = "";
+$hasError = false;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (empty($_POST['expenseCategory'])) {
+        $categoryError = "Please select a category.";
+        $hasError = true;
+    } else {
+        $category = $_POST['expenseCategory'];
+        $allowedCategories = ["House Rent", "Transportation", "Shopping", "Food", "Cosmetics", "Pet", "Medical", "Education"];
+        if (!in_array($category, $allowedCategories)) {
+            $categoryError = "Invalid category selected.";
+            $hasError = true;
+        }
+    }
+
+    if (empty(trim($_POST['expenseName'] ?? ''))) {
+        $nameError = "Name is required.";
+        $hasError = true;
+    } else {
+        $name = trim($_POST['expenseName']);
+        if (!isValidNameString($name)) {
+            $nameError = "Name contains invalid characters.";
+            $hasError = true;
+        }
+    }
+
+    if (empty(trim($_POST['expenseAmount'] ?? ''))) {
+        $amountError = "Amount is required.";
+        $hasError = true;
+    } else {
+        $amount = trim($_POST['expenseAmount']);
+        if (!is_numeric($amount) || floatval($amount) <= 0) {
+            $amountError = "Amount must be a positive number.";
+            $hasError = true;
+        }
+    }
+
+    if (empty($_POST['expenseDate'])) {
+        $dateError = "Date is required.";
+        $hasError = true;
+    } 
+
+    $notes = trim($_POST['expenseNotes'] ?? '');
+
+    if (!$hasError) {
+        // db
+        header("Location: expense-dashboard.php");
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +73,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MoneyMap || Add Expense</title>
     <link rel="stylesheet" href="../../styles/expense/add-expense.css" />
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
@@ -22,51 +87,50 @@
             <h2>Add Expense</h2>
         </div>
 
-        <form action="" method="POST" class="expense-form">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="expense-form" novalidate>
             <div class="form-group">
                 <label for="expenseCategory">Category:</label>
                 <select id="expenseCategory" name="expenseCategory">
-                    <option value="" disabled selected>Select Category</option>
-                    <option value="House Rent">House Rent</option>
-                    <option value="Transportation">Transportation</option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Food">Food</option>
-                    <option value="Cosmetics">Cosmetics</option>
-                    <option value="Pet">Pet</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Education">Education</option>
+                    <option value="" disabled <?php if ($category === '') echo 'selected'; ?>>Select Category</option>
+                    <?php
+                    $categories = ["House Rent", "Transportation", "Shopping", "Food", "Cosmetics", "Pet", "Medical", "Education"];
+                    foreach ($categories as $cat) {
+                        $selected = ($cat === $category) ? "selected" : "";
+                        echo "<option value=\"$cat\" $selected>$cat</option>";
+                    }
+                    ?>
                 </select>
-
+                <p id="categoryError" class="error-message"><?php echo $categoryError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseName">Name</label>
-                <input type="text" id="expenseName" name="expenseName" placeholder="e.g., Rent, Groceries" />
-                <p id="nameError" class="error-message"></p>
+                <input type="text" id="expenseName" name="expenseName" placeholder="e.g., Rent, Groceries"
+                    value="<?php echo htmlspecialchars($name); ?>" />
+                <p id="nameError" class="error-message"><?php echo $nameError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseAmount">Amount</label>
-                <input type="number" id="expenseAmount" name="expenseAmount" placeholder="Amount in $" />
-                <p id="amountError" class="error-message"></p>
+                <input type="number" id="expenseAmount" name="expenseAmount" placeholder="Amount in $"
+                    value="<?php echo htmlspecialchars($amount); ?>" step="0.01" />
+                <p id="amountError" class="error-message"><?php echo $amountError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseDate">Date</label>
-                <input type="date" id="expenseDate" name="expenseDate" />
-                <p id="dateError" class="error-message"></p>
+                <input type="date" id="expenseDate" name="expenseDate" value="<?php echo htmlspecialchars($date); ?>" />
+                <p id="dateError" class="error-message"><?php echo $dateError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseNotes">Notes (Optional)</label>
                 <textarea id="expenseNotes" name="expenseNotes"
-                    placeholder="Optional details about the expense"></textarea>
+                    placeholder="Optional details about the expense"><?php echo htmlspecialchars($notes); ?></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Add Expense</button>
-            <p id="emptyError" class="error-message"></p>
 
-            <!-- Additional navigation buttons -->
             <div class="navigation-buttons">
                 <a href="expense-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
                 <a href="edit-expense.php" class="btn btn-secondary">Edit Expense</a>
@@ -77,7 +141,7 @@
 
     <?php include '../header-footer/footer.php' ?>
 
-    <script src="../../validation/expense/add-expense.js"></script>
+    <script src="../../scripts/expense/add-expense.js"></script>
 </body>
 
 </html>
