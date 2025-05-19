@@ -1,6 +1,5 @@
 <?php
     require_once('../../controllers/userAuth.php');
-
 ?>
 
 <!DOCTYPE html>

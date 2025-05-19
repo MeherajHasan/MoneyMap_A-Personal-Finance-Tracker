@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h1>Contact Us</h1>
         <p>Have questions or feedback? Fill out the form below and we'll get back to you!</p>
 
-        <form id="contactForm" action="" method="POST">
+        <form id="contactForm" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
             <label for="name">Full Name:</label>
             <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>">
             <p id="nameError"><?= $nameError ?></p>
@@ -125,7 +125,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <button type="submit" class="btn" id="btn-submit">Submit</button>
             <button type="reset" class="btn" id="btn-reset">Reset</button>
-            <button type="button" onclick="window.location.href='../../../public/index.html'">Cancel</button>
+
+            <?php
+                if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
+                    $redirectUrl = '../dashboard/dashboard.php';
+                } 
+                else {
+                    $redirectUrl = '../../../public/index.php';
+                }
+            ?>
+            <button type="button" onclick="window.location.href='<?php echo $redirectUrl; ?>'">Cancel</button>
         </form>
     </main>
 

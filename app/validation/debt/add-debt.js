@@ -1,64 +1,116 @@
-const form = document.getElementById('addDebtForm');
-const debtName = document.getElementById('debtName');
-const payeeName = document.getElementById('payeeName');
-const debtDate = document.getElementById('debtDate');
-const maxPaymentDate = document.getElementById('maxPaymentDate');
-const principalAmount = document.getElementById('principalAmount');
-const interestRate = document.getElementById('interestRate');
-const minimumPayment = document.getElementById('minimumPayment');
-const notes = document.getElementById('notes');
-
-const debtNameError = document.getElementById('debtNameError');
-const payeeNameError = document.getElementById('payeeNameError');
-const debtDateError = document.getElementById('debtDateError');
-const maxPaymentDateError = document.getElementById('maxPaymentDateError');
-const principalAmountError = document.getElementById('principalAmountError');
-const interestRateError = document.getElementById('interestRateError');
-const minimumPaymentError = document.getElementById('minimumPaymentError');
-const notesError = document.getElementById('notesError');
-
-function clearErrors() {
-    debtNameError.textContent = '';
-    payeeNameError.textContent = '';
-    debtDateError.textContent = '';
-    maxPaymentDateError.textContent = '';
-    principalAmountError.textContent = '';
-    interestRateError.textContent = '';
-    minimumPaymentError.textContent = '';
-    notesError.textContent = '';
+function isValidNameString(str) {
+    for (let i = 0; i < str.length; i++) {
+        const c = str[i];
+        if (!(
+            (c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9') ||
+            c === ' ' || c === '.' || c === ',' || c === '-'
+        )) {
+            return false;
+        }
+    }
+    return true;
 }
 
-form.addEventListener('submit', function (e) {
-    let valid = true;
-    clearErrors();
+function isValidNotesString(str) {
+    for (let i = 0; i < str.length; i++) {
+        const c = str[i];
+        if (!(
+            (c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9') ||
+            c === ' ' || c === '.' || c === ',' || c === '-' ||
+            c === '!' || c === '?' || c === ':' || c === ';' ||
+            c === '\n' || c === '\r'
+        )) {
+            return false;
+        }
+    }
+    return true;
+}
 
-    const debtNameValue = debtName.value.trim();
-    const payeeNameValue = payeeName.value.trim();
-    const debtDateValue = debtDate.value.trim();
-    const principalAmountValue = parseFloat(principalAmount.value);
-    const interestRateValue = parseFloat(interestRate.value);
-    const minimumPaymentValue = parseFloat(minimumPayment.value);
+document.getElementById('addDebtForm').addEventListener('submit', function(event) {
+    let isValid = true;
 
-    if (!debtNameValue || !payeeNameValue || !debtDateValue || !interestRateValue || !minimumPaymentValue) {
-        notesError.textContent = 'All fields must be filled out.';
-        valid = false;
-    } else if (principalAmountValue <= 0) {
-        principalAmountError.textContent = 'Please enter a valid principal amount.';
-        valid = false;
-    } else if (interestRateValue <= 0) {
-        interestRateError.textContent = 'Please enter a valid interest rate.';
-        valid = false;
-    } else if (minimumPaymentValue <= 0) {
-        minimumPaymentError.textContent = 'Please enter a valid minimum payment.';
-        valid = false;
+    const debtName = document.getElementById('debtName').value.trim();
+    const payeeName = document.getElementById('payeeName').value.trim();
+    const debtDate = document.getElementById('debtDate').value;
+    const maxPaymentDate = document.getElementById('maxPaymentDate').value;
+    const principalAmount = document.getElementById('principalAmount').value.trim();
+    const interestRate = document.getElementById('interestRate').value.trim();
+    const minimumPayment = document.getElementById('minimumPayment').value.trim();
+    const notes = document.getElementById('notes').value.trim();
+
+    document.getElementById('debtNameError').textContent = '';
+    document.getElementById('payeeNameError').textContent = '';
+    document.getElementById('debtDateError').textContent = '';
+    document.getElementById('maxPaymentDateError').textContent = '';
+    document.getElementById('principalAmountError').textContent = '';
+    document.getElementById('interestRateError').textContent = '';
+    document.getElementById('minimumPaymentError').textContent = '';
+    document.getElementById('notesError').textContent = '';
+
+    if (debtName === '') {
+        document.getElementById('debtNameError').textContent = 'Debt name is required.';
+        isValid = false;
+    } else if (!isValidNameString(debtName)) {
+        document.getElementById('debtNameError').textContent = 'Debt name contains invalid characters.';
+        isValid = false;
     }
 
-    if (!valid) {
-        e.preventDefault(); 
-    } else {
-        e.preventDefault();
-        setTimeout(() => {
-            window.location.href = '../../views/debt/debt-dashboard.php'; 
-        }, 100);
+    if (payeeName === '') {
+        document.getElementById('payeeNameError').textContent = 'Payee name is required.';
+        isValid = false;
+    } else if (!isValidNameString(payeeName)) {
+        document.getElementById('payeeNameError').textContent = 'Payee name contains invalid characters.';
+        isValid = false;
+    }
+
+    if (debtDate === '') {
+        document.getElementById('debtDateError').textContent = 'Debt date is required.';
+        isValid = false;
+    }
+
+    if (maxPaymentDate !== '') {
+        if (debtDate !== '' && maxPaymentDate < debtDate) {
+            document.getElementById('maxPaymentDateError').textContent = 'Maximum payment date cannot be before debt date.';
+            isValid = false;
+        }
+    }
+
+    if (principalAmount === '') {
+        document.getElementById('principalAmountError').textContent = 'Principal amount is required.';
+        isValid = false;
+    } else if (isNaN(principalAmount) || Number(principalAmount) <= 0) {
+        document.getElementById('principalAmountError').textContent = 'Principal amount must be a positive number.';
+        isValid = false;
+    }
+
+    if (interestRate === '') {
+        document.getElementById('interestRateError').textContent = 'Interest rate is required.';
+        isValid = false;
+    } else if (isNaN(interestRate) || Number(interestRate) < 0) {
+        document.getElementById('interestRateError').textContent = 'Interest rate must be a non-negative number.';
+        isValid = false;
+    }
+
+    if (minimumPayment === '') {
+        document.getElementById('minimumPaymentError').textContent = 'Minimum payment is required.';
+        isValid = false;
+    } else if (isNaN(minimumPayment) || Number(minimumPayment) < 0) {
+        document.getElementById('minimumPaymentError').textContent = 'Minimum payment must be a non-negative number.';
+        isValid = false;
+    }
+
+    if (notes !== '') {
+        if (!isValidNotesString(notes)) {
+            document.getElementById('notesError').textContent = 'Notes contain invalid characters.';
+            isValid = false;
+        }
+    }
+
+    if (!isValid) {
+        event.preventDefault();
     }
 });

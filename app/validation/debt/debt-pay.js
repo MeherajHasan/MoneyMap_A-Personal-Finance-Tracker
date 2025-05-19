@@ -2,43 +2,30 @@ const form = document.querySelector('.debt-form');
 const paymentAmount = document.getElementById('paymentAmount');
 const paymentError = document.getElementById('paymentError');
 
-// Example data for demonstration (this should come from a backend in a real application)
-const debtDetails = {
-    debtName: 'Home Loan',
-    payeeName: 'Bank of MoneyMap',
-    remainingAmount: 5000 // In dollars
-};
-
-// Display the debt details dynamically
-document.getElementById('debtNameDisplay').textContent = debtDetails.debtName;
-document.getElementById('payeeNameDisplay').textContent = debtDetails.payeeName;
-document.getElementById('payableAmountDisplay').textContent = `$${debtDetails.remainingAmount}`;
+// demo value
+const remainingAmount = 5000; 
 
 function clearErrors() {
-    paymentError.textContent = ''; 
+    paymentError.textContent = '';
 }
 
-function validatePaymentAmount(paymentAmountValue) {
-    if (isNaN(paymentAmountValue) || paymentAmountValue <= 0 || paymentAmountValue > debtDetails.remainingAmount) {
-        paymentError.textContent = 'Please enter a valid payment amount.';
+function validatePaymentAmount(value) {
+    if (isNaN(value) || value <= 0) {
+        paymentError.textContent = 'Payment amount must be a positive number.';
+        return false;
+    } else if (value > remainingAmount) {
+        paymentError.textContent = `Amount cannot exceed remaining payable amount ($${remainingAmount.toFixed(2)}).`;
         return false;
     }
-
     return true;
 }
 
 form.addEventListener('submit', function (e) {
-    e.preventDefault(); 
+    clearErrors();
+    const value = parseFloat(paymentAmount.value);
 
-    const paymentAmountValue = parseFloat(paymentAmount.value);
-
-    if (validatePaymentAmount(paymentAmountValue)) {
-        debtDetails.remainingAmount -= paymentAmountValue;
-        document.getElementById('payableAmountDisplay').textContent = `$${debtDetails.remainingAmount}`;
-
-        window.location.href = '../../views/debt/debt-dashboard.php';
-    } else {
+    if (!validatePaymentAmount(value)) {
+        e.preventDefault(); 
         paymentError.style.display = 'block';
     }
 });
-

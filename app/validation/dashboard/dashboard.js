@@ -76,43 +76,43 @@ const setWidgetData = () => {
     if (incomeWidget) {
         const amountElement = incomeWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "$5000"; // Replace with actual data fetching
+            amountElement.textContent = "$5000";
         }
     }
     if (expenseWidget) {
         const amountElement = expenseWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "$2000"; // Replace with actual data fetching
+            amountElement.textContent = "$2000"; 
         }
     }
     if (budgetWidget) {
         const amountElement = budgetWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "$3000"; // Replace with actual data fetching
+            amountElement.textContent = "$3000"; 
         }
     }
     if (savingsWidget) {
         const amountElement = savingsWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "$1500"; // Replace with actual data fetching
+            amountElement.textContent = "$1500"; 
         }
     }
     if (debtWidget) {
         const amountElement = debtWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "$4000"; // Replace with actual data fetching
+            amountElement.textContent = "$4000"; 
         }
     }
     if (billsWidget) {
         const amountElement = billsWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "$1000"; // Replace with actual data fetching
+            amountElement.textContent = "$1000";
         }
     }
     if (reportsWidget) {
         const amountElement = reportsWidget.querySelector('.widget-amount');
         if (amountElement) {
-            amountElement.textContent = "View Detailed Reports"; // Customize as needed
+            amountElement.textContent = "View Detailed Reports"; 
         }
     }
 };

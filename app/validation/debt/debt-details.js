@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Show debt details when a debt is selected
     function displayDebtDetails(debtId) {
         const debt = debts.find(d => d.id === parseInt(debtId));
 

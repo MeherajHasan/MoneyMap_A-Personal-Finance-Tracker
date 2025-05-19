@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const reportOutputDiv = document.getElementById('reportOutput');
     const noReportGenerated = document.getElementById('noReportGenerated');
 
-    // In a real application, you would fetch this data from your backend
     const debtsData = [
         {
             id: 1,
