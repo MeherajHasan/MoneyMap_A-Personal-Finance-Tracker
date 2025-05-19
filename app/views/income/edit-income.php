@@ -1,6 +1,66 @@
 <?php
-    require_once('../../controllers/userAuth.php');
+require_once('../../controllers/userAuth.php');
 
+$incomeType = "";
+$incomeSource = "";
+$incomeAmount = "";
+$incomeDate = "";
+$incomeNotes = "";
+
+$sourceError = "";
+$amountError = "";
+$dateError = "";
+$emptyError = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $incomeType = $_POST['incomeType'] ?? "";
+    $incomeSource = trim($_POST['incomeSource'] ?? "");
+    $incomeAmount = trim($_POST['incomeAmount'] ?? "");
+    $incomeDate = trim($_POST['incomeDate'] ?? "");
+    $incomeNotes = trim($_POST['incomeNotes'] ?? "");
+
+    $hasError = false;
+
+    $validTypes = ["main", "side", "irregular"];
+    if ($incomeType !== "" && !in_array($incomeType, $validTypes)) {
+        $emptyError = "Please select a valid Income Type.";
+        $hasError = true;
+    }
+
+    if ($incomeSource !== "") {
+        for ($i = 0; $i < strlen($incomeSource); $i++) {
+            $c = $incomeSource[$i];
+            if (!(($c >= 'a' && $c <= 'z') || ($c >= 'A' && $c <= 'Z') || ($c >= '0' && $c <= '9') || $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
+                $sourceError = "Source contains invalid characters.";
+                $hasError = true;
+                break;
+            }
+        }
+    }
+
+    if ($incomeAmount === "") {
+        $amountError = "Amount is required.";
+        $hasError = true;
+    } elseif (!is_numeric($incomeAmount) || floatval($incomeAmount) <= 0) {
+        $amountError = "Amount must be a positive number.";
+        $hasError = true;
+    }
+
+    if ($incomeDate === "") {
+        $dateError = "Date is required.";
+        $hasError = true;
+    }
+
+    if (!$hasError) {
+        // db
+        header("Location: income-dashboard.php");
+        exit;
+    } else {
+        if ($emptyError === "") {
+            $emptyError = "Please fix the errors above and resubmit.";
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +91,10 @@
                 <div class="form-column">
                     <label for="incomeType">New Income Type</label>
                     <select id="incomeType" name="incomeType">
-                        <option value="">Select</option>
-                        <option value="main">Regular Main Income</option>
-                        <option value="side">Regular Side Income</option>
-                        <option value="irregular">Irregular Income</option>
+                        <option value="" <?= $incomeType === "" ? "selected" : "" ?>>Select</option>
+                        <option value="main" <?= $incomeType === "main" ? "selected" : "" ?>>Regular Main Income</option>
+                        <option value="side" <?= $incomeType === "side" ? "selected" : "" ?>>Regular Side Income</option>
+                        <option value="irregular" <?= $incomeType === "irregular" ? "selected" : "" ?>>Irregular Income</option>
                     </select>
                 </div>
             </div>
@@ -46,8 +106,8 @@
                 </div>
                 <div class="form-column">
                     <label for="incomeSource">New Source</label>
-                    <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Freelancing" />
-                    <p id="sourceError" class="error-message"></p>
+                    <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Freelancing" value="<?= htmlspecialchars($incomeSource) ?>" />
+                    <p id="sourceError" class="error-message"><?= $sourceError ?></p>
                 </div>
             </div>
 
@@ -58,8 +118,8 @@
                 </div>
                 <div class="form-column">
                     <label for="incomeAmount">New Amount</label>
-                    <input type="number" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" />
-                    <p id="amountError" class="error-message"></p>
+                    <input type="number" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" value="<?= htmlspecialchars($incomeAmount) ?>" />
+                    <p id="amountError" class="error-message"><?= $amountError ?></p>
                 </div>
             </div>
 
@@ -70,8 +130,8 @@
                 </div>
                 <div class="form-column">
                     <label for="incomeDate">New Date</label>
-                    <input type="date" id="incomeDate" name="incomeDate" />
-                    <p id="dateError" class="error-message"></p>
+                    <input type="date" id="incomeDate" name="incomeDate" value="<?= htmlspecialchars($incomeDate) ?>" />
+                    <p id="dateError" class="error-message"><?= $dateError ?></p>
                 </div>
             </div>
 
@@ -82,12 +142,12 @@
                 </div>
                 <div class="form-column">
                     <label for="incomeNotes">New Notes</label>
-                    <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"></textarea>
+                    <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"><?= htmlspecialchars($incomeNotes) ?></textarea>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Income</button>
-            <p id="emptyError" class="error-message"></p>
+            <p id="emptyError" class="error-message"><?= $emptyError ?></p>
 
             <div class="navigation-buttons">
                 <a href="income-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>

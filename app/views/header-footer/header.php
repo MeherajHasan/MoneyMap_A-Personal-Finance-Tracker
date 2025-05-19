@@ -3,6 +3,7 @@
         <img src="../../../public/assets/fullLogo.png" alt="MoneyMap Logo" class="logo" />
         <nav class="nav">
             <a href="../dashboard/dashboard.php">Dashboard</a>
+            <a href="../income/income-dashboard.php">Income</a>
             <a href="../expense/expense-dashboard.php">Expenses</a>
             <a href="../budget/budget-dashboard.php">Budget</a>
             <a href="../bills/bill-dashboard.php">Bills</a>

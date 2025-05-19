@@ -1,59 +1,45 @@
-const form = document.querySelector('.income-form');
-const incomeSource = document.getElementById('incomeSource');
-const incomeAmount = document.getElementById('incomeAmount');
-const incomeDate = document.getElementById('incomeDate');
+document.querySelector('.income-form').addEventListener('submit', function (e) {
+    let hasError = false;
 
-const sourceError = document.getElementById('sourceError');
-const amountError = document.getElementById('amountError');
-const dateError = document.getElementById('dateError');
-const emptyError = document.getElementById('emptyError'); 
+    document.getElementById('sourceError').textContent = '';
+    document.getElementById('amountError').textContent = '';
+    document.getElementById('dateError').textContent = '';
+    document.getElementById('emptyError').textContent = '';
 
-function clearErrors() {
-    sourceError.textContent = '';
-    amountError.textContent = '';
-    dateError.textContent = '';
-    emptyError.textContent = ''; 
-}
-
-function containsIllegalCharacters(input) {
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
-        const code = char.charCodeAt(0);
-        const isLetter = (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
-        const isDigit = code >= 48 && code <= 57;
-        const isAllowedSymbol = char === ' ' || char === ',' || char === '-';
-        if (!isLetter && !isDigit && !isAllowedSymbol) {
-            return true;
+    const incomeSource = document.getElementById('incomeSource').value.trim();
+    if (incomeSource !== "") {
+        for (let i = 0; i < incomeSource.length; i++) {
+            const c = incomeSource[i];
+            if (!(
+                (c >= 'a' && c <= 'z') ||
+                (c >= 'A' && c <= 'Z') ||
+                (c >= '0' && c <= '9') ||
+                c === ' ' || c === '.' || c === ',' || c === '-'
+            )) {
+                document.getElementById('sourceError').textContent = "Source contains invalid characters.";
+                hasError = true;
+                break;
+            }
         }
     }
-    return false;
-}
 
-form.addEventListener('submit', function (e) {
-    let valid = true;
-    clearErrors();
-    const sourceValue = incomeSource.value.trim();
-    const amountValue = parseFloat(incomeAmount.value);
-    const dateValue = incomeDate.value.trim(); 
-
-    if (!sourceValue || isNaN(amountValue) || !dateValue) {
-        emptyError.textContent = 'All fields must be filled out.';
-        valid = false;
-    } else if (containsIllegalCharacters(sourceValue)) {
-        sourceError.textContent = 'Source contains illegal characters.';
-        valid = false;
-    } else if (isNaN(amountValue)) {
-        amountError.textContent = 'Amount must be a number.';
-        valid = false;
-    } else if (amountValue < 0) {
-        amountError.textContent = 'Amount cannot be negative.';
-        valid = false;
+    const incomeAmount = document.getElementById('incomeAmount').value.trim();
+    if (incomeAmount === "") {
+        document.getElementById('amountError').textContent = "Amount is required.";
+        hasError = true;
+    } else if (isNaN(incomeAmount) || parseFloat(incomeAmount) <= 0) {
+        document.getElementById('amountError').textContent = "Amount must be a positive number.";
+        hasError = true;
     }
 
-    if (!valid) {
+    const incomeDate = document.getElementById('incomeDate').value.trim();
+    if (incomeDate === "") {
+        document.getElementById('dateError').textContent = "Date is required.";
+        hasError = true;
+    }
+
+    if (hasError) {
+        document.getElementById('emptyError').textContent = "Please fix the errors above and resubmit.";
         e.preventDefault();
-    } else {
-        e.preventDefault();
-        window.location.href = '../../views/income/income-dashboard.php';
     }
 });
