@@ -50,8 +50,6 @@ if ($userData) {
     setcookie('remember_password', '', time() - 3600, '/');
     }
 
-
-    // Redirect based on role
     if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin') {
         header('Location: ../views/admin/admin-dashboard.php');
     } else {

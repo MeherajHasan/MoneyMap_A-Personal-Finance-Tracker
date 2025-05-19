@@ -11,6 +11,8 @@ const genderInputs = document.querySelectorAll("input[name='gender']");
 const dobInput = document.getElementById("dob");
 const addressInput = document.getElementById("address");
 const photoInput = document.getElementById("photo");
+const passportExpiryInput = document.getElementById("passportExpiry");
+const countryCodeSelect = document.getElementById("countryCode");
 
 const fnameError = document.getElementById("fnameError");
 const lnameError = document.getElementById("lnameError");
@@ -24,15 +26,17 @@ const genderError = document.getElementById("genderError");
 const dobError = document.getElementById("dobError");
 const addressError = document.getElementById("addressError");
 const photoError = document.getElementById("photoError");
-const passportExpiryInput = document.getElementById("passportExpiry");
 const passportExpiryError = document.getElementById("passportExpiryError");
-
 
 function isValidName(name) {
     for (let i = 0; i < name.length; i++) {
         const ch = name[i];
         const code = ch.charCodeAt(0);
-        if (!((code >= 65 && code <= 90) || (code >= 97 && code <= 122) || ch === '.' || ch === '-' || ch === "'")) {
+        if (!(
+            (code >= 65 && code <= 90) || 
+            (code >= 97 && code <= 122) || 
+            ch === '.' || ch === '-' || ch === "'"
+        )) {
             return false;
         }
     }
@@ -42,10 +46,13 @@ function isValidName(name) {
 function validateEmail(email) {
     const parts = email.trim().split("@");
     if (parts.length !== 2) return false;
+
     const local = parts[0];
     const domainParts = parts[1].split(".");
     if (!local || local.length > 64) return false;
+
     if (domainParts.length < 2) return false;
+
     for (let part of domainParts) {
         if (!part || part.length > 63) return false;
     }
@@ -64,6 +71,8 @@ function handleIDSelection() {
         idInput.type = "number";
         container.classList.remove("hidden");
         passportExpiryContainer.classList.add("hidden");
+        passportExpiryInput.value = "";
+        passportExpiryError.textContent = "";
     } else if (type === "passport") {
         label.textContent = "Passport Number:";
         idInput.placeholder = "Enter Passport Number";
@@ -73,73 +82,65 @@ function handleIDSelection() {
     } else {
         container.classList.add("hidden");
         passportExpiryContainer.classList.add("hidden");
+        idInput.value = "";
+        passportExpiryInput.value = "";
+        idError.textContent = "";
+        passportExpiryError.textContent = "";
     }
 }
 
 function validateForm() {
-    const genderSelected = Array.from(genderInputs).some(input => input.checked);
-
-    if (
-        fnameInput.value.trim() === "" ||
-        lnameInput.value.trim() === "" ||
-        idTypeSelect.value === "" ||
-        idInput.value.trim() === "" ||
-        phoneInput.value.trim() === "" ||
-        emailInput.value.trim() === "" ||
-        passwordInput.value.trim() === "" ||
-        confirmPasswordInput.value.trim() === "" ||
-        !genderSelected ||
-        dobInput.value === "" ||
-        addressInput.value.trim() === ""
-    ) {
-        photoError.innerHTML = "All fields must be fulfilled.";
-        return false;
-    } else {
-        addressError.innerHTML = "";
-    }
-
-    if (photoInput.files.length === 0) {
-        photoError.innerHTML = "Please upload a photo.";
-        return false;
-    } else {
-        photoError.innerHTML = "";
-    }
-
     let valid = true;
-    if (!isValidName(fnameInput.value.trim())) {
+
+    if (fnameInput.value.trim() === "") {
+        fnameError.textContent = "First name is required.";
+        valid = false;
+    } else if (!isValidName(fnameInput.value.trim())) {
         fnameError.textContent = "Illegal character(s) in first name!";
         valid = false;
     } else {
         fnameError.textContent = "";
     }
 
-    if (!isValidName(lnameInput.value.trim())) {
+    if (lnameInput.value.trim() === "") {
+        lnameError.textContent = "Last name is required.";
+        valid = false;
+    } else if (!isValidName(lnameInput.value.trim())) {
         lnameError.textContent = "Illegal character(s) in last name!";
         valid = false;
     } else {
         lnameError.textContent = "";
     }
 
-    const idType = idTypeSelect.value;
-    if (idType === "nid") {
+    if (idTypeSelect.value === "") {
+        idTypeError.textContent = "Please select ID type.";
+        valid = false;
+    } else {
+        idTypeError.textContent = "";
+    }
+
+    if (idTypeSelect.value === "nid") {
         const nid = idInput.value.trim();
         if (nid === "") {
             idError.textContent = "NID number is required.";
             valid = false;
-        }
-        else if (nid.length !== 10 && nid.length !== 17) {
+        } else if (nid.length !== 10 && nid.length !== 17) {
             idError.textContent = "NID number must be 10 or 17 digits long.";
             valid = false;
+        } else {
+            for (let i = 0; i < nid.length; i++) {
+                const c = nid[i];
+                if (!(c >= '0' && c <= '9')) {
+                    idError.textContent = "NID must contain digits only.";
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) idError.textContent = "";
         }
-        else {
-            idError.textContent = "";
-        }
-    }
-
-    else if (idType === "passport") {
+        passportExpiryError.textContent = "";
+    } else if (idTypeSelect.value === "passport") {
         const passportNumber = idInput.value.trim();
-        const expiryValue = passportExpiryInput.value.trim();
-
         if (passportNumber === "") {
             idError.textContent = "Passport number is required.";
             valid = false;
@@ -153,25 +154,25 @@ function validateForm() {
                     break;
                 }
             }
-
             if (!isAlphanumeric) {
-                idError.textContent = "Passport number must be alphanumeric (Capital Letter & Number).";
+                idError.textContent = "Passport number must be alphanumeric (Capital letters & numbers).";
                 valid = false;
             } else if (passportNumber.length !== 10) {
-                idError.textContent = "Passport number must be 10 characters long.";
+                idError.textContent = "Passport number must be exactly 10 characters long.";
                 valid = false;
             } else {
                 idError.textContent = "";
             }
         }
 
+        const expiryValue = passportExpiryInput.value.trim();
         if (expiryValue === "") {
             passportExpiryError.textContent = "Passport expiry date is required.";
             valid = false;
         } else {
             const expiryDate = new Date(expiryValue);
             const today = new Date();
-            today.setHours(0, 0, 0, 0); // to ignore time comparison
+            today.setHours(0, 0, 0, 0); 
 
             if (expiryDate <= today) {
                 passportExpiryError.textContent = "Passport expiry date must be after today's date.";
@@ -180,64 +181,108 @@ function validateForm() {
                 passportExpiryError.textContent = "";
             }
         }
+    } else {
+        idError.textContent = "";
+        passportExpiryError.textContent = "";
     }
 
-    const countryCode = document.getElementById("countryCode").value;
-    const phoneNumber = phoneInput.value.trim();
-    
-    if (countryCode === "") {
+    if (countryCodeSelect.value === "") {
         phoneError.textContent = "Please select a country code.";
-        valid = false;
-    } else if (phoneNumber.length < 6) {
-        phoneError.textContent = "Phone number must be exactly 6 characters long.";
         valid = false;
     } else {
         phoneError.textContent = "";
     }
 
-    if (!validateEmail(emailInput.value.trim())) {
-        emailError.innerHTML = "Please enter a valid email address.";
+    const phoneNumber = phoneInput.value.trim();
+    if (phoneNumber.length !== 6) {
+        phoneError.textContent = "Phone number must be exactly 6 digits.";
         valid = false;
     } else {
-        emailError.innerHTML = "";
+        for (let i = 0; i < phoneNumber.length; i++) {
+            if (!(phoneNumber[i] >= '0' && phoneNumber[i] <= '9')) {
+                phoneError.textContent = "Phone number must contain digits only.";
+                valid = false;
+                break;
+            }
+        }
+        if (valid) phoneError.textContent = "";
+    }
+
+    if (emailInput.value.trim() === "") {
+        emailError.textContent = "Email is required.";
+        valid = false;
+    } else if (!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = "Please enter a valid email address.";
+        valid = false;
+    } else {
+        emailError.textContent = "";
     }
 
     if (passwordInput.value.trim().length < 8) {
-        passError.innerHTML = "Password must be at least 8 characters.";
+        passError.textContent = "Password must be at least 8 characters.";
         valid = false;
     } else {
-        passError.innerHTML = "";
+        passError.textContent = "";
     }
 
     if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
-        confirmPassError.innerHTML = "Passwords do not match.";
+        confirmPassError.textContent = "Passwords do not match.";
         valid = false;
     } else {
-        confirmPassError.innerHTML = "";
+        confirmPassError.textContent = "";
     }
 
-    const dob = new Date(dobInput.value);
-    const today = new Date();
-    const age = today.getFullYear() - dob.getFullYear();
-    const m = today.getMonth() - dob.getMonth();
-    const d = today.getDate() - dob.getDate();
-
-    const isUnder18 = age < 18 || (age === 18 && (m < 0 || (m === 0 && d < 0)));
-
-    if (isUnder18) {
-        dobError.textContent = "You must be at least 18 years old.";
+    const genderSelected = Array.from(genderInputs).some(input => input.checked);
+    if (!genderSelected) {
+        genderError.textContent = "Please select your gender.";
         valid = false;
     } else {
-        dobError.textContent = "";
+        genderError.textContent = "";
+    }
+
+    if (dobInput.value === "") {
+        dobError.textContent = "Date of birth is required.";
+        valid = false;
+    } else {
+        const dob = new Date(dobInput.value);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        const d = today.getDate() - dob.getDate();
+        if (m < 0 || (m === 0 && d < 0)) {
+            age--;
+        }
+        if (age < 18) {
+            dobError.textContent = "You must be at least 18 years old.";
+            valid = false;
+        } else {
+            dobError.textContent = "";
+        }
+    }
+
+    if (addressInput.value.trim() === "") {
+        addressError.textContent = "Address is required.";
+        valid = false;
+    } else {
+        addressError.textContent = "";
+    }
+
+    if (photoInput.files.length === 0) {
+        photoError.textContent = "Please upload a photo.";
+        valid = false;
+    } else {
+        photoError.textContent = "";
     }
 
     return valid;
 }
 
 idTypeSelect.addEventListener("change", handleIDSelection);
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (validateForm()) {
+        // form.submit();
         window.location.href = 'login.php';
     }
 });

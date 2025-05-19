@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main class="profile-container">
 <h1>Admin Profile</h1>
 
-<form action="" method="POST" enctype="multipart/form-data" class="profile-form" novalidate>
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data" class="profile-form">
     <div class="profile-photo">
         <img id="admin-photo" src="<?= htmlspecialchars($old['photo']) ?>" alt="Admin Photo" />
         <input type="file" name="photo" id="photo" accept="image/*" />

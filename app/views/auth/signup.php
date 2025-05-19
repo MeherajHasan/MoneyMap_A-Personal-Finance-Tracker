@@ -1,15 +1,59 @@
 <?php
-    require_once('../../models/db.php');
-?>
+require_once('../../models/db.php');
 
-<?php
 $errors = [];
 $success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     function sanitize($data)
     {
         return htmlspecialchars(stripslashes(trim($data)));
+    }
+
+    function isOnlyLettersAndSpaces($str) {
+        for ($i = 0; $i < strlen($str); $i++) {
+            $c = $str[$i];
+            if (!(($c >= 'A' && $c <= 'Z') || ($c >= 'a' && $c <= 'z') || $c === ' ')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function isAlphanumeric($str) {
+        for ($i = 0; $i < strlen($str); $i++) {
+            $c = $str[$i];
+            if (!(($c >= 'A' && $c <= 'Z') || ($c >= 'a' && $c <= 'z') || ($c >= '0' && $c <= '9'))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function isDigitsOnly($str) {
+        for ($i = 0; $i < strlen($str); $i++) {
+            if (!($str[$i] >= '0' && $str[$i] <= '9')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function isValidEmailSimple($email) {
+        $atPos = strpos($email, '@');
+        $dotPos = strrpos($email, '.');
+        if ($atPos === false || $dotPos === false) {
+            return false;
+        }
+        return ($atPos < $dotPos) && ($atPos > 0) && ($dotPos < strlen($email) - 1);
+    }
+
+    function isAtLeast12YearsOld($dob) {
+        $dobDate = strtotime($dob);
+        if (!$dobDate) return false;
+        $twelveYearsAgo = strtotime('-12 years');
+        return $dobDate <= $twelveYearsAgo;
     }
 
     $fname = sanitize($_POST['fname'] ?? '');
@@ -27,18 +71,87 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = sanitize($_POST['address'] ?? '');
     $photo = $_FILES['photo'] ?? null;
 
-    if (empty($fname)) $errors['fname'] = "First name is required.";
-    if (empty($lname)) $errors['lname'] = "Last name is required.";
-    if (empty($idType)) $errors['idType'] = "Identification type is required.";
-    if (empty($idInput)) $errors['idInput'] = ucfirst($idType) . " number is required.";
-    if ($idType === 'passport' && empty($passportExpiry)) $errors['passportExpiry'] = "Passport expiry date is required.";
-    if (empty($countryCode) || empty($phone)) $errors['phone'] = "Phone number with country code is required.";
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors['email'] = "A valid email is required.";
-    if (strlen($password) < 8) $errors['password'] = "Password must be at least 8 characters.";
-    if ($password !== $confirmPassword) $errors['confirmPassword'] = "Passwords do not match.";
-    if (empty($gender)) $errors['gender'] = "Gender is required.";
-    if (empty($dob)) $errors['dob'] = "Date of birth is required.";
-    if (empty($address)) $errors['address'] = "Address is required.";
+    if (empty($fname)) {
+        $errors['fname'] = "First name is required.";
+    } elseif (!isOnlyLettersAndSpaces($fname)) {
+        $errors['fname'] = "First name must contain only letters and spaces.";
+    }
+
+    if (empty($lname)) {
+        $errors['lname'] = "Last name is required.";
+    } elseif (!isOnlyLettersAndSpaces($lname)) {
+        $errors['lname'] = "Last name must contain only letters and spaces.";
+    }
+
+    if (empty($idType)) {
+        $errors['idType'] = "Identification type is required.";
+    }
+
+    if (empty($idInput)) {
+        $errors['idInput'] = ucfirst($idType) . " number is required.";
+    } else {
+        $len = strlen($idInput);
+        if ($len < 6 || $len > 20) {
+            $errors['idInput'] = ucfirst($idType) . " number must be 6 to 20 characters long.";
+        } elseif (!isAlphanumeric($idInput)) {
+            $errors['idInput'] = ucfirst($idType) . " number must contain only letters and numbers.";
+        }
+    }
+
+    if ($idType === 'passport') {
+        if (empty($passportExpiry)) {
+            $errors['passportExpiry'] = "Passport expiry date is required.";
+        } elseif (strtotime($passportExpiry) <= strtotime(date('Y-m-d'))) {
+            $errors['passportExpiry'] = "Passport expiry date must be greater than today.";
+        }
+    }
+
+    if (empty($countryCode)) {
+        $errors['countryCode'] = "Country code is required.";
+    }
+
+    if (empty($phone)) {
+        $errors['phone'] = "Phone number is required.";
+    } else {
+        $len = strlen($phone);
+        if ($len < 6 || $len > 15) {
+            $errors['phone'] = "Phone number must be 6 to 15 digits.";
+        } elseif (!isDigitsOnly($phone)) {
+            $errors['phone'] = "Phone number must contain only digits.";
+        }
+    }
+
+    if (empty($email)) {
+        $errors['email'] = "Email is required.";
+    } elseif (!isValidEmailSimple($email)) {
+        $errors['email'] = "Email must be valid and contain '@' and '.' with '@' before '.'";
+    }
+
+    if (empty($password)) {
+        $errors['password'] = "Password is required.";
+    } elseif (strlen($password) < 8) {
+        $errors['password'] = "Password must be at least 8 characters.";
+    }
+
+    if (empty($confirmPassword)) {
+        $errors['confirmPassword'] = "Confirm Password is required.";
+    } elseif ($password !== $confirmPassword) {
+        $errors['confirmPassword'] = "Passwords do not match.";
+    }
+
+    if (empty($gender)) {
+        $errors['gender'] = "Gender is required.";
+    }
+
+    if (empty($dob)) {
+        $errors['dob'] = "Date of birth is required.";
+    } elseif (!isAtLeast12YearsOld($dob)) {
+        $errors['dob'] = "You must be at least 12 years old.";
+    }
+
+    if (empty($address)) {
+        $errors['address'] = "Address is required.";
+    }
 
     if ($photo && $photo['error'] == 0) {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -178,7 +291,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php include '../header-footer/footer.php' ?>
 
-    <!-- <script src="../../validation/auth/signup.js"></script> -->
+    <script src="../../validation/auth/signup.js"></script>
 </body>
 
 </html>
