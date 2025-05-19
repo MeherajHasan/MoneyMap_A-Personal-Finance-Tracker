@@ -1,23 +1,19 @@
 <?php
 require_once('../../controllers/adminAuth.php');
 
-include '../../../config/db.php';
+include '../../models/db.php';
 
 if (isset($_POST['backup'])) {
-    // Database configuration
     $dbHost = '127.0.0.1';
     $dbUsername = 'root';
     $dbPassword = '';
     $dbName = 'moneymap';
 
-    // Set the filename as 'backup_moneymap.sql'
     $backupFile = "backup_moneymap.sql";
 
-    // Execute the mysqldump command to generate the SQL file
     $command = "mysqldump --user=$dbUsername --password=$dbPassword --host=$dbHost $dbName > $backupFile";
     exec($command);
 
-    // If the file is generated, trigger download
     if (file_exists($backupFile)) {
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
@@ -25,7 +21,6 @@ if (isset($_POST['backup'])) {
         header('Content-Length: ' . filesize($backupFile));
         readfile($backupFile);
 
-        // Remove the file from the server after download
         unlink($backupFile);
         exit();
     } else {

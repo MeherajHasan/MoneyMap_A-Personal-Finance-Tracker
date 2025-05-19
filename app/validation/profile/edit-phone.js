@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     cancelBtn.addEventListener('click', function () {
-        phoneInput.value = '';
-        errorMSG.textContent = '';
-        successMSG.textContent = '';
+        window.location.href = 'profile.php';
     });
 });

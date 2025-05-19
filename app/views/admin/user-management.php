@@ -8,44 +8,98 @@ $searchEmail = '';
 $selectedUser = null;
 $updateSuccess = false;
 
-// Search User
 if (isset($_POST['search'])) {
-    $searchEmail = $_POST['searchEmail'];
-    $query = "SELECT * FROM users WHERE mail = '$searchEmail'";
-    $result = mysqli_query($con, $query);
-    if (mysqli_num_rows($result) > 0) {
-        $selectedUser = mysqli_fetch_assoc($result);
+    $searchEmail = trim($_POST['searchEmail']);
+    
+    if (empty($searchEmail)) {
+        echo "<p style='color:red;'>Email field is required</p>";
+    } elseif (!filter_var($searchEmail, FILTER_VALIDATE_EMAIL)) {
+        echo "<p style='color:red;'>Invalid email address</p>";
+    }
+    else {
+        $query = "SELECT * FROM users WHERE email = '$searchEmail'";
+        $result = mysqli_query($con, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $selectedUser = mysqli_fetch_assoc($result);
+        }
     }
 }
 
 // Update User
 if (isset($_POST['update'])) {
+    $errors = [];
+
     $id = $_POST['id'];
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $country_code = $_POST['country_code'];
-    $phone = $_POST['phone'];
+    $fname = trim($_POST['fname']);
+    $lname = trim($_POST['lname']);
+    $country_code = trim($_POST['country_code']);
+    $phone = trim($_POST['phone']);
     $gender = $_POST['gender'];
     $dob = $_POST['dob'];
-    $address = $_POST['address'];
+    $address = trim($_POST['address']);
     $account_status = $_POST['account_status'];
     $role = $_POST['role'];
 
-    $updateQuery = "UPDATE users SET 
-        fname = '$fname', 
-        lname = '$lname',
-        country_code = '$country_code',
-        phone = '$phone',
-        gender = '$gender',
-        dob = '$dob',
-        address = '$address',
-        account_status = '$account_status',
-        role = '$role'
-        WHERE id = '$id'";
+    if ($fname === '' || !ctype_alpha(str_replace(' ', '', $fname))) {
+        $errors[] = "First name must contain only letters and not be empty.";
+    }
 
-    if (mysqli_query($con, $updateQuery)) {
-        $updateSuccess = true;
-        $selectedUser = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM users WHERE id = '$id'"));
+    if ($lname === '' || !ctype_alpha(str_replace(' ', '', $lname))) {
+        $errors[] = "Last name must contain only letters and not be empty.";
+    }
+
+    if ($country_code === '' || (!is_numeric($country_code) && $country_code[0] !== '+')) {
+        $errors[] = "Country code must be numeric or start with '+'.";
+    }
+
+    if ($phone === '' || !ctype_digit($phone)) {
+        $errors[] = "Phone number must be digits only.";
+    }
+
+    if (!in_array($gender, ['0', '1'])) {
+        $errors[] = "Invalid gender selected.";
+    }
+
+    if ($dob === '') {
+        $errors[] = "Date of birth is required.";
+    }
+
+    if ($address === '') {
+        $errors[] = "Address is required.";
+    }
+
+    if (!in_array($account_status, ['0', '1', '2', '3'])) {
+        $errors[] = "Invalid account status.";
+    }
+
+    if (!in_array($role, ['admin', 'user'])) {
+        $errors[] = "Invalid role selected.";
+    }
+
+    if (count($errors) > 0) {
+        foreach ($errors as $error) {
+            echo "<p style='color:red;'>$error</p>";
+        }
+    } else {
+        $updateQuery = "UPDATE users SET 
+            fname = '$fname', 
+            lname = '$lname',
+            country_code = '$country_code',
+            phone = '$phone',
+            gender = '$gender',
+            dob = '$dob',
+            address = '$address',
+            account_status = '$account_status',
+            role = '$role'
+            WHERE id = '$id'";
+
+        if (mysqli_query($con, $updateQuery)) {
+            $updateSuccess = true;
+            $selectedUser = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM users WHERE id = '$id'"));
+            echo "<p style='color:green;'>User updated successfully!</p>";
+        } else {
+            echo "<p style='color:red;'>Error updating user.</p>";
+        }
     }
 }
 
@@ -75,8 +129,7 @@ $pendingUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 3
 
     <h2>User Management</h2>
 
-    <!-- Search Form -->
-    <form method="post">
+    <form method="post" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
         <input type="text" name="searchEmail" placeholder="Search by Email" value="<?= $searchEmail ?>">
         <button type="submit" name="search">Search</button>
     </form>
@@ -132,7 +185,7 @@ $pendingUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 3
             echo "<tr>
                 <td>{$row['id']}</td>
                 <td>{$row['fname']} {$row['lname']}</td>
-                <td>{$row['mail']}</td>
+                <td>{$row['email']}</td>
                 <td>{$row['role']}</td>
                 <td>{$row['account_status']}</td>
             </tr>";
