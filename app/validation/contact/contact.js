@@ -1,122 +1,69 @@
-const form = document.getElementById("contactForm");
-const nameInput = document.getElementById("name");
-const emailInput = document.getElementById("email");
-const subjectInput = document.getElementById("subject");
-const messageInput = document.getElementById("message");
-const captchaInput = document.getElementById("captcha");
-const captchaDisplay = document.getElementById("captchaDisplay");
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const subject = document.getElementById("subject").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const captcha = document.getElementById("captcha").value.trim();
 
-const nameError = document.getElementById("nameError");
-const emailError = document.getElementById("emailError");
-const subjectError = document.getElementById("subjectError");
-const messageError = document.getElementById("messageError");
-const captchaError = document.getElementById("captchaError");
+  let isValid = true;
 
-let correctCaptchaAnswer = 0;
-let captchaWrongAttempts = 0;
+  document.getElementById("nameError").textContent = "";
+  document.getElementById("emailError").textContent = "";
+  document.getElementById("subjectError").textContent = "";
+  document.getElementById("messageError").textContent = "";
+  document.getElementById("captchaError").textContent = "";
 
-function validateEmail(email) {
-  const parts = email.trim().split("@");
-  if (parts.length !== 2) return false;
-  const local = parts[0];
-  const domainParts = parts[1].split(".");
-  if (!local || local.length > 64) return false;
-  if (domainParts.length < 2) return false;
-  for (let part of domainParts) {
-    if (!part || part.length > 63) return false;
+  if (name === "") {
+    document.getElementById("nameError").textContent = "Full name is required.";
+    isValid = false;
+  } else {
+    for (let i = 0; i < name.length; i++) {
+      const char = name[i];
+      if (!(
+        (char >= 'A' && char <= 'Z') ||
+        (char >= 'a' && char <= 'z') ||
+        (char >= '0' && char <= '9') ||
+        char === ' ' || char === '.' || char === ',' || char === '-'
+      )) {
+        document.getElementById("nameError").textContent = "Name contains invalid characters.";
+        isValid = false;
+        break;
+      }
+    }
   }
-  return true;
-}
 
-function isValidName(name) {
-  for (let i = 0; i < name.length; i++) {
-    const ch = name[i];
-    const code = ch.charCodeAt(0);
+  if (email === "") {
+    document.getElementById("emailError").textContent = "Email is required.";
+    isValid = false;
+  } else {
+    const atPos = email.indexOf("@");
+    const dotPos = email.indexOf(".", atPos + 2);
     if (
-      !(
-        (code >= 65 && code <= 90) ||
-        (code >= 97 && code <= 122) ||
-        ch === " " ||
-        ch === "." ||
-        ch === "-"
-      )
+      atPos < 1 ||
+      dotPos === -1 ||
+      dotPos === email.length - 1
     ) {
-      return false;
+      document.getElementById("emailError").textContent = "Invalid email format.";
+      isValid = false;
     }
   }
-  return true;
-}
 
-function generateCaptcha() {
-  const num1 = Math.floor(Math.random() * 10) + 1;
-  const num2 = Math.floor(Math.random() * 10) + 1;
-  correctCaptchaAnswer = num1 + num2;
-  captchaDisplay.innerHTML = `What is ${num1} + ${num2}?`;
-}
-
-function validateForm() {
-  // 1. First check if any field is empty
-  if (
-    nameInput.value.trim() === "" ||
-    emailInput.value.trim() === "" ||
-    subjectInput.value.trim() === "" ||
-    messageInput.value.trim() === "" ||
-    captchaInput.value.trim() === ""
-  ) {
-    captchaError.innerHTML = "All the fields must be filled up.";
-    return false;
-  } else {
-    captchaError.innerHTML = "";
+  if (subject === "") {
+    document.getElementById("subjectError").textContent = "Subject is required.";
+    isValid = false;
   }
 
-  let valid = true;
-
-  if (!isValidName(nameInput.value.trim())) {
-    nameError.innerHTML = "Illegal character(s) in name!";
-    valid = false;
-  } else {
-    nameError.innerHTML = "";
+  if (message === "") {
+    document.getElementById("messageError").textContent = "Message is required.";
+    isValid = false;
   }
 
-  if (!validateEmail(emailInput.value.trim())) {
-    emailError.innerHTML = "Please enter a valid email.";
-    valid = false;
-  } else {
-    emailError.innerHTML = "";
+  if (captcha === "") {
+    document.getElementById("captchaError").textContent = "CAPTCHA is required.";
+    isValid = false;
   }
 
-  if (parseInt(captchaInput.value.trim()) !== correctCaptchaAnswer) {
-    captchaWrongAttempts++;
-    generateCaptcha();
-    captchaInput.value = "";
-    valid = false;
-
-    if (captchaWrongAttempts >= 5) {
-      alert("Too many wrong attempts! Redirecting to Home Page...");
-
-      window.location.href = "../../../public/index.php";
-      return false;
-    } else if (captchaWrongAttempts >= 3) {
-      captchaError.innerHTML =
-        "Incorrect CAPTCHA! Warning: Multiple wrong attempts detected.";
-    } else {
-      captchaError.innerHTML = "Incorrect CAPTCHA answer. Please try again.";
-    }
-  } else {
-    captchaError.innerHTML = "";
-    captchaWrongAttempts = 0;
-  }
-
-  return valid;
-}
-
-form.addEventListener("submit", function (e) {
-  if (!validateForm()) {
+  if (!isValid) {
     e.preventDefault();
-  } else {
-    e.preventDefault();
-    window.location.href = "../../views/contact/confirmation.php";
   }
 });
-
-generateCaptcha();
