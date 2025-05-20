@@ -1,9 +1,12 @@
 <?php
 session_start();
 
+require_once('../models/db.php');
+require_once('../models/userModel.php');
+
 function sanitize($data) {
     return htmlspecialchars(trim($data));
-}
+} 
 
 function isOnlyLettersAndSpaces($str) {
     for ($i = 0; $i < strlen($str); $i++) {
@@ -166,12 +169,39 @@ if (!empty($errors)) {
 }
 
 $src = $photo['tmp_name'];
-$des = "../../uploads/" . $photo['name'];
+$ext = pathinfo($photo['name'], PATHINFO_EXTENSION);
+$emailName = strstr($email, '@', true);
+$newFileName = $emailName . '.' . $ext;
+$des = "../../uploads/" . $newFileName;
 
 if (move_uploaded_file($src, $des)) {
-     header("Location: ../views/auth/login.php");
-     exit;
-} else {
+     $user = [
+        'fname' => $fname,
+        'lname' => $lname,
+        'id_type' => $idType === 'nid' ? 0 : 1,
+        'id_number' => $idInput,
+        'passport_expiry' => $idType === 'passport' ? $passportExpiry : null,
+        'country_code' => $countryCode,
+        'phone' => $phone,
+        'email' => $email,
+        'password' => $password,
+        'gender' => $gender === 'male' ? 0 : 1,
+        'dob' => $dob,
+        'address' => $address,
+        'photo_path' => $des
+    ];
+    if (signup($user)) {
+        header("Location: ../views/auth/login.php");
+        exit;
+    } 
+    else {
+        echo "<script>
+            alert('Error: Failed to register user. Please try again.');
+            window.history.back();
+        </script>";
+    }
+} 
+else {
     echo "<script>
         alert('Error: Image upload failed. Please try again.');
         window.history.back();

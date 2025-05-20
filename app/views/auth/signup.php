@@ -87,7 +87,7 @@ unset($_SESSION['signup_errors'], $_SESSION['signup_old'], $_SESSION['signup_suc
             }
             ?>
                     </select>
-                    <div>
+                     <div>
                         <p id="countryCodeError"><?= $errors['countryCode'] ?? '' ?></p>
                     </div>
                 </div>
