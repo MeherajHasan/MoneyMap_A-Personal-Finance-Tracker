@@ -44,7 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!array_filter($errors)) {
-        // saveBillToDB($billName, $amount, $dueDate, $status);
+        // db
+        
         header("Location: bill-dashboard.php");
         exit();
     }

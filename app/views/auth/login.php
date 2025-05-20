@@ -3,7 +3,6 @@ session_start();
 require_once('../../models/db.php');
 
 $email = $_SESSION['email'] ?? '';
-
 if (isset($_COOKIE['remember_email'])) {
     $email = $_COOKIE['remember_email'];
 }

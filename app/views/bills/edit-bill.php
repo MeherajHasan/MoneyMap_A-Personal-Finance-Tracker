@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($isValid) {
-        // save to db
+        // db
         header('Location: bill-dashboard.php');
         exit();
     }
