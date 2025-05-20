@@ -123,7 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $adminData = $old;
         echo "<script>alert('Profile updated successfully!');</script>";
     }
-}
 ?>
 
 <!DOCTYPE html>

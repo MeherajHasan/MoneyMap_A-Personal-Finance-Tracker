@@ -8,7 +8,7 @@ profileBtn.addEventListener('click', () => {
 });
 
 notificationBtn.addEventListener('click', () => {
-  alert('⚠️ This feature is under development. Stay tuned!');
+  alert('This feature is under development. Stay tuned!');
 });
 
 logoutBtn.addEventListener('click', () => {

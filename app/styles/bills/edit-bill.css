@@ -1,4 +1,3 @@
-/* Container for the whole page */
 .edit-bill-container {
   max-width: 900px;
   margin: 40px auto;
@@ -9,7 +8,6 @@
   color: #0D1B2A;
 }
 
-/* Left side: current bill info */
 .current-bill {
   flex: 1;
   background-color: #f9f9f9;
@@ -30,7 +28,6 @@
   margin: 10px 0;
 }
 
-/* Right side: edit form */
 .edit-bill-form {
   flex: 1;
   background-color: #ffffff;
@@ -47,7 +44,6 @@
   padding-bottom: 8px;
 }
 
-/* Form elements styling */
 .edit-bill-form label {
   display: block;
   margin-bottom: 6px;
@@ -76,14 +72,12 @@
   outline: none;
 }
 
-/* Buttons container */
 .form-buttons {
   display: flex;
   gap: 15px;
   margin-top: 10px;
 }
 
-/* Buttons styling */
 .btn {
   padding: 10px 25px;
   font-size: 1rem;
