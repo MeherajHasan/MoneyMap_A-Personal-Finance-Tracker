@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const fromDate = document.getElementById('custom-start-date').value;
         const toDate = document.getElementById('custom-end-date').value;
 
-        errorDiv.textContent = ''; // Clear previous error
+        errorDiv.textContent = '';
 
-        // Validation
         if (!fromDate || !toDate) {
             errorDiv.textContent = 'Both From and To dates are required.';
             return;
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Sample transaction data (this should come from the server in a real app)
         const transactions = [
             { date: '2025-05-01', type: 'Income', category: 'Salary', title: 'May Salary', amount: 3000 },
             { date: '2025-05-05', type: 'Expense', category: 'Groceries', title: 'Supermarket', amount: 150 },
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const filtered = transactions.filter(tx => tx.date >= fromDate && tx.date <= toDate);
 
-        // Populate table
         tableBody.innerHTML = '';
         filtered.forEach(tx => {
             const row = document.createElement('tr');
@@ -48,15 +45,13 @@ document.addEventListener('DOMContentLoaded', function () {
             tableBody.appendChild(row);
         });
 
-        // Prepare data for chart
         let incomeTotal = 0, expenseTotal = 0;
         filtered.forEach(tx => {
             if (tx.type === 'Income') incomeTotal += tx.amount;
             else if (tx.type === 'Expense') expenseTotal += tx.amount;
         });
 
-        // Draw chart
-        if (chart) chart.destroy(); // Reset if already drawn
+        if (chart) chart.destroy();
 
         chart = new Chart(chartCanvas, {
             type: 'bar',

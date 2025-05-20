@@ -1,5 +1,3 @@
-// File: ../../validation/income/edit-income.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".income-form");
   const incomeType = document.getElementById("incomeType");

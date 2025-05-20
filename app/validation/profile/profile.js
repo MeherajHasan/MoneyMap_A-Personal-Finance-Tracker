@@ -1,4 +1,3 @@
-// Query Selectors
 const fullNameField = document.getElementById('full-name');
 const idTypeField = document.getElementById('id-type');
 const nidPassportField = document.getElementById('nid-passport');
@@ -12,7 +11,6 @@ const userPhoto = document.getElementById('user-photo');
 const uploadBtn = document.getElementById('upload');
 const deleteBtn = document.getElementById('delete-acc');
 
-// Edit Buttons
 const editNameBtn = document.getElementById('edit-Name');
 const identityEditBtn = document.getElementById('identity-edit');
 const genderEditBtn = document.getElementById('gender-edit');

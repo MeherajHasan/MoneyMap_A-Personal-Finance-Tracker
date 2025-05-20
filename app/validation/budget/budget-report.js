@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const reportPeriodText = reportType === 'yearly' ? `Year: ${year}` : `Month: ${month}, ${year}`;
         reportPeriodElement.textContent = reportPeriodText;
 
-        // In a real application, you would fetch data based on these filters
+        // db
         const budgetData = generateDummyBudgetReport(reportType, year, month, selectedCategories);
         updateBudgetOverview(budgetData);
         updateBudgetTable(budgetData);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const link = document.createElement('a');
         link.setAttribute('href', encodedUri);
         link.setAttribute('download', 'budget_report.csv');
-        document.body.appendChild(link); // Required for Firefox
+        document.body.appendChild(link); 
         link.click();
         document.body.removeChild(link);
     });
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const difference = data.totalPlanned - data.totalActual;
         budgetDifferenceElement.textContent = `$${difference.toFixed(2)}`;
         budgetStatusElement.textContent = difference >= 0 ? 'Under Budget' : 'Over Budget';
-        budgetStatusElement.className = difference >= 0 ? 'under-budget' : 'over-budget'; // You'll need CSS for these classes
+        budgetStatusElement.className = difference >= 0 ? 'under-budget' : 'over-budget';
         const utilizedPercentage = data.totalPlanned > 0 ? (data.totalActual / data.totalPlanned) * 100 : 0;
         budgetUtilizedElement.textContent = `${utilizedPercentage.toFixed(0)}%`;
 

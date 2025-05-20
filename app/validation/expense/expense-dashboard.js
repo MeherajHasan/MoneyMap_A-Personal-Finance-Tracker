@@ -12,7 +12,6 @@ function filterTable() {
         const category = row.cells[0].textContent.toLowerCase();
         const date = row.cells[3].textContent;
 
-        // Filter by category and date
         if ((categoryValue === "all" || category.includes(categoryValue)) &&
             (dateValue === "" || date.startsWith(dateValue))) {
             row.style.display = "";

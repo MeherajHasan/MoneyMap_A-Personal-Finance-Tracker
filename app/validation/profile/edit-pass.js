@@ -29,12 +29,9 @@ window.addEventListener('load', () => {
       e.preventDefault();
       return false;
     }
-
-    // If no errors, allow form submission
     return true;
   });
 
-  // Cancel button can just go back
   document.getElementById('cancel-btn').addEventListener('click', () => {
     window.history.back();
   });

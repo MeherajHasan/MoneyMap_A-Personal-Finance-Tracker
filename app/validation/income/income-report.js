@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: incomeTypes.map((type, index) => ({
                     label: type,
                     data: chartData[index],
-                    backgroundColor: ['#4FC3F7', '#81C784', '#FFB74D'][index], // Different colors for each income type
+                    backgroundColor: ['#4FC3F7', '#81C784', '#FFB74D'][index],
                 }))
             },
             options: {

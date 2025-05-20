@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const month = document.getElementById('monthSelect').value;
         const reportType = document.querySelector('input[name="reportType"]:checked').value;
 
-        const selectedTypes = Array.from(document.querySelectorAll('input[name="expenseCategory"]:checked')) // Use 'expenseCategory' to match HTML
+        const selectedTypes = Array.from(document.querySelectorAll('input[name="expenseCategory"]:checked')) 
             .map(input => input.value);
 
         const dummyData = generateDummyData(reportType, year, month, selectedTypes);
 
         updateExpenseTable(dummyData);
-        updateChart(dummyData, reportType, month, selectedTypes); // Pass selectedTypes to updateChart
+        updateChart(dummyData, reportType, month, selectedTypes); 
     });
 
     downloadBtn.addEventListener('click', () => {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const date = `${mon} ${Math.floor(Math.random() * 28) + 1}, ${year}`;
                 data.push({
                     date: date,
-                    type: type + " Expense", // Keep the " Expense" suffix for consistency if needed
+                    type: type + " Expense", 
                     amount: amount,
                     description: `${type} expense for ${mon}`
                 });
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function updateChart(data, reportType, selectedMonth, expenseTypes) { // Accept selectedTypes
+    function updateChart(data, reportType, selectedMonth, expenseTypes) { 
         const labels = [...new Set(data.map(d => d.date.split(' ')[0]))];
         const grouped = {};
 

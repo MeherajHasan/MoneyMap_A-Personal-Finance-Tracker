@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const categoryTableBody = document.getElementById('categoryTableBody');
 
-    // Handle edit button clicks
     categoryTableBody.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-edit')) {
             const oldCategoryName = e.target.dataset.category;
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Create a form and submit it to update the category
                 const form = document.createElement('form');
                 form.method = 'post';
-                form.action = window.location.href; // Submit to the same page
+                form.action = window.location.href; 
 
                 const actionInput = document.createElement('input');
                 actionInput.type = 'hidden';

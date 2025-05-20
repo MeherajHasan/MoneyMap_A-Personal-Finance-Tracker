@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generatePaymentSchedules(debts) {
-        // This is a more complex feature. For simplicity, we'll just list the debts.
+        // simple way 
         if (debts.length === 0) {
             return '<p>No debts recorded for payment schedules.</p>';
         }
@@ -193,6 +193,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial state: show the "no report generated" message
     noReportGenerated.style.display = 'block';
 });
