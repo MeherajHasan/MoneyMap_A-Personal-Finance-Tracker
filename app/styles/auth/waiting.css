@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #0D1B2A;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#MoneyMap-logo {
+    height: 400px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.waiting-container {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 480px;
+    width: 100%;
+}
+
+.waiting-container h1 {
+    font-size: 28px;
+    color: #0D1B2A;
+    margin-bottom: 20px;
+}
+
+.waiting-container p {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.contact-btn {
+    background-color: #1B263B;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.contact-btn:hover {
+    background-color: #0D1B2A;
+}

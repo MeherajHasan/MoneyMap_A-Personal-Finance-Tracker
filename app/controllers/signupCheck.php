@@ -191,7 +191,7 @@ if (move_uploaded_file($src, $des)) {
         'photo_path' => $des
     ];
     if (signup($user)) {
-        header("Location: ../views/auth/login.php");
+        header("Location: ../views/auth/waiting.php");
         exit;
     } 
     else {

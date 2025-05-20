@@ -2,7 +2,7 @@
 session_start();
 require_once('../models/db.php');
 require_once('../models/userModel.php');
-
+ 
 $email = trim($_POST['email'] ?? '');
 $password = trim($_POST['password'] ?? '');
 
@@ -50,10 +50,12 @@ if ($userData) {
     setcookie('remember_password', '', time() - 3600, '/');
     }
 
-    if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin') {
+    if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin' && $_SESSION['user']['account_status'] == 0) {
         header('Location: ../views/admin/admin-dashboard.php');
-    } else {
+    } else if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'user' && $_SESSION['user']['account_status'] == 0) {
         header('Location: ../views/dashboard/dashboard.php');
+    } else {
+        header('Location: ../views/auth/waiting.php');
     }
 } else {
     $_SESSION['passwordError'] = "Invalid email or password!";

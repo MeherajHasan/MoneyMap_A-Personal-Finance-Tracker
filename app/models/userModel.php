@@ -13,10 +13,10 @@ function login($user) {
 
     if (mysqli_num_rows($result) == 1) {
         $dbUser = mysqli_fetch_assoc($result);
-        if (password_verify($password, $dbUser['password'])) {  // actual
+        //if (password_verify($password, $dbUser['password'])) {  // actual
 
         // CHECKING PURPOSE 
-        //if ($password === $dbUser['password']) {
+        if ($password === $dbUser['password']) {
             return $dbUser;
         }
     }
@@ -28,9 +28,9 @@ function signup($user) {
 
     $fname = $user['fname'];
     $lname = $user['lname'];
-    $id_type = $user['id_type'];  // 0 or 1
+    $id_type = $user['id_type'];  // 0->NID or 1->Passport
     $id_number = $user['id_number'];
-    $passport_expiry = $user['passport_expiry']; // if id_type=1 then will contain value else null
+    $passport_expiry = $user['passport_expiry'] ?? null; 
     $country_code = $user['country_code'];
     $phone = $user['phone'];
     $email = $user['email'];
@@ -40,7 +40,7 @@ function signup($user) {
     $address = $user['address'];
     $photo_path = $user['photo_path'];
     $created_at = date('Y-m-d H:i:s');     //current time
-    $account_status = 1; // by default 1 -> inactive
+    $account_status = 3; // by default 3 -> pending
     $role = "user"; // by default 'user'
 
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
