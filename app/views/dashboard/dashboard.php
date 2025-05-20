@@ -1,5 +1,11 @@
 <?php
     require_once('../../controllers/userAuth.php');
+
+    $photoPath = $_SESSION['user']['photo_path'] ?? '';
+    //var_dump($photoPath); 
+    $profileImage = (!empty($photoPath) && file_exists("../{$photoPath}"))
+        ? "../{$photoPath}"
+        : "../../../public/assets/profile.png";
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +50,8 @@
                     <span class="navigation-btn" id="sync-status"></span>
                     <button class="navigation-btn" id="syncBtn"><img id="sync-icon"
                             src="../../../public/assets/sync.png" alt="sync-icon"></button>
-                    <button class="navigation-btn" id="profileBtn"><img id="profile-img"
-                            src="../../../public/assets/profile.png" alt="profile-img"></button>
+                    <button class="navigation-btn" id="profileBtn"><img id="profile-img" class="profile-circle"
+                            src="<?= $profileImage ?>" alt="profile-img"></button>
                     <button class="navigation-btn" id="notificationBtn"><img id="notification-icon"
                             src="../../../public/assets/notification-white.png" alt="notification-icon"></button>
                     <a href="../../controllers/logout.php" class="navigation-btn" id="logoutBtn"><img

@@ -1,6 +1,12 @@
 <?php
-require_once('../../controllers/userAuth.php');
+    require_once('../../controllers/userAuth.php');
 
+    $photoPath = $_SESSION['user']['photo_path'] ?? '';
+    $profileImage = (!empty($photoPath) && file_exists("../{$photoPath}"))
+        ? "../{$photoPath}"
+        : "../../../public/assets/profile.png";
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +30,7 @@ require_once('../../controllers/userAuth.php');
 
         <div class="profile-details">
             <div class="profile-photo">
-                <img id="user-photo" src="../../../public/assets/profile.png" alt="Profile Photo">
+                <img id="user-photo" class="profile-img" src="<?= $profileImage ?>" alt="Profile Photo">
                 <button class="upload edit" id="upload">Upload</button>
             </div>
 
