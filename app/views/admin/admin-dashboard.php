@@ -1,5 +1,12 @@
 <?php
 require_once('../../controllers/adminAuth.php');
+
+$photoPath = $_SESSION['user']['photo_path'];
+    $profileImage = (!empty($photoPath) && file_exists("../{$photoPath}"))
+        ? "../{$photoPath}"
+        : "../../../public/assets/profile.png";
+
+$fname = strtoupper($_SESSION['user']['fname']);
 ?>
  
 <!DOCTYPE html>
@@ -28,14 +35,14 @@ require_once('../../controllers/adminAuth.php');
         <main class="main-content">
             <header class="dashboard-header">
                 <div class="header-right">
-                    <button class="navigation-btn" id="profileBtn"><img id="profile-img" src="../../../public/assets/profile.png" alt="admin-profile-img"></button>
+                    <button class="navigation-btn" id="profileBtn"><img id="profile-img" src="<?= $profileImage ?>" alt="admin-profile-img"></button>
                     <button class="navigation-btn" id="notificationBtn"><img id="notification-icon" src="../../../public/assets/notification-white.png" alt="notification-icon"></button>
                     <a href="../../controllers/logout.php" class="navigation-btn" id="logoutBtn"><img id="logout-icon" src="../../../public/assets/logout.png" alt="logout-icon"></a>
                 </div>
             </header>
 
             <section class="dashboard-widgets">
-                <h1>Welcome, Admin!</h1>
+                <h1>Welcome, <?= $fname ?>!</h1>
                 <p>Manage the Money Map platform using the controls below.</p>
 
                 <div class="widget" id="total-users-widget">

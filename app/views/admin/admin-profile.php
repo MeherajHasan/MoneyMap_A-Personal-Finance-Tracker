@@ -1,12 +1,16 @@
 <?php
 require_once('../../controllers/adminAuth.php');
 
+$photoPath = $_SESSION['user']['photo_path'] ?? '';
+
 $adminData = [
-    'photo' => '../../../public/assets/admin-default.png',
-    'name' => 'Admin User',
-    'email' => 'admin@example.com',
-    'phone' => '01234567890',
-    'address' => 'Admin Office, Headquarters',
+    'photo' => !empty($photoPath) && file_exists("../{$photoPath}")
+        ? "../{$photoPath}"
+        : "../../../public/assets/admin-default.png",
+    'name' => $_SESSION['user']['fname'] . ' ' . $_SESSION['user']['lname'],
+    'email' => $_SESSION['user']['email'],
+    'phone' => $_SESSION['user']['phone'],
+    'address' => $_SESSION['user']['address'],
 ];
 
 $errors = [

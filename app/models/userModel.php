@@ -13,10 +13,10 @@ function login($user) {
 
     if (mysqli_num_rows($result) == 1) {
         $dbUser = mysqli_fetch_assoc($result);
-        //if (password_verify($password, $dbUser['password'])) {  // actual
+        if (password_verify($password, $dbUser['password'])) {  // actual
 
         // CHECKING PURPOSE 
-        if ($password === $dbUser['password']) {
+        //if ($password === $dbUser['password']) {
             return $dbUser;
         }
     }
