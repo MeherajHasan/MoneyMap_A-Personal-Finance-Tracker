@@ -6,7 +6,16 @@
         ? "../{$photoPath}"
         : "../../../public/assets/profile.png";
 
-    
+    $fullName = $_SESSION['user']['fname'] . ' ' . $_SESSION['user']['lname'];
+
+    $idType = $_SESSION['user']['id_type'] === 0 ? 'NID' : 'Passport';
+    $idNumber = $_SESSION['user']['id_number'];
+
+    $email = $_SESSION['user']['email'];
+
+    $phone = $_SESSION['user']['phone'];
+
+    $address = $_SESSION['user']['address'];
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +35,7 @@
     </header>
 
     <main class="profile-container">
-        <h1>User Profile</h1>
+        <h1><?= $fullName ?>'s Profile</h1>
 
         <div class="profile-details">
             <div class="profile-photo">
@@ -35,20 +44,20 @@
             </div>
 
             <div class="profile-info">
-                <p><strong>Full Name:</strong> <span id="full-name"></span></p>
+                <p><strong>Full Name:</strong> <span id="full-name"></span><?= $fullName ?></span></p>
                 <button class="edit" id="edit-Name">Edit</button>
 
-                <p><strong>Identification Type:</strong> <span id="id-type"></span></p>
-                <p><strong>NID/Passport Number:</strong> <span id="nid-passport"></span></p>
+                <p><strong>Identification Type:</strong> <span id="id-type"><?= $idType ?></span></p>
+                <p><strong>NID/Passport Number:</strong> <span id="nid-passport"><?= $idNumber ?></span></p>
                 <button class="edit" id="identity-edit">Edit</button>
 
-                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Email:</strong> <span id="email"><?= $email ?></span></p>
                 <button class="edit" id="mail-edit">Edit</button>
 
-                <p><strong>Phone Number:</strong> <span id="phone"></span></p>
+                <p><strong>Phone Number:</strong> <span id="phone"><?= $phone ?></span></p>
                 <button class="edit" id="phone-edit">Edit</button>
 
-                <p><strong>Address:</strong> <span id="address"></span></p>
+                <p><strong>Address:</strong> <span id="address"><?= $address ?></span></p>
                 <button class="edit" id="address-edit">Edit</button>
 
                 <p><strong>Password:</strong> ********</p>

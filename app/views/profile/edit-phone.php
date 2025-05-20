@@ -3,10 +3,10 @@ require_once('../../controllers/userAuth.php');
 
 $errorMSG = '';
 $successMSG = '';
-//hardcoded
-$currentPhoneHardcoded = '01234567890'; 
 
-$currentPhoneDisplay = $currentPhoneHardcoded;
+$currentPhone = $_SESSION['user']['phone']; 
+
+$currentPhoneDisplay = $currentPhone;
 
 function isDigitsOnly($str) {
     for ($i = 0; $i < strlen($str); $i++) {
@@ -19,11 +19,11 @@ function isDigitsOnly($str) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newPhone = trim($_POST['phone'] ?? '');
+    $newPhone = trim($_POST['phone']);
 
     if ($newPhone === '') {
         $errorMSG = 'New phone number is required.';
-    } elseif ($newPhone === $currentPhoneHardcoded) {
+    } elseif ($newPhone === $currentPhone) {
         $errorMSG = 'New phone number must be different from the current phone number.';
     } elseif (!isDigitsOnly($newPhone)) {
         $errorMSG = 'Phone number can contain digits only.';
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // db
 
         $successMSG = 'Phone number updated successfully.';
-        $currentPhoneDisplay = htmlspecialchars($newPhone);
+        $currentPhoneDisplay = $newPhone;
         $_POST = [];
     }
 }

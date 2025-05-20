@@ -3,9 +3,7 @@ require_once('../../controllers/userAuth.php');
 
 $errorMSG = '';
 $successMSG = '';
-
-// Hardcoded
-$currentName = 'John Doe';
+$currentName = $_SESSION['user']['fname'] . ' ' . $_SESSION['user']['lname'];
 
 function isValidBillName($name) {
     for ($i = 0; $i < strlen($name); $i++) {

@@ -4,8 +4,7 @@ require_once('../../controllers/userAuth.php');
 $errorMSG = '';
 $successMSG = '';
 
-// Hardcoded 
-$currentEmail = 'user@example.com';
+$currentEmail = $_SESSION['user']['email'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newEmail = trim($_POST['email'] ?? '');
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <h1>Edit Email</h1>
         <form id="edit-mail" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <p><strong>Current Email: </strong> <span id="current-email"><?php echo htmlspecialchars($currentEmail); ?></span></p>
+            <p><strong>Current Email: </strong> <span id="current-email"><?= $currentEmail ?></span></p>
 
             <label for="email"><strong>New Email: </strong></label>
             <input type="email" id="email" name="email" class="email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">

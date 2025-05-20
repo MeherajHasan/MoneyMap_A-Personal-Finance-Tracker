@@ -4,8 +4,8 @@ require_once('../../controllers/userAuth.php');
 $errorMSG = '';
 $successMSG = '';
 
-$currentIdType = 'Passport';
-$currentIdNumber = 'AB1234567';
+$currentIdType = $_SESSION['user']['id_type'] === 0 ? 'NID' : 'Passport';
+$currentIdNumber = $_SESSION['user']['id_number'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idType = $_POST['id-type'] ?? '';
@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <h1>Edit Identity</h1>
         <form id="edit-identity" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <p><strong>Current Identity Type: </strong> <span id="current-idType"><?php echo htmlspecialchars($currentIdType); ?></span></p>
-            <p><strong>Current ID Number: </strong> <span id="current-idNumber"><?php echo htmlspecialchars($currentIdNumber); ?></span></p>
+            <p><strong>Current Identity Type: </strong> <span id="current-idType"><?= $currentIdType ?></span></p>
+            <p><strong>Current ID Number: </strong> <span id="current-idNumber"><?= $currentIdNumber ?></span></p>
 
             <label for="id-type"><strong>New Identity Type: </strong></label>
             <select id="id-type" name="id-type" class="id-type">

@@ -1,8 +1,7 @@
 <?php
 require_once('../../controllers/userAuth.php');
 
-// hardcoded
-$currentAddress = "123 Main St, City, Country";
+$currentAddress = $_SESSION['user']['address'];
 
 $errorMSG = "";
 $successMSG = "";
@@ -54,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <h1>Edit Address</h1>
         <form id="edit-address" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <p><strong>Current Address: </strong> <span id="current-address"><?php echo htmlspecialchars($currentAddress); ?></span></p>
+            <p><strong>Current Address: </strong> <span id="current-address"><?= $currentAddress ?></span></p>
 
             <label for="address"><strong>New Address: </strong></label>
             <textarea id="address" name="address" class="address" rows="4"><?php echo htmlspecialchars($_POST['address'] ?? ''); ?></textarea>

@@ -6,6 +6,8 @@
     $profileImage = (!empty($photoPath) && file_exists("../{$photoPath}"))
         ? "../{$photoPath}"
         : "../../../public/assets/profile.png";
+
+    $fname = strtoupper($_SESSION['user']['fname']);
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +62,7 @@
             </header>
 
             <section class="dashboard-widgets">
-                <h1>Welcome to Your Dashboard!</h1>
+                <h1>Welcome, <?= $fname ?> to Your Dashboard!</h1>
                 <p>Select a feature from the sidebar to get started.</p>
 
                 <div class="widget" id="income-widget">
