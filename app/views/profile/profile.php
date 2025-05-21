@@ -1,5 +1,6 @@
 <?php
     require_once('../../controllers/userAuth.php');
+    require_once('../../models/userModel.php');
 
     $photoPath = $_SESSION['user']['photo_path'] ?? '';
     $profileImage = (!empty($photoPath) && file_exists("../{$photoPath}"))

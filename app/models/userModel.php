@@ -2,7 +2,8 @@
 
 require_once('db.php');
 
-function login($user) {
+function login($user)
+{
     $con = getConnection();
 
     $email = $user['email'];
@@ -13,25 +14,26 @@ function login($user) {
 
     if (mysqli_num_rows($result) == 1) {
         $dbUser = mysqli_fetch_assoc($result);
-        if (password_verify($password, $dbUser['password'])) { 
+        if (password_verify($password, $dbUser['password'])) {
             return $dbUser;
         }
     }
     return false;
 }
 
-function signup($user) {
+function signup($user)
+{
     $con = getConnection();
 
     $fname = $user['fname'];
     $lname = $user['lname'];
     $id_type = $user['id_type'];  // 0->NID or 1->Passport
     $id_number = $user['id_number'];
-    $passport_expiry = $user['passport_expiry'] ?? null; 
+    $passport_expiry = $user['passport_expiry'] ?? null;
     $country_code = $user['country_code'];
     $phone = $user['phone'];
     $email = $user['email'];
-    $password = $user['password']; 
+    $password = $user['password'];
     $gender = $user['gender']; // for male 0, for female 1
     $dob = $user['dob'];
     $address = $user['address'];
@@ -52,7 +54,8 @@ function signup($user) {
     }
 }
 
-function updateUserName($user, $newFirstName, $newLastName) {
+function updateUserName($user, $newFirstName, $newLastName)
+{
     $con = getConnection();
     $email = $user['email'];
     $newFirstName = $newFirstName;
@@ -61,7 +64,8 @@ function updateUserName($user, $newFirstName, $newLastName) {
     return mysqli_query($con, $sql);
 }
 
-function updateUserIdentity($user, $newIdType, $newIdNumber, $passportExpiry) {
+function updateUserIdentity($user, $newIdType, $newIdNumber, $passportExpiry)
+{
     $con = getConnection();
     $email = $user['email'];
     $idTypeValue = ($newIdType === 'NID') ? 0 : 1;
@@ -84,15 +88,24 @@ function updateUserIdentity($user, $newIdType, $newIdNumber, $passportExpiry) {
     }
 }
 
-function updateUserEmail($user, $newEmail) {
+function updateUserEmail($user, $newEmail)
+{
     $con = getConnection();
     $email = $user['email'];
     $newEmail = $newEmail;
     $sql = "UPDATE users SET email = '$newEmail' WHERE email = '$email'";
-    return mysqli_query($con, $sql);
+    try {
+        return mysqli_query($con, $sql);
+    } catch (mysqli_sql_exception $e) {
+        if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+            return "duplicate";
+        }
+        return false;
+    } 
 }
 
-function updateUserPhone($user, $newPhone) {
+function updateUserPhone($user, $newPhone)
+{
     $con = getConnection();
     $email = $user['email'];
     $newPhone = $newPhone;
@@ -100,7 +113,8 @@ function updateUserPhone($user, $newPhone) {
     return mysqli_query($con, $sql);
 }
 
-function updateUserAddress($user, $newAddress) {
+function updateUserAddress($user, $newAddress)
+{
     $con = getConnection();
     $email = $user['email'];
     $newAddress = $newAddress;
@@ -108,17 +122,42 @@ function updateUserAddress($user, $newAddress) {
     return mysqli_query($con, $sql);
 }
 
-function updateUserPassword($user, $newPassword) {
+function updateUserPassword($user, $newPassword)
+{
     $con = getConnection();
     $email = $user['email'];
     $sql = "UPDATE users SET password = '$newPassword' WHERE email = '$email'";
     return mysqli_query($con, $sql);
 }
 
-function deleteUserAccount($user) {
+function deleteUserAccount($user)
+{
     $con = getConnection();
     $email = $user['email'];
-    $sql = "UPDATE users SET account_status = 1 WHERE email = '$email'";
+    $sql = "UPDATE users SET account_status = 1 WHERE email = '$email'"; // 1->inactive
     return mysqli_query($con, $sql);
 }
-?>
+
+function getTotalUsers()
+{
+    $con = getConnection();
+    $sql = "SELECT COUNT(*) as total FROM users";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result)['total'];
+}
+
+function updateAdminInfo($user, $newFirstName, $newLastName, $newEmail, $newPhone, $newAddress, $newPassword)
+{
+    $con = getConnection();
+    $email = $user['email'];
+    $sql = "UPDATE users SET fname = '$newFirstName', lname = '$newLastName', email = '$newEmail', phone = '$newPhone', address = '$newAddress', password = '$newPassword' WHERE email = '$email'";
+
+    try {
+        return mysqli_query($con, $sql);
+    } catch (mysqli_sql_exception $e) {
+        if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+            return "duplicate";
+        }
+        return false;
+    }
+}

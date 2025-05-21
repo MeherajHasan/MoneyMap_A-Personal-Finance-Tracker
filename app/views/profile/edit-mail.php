@@ -16,13 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMSG = "Invalid email format.";
     } else {
         $mailUpdate = updateUserEmail($_SESSION['user'], $newEmail);
-        if ($mailUpdate) {
+        if (!$mailUpdate) {
+            $errorMSG = "Failed to update email. Please try again.";
+        } elseif ($mailUpdate === "duplicate") {
+            $errorMSG = "Email already exists.";
+        } else {
             $successMSG = "Email updated successfully.";
             $_SESSION['user']['email'] = $newEmail;
             $currentEmail = $newEmail;
-            header("Location: profile.php");
-        } else {
-            $errorMSG = "Failed to update email. Please try again.";
+            header("Location: ../dashboard/dashboard.php");
+            exit();
         }
     }
 }

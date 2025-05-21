@@ -1,10 +1,10 @@
 <?php
 require_once('../../controllers/adminAuth.php');
+require_once('../../models/userModel.php');
 
 $photoPath = $_SESSION['user']['photo_path'];
-    $profileImage = (!empty($photoPath) && file_exists("../{$photoPath}"))
-        ? "../{$photoPath}"
-        : "../../../public/assets/profile.png";
+$profileImage = (!empty($photoPath) && file_exists("../{$photoPath}")) 
+    ? "../{$photoPath}" : "../../../public/assets/profile.png";
 
 $fname = strtoupper($_SESSION['user']['fname']);
 ?>
@@ -47,7 +47,7 @@ $fname = strtoupper($_SESSION['user']['fname']);
 
                 <div class="widget" id="total-users-widget">
                     <h2 class="widget-title">Total Users</h2>
-                    <p class="widget-amount" id="user-count">--</p>
+                    <p class="widget-amount" id="user-count"><?= getTotalUsers() ?></p>
                     <button class="widget-action-btn" onclick="window.location.href='user-management.php'">View Users</button>
                 </div>
 
