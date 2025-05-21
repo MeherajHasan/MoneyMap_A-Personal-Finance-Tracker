@@ -7,20 +7,18 @@ $successMSG = '';
 
 $currentIdType = $_SESSION['user']['id_type'] === 0 ? 'NID' : 'Passport';
 $currentIdNumber = $_SESSION['user']['id_number'];
-$passportExpiry = $_SESSION['user']['passport_expiry'];
+$passportExpiry = $_SESSION['user']['passport_expiry'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $idType = $_POST['id-type'] ?? '';
-    $idNumber = trim($_POST['id-number'] ?? '');
-    $passportExpiry = $_POST['passport-expiry-date'] ?? '';
+    $idType = $_POST['id-type'];
+    $idNumber = trim($_POST['id-number']);
+    $passportExpiry = $_POST['passport-expiry-date'] ?? null;
 
     if (empty($idType) || empty($idNumber)) {
         $errorMSG = "Identity type and ID number are required.";
-    } 
-    elseif ($idType === 'Passport' && empty($passportExpiry)) {
+    } elseif ($idType === 'Passport' && empty($passportExpiry)) {
         $errorMSG = "Passport expiry date is required.";
-    } 
-    else {
+    } else {
         $valid = true;
         for ($i = 0; $i < strlen($idNumber); $i++) {
             $char = $idNumber[$i];
@@ -33,12 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if ($valid) {
-            $idUpdate = updateUserIdentity($_SESSION['user'], $idType, $idNumber);
+            $idUpdate = updateUserIdentity($_SESSION['user'], $idType, $idNumber, $passportExpiry);
 
-            if ($idUpdate === true) {
+            if ($idUpdate) {
                 $successMSG = "Identity updated successfully.";
                 $_SESSION['user']['id_type'] = $idType === 'NID' ? 0 : 1;
                 $_SESSION['user']['id_number'] = $idNumber;
+                if ($idType === 'Passport') {
+                    $_SESSION['user']['passport_expiry'] = $passportExpiry;
+                } else {
+                    unset($_SESSION['user']['passport_expiry']);
+                }
                 header("Location: profile.php");
                 exit();
             } elseif ($idUpdate === "duplicate") {
@@ -74,7 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="edit-identity" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <p><strong>Current Identity Type: </strong> <span id="current-idType"><?= $currentIdType ?></span></p>
             <p><strong>Current ID Number: </strong> <span id="current-idNumber"><?= $currentIdNumber ?></span></p>
-            <p><strong>Current Passport Expiry: </strong> <span id="current-passportExpiry"><?= $currentIdType === 'Passport' ? $passportExpiry : 'N/A' ?></span></p>
+            <?php if ($currentIdType === 'Passport' && !empty($passportExpiry)): ?>
+                <p><strong>Current Passport Expiry: </strong> <span id="current-passportExpiry"><?= $passportExpiry ?></span></p>
+            <?php endif; ?>
+
 
             <label for="id-type"><strong>New Identity Type: </strong></label>
             <select id="id-type" name="id-type" class="id-type">

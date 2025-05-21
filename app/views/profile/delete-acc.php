@@ -5,7 +5,7 @@ require_once('../../models/userModel.php');
 $errorMSG = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $selectedReasons = $_POST['reason'] ?? []; // Now it's always an array
+    $selectedReasons = $_POST['reason'] ?? []; 
     $otherDetail = trim($_POST['other-reason-detail'] ?? '');
 
     $validReasons = [

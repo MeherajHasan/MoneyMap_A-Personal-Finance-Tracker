@@ -61,12 +61,18 @@ function updateUserName($user, $newFirstName, $newLastName) {
     return mysqli_query($con, $sql);
 }
 
-function updateUserIdentity($user, $newIdType, $newIdNumber) {
+function updateUserIdentity($user, $newIdType, $newIdNumber, $passportExpiry) {
     $con = getConnection();
     $email = $user['email'];
     $idTypeValue = ($newIdType === 'NID') ? 0 : 1;
 
-    $sql = "UPDATE users SET id_type = '$idTypeValue', id_number = '$newIdNumber' WHERE email = '$email'";
+    if ($newIdType === 'Passport' && !empty($passportExpiry)) {
+        $passportExpiryValue = "'$passportExpiry'";
+    } else {
+        $passportExpiryValue = "NULL";
+    }
+
+    $sql = "UPDATE users SET id_type = '$idTypeValue', id_number = '$newIdNumber', passport_expiry = $passportExpiryValue WHERE email = '$email'";
 
     try {
         return mysqli_query($con, $sql);
@@ -77,7 +83,6 @@ function updateUserIdentity($user, $newIdType, $newIdNumber) {
         return false;
     }
 }
-
 
 function updateUserEmail($user, $newEmail) {
     $con = getConnection();
