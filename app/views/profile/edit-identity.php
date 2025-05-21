@@ -1,11 +1,13 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/userModel.php');
 
 $errorMSG = '';
 $successMSG = '';
 
 $currentIdType = $_SESSION['user']['id_type'] === 0 ? 'NID' : 'Passport';
 $currentIdNumber = $_SESSION['user']['id_number'];
+$passportExpiry = $_SESSION['user']['passport_expiry'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idType = $_POST['id-type'] ?? '';
@@ -14,9 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($idType) || empty($idNumber)) {
         $errorMSG = "Identity type and ID number are required.";
-    } elseif ($idType === 'Passport' && empty($passportExpiry)) {
+    } 
+    elseif ($idType === 'Passport' && empty($passportExpiry)) {
         $errorMSG = "Passport expiry date is required.";
-    } else {
+    } 
+    else {
         $valid = true;
         for ($i = 0; $i < strlen($idNumber); $i++) {
             $char = $idNumber[$i];
@@ -28,13 +32,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        if (!$valid) {
-            $errorMSG = "ID number contains invalid characters.";
-        } else {
-            // db
+        if ($valid) {
+            $idUpdate = updateUserIdentity($_SESSION['user'], $idType, $idNumber);
 
-            header("Location: profile.php");
-            exit;
+            if ($idUpdate === true) {
+                $successMSG = "Identity updated successfully.";
+                $_SESSION['user']['id_type'] = $idType === 'NID' ? 0 : 1;
+                $_SESSION['user']['id_number'] = $idNumber;
+                header("Location: profile.php");
+                exit();
+            } elseif ($idUpdate === "duplicate") {
+                $errorMSG = "This ID number is already used by another account.";
+            } else {
+                $errorMSG = "Failed to update identity. Please try again.";
+            }
+        } else {
+            $errorMSG = "ID number contains invalid characters.";
         }
     }
 }
@@ -61,21 +74,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="edit-identity" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <p><strong>Current Identity Type: </strong> <span id="current-idType"><?= $currentIdType ?></span></p>
             <p><strong>Current ID Number: </strong> <span id="current-idNumber"><?= $currentIdNumber ?></span></p>
+            <p><strong>Current Passport Expiry: </strong> <span id="current-passportExpiry"><?= $currentIdType === 'Passport' ? $passportExpiry : 'N/A' ?></span></p>
 
             <label for="id-type"><strong>New Identity Type: </strong></label>
             <select id="id-type" name="id-type" class="id-type">
-                <option value="" disabled <?php if (!isset($_POST['id-type'])) echo 'selected'; ?>>--Select A Type--</option>
+                <option value="" disabled <?php if (!isset($_POST['id-type'])) echo 'selected'; ?>>--Select A Type--
+                </option>
                 <option value="NID" <?php if ($_POST['id-type'] ?? '' === 'NID') echo 'selected'; ?>>NID</option>
-                <option value="Passport" <?php if ($_POST['id-type'] ?? '' === 'Passport') echo 'selected'; ?>>Passport</option>
+                <option value="Passport" <?php if ($_POST['id-type'] ?? '' === 'Passport') echo 'selected'; ?>>Passport
+                </option>
             </select>
             <br><br>
 
             <label for="id-number"><strong>New ID Number: </strong></label>
-            <input type="text" id="id-number" name="id-number" class="id-number" value="<?php echo htmlspecialchars($_POST['id-number'] ?? ''); ?>">
+            <input type="text" id="id-number" name="id-number" class="id-number"
+                value="<?php echo htmlspecialchars($_POST['id-number'] ?? ''); ?>">
 
-            <div id="passport-expiry" style="<?php echo ($_POST['id-type'] ?? '') === 'Passport' ? 'display: block;' : 'display: none;'; ?>">
+            <div id="passport-expiry"
+                style="<?php echo ($_POST['id-type'] ?? '') === 'Passport' ? 'display: block;' : 'display: none;'; ?>">
                 <label for="passport-expiry-date"><strong>Passport Expiry Date: </strong></label>
-                <input type="date" id="passport-expiry-date" name="passport-expiry-date" value="<?php echo htmlspecialchars($_POST['passport-expiry-date'] ?? ''); ?>">
+                <input type="date" id="passport-expiry-date" name="passport-expiry-date"
+                    value="<?php echo htmlspecialchars($_POST['passport-expiry-date'] ?? ''); ?>">
             </div>
 
             <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>

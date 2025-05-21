@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/userModel.php');
 
 $errorMSG = '';
 $successMSG = '';
@@ -30,11 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($newPhone) < 6) {
         $errorMSG = 'Phone number must be at least 6 digits.';
     } else {
-        // db
-
-        $successMSG = 'Phone number updated successfully.';
-        $currentPhoneDisplay = $newPhone;
-        $_POST = [];
+        $phoneUpdate = updateUserPhone($_SESSION['user'], $newPhone);
+        if ($phoneUpdate) {
+            $successMSG = 'Phone number updated successfully.';
+            $_SESSION['user']['phone'] = $newPhone;
+            $currentPhoneDisplay = $newPhone;
+            header("Location: profile.php");
+            exit();
+        } else {
+            $errorMSG = 'Failed to update phone number. Please try again.';
+        }
     }
 }
 ?>

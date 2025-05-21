@@ -37,9 +37,7 @@ if ($userData) {
     $_SESSION['status'] = true;
 
     foreach ($userData as $key => $value) {
-        // if ($key !== 'password') {
             $_SESSION['user'][$key] = $value;
-        // }
     }
 
     if (isset($_POST['remember'])) {

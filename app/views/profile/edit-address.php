@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/userModel.php');
 
 $currentAddress = $_SESSION['user']['address'];
 
@@ -26,10 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$valid) {
             $errorMSG = "Address contains invalid characters.";
         } else {
-            // db
-
-            header("Location: profile.php");
-            exit;
+            $addressUpdate = updateUserAddress($_SESSION['user'], $newAddress);
+            if ($addressUpdate) {
+                $successMSG = "Address updated successfully.";
+                $_SESSION['user']['address'] = $newAddress;
+                $currentAddress = $newAddress;
+                header("Location: profile.php");
+                exit();
+            } else {
+                $errorMSG = "Failed to update address. Please try again.";
+            }
         }
     }
 }

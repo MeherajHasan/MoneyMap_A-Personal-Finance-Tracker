@@ -1,29 +1,37 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/userModel.php');
 
 $errorMSG = '';
 $successMSG = '';
 
-//hardcoded - db
-$currentHPass = 'Password123'; 
+$actualCurrentPassword = $_SESSION['user']['password'];  
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $currentPassword = $_POST['current-password'] ?? '';
-    $newPassword = $_POST['new-password'] ?? '';
-    $confirmPassword = $_POST['confirm-password'] ?? '';
+    $currentPassword = $_POST['current-password'];
+    $newPassword = $_POST['new-password'];
+    $confirmPassword = $_POST['confirm-password'];
 
     if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
         $errorMSG = "All fields are required.";
-    } elseif ($currentPassword !== $currentHPass) {
+    } elseif (!password_verify($currentPassword, $actualCurrentPassword)) {
         $errorMSG = "Current password is incorrect.";
     } elseif (strlen($newPassword) < 8) {
         $errorMSG = "New password must be at least 8 characters long.";
     } elseif ($newPassword !== $confirmPassword) {
         $errorMSG = "New password and confirm password do not match.";
     } else {
-        // db
-        $successMSG = "Password changed successfully.";
-        $_POST = [];
+        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $passwordUpdate = updateUserPassword($_SESSION['user'], $hashedNewPassword);
+        if ($passwordUpdate) { 
+            $successMSG = "Password changed successfully."; 
+            $_POST = [];
+            $_SESSION['user']['password'] = $hashedNewPassword;
+            header("Location: profile.php");
+            exit();
+        } else {
+            $errorMSG = "Failed to change password. Please try again.";
+        }
     }
 }
 ?>

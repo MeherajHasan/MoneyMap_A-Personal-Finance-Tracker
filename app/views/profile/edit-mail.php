@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/userModel.php');
 
 $errorMSG = '';
 $successMSG = '';
@@ -14,9 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
         $errorMSG = "Invalid email format.";
     } else {
-        // db
-        $successMSG = "Email updated successfully.";
-        $currentEmail = $newEmail;
+        $mailUpdate = updateUserEmail($_SESSION['user'], $newEmail);
+        if ($mailUpdate) {
+            $successMSG = "Email updated successfully.";
+            $_SESSION['user']['email'] = $newEmail;
+            $currentEmail = $newEmail;
+            header("Location: profile.php");
+        } else {
+            $errorMSG = "Failed to update email. Please try again.";
+        }
     }
 }
 ?>

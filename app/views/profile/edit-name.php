@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/userModel.php');
 
 $errorMSG = '';
 $successMSG = '';
@@ -25,11 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMSG = "Name cannot be empty.";
     } elseif (!isValidBillName($newName)) {
         $errorMSG = "Name contains invalid characters.";
+    } elseif (count(explode(' ', $newName)) < 2) {
+        $errorMSG = "Full name must contain at least two parts.";
     } else {
-        // db
+        $nameParts = explode(' ', $newName);
+        $newFirstName = $nameParts[0];
+        $newLastName = $nameParts[1];
 
-        $successMSG = "Name updated successfully.";
-        $currentName = $newName;
+        $nameUpdate = updateUserName($_SESSION['user'], $newFirstName, $newLastName);
+
+        if ($nameUpdate) {
+            $successMSG = "Name updated successfully.";
+            $_SESSION['user']['fname'] = $newFirstName;
+            $_SESSION['user']['lname'] = $newLastName;
+            $currentName = $newFirstName . ' ' . $newLastName;
+            header("Location: profile.php");
+            exit();
+        } else {
+            $errorMSG = "Failed to update name. Please try again.";
+        }
     }
 }
 ?>
