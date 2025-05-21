@@ -6,13 +6,12 @@ $errorMSG = '';
 $successMSG = '';
 $currentName = $_SESSION['user']['fname'] . ' ' . $_SESSION['user']['lname'];
 
-function isValidBillName($name) {
+function isValidName($name) {
     for ($i = 0; $i < strlen($name); $i++) {
         $char = $name[$i];
         if (!(($char >= 'a' && $char <= 'z') ||
               ($char >= 'A' && $char <= 'Z') ||
-              ($char >= '0' && $char <= '9') ||
-              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
+              $char === '.' || $char === '-')) {
             return false;
         }
     }
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($newName === '') {
         $errorMSG = "Name cannot be empty.";
-    } elseif (!isValidBillName($newName)) {
+    } elseif (!isValidName($newName)) {
         $errorMSG = "Name contains invalid characters.";
     } elseif (count(explode(' ', $newName)) < 2) {
         $errorMSG = "Full name must contain at least two parts.";
@@ -67,17 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Name</h1>
-        <form id="edit-name" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <p><strong>Current Name: </strong> <span id="current-name"><?php echo htmlspecialchars($currentName); ?></span></p>
+        <form id="edit-name" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <p><strong>Current Name: </strong> <span id="current-name"><?php echo $currentName; ?></span></p>
 
             <label for="name"><strong>New Name: </strong></label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                class="name"
-                value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>"
-            />
+            <input type="text" id="name" name="name" class="name" value="<?php echo $_POST['name'] ?? ''; ?>" />
 
             <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
             <?php if ($successMSG): ?>

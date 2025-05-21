@@ -1,89 +1,121 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form[method="post"]:not([name])'); // selects the edit form
-    if (!form) return;
+  const searchForm = document.querySelector('form[action="' + location.pathname + '"]');
+  const searchEmailInput = searchForm ? searchForm.querySelector('input[name="searchEmail"]') : null;
+  const searchError = document.getElementById('searchError');
 
-    function isLettersAndSpaces(str) {
-        for (let i = 0; i < str.length; i++) {
-            const c = str[i].toLowerCase();
-            if (!((c >= 'a' && c <= 'z') || c === ' ')) return false;
-        }
-        return str.length > 0;
+  const updateForm = document.querySelector('form[method="post"]:not([action])');
+  const updateError = document.getElementById('updateError');
+
+  function isValidName(name) {
+    for (let i = 0; i < name.length; i++) {
+      const ch = name[i];
+      if (
+        !(
+          (ch >= 'a' && ch <= 'z') ||
+          (ch >= 'A' && ch <= 'Z') ||
+          ch === '.' ||
+          ch === '-'
+        )
+      ) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    function isValidCountryCode(code) {
-        if (code.length === 0) return false;
-        if (code[0] === '+') {
-            for (let i = 1; i < code.length; i++) {
-                if (!(code[i] >= '0' && code[i] <= '9')) return false;
-            }
-            return true;
-        } else {
-            for (let i = 0; i < code.length; i++) {
-                if (!(code[i] >= '0' && code[i] <= '9')) return false;
-            }
-            return true;
-        }
+  function isDigitsOnly(str) {
+    for (let i = 0; i < str.length; i++) {
+      const ch = str[i];
+      if (ch < '0' || ch > '9') {
+        return false;
+      }
     }
+    return true;
+  }
 
-    function isDigitsOnly(str) {
-        if (str.length === 0) return false;
-        for (let i = 0; i < str.length; i++) {
-            if (!(str[i] >= '0' && str[i] <= '9')) return false;
-        }
-        return true;
+  function manualEmailCheck(email) {
+    const atPos = email.indexOf('@');
+    const dotPos = email.lastIndexOf('.');
+    if (atPos < 1 || dotPos < atPos + 2 || dotPos === email.length - 1) {
+      return false;
     }
+    return true;
+  }
 
-    function validateForm() {
-        const errors = [];
-
-        const fname = form.fname.value.trim();
-        const lname = form.lname.value.trim();
-        const countryCode = form.country_code.value.trim();
-        const phone = form.phone.value.trim();
-        const gender = form.gender.value;
-        const dob = form.dob.value;
-        const address = form.address.value.trim();
-        const accountStatus = form.account_status.value;
-        const role = form.role.value;
-
-        if (!isLettersAndSpaces(fname)) {
-            errors.push('First name must contain only letters and spaces and cannot be empty.');
-        }
-        if (!isLettersAndSpaces(lname)) {
-            errors.push('Last name must contain only letters and spaces and cannot be empty.');
-        }
-        if (!isValidCountryCode(countryCode)) {
-            errors.push('Country code must be numeric or start with "+".');
-        }
-        if (!isDigitsOnly(phone)) {
-            errors.push('Phone number must be digits only and cannot be empty.');
-        }
-        if (gender !== '0' && gender !== '1') {
-            errors.push('Please select a valid gender.');
-        }
-        if (dob === '') {
-            errors.push('Date of birth is required.');
-        }
-        if (address === '') {
-            errors.push('Address is required.');
-        }
-        if (!['0', '1', '2', '3'].includes(accountStatus)) {
-            errors.push('Please select a valid account status.');
-        }
-        if (role !== 'admin' && role !== 'user') {
-            errors.push('Please select a valid role.');
-        }
-
-        if (errors.length > 0) {
-            alert(errors.join('\n'));
-            return false;
-        }
-        return true;
-    }
-
-    form.addEventListener('submit', (e) => {
-        if (!validateForm()) {
-            e.preventDefault();
-        }
+  if (searchForm) {
+    searchForm.addEventListener('submit', e => {
+      const email = searchEmailInput.value.trim();
+      if (email === '') {
+        e.preventDefault();
+        searchError.textContent = 'Email field is required';
+      } else if (!manualEmailCheck(email)) {
+        e.preventDefault();
+        searchError.textContent = 'Invalid email address';
+      } else {
+        searchError.textContent = '';
+      }
     });
+  }
+
+  if (updateForm) {
+    updateForm.addEventListener('submit', e => {
+      let errorMsg = '';
+      const fname = updateForm.elements['fname'].value.trim();
+      const lname = updateForm.elements['lname'].value.trim();
+      const phone = updateForm.elements['phone'].value.trim();
+      const gender = updateForm.elements['gender'].value;
+      const dob = updateForm.elements['dob'].value;
+      const address = updateForm.elements['address'].value.trim();
+      const account_status = updateForm.elements['account_status'].value;
+      const role = updateForm.elements['role'].value;
+
+      if (fname === '') {
+        errorMsg = 'First name is required';
+      } else if (!isValidName(fname)) {
+        errorMsg = 'First name must contain only letters';
+      } else if (lname === '') {
+        errorMsg = 'Last name is required';
+      } else if (!isValidName(lname)) {
+        errorMsg = 'Last name must contain only letters';
+      } else if (phone === '') {
+        errorMsg = 'Phone number is required';
+      } else if (!isDigitsOnly(phone)) {
+        errorMsg = 'Phone number must be digits only';
+      } else if (phone.length < 6) {
+        errorMsg = 'Phone number must be at least 6 digits';
+      } else if (gender === '') {
+        errorMsg = 'Gender is required';
+      } else if (!['0', '1'].includes(gender)) {
+        errorMsg = 'Invalid gender selected';
+      } else if (address === '') {
+        errorMsg = 'Address is required';
+      } else if (dob === '') {
+        errorMsg = 'Date of birth is required';
+      } else {
+        const dobDate = new Date(dob);
+        const today = new Date();
+        const minDob = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate());
+        if (dobDate > minDob) {
+          errorMsg = 'User must be at least 12 years old';
+        }
+      } 
+
+      if (account_status === '') {
+        errorMsg = 'Account status is required';
+      } else if (!['0', '2'].includes(account_status)) {
+        errorMsg = 'Invalid account status';
+      } else if (role === '') {
+        errorMsg = 'Role is required';
+      } else if (!['admin', 'user'].includes(role)) {
+        errorMsg = 'Invalid role selected';
+      }
+
+      if (errorMsg !== '') {
+        e.preventDefault();
+        updateError.textContent = errorMsg;
+      } else {
+        updateError.textContent = '';
+      }
+    });
+  }
 });

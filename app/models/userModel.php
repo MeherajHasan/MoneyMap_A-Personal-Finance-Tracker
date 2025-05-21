@@ -2,6 +2,7 @@
 
 require_once('db.php');
 
+// loginCheck.php
 function login($user)
 {
     $con = getConnection();
@@ -21,6 +22,7 @@ function login($user)
     return false;
 }
 
+// signupCheck.php
 function signup($user)
 {
     $con = getConnection();
@@ -54,6 +56,7 @@ function signup($user)
     }
 }
 
+// edit-name.php
 function updateUserName($user, $newFirstName, $newLastName)
 {
     $con = getConnection();
@@ -64,6 +67,7 @@ function updateUserName($user, $newFirstName, $newLastName)
     return mysqli_query($con, $sql);
 }
 
+// edit-identity.php
 function updateUserIdentity($user, $newIdType, $newIdNumber, $passportExpiry)
 {
     $con = getConnection();
@@ -88,6 +92,7 @@ function updateUserIdentity($user, $newIdType, $newIdNumber, $passportExpiry)
     }
 }
 
+// edit-mail.php
 function updateUserEmail($user, $newEmail)
 {
     $con = getConnection();
@@ -101,9 +106,10 @@ function updateUserEmail($user, $newEmail)
             return "duplicate";
         }
         return false;
-    } 
+    }
 }
 
+// edit-phone.php
 function updateUserPhone($user, $newPhone)
 {
     $con = getConnection();
@@ -113,6 +119,7 @@ function updateUserPhone($user, $newPhone)
     return mysqli_query($con, $sql);
 }
 
+// edit-address.php
 function updateUserAddress($user, $newAddress)
 {
     $con = getConnection();
@@ -122,6 +129,7 @@ function updateUserAddress($user, $newAddress)
     return mysqli_query($con, $sql);
 }
 
+// edit-pass.php
 function updateUserPassword($user, $newPassword)
 {
     $con = getConnection();
@@ -130,6 +138,7 @@ function updateUserPassword($user, $newPassword)
     return mysqli_query($con, $sql);
 }
 
+// delete-acc.php
 function deleteUserAccount($user)
 {
     $con = getConnection();
@@ -146,6 +155,7 @@ function getTotalUsers()
     return mysqli_fetch_assoc($result)['total'];
 }
 
+// admin-profile.php
 function updateAdminInfo($user, $newFirstName, $newLastName, $newEmail, $newPhone, $newAddress, $newPassword)
 {
     $con = getConnection();
@@ -160,4 +170,52 @@ function updateAdminInfo($user, $newFirstName, $newLastName, $newEmail, $newPhon
         }
         return false;
     }
+}
+
+// user-management.php
+function searchByMail($searchEmail)
+{
+    $con = getConnection();
+    $query = "SELECT * FROM users WHERE email = '$searchEmail'";
+    $result = mysqli_query($con, $query);
+    if (mysqli_num_rows($result) === 1) {
+        $selectedUser = mysqli_fetch_assoc($result);
+        return $selectedUser;
+    }
+    return false;
+}
+
+function updateUserInfo_byAdmin($searchEmail, $fname, $lname, $phone, $gender, $dob, $address, $account_status, $role)
+{
+    $con = getConnection();
+    $updateQuery = "UPDATE users SET fname = '$fname', lname = '$lname', phone = '$phone', gender = '$gender', dob = '$dob', address = '$address', 
+        account_status = '$account_status', role = '$role' WHERE email = '$searchEmail'";
+    $updateUser = mysqli_query($con, $updateQuery);
+
+    if ($updateUser) {
+        return searchByMail($searchEmail);
+    }
+    return false;
+}
+
+function fetchUserCategoryWise()
+{
+    $con = getConnection();
+    $allUsers = mysqli_query($con, "SELECT * FROM users");
+    $adminUsers = mysqli_query($con, "SELECT * FROM users WHERE role = 'admin'");
+    $regularUsers = mysqli_query($con, "SELECT * FROM users WHERE role = 'user'");
+    $activeUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 0");
+    $inactiveUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 1");
+    $suspendedUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 2");
+    $pendingUsers = mysqli_query($con, "SELECT * FROM users WHERE account_status = 3");
+
+    return [
+        'All Users' => $allUsers,
+        'Admins' => $adminUsers,
+        'Users' => $regularUsers,
+        'Active Users' => $activeUsers,
+        'Inactive Users' => $inactiveUsers,
+        'Suspended Users' => $suspendedUsers,
+        'Pending Users' => $pendingUsers
+    ];
 }

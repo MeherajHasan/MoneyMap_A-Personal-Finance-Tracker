@@ -1,94 +1,85 @@
-function isNameValid(name) {
-  if (name === '') return false;
-  for (let i = 0; i < name.length; i++) {
-    const c = name[i];
-    if (
-      !( (c >= 'a' && c <= 'z') ||
-         (c >= 'A' && c <= 'Z') ||
-          c === ' '
-      )
-    ) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function isEmailValid(email) {
-  const atPos = email.indexOf('@');
-  const dotPos = email.lastIndexOf('.');
-  if (
-    atPos < 1 ||
-    dotPos < atPos + 2 ||
-    dotPos === email.length - 1 
-  ) {
-    return false;
-  }
-  return true;
-}
-
-function isPhoneValid(phone) {
-  if (phone === '') return false;
-  for (let i = 0; i < phone.length; i++) {
-    const c = phone[i];
-    if (!(c >= '0' && c <= '9')) {
-      return false;
-    }
-  }
-  return true;
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.profile-form');
-
-  form.addEventListener('submit', (e) => {
+document.querySelector('.profile-form').addEventListener('submit', function (e) {
     let hasError = false;
 
-    document.querySelectorAll('.error').forEach(el => el.textContent = '');
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const currentPassword = document.getElementById('current-password').value;
 
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const phone = form.phone.value.trim();
-    const password = form.password.value;
-    const confirmPassword = form['confirm-password'].value;
+    function isNameValid(name) {
+        for (let i = 0; i < name.length; i++) {
+            let c = name[i];
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c === ' ')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function isEmailValid(email) {
+        return email.includes('@') && email.includes('.') && email.indexOf('@') < email.lastIndexOf('.');
+    }
+
+    function isPhoneValid(phone) {
+        if (phone.length < 8 || phone.length > 15) return false;
+        for (let i = 0; i < phone.length; i++) {
+            if (!(phone[i] >= '0' && phone[i] <= '9')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    if (currentPassword === '') {
+        alert('Current password is required.');
+        hasError = true;
+    }
 
     if (name === '') {
-      document.getElementById('error-name').textContent = 'Full Name is required.';
-      hasError = true;
+        alert('Full Name is required.');
+        hasError = true;
     } else if (!isNameValid(name)) {
-      document.getElementById('error-name').textContent = 'Name can only contain letters and spaces.';
-      hasError = true;
+        alert('Name can only contain letters and spaces.');
+        hasError = true;
+    } else if (name.split(' ').length < 2) {
+        alert('Full Name must contain first and last name.');
+        hasError = true;
     }
 
     if (email === '') {
-      document.getElementById('error-email').textContent = 'Email is required.';
-      hasError = true;
+        alert('Email is required.');
+        hasError = true;
     } else if (!isEmailValid(email)) {
-      document.getElementById('error-email').textContent = 'Invalid email format.';
-      hasError = true;
+        alert('Invalid email format.');
+        hasError = true;
     }
 
     if (phone === '') {
-      document.getElementById('error-phone').textContent = 'Phone number is required.';
-      hasError = true;
+        alert('Phone number is required.');
+        hasError = true;
     } else if (!isPhoneValid(phone)) {
-      document.getElementById('error-phone').textContent = 'Phone number must be digits only.';
-      hasError = true;
+        alert('Phone number must be 8-15 DIGITS only.');
+        hasError = true;
+    }
+
+    if (address === '') {
+        alert('Address is required.');
+        hasError = true;
     }
 
     if (password !== '') {
-      if (password.length < 8) {
-        document.getElementById('error-password').textContent = 'Password must be at least 8 characters.';
-        hasError = true;
-      }
-      if (password !== confirmPassword) {
-        document.getElementById('error-confirm-password').textContent = 'Passwords do not match.';
-        hasError = true;
-      }
+        if (password.length < 8) {
+            alert('Password must be at least 8 characters.');
+            hasError = true;
+        }
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.');
+            hasError = true;
+        }
     }
 
-    if (hasError) {
-      e.preventDefault(); 
-    }
-  });
+    if (hasError) e.preventDefault();
 });

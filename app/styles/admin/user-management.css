@@ -112,31 +112,13 @@ tr:nth-child(even) {
     background-color: #ffe6e6;
 }
 
-.header {
-    background-color: #4a0d0d;
-    color: white;
-    padding: 1rem 0;
+#updateError,
+#searchError {
+    color: #b00020;
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.header a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-}
 
-.header a:hover {
-    color: #f4a4a4;
-}
-
-.footer {
-    background-color: #4a0d0d;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 20px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
