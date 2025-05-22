@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/incomeModel.php');
 
 $incomeType = "";
 $incomeSource = "";
@@ -13,10 +14,18 @@ $dateError = "";
 $emptyError = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $incomeType = $_POST['incomeType'] ?? '';
-    $incomeSource = trim($_POST['incomeSource'] ?? '');
-    $incomeAmount = $_POST['incomeAmount'] ?? '';
-    $incomeDate = $_POST['incomeDate'] ?? '';
+    $incomeType = $_POST['incomeType'];
+    if ($incomeType === "main") {
+        $incomeType = 0;
+    } elseif ($incomeType === "side") {
+        $incomeType = 1;
+    } elseif ($incomeType === "irregular") {
+        $incomeType = 2;
+    }
+
+    $incomeSource = trim($_POST['incomeSource']);
+    $incomeAmount = $_POST['incomeAmount'];
+    $incomeDate = $_POST['incomeDate'];
     $incomeNotes = trim($_POST['incomeNotes'] ?? '');
 
     $hasError = false;
@@ -49,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!$hasError) {
-        // db
+        $user_id = $_SESSION['user']['id'];
+
+        addIncome($user_id, $incomeType, $incomeSource, $incomeAmount, $incomeDate, $incomeNotes);
+
         header("Location: income-dashboard.php");
         exit;
     } else {

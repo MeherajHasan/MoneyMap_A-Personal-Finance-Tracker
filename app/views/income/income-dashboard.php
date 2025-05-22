@@ -1,5 +1,36 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/incomeModel.php');
+
+$typeFilter = isset($_GET['type']) ? $_GET['type'] : 'all';
+$dateFilter = isset($_GET['date']) ? $_GET['date'] : '';
+$incomeId = '';
+
+if ($typeFilter == 'all') {
+    $incomeRecords = getAllIncome($_SESSION['user']['id'], $dateFilter);
+} elseif ($typeFilter == 'main') {
+    $incomeRecords = getRegularMainIncome($_SESSION['user']['id'], $dateFilter);
+} elseif ($typeFilter == 'side') {
+    $incomeRecords = getRegularSideIncome($_SESSION['user']['id'], $dateFilter);
+} elseif ($typeFilter == 'irregular') {
+    $incomeRecords = getIrregularIncome($_SESSION['user']['id'], $dateFilter);
+} else {
+    $incomeRecords = getAllIncome($_SESSION['user']['id'], $dateFilter);
+}
+
+$typeMap = [
+    0 => 'Regular Main',
+    1 => 'Regular Side',
+    2 => 'Irregular'
+];
+
+if (isset($_GET['delete'])) {
+    $deleteId = $_GET['delete'];
+    deleteIncome($deleteId); 
+    header("Location: income-dashboard.php?deleted=1&type=$typeFilter&date=$dateFilter");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,20 +50,20 @@ require_once('../../controllers/userAuth.php');
     <main class="main container">
         <section class="summary-cards">
             <div class="card income-main">
-                <h3>Regular Main Income</h3>
-                <p>$5,000</p>
+                <h3>Total Regular Main Income</h3>
+                <p><?= totalRegularMainIncome($_SESSION['user']['id']) ?? "0.00"; ?></p>
             </div>
             <div class="card income-side">
-                <h3>Regular Side Income</h3>
-                <p>$1,200</p>
+                <h3>Total Regular Side Income</h3>
+                <p><?= totalRegularSideIncome($_SESSION['user']['id']) ?? "0.00"; ?></p>
             </div>
             <div class="card income-irregular">
-                <h3>Irregular Income</h3>
-                <p>$600</p>
+                <h3>Total Irregular Income</h3>
+                <p><?= totalIrregularIncome($_SESSION['user']['id']) ?? "0.00"; ?></p>
             </div>
             <div class="card income-total">
                 <h3>Total Income</h3>
-                <p>$6,800</p>
+                <p><?= totalIncome($_SESSION['user']['id']) ?? "0.00"; ?></p>
             </div>
         </section>
 
@@ -66,100 +97,33 @@ require_once('../../controllers/userAuth.php');
                 </tr>
             </thead>
             <tbody id="incomeTableBody">
+                <?php if ($incomeRecords && mysqli_num_rows($incomeRecords) > 0): ?>
+                <?php while ($row = mysqli_fetch_assoc($incomeRecords)): ?>
                 <tr>
-                    <td>Regular Main</td>
-                    <td>Job Salary</td>
-                    <td>$4,000</td>
-                    <td>2025-05-01</td>
-                    <td>April Salary</td>
+                    <td><?= $typeMap[$row['income_type']]; ?></td>
+                    <td><?= $row['source']; ?></td>
+                    <td>$<?php echo number_format($row['amount'], 2); ?></td>
+                    <td><?= $row['income_date']; ?></td>
+                    <td><?= $row['note']; ?></td>
                     <td>
-                        <a href="edit-income.php?id=1" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
+                        <?php $incomeId = $row['income_id']; ?>
+                        <a class="btn-small edit" href="edit-income.php?id=<?= $incomeId; ?>">Edit</a>
+                        <button class="btn-small delete"
+                            onclick="deleteIncome(<?= $incomeId; ?>)">Delete</button>
                     </td>
+
                 </tr>
+                <?php endwhile; ?>
+                <?php else: ?>
                 <tr>
-                    <td>Regular Side</td>
-                    <td>Freelancing</td>
-                    <td>$800</td>
-                    <td>2025-05-03</td>
-                    <td>Web design project</td>
-                    <td>
-                        <a href="edit-income.php?id=2" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
+                    <td colspan="6">No income records found.</td>
                 </tr>
-                <tr>
-                    <td>Irregular</td>
-                    <td>Gift</td>
-                    <td>$200</td>
-                    <td>2025-04-28</td>
-                    <td>Birthday gift from uncle</td>
-                    <td>
-                        <a href="edit-income.php?id=3" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Regular Side</td>
-                    <td>Online Course</td>
-                    <td>$400</td>
-                    <td>2025-05-05</td>
-                    <td>Udemy payout</td>
-                    <td>
-                        <a href="edit-income.php?id=4" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Regular Main</td>
-                    <td>Part-time Job</td>
-                    <td>$1,000</td>
-                    <td>2025-04-30</td>
-                    <td>Weekend cashier</td>
-                    <td>
-                        <a href="edit-income.php?id=5" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Irregular</td>
-                    <td>Sold Bike</td>
-                    <td>$500</td>
-                    <td>2025-04-25</td>
-                    <td>Old bike sale</td>
-                    <td>
-                        <a href="edit-income.php?id=6" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Regular Side</td>
-                    <td>YouTube Revenue</td>
-                    <td>$300</td>
-                    <td>2025-05-02</td>
-                    <td>Monthly payout</td>
-                    <td>
-                        <a href="edit-income.php?id=7" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Irregular</td>
-                    <td>Refund</td>
-                    <td>$100</td>
-                    <td>2025-04-20</td>
-                    <td>Tax refund</td>
-                    <td>
-                        <a href="edit-income.php?id=8" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
+                <?php endif; ?>
             </tbody>
 
         </table>
 
         <div class="action-buttons">
-            <a href="edit-income.php" class="btn">Edit Income</a>
             <a href="income-report.php" class="btn">View Income Report</a>
         </div>
     </main>

@@ -1,44 +1,46 @@
-const typeFilter = document.getElementById("typeFilter");
-const dateFilter = document.getElementById("dateFilter");
-const incomeTableBody = document.getElementById("incomeTableBody");
-const deleteButtons = document.querySelectorAll(".btn-small.delete");
+window.addEventListener('DOMContentLoaded', () => {
+    const typeFilter = document.getElementById('typeFilter');
+    const dateFilter = document.getElementById('dateFilter');
 
-function filterTable() {
-    const typeValue = typeFilter.value.toLowerCase();
-    const dateValue = dateFilter.value;
-    const rows = incomeTableBody.querySelectorAll("tr");
+    // Pre-fill filters based on URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedType = urlParams.get('type');
+    const selectedDate = urlParams.get('date');
 
-    rows.forEach(row => {
-        const type = row.cells[0].textContent.toLowerCase();
-        const date = row.cells[3].textContent;
+    if (selectedType) {
+        typeFilter.value = selectedType;
+    }
 
-        // Filter by type and date
-        if ((typeValue === "all" || type.includes(typeValue)) &&
-            (dateValue === "" || date.startsWith(dateValue))) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
+    if (selectedDate) {
+        dateFilter.value = selectedDate;
+    }
+
+    // Apply filters on change
+    typeFilter.addEventListener('change', () => {
+        applyFilters();
     });
-}
 
-function handleDeleteClick(event) {
-    const row = event.target.closest("tr");
-    const confirmDelete = confirm("Are you sure you want to delete this income record?");
-    
-    if (confirmDelete) {
-        row.remove();
+    dateFilter.addEventListener('change', () => {
+        applyFilters();
+    });
+
+    function applyFilters() {
+        const type = typeFilter.value;
+        const date = dateFilter.value;
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('type', type);
+        url.searchParams.set('date', date);
+
+        window.location.href = url.toString();
+    }
+});
+
+function deleteIncome(incomeId) {
+    if (confirm("Are you sure you want to delete this income record?")) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('delete', incomeId);
+        window.location.href = url.toString();
     }
 }
 
-typeFilter.addEventListener("change", function () {
-    filterTable();
-});
-
-dateFilter.addEventListener("input", function () {
-    filterTable();
-});
-
-deleteButtons.forEach(button => {
-    button.addEventListener("click", handleDeleteClick);
-});

@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/incomeModel.php');
 
 $incomeType = "";
 $incomeSource = "";
@@ -11,6 +12,40 @@ $sourceError = "";
 $amountError = "";
 $dateError = "";
 $emptyError = "";
+
+$incomeID = $_GET['id'] ?? null;
+
+$previousIncome = getSpecificIncome($incomeID);
+// if (!$previousIncome) {
+//     header("Location: income-dashboard.php");
+//     exit;
+// }
+
+$typeMap = [
+    0 => 'main',
+    1 => 'side',
+    2 => 'irregular'
+];
+$typeLabelMap = [
+    0 => 'Regular Main Income',
+    1 => 'Regular Side Income',
+    2 => 'Irregular Income'
+];
+
+$prevTypeText = $typeLabelMap[$previousIncome['income_type']];
+$prevTypeValue = $typeMap[$previousIncome['income_type']];
+$prevSource = $previousIncome['source'];
+$prevAmount = number_format($previousIncome['amount'], 2);
+$prevDate = $previousIncome['income_date'];
+$prevNotes = $previousIncome['note'] ?? "";
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    $incomeType = $typeMap[$previousIncome['income_type']];
+    $incomeSource = $prevSource;
+    $incomeAmount = $previousIncome['amount'];  
+    $incomeDate = $prevDate;
+    $incomeNotes = $prevNotes;
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $incomeType = $_POST['incomeType'] ?? "";
@@ -52,9 +87,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!$hasError) {
-        // db
-        header("Location: income-dashboard.php");
-        exit;
+        $incomeType = array_search($incomeType, $typeMap);
+        $updateSuccess = updateIncome($incomeID, $incomeType, $incomeSource, $incomeAmount, $incomeDate, $incomeNotes);
+        if ($updateSuccess) {
+            header("Location: income-dashboard.php");
+            exit;
+        } else {
+            $emptyError = "Failed to update income. Please try again.";
+        }
     } else {
         if ($emptyError === "") {
             $emptyError = "Please fix the errors above and resubmit.";
@@ -82,11 +122,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Edit Income</h2>
         </div>
 
-        <form action="" method="POST" class="income-form two-column-form">
+        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?id=' . urlencode($incomeID) ?>" method="POST" class="income-form two-column-form">
+
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Income Type</label>
-                    <input type="text" value="Regular Main Income" readonly />
+                    <input type="text" value="<?= $prevTypeText ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="incomeType">New Income Type</label>
@@ -102,11 +143,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Source</label>
-                    <input type="text" value="Job Salary" readonly />
+                    <input type="text" value="<?= $prevSource ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="incomeSource">New Source</label>
-                    <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Freelancing" value="<?= htmlspecialchars($incomeSource) ?>" />
+                    <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Freelancing" value="<?= $incomeSource ?>" />
                     <p id="sourceError" class="error-message"><?= $sourceError ?></p>
                 </div>
             </div>
@@ -114,11 +155,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Amount</label>
-                    <input type="text" value="$2000" readonly />
+                    <input type="text" value="$<?= $prevAmount ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="incomeAmount">New Amount</label>
-                    <input type="number" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" value="<?= htmlspecialchars($incomeAmount) ?>" />
+                    <input type="number" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" value="<?= $incomeAmount ?>" />
                     <p id="amountError" class="error-message"><?= $amountError ?></p>
                 </div>
             </div>
@@ -126,11 +167,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Date</label>
-                    <input type="text" value="2025-04-01" readonly />
+                    <input type="text" value="<?= $prevDate ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="incomeDate">New Date</label>
-                    <input type="date" id="incomeDate" name="incomeDate" value="<?= htmlspecialchars($incomeDate) ?>" />
+                    <input type="date" id="incomeDate" name="incomeDate" value="<?= $incomeDate ?>" />
                     <p id="dateError" class="error-message"><?= $dateError ?></p>
                 </div>
             </div>
@@ -138,11 +179,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Notes</label>
-                    <textarea readonly>Monthly paycheck</textarea>
+                    <textarea readonly><?= $prevNotes ?></textarea>
                 </div>
                 <div class="form-column">
                     <label for="incomeNotes">New Notes</label>
-                    <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"><?= htmlspecialchars($incomeNotes) ?></textarea>
+                    <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"><?= $incomeNotes ?></textarea>
                 </div>
             </div>
 
