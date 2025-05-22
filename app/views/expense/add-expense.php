@@ -1,5 +1,9 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/expenseCategoryModel.php');
+require_once('../../models/expenseModel.php');
+
+$categoryNames = getExpenseCategoryName($_SESSION['user']['id']);
 
 function isValidNameString($str) {
     for ($i = 0; $i < strlen($str); $i++) {
@@ -9,7 +13,7 @@ function isValidNameString($str) {
               ($c >= '0' && $c <= '9') ||
               $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
             return false;
-        }
+        } 
     }
     return true;
 }
@@ -87,19 +91,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Add Expense</h2>
         </div>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="expense-form" novalidate>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="expense-form"
+            novalidate>
             <div class="form-group">
                 <label for="expenseCategory">Category:</label>
                 <select id="expenseCategory" name="expenseCategory">
                     <option value="" disabled <?php if ($category === '') echo 'selected'; ?>>Select Category</option>
                     <?php
-                    $categories = ["House Rent", "Transportation", "Shopping", "Food", "Cosmetics", "Pet", "Medical", "Education"];
-                    foreach ($categories as $cat) {
+                    foreach ($categoryNames as $cat) {
                         $selected = ($cat === $category) ? "selected" : "";
                         echo "<option value=\"$cat\" $selected>$cat</option>";
                     }
                     ?>
                 </select>
+
                 <p id="categoryError" class="error-message"><?php echo $categoryError; ?></p>
             </div>
 

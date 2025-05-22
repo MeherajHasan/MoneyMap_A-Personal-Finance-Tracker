@@ -1,6 +1,9 @@
 <?php
     require_once('../../controllers/userAuth.php');
+    require_once('../../models/expenseCategoryModel.php');
+    require_once('../../models/expenseModel.php');
 
+    $expenseCategoryNames = getExpenseCategoryName($_SESSION['user']['id']);
 ?>
 
 <!DOCTYPE html>
@@ -66,14 +69,9 @@
             <label for="categoryFilter">Category:</label>
             <select id="categoryFilter">
                 <option value="all">All</option>
-                <option value="house-rent">House Rent</option>
-                <option value="transportation">Transportation</option>
-                <option value="shopping">Shopping</option>
-                <option value="food">Food</option>
-                <option value="cosmetics">Cosmetics</option>
-                <option value="pet">Pet</option>
-                <option value="medical">Medical</option>
-                <option value="education">Education</option>
+                <?php foreach ($expenseCategoryNames as $category): ?>
+                    <option value="<?= $category; ?>"><?= $category; ?></option>
+                <?php endforeach; ?>
             </select>
 
             <label for="dateFilter">Date:</label>
@@ -153,7 +151,6 @@
         <div class="action-buttons">
             <a href="expense-category.php" class="btn">Manage Categories</a>
             <a href="expense-report.php" class="btn">View Expense Report</a>
-            <a href="edit-expense.php" class="btn">Edit Expense</a>
         </div>
     </main>
 
