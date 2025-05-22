@@ -51,10 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h1 id="verificationTitle">Email Verification</h1>
             <label for="verifyCode" class="inputLabel">Enter Verification Code:</label>
             <input id="verifyCode" class="inputField" type="text" name="verifyCode" placeholder="Must be 6 digits"
-                value="<?php echo htmlspecialchars($verifyCode); ?>" />
+                value="<?= $verifyCode; ?>" />
             <br>
             <?php if ($verifyCodeError): ?>
-                <p style="color:red; margin-top:4px;"><?php echo $verifyCodeError; ?></p>
+                <p style="color:red; margin-top:4px;"><?= $verifyCodeError; ?></p>
             <?php endif; ?>
 
             <div class="button-group">
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
             <?php if ($verifyMsg): ?>
-                <p id="verifyMSG" class="verificationMessage" style="color:green;"><?php echo $verifyMsg; ?></p>
+                <p id="verifyMSG" class="verificationMessage" style="color:green;"><?= $verifyMsg; ?></p>
             <?php endif; ?>
 
             <div class="emailErrorLink">Entered wrong email? <a href="forgetPass.php" class="errorLink">Go back</a>

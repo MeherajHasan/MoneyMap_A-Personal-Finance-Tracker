@@ -31,7 +31,7 @@ require_once('../../controllers/adminAuth.php');
                 </tr>
             </thead>
             <tbody id="response-table-body">
-                <!-- Demo data will be injected here by JavaScript -->
+                <!-- db -->
             </tbody>
         </table>
     </div>

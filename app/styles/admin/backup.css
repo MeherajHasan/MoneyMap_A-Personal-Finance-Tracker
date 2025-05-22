@@ -1,52 +1,45 @@
-/* ../../styles/admin/backup.css */
-
-/* General Styling */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f0f0;
-    color: #4a0d0d;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #0D1B2A;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 h2 {
     text-align: center;
-    color: #4a0d0d;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    color: #1B263B;
+    font-size: 28px;
 }
 
-form {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+form#backupForm {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-button {
-    background-color: #4a0d0d;
-    color: white;
-    padding: 8px 15px;
+form#backupForm button {
+    background-color: #8B0000;
+    color: #ffffff;
     border: none;
-    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #3c0a0a;
+form#backupForm button:hover {
+    background-color: #5A0000;
 }
 
-p.success {
-    color: green;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 15px;
-}
-
-p.error {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 15px;
+form#backupForm p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
 }

@@ -52,23 +52,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </ul>
 
     <h3>Expense Categories:</h3>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <input type="text" name="searchExpense" placeholder="Search by User Email" value="<?php echo htmlspecialchars($searchExpense); ?>" />
+    <form method="post" action="<?= $_SERVER["PHP_SELF"]; ?>">
+        <input type="text" name="searchExpense" placeholder="Search by User Email" value="<?= $searchExpense; ?>" />
         <button type="submit" name="searchExpenseBtn">Search</button>
     </form>
-    <div style="color:red;"><?php echo $expenseError; ?></div>
-    <div id="expense-category-list">
-        <?php echo $expenseResult; ?>
+    <div style="color:red;"><?= $expenseError; ?></div>
+    <div id="expense-category-list"> 
+        <?= $expenseResult; ?>
     </div>
 
     <h3>Budget Categories:</h3>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <input type="text" name="searchBudget" placeholder="Search by User Email" value="<?php echo htmlspecialchars($searchBudget); ?>" />
+    <form method="post" action="<?= $_SERVER["PHP_SELF"]; ?>">
+        <input type="text" name="searchBudget" placeholder="Search by User Email" value="<?= $searchBudget; ?>" />
         <button type="submit" name="searchBudgetBtn">Search</button>
     </form>
-    <div style="color:red;"><?php echo $budgetError; ?></div>
+    <div style="color:red;"><?= $budgetError; ?></div>
     <div id="budget-category-list">
-        <?php echo $budgetResult; ?>
+        <?= $budgetResult; ?>
     </div>
 
     <?php include '../header-footer/admin-footer.php'; ?>

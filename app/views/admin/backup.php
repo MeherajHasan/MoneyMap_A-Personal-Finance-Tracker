@@ -1,31 +1,10 @@
 <?php
 require_once('../../controllers/adminAuth.php');
-
-include '../../models/db.php';
+include '../../models/userModel.php';
 
 if (isset($_POST['backup'])) {
-    $dbHost = '127.0.0.1';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'moneymap';
-
-    $backupFile = "backup_moneymap.sql";
-
-    $command = "mysqldump --user=$dbUsername --password=$dbPassword --host=$dbHost $dbName > $backupFile";
-    exec($command);
-
-    if (file_exists($backupFile)) {
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . basename($backupFile));
-        header('Content-Length: ' . filesize($backupFile));
-        readfile($backupFile);
-
-        unlink($backupFile);
-        exit();
-    } else {
-        echo "<script>alert('Backup failed. Please try again.');</script>";
-    }
+    backupDatabase();
+    exit();
 }
 ?>
 
@@ -43,10 +22,10 @@ if (isset($_POST['backup'])) {
 
     <h2>Database Backup</h2>
 
-    <form id="backupForm" method="post">
+    <form id="backupForm" method="post" action="<?= $_SERVER['PHP_SELF'] ?>">
         <button type="submit" name="backup">Create Backup</button>
+        <p>Click the button above to create a backup of the database. The backup will be downloaded as a .sql file.</p>
     </form>
-
     <?php include '../header-footer/admin-footer.php'; ?>
 </body>
 

@@ -219,3 +219,33 @@ function fetchUserCategoryWise()
         'Pending Users' => $pendingUsers
     ];
 }
+
+function backupDatabase()
+{
+    global $dbuser, $dbpass, $host, $dbname;
+    $backupFile = "backup_moneymap.sql"; 
+
+    $command = "mysqldump --user=$dbuser --password=$dbpass --host=$host $dbname > $backupFile";
+    exec($command, $output, $returnVar);
+
+    if (file_exists($backupFile)) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename($backupFile));
+        header('Content-Length: ' . filesize($backupFile));
+        readfile($backupFile);
+
+        unlink($backupFile);
+        exit();
+    } else {
+        echo "<script>alert('Backup failed. Please try again.');</script>";
+    }
+}
+
+function countUsersByStatus($status)
+{
+    $con = getConnection();
+    $sql = "SELECT COUNT(*) AS count FROM users WHERE account_status = '$status'";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result)['count'];
+}

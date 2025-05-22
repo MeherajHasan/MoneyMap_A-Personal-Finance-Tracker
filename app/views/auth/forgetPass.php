@@ -45,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 type="text"
                 name="email"
                 placeholder="xyz@gmail.com"
-                value="<?php echo htmlspecialchars($email); ?>"
+                value="<?= $email; ?>"
             />
             <br />
             <?php if ($emailError): ?>
-                <p style="color:red; margin-top:4px;"><?php echo $emailError; ?></p>
+                <p style="color:red; margin-top:4px;"><?= $emailError; ?></p>
             <?php endif; ?>
 
             <div class="button-group">

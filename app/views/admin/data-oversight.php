@@ -1,16 +1,14 @@
 <?php
 require_once('../../controllers/adminAuth.php');
-
-include '../../models/db.php';
+include '../../models/userModel.php';
 
 // Fetch Data from Database
-$totalUsers = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS count FROM users"))['count'];
-$activeUsers = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS count FROM users WHERE account_status = 0"))['count'];
-$inactiveUsers = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS count FROM users WHERE account_status = 1"))['count'];
-$suspendedUsers = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS count FROM users WHERE account_status = 2"))['count'];
-$pendingUsers = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS count FROM users WHERE account_status = 3"))['count'];
+$totalUsers = getTotalUsers() ?? 0;
+$activeUsers = countUsersByStatus(0) ?? 0;
+$inactiveUsers = countUsersByStatus(1) ?? 0;
+$suspendedUsers = countUsersByStatus(2) ?? 0;
+$pendingUsers = countUsersByStatus(3) ?? 0;
 
-// // Uncomment these when ready to use:
 // $totalTransactions = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS count FROM transactions"))['count'];
 // $totalIncome = mysqli_fetch_assoc(mysqli_query($con, "SELECT SUM(amount) AS total FROM transactions WHERE type = 'income'"))['total'] ?? 0;
 // $totalExpenses = mysqli_fetch_assoc(mysqli_query($con, "SELECT SUM(amount) AS total FROM transactions WHERE type = 'expense'"))['total'] ?? 0;
