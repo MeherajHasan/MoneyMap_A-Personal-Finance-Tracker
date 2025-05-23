@@ -37,15 +37,9 @@ a {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.expense-house-rent { border-left-color: #FF5722; }
-.expense-transportation { border-left-color: #4CAF50; }
-.expense-shopping { border-left-color: #2196F3; }
-.expense-food { border-left-color: #FF9800; }
-.expense-cosmetics { border-left-color: #9C27B0; }
-.expense-pet { border-left-color: #795548; }
-.expense-medical { border-left-color: #E91E63; }
-.expense-education { border-left-color: #3F51B5; }
-.expense-total { border-left-color: #607D8B; }
+.expense-total {
+    background-color: #ea7682;
+}
 
 .card h3 {
     margin-bottom: 0.5rem;

@@ -5,15 +5,16 @@ require_once('../../models/expenseModel.php');
 
 $categoryNames = getExpenseCategoryName($_SESSION['user']['id']);
 
-function isValidNameString($str) {
+function isValidNameString($str)
+{
     for ($i = 0; $i < strlen($str); $i++) {
         $c = $str[$i];
         if (!(($c >= 'a' && $c <= 'z') ||
-              ($c >= 'A' && $c <= 'Z') ||
-              ($c >= '0' && $c <= '9') ||
-              $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
+            ($c >= 'A' && $c <= 'Z') ||
+            ($c >= '0' && $c <= '9') ||
+            $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
             return false;
-        } 
+        }
     }
     return true;
 }
@@ -28,8 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $hasError = true;
     } else {
         $category = $_POST['expenseCategory'];
-        $allowedCategories = ["House Rent", "Transportation", "Shopping", "Food", "Cosmetics", "Pet", "Medical", "Education"];
-        if (!in_array($category, $allowedCategories)) {
+        if (!in_array($category, $categoryNames)) {
             $categoryError = "Invalid category selected.";
             $hasError = true;
         }
@@ -60,14 +60,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($_POST['expenseDate'])) {
         $dateError = "Date is required.";
         $hasError = true;
-    } 
+    }
 
     $notes = trim($_POST['expenseNotes'] ?? '');
 
     if (!$hasError) {
-        // db
-        header("Location: expense-dashboard.php");
-        exit;
+        $categoryID = getExpenseCategoryIdByName($_SESSION['user']['id'], $category);
+        if ($categoryID === null) {
+            $categoryError = "Invalid category.";
+            $hasError = true;
+        } else {
+            $addExpense = addExpense($_SESSION['user']['id'], $categoryID, $name, $amount, $notes);
+            if ($addExpense) {
+                header("Location: expense-dashboard.php");
+                exit();
+            } else {
+                $categoryError = "Failed to add expense. Please try again.";
+            }
+        }
     }
 }
 ?>

@@ -1,6 +1,31 @@
 <?php
 require_once('db.php');
 
+function getExpenseCategoryName($userID) {
+    $con = getConnection();
+    $sql = "SELECT * FROM expense_categories 
+            WHERE (status = 1 AND user_id = '$userID') 
+               OR (status = 0 AND user_id IS NULL)";
+
+    $result = mysqli_query($con, $sql);
+    $categoryNames = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categoryNames[] = $row['name'];
+    }
+    return $categoryNames;
+}
+
+function getExpenseCategoryIdByName($userID, $name) {
+    $con = getConnection();
+    $sql = "SELECT category_id FROM expense_categories 
+            WHERE name = '$name' AND (user_id = '$userID' OR user_id IS NULL)";
+    $result = mysqli_query($con, $sql);
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row['category_id'];
+    }
+    return null;
+}
+
 function getGeneralizedExpenseCategoryName() {
     $con = getConnection();
     $sql = "SELECT * FROM expense_categories 
