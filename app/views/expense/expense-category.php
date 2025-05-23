@@ -46,16 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $categoryToDelete = $_POST['category'];
         foreach ($categories as $cat) {
             if ($cat['name'] === $categoryToDelete) {
-                if ($cat['status'] == 0) {
-                    $error = "Default categories cannot be deleted.";
+                if (deleteExpenseCategory($cat['category_id'], $_SESSION['user']['id'])) {
+                    $success = "Category deleted successfully.";
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
                 } else {
-                    if (deleteExpenseCategory($cat['category_id'], $_SESSION['user']['id'])) {
-                        $success = "Category deleted successfully.";
-                        header("Location: " . $_SERVER['PHP_SELF']);
-                        exit();
-                    } else {
-                        $error = "Failed to delete category.";
-                    }
+                    $error = "Failed to delete category.";
                 }
                 break;
             }
@@ -68,14 +64,40 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $error = "Category name cannot be empty.";
         } elseif (!isValidCategoryName($newCategory)) {
             $error = "Category name contains invalid characters.";
-        } elseif (in_array($newCategory, $categories)) {
+        } elseif (in_array($newCategory, $categoryNames)) {
             $error = "Category already exists.";
         } else {
-            if (($key = array_search($oldCategory, $categories)) !== false) {
-                $categories[$key] = $newCategory; // Simulate updating in DB
-                $success = "Category updated successfully.";
+            foreach ($categories as $cat) {
+                if ($cat['name'] === $oldCategory && $cat['status'] == 1) {
+                    if (renameExpenseCategory($cat['category_id'], $_SESSION['user']['id'], $newCategory)) {
+                        $success = "Category updated successfully.";
+                        
+                        header("Location: " . $_SERVER['PHP_SELF']);
+                        exit();
+                    } else {
+                        $error = "Failed to update category.";
+                    }
+                    break;
+                }
             }
         }
+    }
+}
+
+function renderCategoryActions($cat)
+{
+    if ($cat['status'] == 1) {
+        return '
+            <button class="btn btn-edit" data-category="' . $cat['name'] . '">Edit</button>
+            <form method="post" style="display:inline;">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="category" value="' . $cat['name'] . '">
+                <button type="submit" class="btn btn-delete">Delete</button>
+            </form>
+        ';
+    } else {
+        return '
+            <i>Default category (Actions not allowed)</i>';
     }
 }
 ?>
@@ -106,19 +128,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <th>Action</th>
                 </tr>
             </thead>
+
             <tbody id="categoryTableBody">
                 <?php foreach ($categories as $cat): ?>
-                <tr>
-                    <td><?= $cat['name'] ?></td>
-                    <td>
-                        <button class="btn btn-edit" data-category="<?= $cat['name'] ?>">Edit</button>
-                        <form method="post" style="display:inline;">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="category" value="<?= $cat['name'] ?>">
-                            <button type="submit" class="btn btn-delete">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= $cat['name'] ?></td>
+                        <td><?= renderCategoryActions($cat) ?></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -130,14 +146,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <form method="post" action="<?= $_SERVER['PHP_SELF'] ?>" class="add-category">
             <input type="hidden" name="action" value="add">
             <input type="text" id="newCategory" name="newCategory" placeholder="Enter new category name"
-                value="<?= $newCategory ?>" autocomplete="off" />
+                value="<?= ($_POST['action'] ?? '') === 'add' ? $newCategory : '' ?>" autocomplete="off">
             <button type="submit" id="addCategoryBtn" class="btn btn-primary">Add Category</button>
         </form>
 
         <?php if ($error): ?>
-        <p id="emptyError" style="color: red;"><?= $error ?></p>
+            <p id="emptyError" style="color: red;"><?= $error ?></p>
         <?php elseif ($success): ?>
-        <p style="color: green;"><?= $success ?></p>
+            <p style="color: green;"><?= $success ?></p>
         <?php endif; ?>
 
         <div class="navigation-buttons">

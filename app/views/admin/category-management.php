@@ -1,9 +1,24 @@
 <?php
 require_once('../../controllers/adminAuth.php');
+require_once('../../models/expenseCategoryModel.php');
+require_once('../../models/userModel.php');
 
 $searchExpense = $searchBudget = "";
 $expenseError = $budgetError = "";
-$expenseResult = $budgetResult = "";
+$user = $userID = $specificExpenseResult = $generalizedExpenseResult = $budgetResult = "";
+$specificExpenseCategoryNames = $generalizedExpenseCategoryNames
+    = $budgetCategoryNames = [];
+
+$generalizedExpenseCategoryNames = getGeneralizedExpenseCategoryName();
+if (count($generalizedExpenseCategoryNames) > 0) {
+    $generalizedExpenseResult = "<ul>";
+    foreach ($generalizedExpenseCategoryNames as $category) {
+        $generalizedExpenseResult .= "<li>" . $category . "</li>";
+    }
+    $generalizedExpenseResult .= "</ul>";
+} else {
+    $generalizedExpenseResult = "<p>No expense categories found.</p>";
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['searchExpenseBtn'])) {
@@ -13,7 +28,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $expenseError = "Please enter a valid email address.";
         } else {
             $searchExpense = trim($_POST['searchExpense']);
-            // db
+
+            $user = searchByMail($searchExpense);
+            if ($user) {
+                $userID = $user['id'];
+                $expenseCategoryNames = getSpecificExpenseCategoryName($userID);
+
+                if (count($expenseCategoryNames) > 0) {
+                    $specificExpenseResult = "<ul>";
+                    foreach ($expenseCategoryNames as $category) {
+                        $specificExpenseResult .= "<li>" . $category . "</li>";
+                    }
+                    $specificExpenseResult .= "</ul>";
+                } else {
+                    $specificExpenseResult = "<p>No expense categories found for this user.</p>";
+                }
+            } else {
+                $expenseError = "No user found with this email.";
+            }
         }
     }
 
@@ -32,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../styles/admin/category-management.css" />
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
+
 <body>
     <?php include '../header-footer/admin-header.php'; ?>
 
@@ -51,14 +85,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li>Irregular Income</li>
     </ul>
 
-    <h3>Expense Categories:</h3>
+    <h3>Default Expense Categories</h3>
+    <?= $generalizedExpenseResult; ?>
+
+    <h3>Individual Expense Categories:</h3>
     <form method="post" action="<?= $_SERVER["PHP_SELF"]; ?>">
         <input type="text" name="searchExpense" placeholder="Search by User Email" value="<?= $searchExpense; ?>" />
         <button type="submit" name="searchExpenseBtn">Search</button>
     </form>
     <div style="color:red;"><?= $expenseError; ?></div>
-    <div id="expense-category-list"> 
-        <?= $expenseResult; ?>
+    <div>
+        <?= $specificExpenseResult; ?>
     </div>
 
     <h3>Budget Categories:</h3>
@@ -67,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit" name="searchBudgetBtn">Search</button>
     </form>
     <div style="color:red;"><?= $budgetError; ?></div>
-    <div id="budget-category-list">
+    <div>
         <?= $budgetResult; ?>
     </div>
 
