@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2025 at 12:52 PM
+-- Generation Time: May 23, 2025 at 04:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -44,7 +44,7 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`expenseID`, `userID`, `category_id`, `name`, `amount`, `expense_date`, `note`, `created_at`, `status`) VALUES
-(1, 23, 1, 'Lunch at cafe', 450.00, '2025-05-15', 'Office lunch', '2025-05-23 08:52:05', 0),
+(1, 23, 1, 'Brunch', 750.00, '2025-05-15', 'Office lunch', '2025-05-23 08:52:05', 0),
 (2, 23, 2, 'Bus fare', 60.00, '2025-05-16', 'Commute to work', '2025-05-23 08:52:05', 0),
 (3, 23, 3, 'Electricity bill', 3200.00, '2025-05-10', 'Monthly bill', '2025-05-23 08:52:05', 0),
 (4, 23, 4, 'Movie ticket', 550.00, '2025-05-12', 'Weekend entertainment', '2025-05-23 08:52:05', 0),

@@ -8,6 +8,15 @@ $expenses = getAllExpenses($_SESSION['user']['id']);
 
 $categoryTotals = getExpenseTotalsByCategory($_SESSION['user']['id']);
 $totalExpense = array_sum($categoryTotals);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['expenseID'])) {
+    $expenseID = $_POST['expenseID'];
+    if (deleteExpense($expenseID)) {
+        echo 'success';
+        header('Location: expense-dashboard.php');
+        exit();
+    } 
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,8 +90,12 @@ $totalExpense = array_sum($categoryTotals);
                             <td><?= $expense['note'] ?></td>
                             <td>
                                 <a href="edit-expense.php?id=<?= $expense['expenseID'] ?>" class="btn-small edit">Edit</a>
-                                <button class="btn-small delete" data-id="<?= $expense['expenseID'] ?>">Delete</button>
+                                <form method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this expense record?');">
+                                    <input type="hidden" name="expenseID" value="<?= $expense['expenseID'] ?>">
+                                    <button type="submit" class="btn-small delete">Delete</button>
+                                </form>
                             </td>
+
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

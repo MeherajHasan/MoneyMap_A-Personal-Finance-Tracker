@@ -4,27 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameInput = document.getElementById('expenseName');
   const amountInput = document.getElementById('expenseAmount');
   const dateInput = document.getElementById('expenseDate');
-  const notesInput = document.getElementById('expenseNotes');
-
-  const prevCategory = "House Rent";
-  const prevName = "Monthly Rent";
-  const prevAmount = 1200;
-  const prevDate = "2025-05-01";
-  const prevNotes = "Rent for May 2025";
 
   const categoryError = document.getElementById('categoryError');
   const nameError = document.getElementById('nameError');
   const amountError = document.getElementById('amountError');
   const dateError = document.getElementById('dateError');
   const emptyError = document.getElementById('emptyError');
-
-  function clearErrors() {
-    categoryError.textContent = '';
-    nameError.textContent = '';
-    amountError.textContent = '';
-    dateError.textContent = '';
-    emptyError.textContent = '';
-  }
 
   function isValidNameString(str) {
     for (let i = 0; i < str.length; i++) {
@@ -41,59 +26,59 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  form.addEventListener('submit', (e) => {
-    clearErrors();
+  const prevCategory = document.querySelector('input[readonly][value="' + categorySelect.options[categorySelect.selectedIndex].text + '"]').value || "";
+  const prevName = document.querySelector('input[readonly][value="' + nameInput.value + '"]').value || "";
+  const prevAmount = document.querySelector('input[readonly][value*="$"]').value.replace('$', '') || "";
+  const prevDate = document.querySelector('input[readonly][value="' + dateInput.value + '"]').value || "";
+  const prevNotes = document.querySelector('textarea[readonly]').textContent || "";
 
+  form.addEventListener('submit', (e) => {
     let hasError = false;
 
-    const category = categorySelect.value.trim();
-    const name = nameInput.value.trim();
-    const amountStr = amountInput.value.trim();
-    const date = dateInput.value.trim();
-    const notes = notesInput.value.trim();
+    categoryError.textContent = '';
+    nameError.textContent = '';
+    amountError.textContent = '';
+    dateError.textContent = '';
+    emptyError.textContent = '';
 
-    if (category === '') {
+    if (categorySelect.value.trim() === '') {
       categoryError.textContent = "Please select a category.";
       hasError = true;
-    } else {
-      const allowedCategories = ["House Rent", "Transportation", "Shopping", "Food", "Cosmetics", "Pet", "Medical", "Education"];
-      if (!allowedCategories.includes(category)) {
-        categoryError.textContent = "Invalid category selected.";
-        hasError = true;
-      }
     }
 
-    if (name === '') {
+    const nameVal = nameInput.value.trim();
+    if (nameVal === '') {
       nameError.textContent = "Name is required.";
       hasError = true;
-    } else if (!isValidNameString(name)) {
+    } else if (!isValidNameString(nameVal)) {
       nameError.textContent = "Name contains invalid characters.";
       hasError = true;
     }
 
-    if (amountStr === '') {
+    const amountVal = amountInput.value.trim();
+    const amountNum = parseFloat(amountVal);
+    if (amountVal === '') {
       amountError.textContent = "Amount is required.";
       hasError = true;
-    } else {
-      const amount = Number(amountStr);
-      if (isNaN(amount) || amount <= 0) {
-        amountError.textContent = "Amount must be a positive number.";
-        hasError = true;
-      }
+    } else if (isNaN(amountNum) || amountNum <= 0) {
+      amountError.textContent = "Amount must be a positive number.";
+      hasError = true;
     }
 
-    if (date === '') {
+    if (dateInput.value.trim() === '') {
       dateError.textContent = "Date is required.";
       hasError = true;
     }
 
     if (!hasError) {
+      const notesVal = document.getElementById('expenseNotes').value;
+
       if (
-        category === prevCategory &&
-        name === prevName &&
-        Number(amountStr) === Number(prevAmount) &&
-        date === prevDate &&
-        notes === prevNotes
+        categorySelect.value === prevCategory &&
+        nameVal === prevName &&
+        parseFloat(amountVal) === parseFloat(prevAmount) &&
+        dateInput.value === prevDate &&
+        notesVal === prevNotes
       ) {
         emptyError.textContent = "No changes detected. Please update at least one field.";
         hasError = true;

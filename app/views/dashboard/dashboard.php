@@ -1,6 +1,7 @@
 <?php
     require_once('../../controllers/userAuth.php');
     require_once('../../models/incomeModel.php');
+    require_once('../../models/expenseModel.php');
 
     $photoPath = $_SESSION['user']['photo_path'];
     //var_dump($photoPath); 
@@ -73,7 +74,7 @@
                 </div>
                 <div class="widget" id="expense-widget">
                     <h2 class="widget-title">Expenses</h2>
-                    <p id="widget-amount" class="widget-amount"></p>
+                    <p id="widget-amount" class="widget-amount">$<?= totalExpense($_SESSION['user']['id']) ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="budget-widget">

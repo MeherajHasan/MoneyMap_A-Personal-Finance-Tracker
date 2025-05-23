@@ -1,7 +1,6 @@
 const categoryFilter = document.getElementById("categoryFilter");
 const dateFilter = document.getElementById("dateFilter");
 const expenseTableBody = document.getElementById("expenseTableBody");
-const deleteButtons = document.querySelectorAll(".btn-small.delete");
 
 function filterTable() {
     const categoryValue = categoryFilter.value.toLowerCase();
@@ -21,23 +20,10 @@ function filterTable() {
     });
 }
 
-function handleDeleteClick(event) {
-    const row = event.target.closest("tr");
-    const confirmDelete = confirm("Are you sure you want to delete this expense record?");
-    
-    if (confirmDelete) {
-        row.remove();
-    }
-}
-
 categoryFilter.addEventListener("change", function () {
     filterTable();
 });
 
 dateFilter.addEventListener("input", function () {
     filterTable();
-});
-
-deleteButtons.forEach(button => {
-    button.addEventListener("click", handleDeleteClick);
 });
