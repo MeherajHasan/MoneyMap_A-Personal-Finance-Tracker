@@ -1,17 +1,38 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/savingsModel.php');
+require_once('../../models/savings_transactionsModel.php');
 
-$goalName = $amount = $transactionDate = $notes = "";
-$nameError = $amountError = $dateError = "";
+$savingsID = $_POST['savingsID'] ?? ($_GET['id'] ?? null);
+// var_dump($savingsID);
+
+$goalName = $transactionDate = $notes = $amount = "";
+$targetAmount = $savedAmount = $maxToSave = 0;
+$amountError = $dateError = "";
 $hasError = false;
 
+if ($savingsID !== null) {
+    $saving = getSavingsById((int)$savingsID);
+
+    //var_dump($savingsID,$saving);
+
+    if ($saving) {
+        $goalName = $saving['goal_name'];
+        $targetAmount = $saving['target_amount'];
+        $savedAmount = $saving['saved_amount'];
+        $maxToSave = $targetAmount - $savedAmount;
+    } 
+}
+else {
+    echo "<script>alert('No savings ID provided.'); </script>";
+    header("Location: savings-dashboard.php");
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (empty($_POST["goalName"])) {
-        $nameError = "Please select a savings goal.";
-        $hasError = true;
-    } else {
-        $goalName = $_POST["goalName"];
-    }
+    $savingsID = $_POST['savingsID'] ?? null;
+
+    //var_dump($savingsID);
 
     if (empty($_POST["amount"])) {
         $amountError = "Please enter an amount.";
@@ -21,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $hasError = true;
     } else {
         $amount = $_POST["amount"];
+        if ($amount > $maxToSave) {
+            $amountError = "Amount exceeds the maximum allowed to save.";
+            $hasError = true;
+        }
     }
 
     if (empty($_POST["transactionDate"])) {
@@ -31,9 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!$hasError) {
-        // db
-        header("Location: savings-dashboard.php?success=1");
-        exit();
+        $notes = $_POST["notes"] ?? "";
+
+        $success = addSavingsTransaction($savingsID, $amount, $transactionDate, $notes);
+
+        if ($success) {
+            updateCompleteStatus($savingsID);
+            header("Location: savings-dashboard.php?success=1");
+            exit();
+        } else {
+            echo "<script>alert('Failed to add transaction. Please try again.');</script>";
+        }
     }
 }
 ?>
@@ -55,34 +88,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <main class="main container">
         <div class="add-money-form-container">
             <h2>Add Money to Savings Goal</h2>
-            <form id="addMoneyForm" method="POST" action="">
+            <form id="addMoneyForm" method="POST" action="<?= $_SERVER['PHP_SELF'] ?>">
+                <input type="hidden" name="savingsID" value="<?= $savingsID; ?>">
+
                 <div class="form-group">
-                    <label for="goalName">Select Goal:</label>
-                    <select id="goalName" name="goalName" class="form-control">
-                        <option value="" disabled <?= $goalName === "" ? "selected" : "" ?>>Select a Savings Goal</option>
-                        <option value="Emergency Fund" <?= $goalName === "Emergency Fund" ? "selected" : "" ?>>Emergency Fund</option>
-                        <option value="Vacation" <?= $goalName === "Vacation" ? "selected" : "" ?>>Vacation</option>
-                        <option value="Car Savings" <?= $goalName === "Car Savings" ? "selected" : "" ?>>Car Savings</option>
-                    </select>
-                    <small class="form-text text-muted">Choose the savings goal you want to add money to.</small>
-                    <p class="errorMSG"><?= $nameError ?></p>
+                    <label for="goalNameDisplay">Selected Goal:</label>
+                    <input type="text" id="goalNameDisplay" class="form-control" value="<?= $goalName ?>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="targetAmount">Target Amount:</label>
+                    <input type="number" id="targetAmount" class="form-control" value="<?= number_format($targetAmount, 2, '.', '') ?>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="savedAmount">Saved Amount:</label>
+                    <input type="number" id="savedAmount" class="form-control" value="<?= number_format($savedAmount, 2, '.', '') ?>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="amountToSave">Maximum Amount to Save:</label>
+                    <input type="number" id="amountToSave" class="form-control" value="<?= number_format($maxToSave, 2, '.', '') ?>" readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="amount">Amount to Add:</label>
-                    <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" value="<?= htmlspecialchars($amount) ?>">
+                    <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" value="<?= $amount ?>" <?= $maxToSave == 0 ? 'readonly' : '' ?>>
                     <p class="errorMSG"><?= $amountError ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="transactionDate">Transaction Date:</label>
-                    <input type="date" id="transactionDate" name="transactionDate" class="form-control" value="<?= htmlspecialchars($transactionDate) ?>">
+                    <input type="date" id="transactionDate" name="transactionDate" class="form-control" value="<?= $transactionDate ?>">
                     <p class="errorMSG"><?= $dateError ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="notes">Notes (Optional):</label>
-                    <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Add any notes about this transaction"><?= htmlspecialchars($notes) ?></textarea>
+                    <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Add any notes about this transaction"><?= $notes ?></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-success">Add Money</button>

@@ -1,41 +1,45 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("addMoneyForm");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("addMoneyForm");
+  const amountInput = document.getElementById("amount");
+  const transactionDateInput = document.getElementById("transactionDate");
+  const amountError = amountInput.nextElementSibling;
+  const dateError = transactionDateInput.nextElementSibling;
+  const maxToSaveInput = document.getElementById("amountToSave");
 
-    const goalName = document.getElementById("goalName");
-    const amount = document.getElementById("amount");
-    const transactionDate = document.getElementById("transactionDate");
+  form.addEventListener("submit", (e) => {
+    let hasError = false;
 
-    const nameError = document.getElementById("nameError");
-    const amountError = document.getElementById("amountError");
-    const dateError = document.getElementById("dateError");
+    amountError.textContent = "";
+    dateError.textContent = "";
 
-    form.addEventListener("submit", function (e) {
-        let hasError = false;
+    const amountValue = amountInput.value.trim();
+    const maxToSave = parseFloat(maxToSaveInput.value);
+    const transactionDateValue = transactionDateInput.value.trim();
 
-        nameError.textContent = "";
-        amountError.textContent = "";
-        dateError.textContent = "";
+    if (amountValue === "") {
+      amountError.textContent = "Please enter an amount.";
+      hasError = true;
+    } else {
+      const amountNum = parseFloat(amountValue);
+      if (isNaN(amountNum)) {
+        amountError.textContent = "Amount must be a valid number.";
+        hasError = true;
+      } else if (amountNum <= 0) {
+        amountError.textContent = "Amount must be greater than zero.";
+        hasError = true;
+      } else if (amountNum > maxToSave) {
+        amountError.textContent = "Amount exceeds the maximum allowed to save.";
+        hasError = true;
+      }
+    }
 
-        if (!goalName.value) {
-            nameError.textContent = "Please select a savings goal.";
-            hasError = true;
-        }
+    if (transactionDateValue === "") {
+      dateError.textContent = "Please select a date.";
+      hasError = true;
+    }
 
-        if (!amount.value) {
-            amountError.textContent = "Amount is required.";
-            hasError = true;
-        } else if (parseFloat(amount.value) <= 0) {
-            amountError.textContent = "Amount must be greater than 0.";
-            hasError = true;
-        }
-
-        if (!transactionDate.value) {
-            dateError.textContent = "Please select a transaction date.";
-            hasError = true;
-        }
-
-        if (hasError) {
-            e.preventDefault(); 
-        }
-    });
+    if (hasError) {
+      e.preventDefault();
+    }
+  });
 });

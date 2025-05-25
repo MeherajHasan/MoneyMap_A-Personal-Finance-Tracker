@@ -1,6 +1,17 @@
 <?php
-    require_once('../../controllers/userAuth.php');
-?>
+require_once('../../controllers/userAuth.php');
+require_once('../../models/savingsModel.php');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['savingsID'])) {
+    $savingsID = $_POST['savingsID'];
+    if (deleteSavings($savingsID)) {
+        header('Location: savings-dashboard.php');
+        exit();
+    } else {
+        echo "<script>alert('Error deleting savings goal. Please try again.');</script>";
+    }
+}
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,15 +31,15 @@
         <div class="overview-cards">
             <div class="overview-card">
                 <h3>Total Saved</h3>
-                <p id="total-saved">$0.00</p>
+                <p id="total-saved">$<?= getTotalSavings($_SESSION['user']['id']) ?? '0.00' ?></p>
             </div>
             <div class="overview-card">
                 <h3>Total Goals</h3>
-                <p id="total-goals">0</p>
+                <p id="total-goals"><?= getTotalGoals($_SESSION['user']['id']) ?? '0' ?></p>
             </div>
             <div class="overview-card">
                 <h3>Goals Achieved</h3>
-                <p id="goals-achieved">0</p>
+                <p id="goals-achieved"><?= getAchievedGoals($_SESSION['user']['id']) ?? '0' ?></p>
             </div>
         </div>
 
@@ -46,21 +57,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Vacation Fund</td>
-                        <td>$5,000.00</td>
-                        <td>$1,200.00</td>
-                        <td><progress value="24" max="100"></progress></td>
-                        <td>Dec 2025</td>
-                        <td>
-                            <div class="actions">
-                                <a href="edit-savings.php" class="btn btn-secondary">Edit</a>
-                                <a href="add-money.php" class="btn btn-success">Add Money</a>
-                                <a href="#" class="btn btn-danger">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php
+                    $savingsList = getAllSavingsDetails($_SESSION['user']['id']);
+                    if (count($savingsList) === 0) {
+                        echo '<tr><td colspan="6">No savings goals found.</td></tr>';
+                    } else {
+                        foreach ($savingsList as $saving) {
+                            // Calculate progress percentage safely
+                            $progress = 0;
+                            if ($saving['target_amount'] > 0) {
+                                $progress = ($saving['saved_amount'] / $saving['target_amount']) * 100;
+                                if ($progress > 100) $progress = 100;
+                            }
+
+                            // Format amounts and date
+                            $targetAmount = number_format($saving['target_amount'], 2);
+                            $savedAmount = number_format($saving['saved_amount'], 2);
+                            $targetDate = date("M Y", strtotime($saving['target_date']));
+
+                            $editUrl = "edit-savings.php?id=" . $saving['savings_id'];
+                            $addMoneyUrl = "add-money.php?id=" . $saving['savings_id'];
+                            $deleteUrl = "delete-savings.php?id=" . $saving['savings_id'];
+
+                            echo "<tr>
+                                    <td>" . $saving['goal_name'] . "</td>
+                                    <td>\$$targetAmount</td>
+                                    <td>\$$savedAmount</td>
+                                    <td><progress value=\"$progress\" max=\"100\"></progress> " . round($progress) . "%</td>
+                                    <td>$targetDate</td>
+                                    <td> 
+                                        <div class=\"actions\">
+                                            <a href=\"$editUrl\" class=\"btn btn-secondary\">Edit</a>
+                                            <a href=\"$addMoneyUrl\" class=\"btn btn-success\">Add Money</a>
+                                            <form method=\"POST\" action=\"savings-dashboard.php\" style=\"display:inline;\" onsubmit=\"return confirm('Are you sure you want to delete this goal?');\">
+                                                <input type=\"hidden\" name=\"savingsID\" value=\"" . $saving['savings_id'] . "\">
+                                                <button type=\"submit\" class=\"btn btn-danger\">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>";
+                        }
+                    }
+                    ?>
                 </tbody>
+
             </table>
         </div>
 

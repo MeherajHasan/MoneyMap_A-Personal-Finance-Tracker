@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/savingsModel.php');
 
 $goalName = $targetAmount = $targetDate = $description = "";
 $nameError = $amountError = $dateError = "";
@@ -48,9 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$hasError) {
-        // db
-        $successMessage = "Savings goal added successfully!";
-        $goalName = $targetAmount = $targetDate = $description = "";
+        $addGoal = addSavings($_SESSION['user']['id'], $goalName, $targetAmount, $targetDate, $description);
+        if ($addGoal) {
+            $successMessage = "Savings goal added successfully!";
+            $goalName = $targetAmount = $targetDate = $description = ""; 
+            $nameError = $amountError = $dateError = ""; 
+            header("Location: savings-dashboard.php");
+            exit();
+        } else {
+            $successMessage = "Failed to add savings goal. Please try again.";
+        }   
     }
 }
 ?>
@@ -80,22 +88,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form id="add-savings-form" method="POST" action="">
                 <div class="form-group">
                     <label for="goal-name">Goal Name</label>
-                    <input type="text" id="goal-name" name="goal-name" placeholder="Enter goal name" value="<?= htmlspecialchars($goalName) ?>">
+                    <input type="text" id="goal-name" name="goal-name" placeholder="Enter goal name" value="<?= $goalName ?>">
                     <p id="nameError" class="errorMSG"><?= $nameError ?></p>
                 </div>
                 <div class="form-group">
                     <label for="target-amount">Target Amount</label>
-                    <input type="number" id="target-amount" name="target-amount" placeholder="Enter target amount" value="<?= htmlspecialchars($targetAmount) ?>">
+                    <input type="number" id="target-amount" name="target-amount" placeholder="Enter target amount" value="<?= $targetAmount ?>">
                     <p id="amountError" class="errorMSG"><?= $amountError ?></p>
                 </div>
                 <div class="form-group">
                     <label for="target-date">Target Date</label>
-                    <input type="date" id="target-date" name="target-date" value="<?= htmlspecialchars($targetDate) ?>">
+                    <input type="date" id="target-date" name="target-date" value="<?= $targetDate ?>">
                     <p id="dateError" class="errorMSG"><?= $dateError ?></p>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" placeholder="Enter a description (optional)"><?= htmlspecialchars($description) ?></textarea>
+                    <textarea id="description" name="description" rows="4" placeholder="Enter a description (optional)"><?= $description ?></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save Goal</button>

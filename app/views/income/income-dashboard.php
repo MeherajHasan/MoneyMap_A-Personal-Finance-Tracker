@@ -102,7 +102,7 @@ if (isset($_GET['delete'])) {
                 <tr>
                     <td><?= $typeMap[$row['income_type']]; ?></td>
                     <td><?= $row['source']; ?></td>
-                    <td>$<?php echo number_format($row['amount'], 2); ?></td>
+                    <td>$<?= number_format($row['amount'], 2); ?></td>
                     <td><?= $row['income_date']; ?></td>
                     <td><?= $row['note']; ?></td>
                     <td>
