@@ -89,9 +89,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($savingsId && $userId) {
             $updateSuccess = updateSavings($savingsId, $userId, $name, $amount, $targetDate, $currentAmount, $notes);
+
             if ($updateSuccess) {
-                header("Location: savings-dashboard.php?update=success");
-                exit;
+                
+                if ($currentAmount >= $amount) {
+                    $updateStatus = updateCompleteStatus($savingsId);
+                    if ($updateStatus) {
+                        header("Location: savings-dashboard.php");
+                        exit; 
+                    } else {
+                        $emptyError = "Failed to update savings status. Please try again.";
+                    }
+                } else {
+                    $reverseStatus = reverseCompleteStatus($savingsId);
+                    if ($reverseStatus) {
+                        header("Location: savings-dashboard.php");
+                        exit;
+                    } else {
+                        $emptyError = "Failed to update savings status. Please try again.";
+                    }
+                }
             } else {
                 $emptyError = "Failed to update savings. Please try again.";
             }

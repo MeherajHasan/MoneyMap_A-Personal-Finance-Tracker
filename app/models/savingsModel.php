@@ -102,4 +102,13 @@ function updateCompleteStatus($savingsID)
     
     return false;
 }
+
+// reverse complete status
+function reverseCompleteStatus ($savingsID)
+{
+    $con = getConnection();
+    
+    $sql = "UPDATE savings SET status = 1 WHERE savings_id = '$savingsID'";
+    return mysqli_query($con, $sql);
+}
 ?>

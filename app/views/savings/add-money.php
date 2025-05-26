@@ -61,9 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $success = addSavingsTransaction($savingsID, $amount, $transactionDate, $notes);
 
         if ($success) {
-            updateCompleteStatus($savingsID);
-            header("Location: savings-dashboard.php?success=1");
-            exit();
+            $statusUpdate = updateCompleteStatus($savingsID);
+            if ($statusUpdate) {
+                header("Location: savings-dashboard.php?success=1");
+                exit();
+            } else {
+                echo "<script>alert('Failed to update savings status. Please try again.');</script>";
+            }
         } else {
             echo "<script>alert('Failed to add transaction. Please try again.');</script>";
         }
