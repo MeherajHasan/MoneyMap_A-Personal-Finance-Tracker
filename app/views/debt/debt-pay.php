@@ -1,12 +1,27 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/debtModel.php');
 
 $paymentAmount = "";
 $paymentError = "";
 $isValid = true;
 
-// Demo value - this would come from DB in real application
-$remainingPayableAmount = 5000.00;
+$debtID = $_GET['id'] ?? null;
+//var_dump($debtID); 
+if (!$debtID) {
+    header("Location: debt-dashboard.php");
+    exit();
+}
+
+$debt = getDebtByID($debtID, $_SESSION['user']['id']);
+
+if (!$debt) {
+    echo "<p>Invalid debt ID or access denied.</p>";
+    exit();
+}
+
+$min_payment = $debt['min_payment'];
+$remainingPayableAmount = $debt['total_amount'] - $debt['paid_amount'];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($_POST["paymentAmount"])) {
@@ -20,14 +35,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } elseif ($paymentAmount > $remainingPayableAmount) {
             $paymentError = "Payment amount cannot exceed remaining payable amount ($" . number_format($remainingPayableAmount, 2) . ").";
             $isValid = false;
-        }
+        } elseif ($paymentAmount < $min_payment) {
+            $paymentError = "Payment amount must be at least the minimum payment amount ($" . number_format($min_payment, 2) . ").";
+            $isValid = false;
+        } 
     }
 
     if ($isValid) {
-        // Example: Handle DB update logic here
-
-        header("Location: debt-dashboard.php");
-        exit();
+        $payStatus = paymentDebt($debtID, $paymentAmount);
+        if ($payStatus) {
+            header("Location: debt-dashboard.php?message=Payment successful");
+            exit();
+        } else {
+            $paymentError = "Failed to process payment. Please try again.";
+        }
     }
 }
 ?>
@@ -48,27 +69,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="debt-pay-container">
             <h2>Pay Debt</h2>
 
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="debt-form">
+            <form method="POST" action="debt-pay.php?id=<?= $debtID ?>" class="debt-form">
                 <div class="debt-info-section">
                     <h3>Debt Information</h3>
                     <div class="detail-item">
                         <span class="label">Debt Name:</span>
-                        <span class="value">Home Loan</span>
+                        <span class="value"><?= $debt['debt_name'] ?></span>
                     </div>
                     <div class="detail-item">
                         <span class="label">Payee Name:</span>
-                        <span class="value">Bank of MoneyMap</span>
+                        <span class="value"><?= $debt['payee_name'] ?></span>
                     </div>
                     <div class="detail-item">
                         <span class="label">Remaining Payable Amount:</span>
-                        <span class="value">$<?php echo number_format($remainingPayableAmount, 2); ?></span>
+                        <span class="value">$<?= number_format($remainingPayableAmount, 2) ?></span>
                     </div>
-
+                    <div class="detail-item">
+                        <span class="label">Minimum Payment Amount:</span>
+                        <span class="value">$<?= number_format($min_payment, 2) ?></span>
+                    </div>
                     <div class="payment-form">
                         <label for="paymentAmount">Payment Amount:</label>
                         <input type="number" id="paymentAmount" name="paymentAmount" placeholder="Enter payment amount"
-                            value="<?php echo htmlspecialchars($paymentAmount); ?>"/>
-                        <span class="error-message" style="color: red;"><?php echo $paymentError; ?></span>
+                            value="<?= $paymentAmount ?>"/>
+                        <span class="error-message" style="color: red;"><?= $paymentError ?></span>
 
                         <div class="actions">
                             <button type="submit" class="btn btn-primary">Submit Payment</button>
@@ -82,6 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <?php include '../header-footer/footer.php'; ?>
 
-    <script src="../../scripts/debt/debt-pay.js"></script>
+    <!-- <script src="../../scripts/debt/debt-pay.js"></script> -->
 </body>
 </html>

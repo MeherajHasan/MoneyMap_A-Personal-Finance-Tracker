@@ -21,7 +21,7 @@ if ($savingsID !== null) {
         $targetAmount = $saving['target_amount'];
         $savedAmount = $saving['saved_amount'];
         $maxToSave = $targetAmount - $savedAmount;
-    } 
+    }  
 }
 else {
     echo "<script>alert('No savings ID provided.'); </script>";

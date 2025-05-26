@@ -79,7 +79,7 @@ require_once('../../models/debtModel.php');
 
     <?php include '../header-footer/footer.php' ?>
 
-    <!-- <script src="../../validation/debt/debt-dashboard.js"></script> -->
+    <script src="../../validation/debt/debt-dashboard.js"></script>
 </body>
 
 </html>

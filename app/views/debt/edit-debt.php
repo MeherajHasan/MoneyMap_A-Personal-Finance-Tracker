@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/debtModel.php');
 
 function isValidNameString($str) {
     for ($i = 0; $i < strlen($str); $i++) {
@@ -29,9 +30,39 @@ function isValidNotesString($str) {
     return true;
 }
 
+$debtID = $_POST['debt_id'] ?? $_GET['id'] ??  null;
+//var_dump($debtID); 
 $debtName = $payeeName = $debtDate = $maxPaymentDate = $principalAmount = $interestRate = $minimumPayment = $notes = "";
 $debtNameError = $payeeNameError = $debtDateError = $maxPaymentDateError = $principalAmountError = $interestRateError = $minimumPaymentError = $notesError = $emptyError = "";
 $isValid = true;
+
+if ($debtID !== null) {
+    $debtData = getDebtByID($debtID); 
+
+    if ($debtData) {
+        $prevDebtName = $debtData['debt_name'];
+        $prevPayeeName = $debtData['payee_name'];
+        $prevDebtDate = $debtData['debt_date'];
+        $prevMaxPaymentDate = $debtData['max_pay_date'];
+        $prevPrincipalAmount = $debtData['total_amount'];
+        $prevInterestRate = $debtData['interest_rate'];
+        $prevMinimumPayment = $debtData['min_payment'];
+        $prevNotes = $debtData['notes'];
+
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            $debtName = $prevDebtName;
+            $payeeName = $prevPayeeName;
+            $debtDate = $prevDebtDate;
+            $maxPaymentDate = $prevMaxPaymentDate;
+            $principalAmount = $prevPrincipalAmount;
+            $interestRate = $prevInterestRate;
+            $minimumPayment = $prevMinimumPayment;
+            $notes = $prevNotes;
+        }
+    } else {
+        die("Debt record pawa jaynai.");
+    }
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($_POST["debtName"])) {
@@ -113,9 +144,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if ($isValid) {
-        // DB 
-        header("Location: debt-dashboard.php");
-        exit();
+        $updateDebt = updateDebt($debtID, $debtName, $payeeName, $debtDate, $maxPaymentDate, $principalAmount, $interestRate, $minimumPayment, $notes);
+        if ($updateDebt) {
+            header("Location: debt-dashboard.php?success=Debt updated successfully.");
+            exit();
+        } else {
+            $emptyError = "Failed to update debt. Please try again.";
+        }
     }
 }
 ?>
@@ -137,14 +172,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" class="debt-form two-column-form">
+            <input type="hidden" name="debt_id" value="<?= $debtID ?>" />
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Debt Name</label>
-                    <input type="text" value="Existing Debt Name" readonly />
+                    <input type="text" value="<?= $debtName ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="debtName">New Debt Name</label>
-                    <input type="text" id="debtName" name="debtName" value="<?= $debtName ?>" placeholder="e.g., Personal Loan, Car Loan" />
+                    <input type="text" id="debtName" name="debtName" value="<?= $debtName ?>" />
                     <p class="error-message"><?= $debtNameError ?></p>
                 </div>
             </div>
@@ -152,11 +188,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Payee Name</label>
-                    <input type="text" value="Existing Payee Name" readonly />
+                    <input type="text" value="<?= $payeeName ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="payeeName">New Payee Name</label>
-                    <input type="text" id="payeeName" name="payeeName" value="<?= $payeeName ?>" placeholder="e.g., Bank, Lender" />
+                    <input type="text" id="payeeName" name="payeeName" value="<?= $payeeName ?>" />
                     <p class="error-message"><?= $payeeNameError ?></p>
                 </div>
             </div>
@@ -164,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Debt Date</label>
-                    <input type="text" value="2025-01-01" readonly />
+                    <input type="text" value="<?= $debtDate ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="debtDate">New Debt Date</label>
@@ -176,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Max Payment Date</label>
-                    <input type="text" value="2025-12-31" readonly />
+                    <input type="text" value="<?= $maxPaymentDate ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="maxPaymentDate">New Max Payment Date (Optional)</label>
@@ -188,11 +224,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Principal Amount</label>
-                    <input type="text" value="$5000" readonly />
+                    <input type="text" value="<?= $principalAmount ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="principalAmount">New Principal Amount</label>
-                    <input type="number" id="principalAmount" name="principalAmount" value="<?= $principalAmount ?>" placeholder="Amount in $" />
+                    <input type="number" id="principalAmount" name="principalAmount" value="<?= $principalAmount ?>" />
                     <p class="error-message"><?= $principalAmountError ?></p>
                 </div>
             </div>
@@ -200,11 +236,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Interest Rate</label>
-                    <input type="text" value="5%" readonly />
+                    <input type="text" value="<?= $interestRate ?>%" readonly />
                 </div>
                 <div class="form-column">
                     <label for="interestRate">New Interest Rate (%)</label>
-                    <input type="number" id="interestRate" name="interestRate" step="0.01" value="<?= $interestRate ?>" placeholder="Interest rate" />
+                    <input type="number" id="interestRate" name="interestRate" step="0.01" value="<?= $interestRate ?>"/>
                     <p class="error-message"><?= $interestRateError ?></p>
                 </div>
             </div>
@@ -212,11 +248,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Minimum Payment</label>
-                    <input type="text" value="$200" readonly />
+                    <input type="text" value="<?= $minimumPayment ?>" readonly />
                 </div>
                 <div class="form-column">
                     <label for="minimumPayment">New Minimum Payment</label>
-                    <input type="number" id="minimumPayment" name="minimumPayment" step="0.01" value="<?= $minimumPayment ?>" placeholder="Amount in $" />
+                    <input type="number" id="minimumPayment" name="minimumPayment" step="0.01" value="<?= $minimumPayment ?>" />
                     <p class="error-message"><?= $minimumPaymentError ?></p>
                 </div>
             </div>
@@ -224,13 +260,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Notes</label>
-                    <textarea readonly>Existing notes about the debt...</textarea>
+                    <textarea readonly><?= $notes ?></textarea>
                 </div>
                 <div class="form-column">
                     <label for="notes">New Notes</label>
-                    <textarea id="notes" name="notes" placeholder="Optional details about the debt"><?= $notes ?></textarea>
+                    <textarea id="notes" name="notes"><?= $notes ?></textarea>
                     <p class="error-message"><?= $notesError ?></p>
-                </div>
+                </div> 
             </div>
 
             <button type="submit" class="btn btn-primary">Update Debt</button>
