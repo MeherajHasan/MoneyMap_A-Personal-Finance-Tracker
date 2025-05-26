@@ -1,5 +1,6 @@
 <?php
-    require_once('../../controllers/userAuth.php');
+require_once('../../controllers/userAuth.php');
+require_once('../../models/debtModel.php');
 ?>
 
 <!DOCTYPE html>
@@ -24,16 +25,18 @@
                 <h3>Summary</h3>
                 <div class="summary-metrics">
                     <div class="metric-card">
-                        <h4>Total Debt</h4>
-                        <p id="totalDebt">$0.00</p>
+                        <h4>Total Active Debts</h4>
+                        <p id="totalDebt"><?= countTotalActiveDebts($_SESSION['user']['id']) ?? '0' ?></p>
                     </div>
                     <div class="metric-card">
-                        <h4>Total Minimum Payment</h4>
-                        <p id="totalMinimumPayment">$0.00</p>
+                        <h4>Total Active Debt Amount</h4>
+                        <p id="totalMinimumPayment">$<?= sumActiveDebtAmounts($_SESSION['user']['id']) ?? '$0.00' ?></p>
                     </div>
                     <div class="metric-card">
-                        <h4>Total Interest Rate</h4>
-                        <p id="totalInterestRate">-</p>
+                        <h4>Total Payable Amount</h4>
+                        <p id="totalInterestRate">
+                            $<?= sumActiveDebtAmounts($_SESSION['user']['id']) - sumPaidAmounts($_SESSION['user']['id']) ?? '0.00' ?>
+                        </p>
                     </div>
                 </div>
             </section>
@@ -41,29 +44,29 @@
             <section class="current-debts">
                 <h3>Current Debts</h3>
                 <ul id="debtList">
-                    <li>
-                        <div class="debt-info">
-                            <span class="debt-name">Credit Card</span>
-                            <span class="debt-amount">$1,200.00</span>
-                        </div>
-                        <div class="debt-actions">
-                            <a href="edit-debt.php" class="btn-edit">Edit</a>
-                            <a href="debt-details.php" class="btn-details">Details</a>
-                            <a href="debt-pay.php" class="btn-pay">Pay</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="debt-info">
-                            <span class="debt-name">Student Loan</span>
-                            <span class="debt-amount">$15,500.00</span>
-                        </div>
-                        <div class="debt-actions">
-                            <a href="edit-debt.php" class="btn-edit">Edit</a>
-                            <a href="debt-details.php" class="btn-details">Details</a>
-                            <a href="debt-pay.php" class="btn-pay">Pay</a>
-                        </div>
-                    </li>
-                    </ul>
+                    <?php
+                    $debts = getAllActiveDebts($_SESSION['user']['id']);
+                    if (!empty($debts)) {
+                        foreach ($debts as $debt) {
+                            $formattedAmount = number_format($debt['total_amount'], 2);
+                            echo "<li>
+                                <div class='debt-info'>
+                                    <span class='debt-name'>" . htmlspecialchars($debt['debt_name']) . "</span>
+                                    <span class='debt-amount'>\${$formattedAmount}</span>
+                                </div>
+                                <div class='debt-actions'>
+                                    <a href='edit-debt.php?id={$debt['debt_id']}' class='btn-edit'>Edit</a>
+                                    <a href='debt-details.php?id={$debt['debt_id']}' class='btn-details'>Details</a>
+                                    <a href='debt-pay.php?id={$debt['debt_id']}' class='btn-pay'>Pay</a>
+                                </div>
+                            </li>";
+                        }
+                    } else {
+                        echo "<p id='noDebts'>No debts recorded yet.</p>";
+                    }
+                    ?>
+                </ul>
+
                 <p id="noDebts" style="display:none;">No debts recorded yet.</p>
             </section>
 
@@ -76,7 +79,7 @@
 
     <?php include '../header-footer/footer.php' ?>
 
-    <script src="../../validation/debt/debt-dashboard.js"></script>
+    <!-- <script src="../../validation/debt/debt-dashboard.js"></script> -->
 </body>
 
 </html>

@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Edit Debt</h2>
         </div>
 
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="debt-form two-column-form">
+        <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST" class="debt-form two-column-form">
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Debt Name</label>
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="debtName">New Debt Name</label>
-                    <input type="text" id="debtName" name="debtName" value="<?= htmlspecialchars($debtName) ?>" placeholder="e.g., Personal Loan, Car Loan" />
+                    <input type="text" id="debtName" name="debtName" value="<?= $debtName ?>" placeholder="e.g., Personal Loan, Car Loan" />
                     <p class="error-message"><?= $debtNameError ?></p>
                 </div>
             </div>
@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="payeeName">New Payee Name</label>
-                    <input type="text" id="payeeName" name="payeeName" value="<?= htmlspecialchars($payeeName) ?>" placeholder="e.g., Bank, Lender" />
+                    <input type="text" id="payeeName" name="payeeName" value="<?= $payeeName ?>" placeholder="e.g., Bank, Lender" />
                     <p class="error-message"><?= $payeeNameError ?></p>
                 </div>
             </div>
@@ -168,7 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="debtDate">New Debt Date</label>
-                    <input type="date" id="debtDate" name="debtDate" value="<?= htmlspecialchars($debtDate) ?>" />
+                    <input type="date" id="debtDate" name="debtDate" value="<?= $debtDate ?>" />
                     <p class="error-message"><?= $debtDateError ?></p>
                 </div>
             </div>
@@ -180,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="maxPaymentDate">New Max Payment Date (Optional)</label>
-                    <input type="date" id="maxPaymentDate" name="maxPaymentDate" value="<?= htmlspecialchars($maxPaymentDate) ?>" />
+                    <input type="date" id="maxPaymentDate" name="maxPaymentDate" value="<?= $maxPaymentDate ?>" />
                     <p class="error-message"><?= $maxPaymentDateError ?></p>
                 </div>
             </div>
@@ -192,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="principalAmount">New Principal Amount</label>
-                    <input type="number" id="principalAmount" name="principalAmount" value="<?= htmlspecialchars($principalAmount) ?>" placeholder="Amount in $" />
+                    <input type="number" id="principalAmount" name="principalAmount" value="<?= $principalAmount ?>" placeholder="Amount in $" />
                     <p class="error-message"><?= $principalAmountError ?></p>
                 </div>
             </div>
@@ -204,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="interestRate">New Interest Rate (%)</label>
-                    <input type="number" id="interestRate" name="interestRate" step="0.01" value="<?= htmlspecialchars($interestRate) ?>" placeholder="Interest rate" />
+                    <input type="number" id="interestRate" name="interestRate" step="0.01" value="<?= $interestRate ?>" placeholder="Interest rate" />
                     <p class="error-message"><?= $interestRateError ?></p>
                 </div>
             </div>
@@ -216,7 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="minimumPayment">New Minimum Payment</label>
-                    <input type="number" id="minimumPayment" name="minimumPayment" step="0.01" value="<?= htmlspecialchars($minimumPayment) ?>" placeholder="Amount in $" />
+                    <input type="number" id="minimumPayment" name="minimumPayment" step="0.01" value="<?= $minimumPayment ?>" placeholder="Amount in $" />
                     <p class="error-message"><?= $minimumPaymentError ?></p>
                 </div>
             </div>
@@ -228,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <div class="form-column">
                     <label for="notes">New Notes</label>
-                    <textarea id="notes" name="notes" placeholder="Optional details about the debt"><?= htmlspecialchars($notes) ?></textarea>
+                    <textarea id="notes" name="notes" placeholder="Optional details about the debt"><?= $notes ?></textarea>
                     <p class="error-message"><?= $notesError ?></p>
                 </div>
             </div>
@@ -244,5 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </main>
     <?php include '../header-footer/footer.php' ?>
+
+    <script src="../../validation/debt/edit-debt.js"></script>
 </body>
 </html>

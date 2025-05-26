@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/debtModel.php');
 
 $isValid = true;
 $debtName = $payeeName = $debtDate = $maxPaymentDate = "";
@@ -116,9 +117,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if ($isValid) {
-        // db
-        header("Location: debt-dashboard.php");
-        exit();
+        $addDebt = addNewDebt($_SESSION['user']['id'], $debtName, $payeeName, $debtDate, $maxPaymentDate, $principalAmount, $interestRate, $minimumPayment, $notes);
+        if ($addDebt) {
+            header("Location: debt-dashboard.php?success=Debt added successfully.");
+            exit();
+        } else {
+            $notesError = "Failed to add debt. Please try again.";
+        }
     }
 }
 ?>

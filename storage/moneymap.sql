@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2025 at 04:35 PM
+-- Generation Time: May 26, 2025 at 05:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 --
 -- Database: `moneymap`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `debt`
+--
+
+CREATE TABLE `debt` (
+  `debt_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `debt_name` varchar(100) NOT NULL,
+  `payee_name` varchar(100) NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `paid_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `debt_date` date NOT NULL,
+  `max_pay_date` date NOT NULL,
+  `interest_rate` decimal(5,2) DEFAULT 0.00,
+  `min_payment` decimal(10,2) DEFAULT 0.00,
+  `notes` text DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 = Payable, 1 = Fully Paid'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `debt`
+--
+
+INSERT INTO `debt` (`debt_id`, `user_id`, `debt_name`, `payee_name`, `total_amount`, `paid_amount`, `debt_date`, `max_pay_date`, `interest_rate`, `min_payment`, `notes`, `status`) VALUES
+(1, 23, 'Car Loan', 'AutoFinance Corp', 15000.00, 3500.00, '2024-01-15', '2026-01-15', 5.50, 300.00, 'Monthly payments ongoing', 0),
+(2, 23, 'Credit Card', 'BankPlus', 3200.00, 1200.00, '2024-03-10', '2025-03-10', 19.90, 150.00, 'Try to clear in 6 months', 0),
+(3, 23, 'Personal Loan', 'QuickCash Inc.', 5000.00, 5000.00, '2023-06-01', '2024-06-01', 12.00, 250.00, 'Paid off early', 1),
+(4, 23, 'Home Renovation', 'RenovateNow', 8000.00, 2000.00, '2024-05-01', '2026-05-01', 6.50, 275.00, 'Used for kitchen upgrade', 0),
+(5, 23, 'Medical Bills', 'HealthCare Central', 4200.00, 1500.00, '2023-12-20', '2024-12-20', 0.00, 200.00, 'No interest on balance', 0),
+(6, 23, 'Business Loan', 'StartUpFund', 20000.00, 18000.00, '2022-08-15', '2025-08-15', 8.50, 500.00, 'Almost done', 0),
+(7, 23, 'Furniture Financing', 'HomeStyle Ltd.', 2800.00, 2800.00, '2023-01-05', '2024-01-05', 4.00, 233.33, 'Paid in full', 1),
+(8, 23, 'Education Loan', 'EduFund', 10000.00, 3500.00, '2023-09-01', '2027-09-01', 7.00, 275.00, 'Used for online course', 0),
+(9, 23, 'Vacation Debt', 'TravelNow PayLater', 3500.00, 1000.00, '2023-11-20', '2024-11-20', 10.00, 250.00, 'Trip to Europe', 0),
+(10, 23, 'Laptop EMI', 'TechZone', 1500.00, 1500.00, '2023-04-10', '2023-10-10', 0.00, 250.00, 'Fully paid in 6 EMIs', 1),
+(11, 23, 'Dhar korsi', 'ABC Bank', 5000.00, 0.00, '2025-04-28', '2025-06-07', 5.00, 1000.00, 'back dibo bro', 0);
 
 -- --------------------------------------------------------
 
@@ -124,6 +162,80 @@ INSERT INTO `income` (`income_id`, `user_id`, `income_type`, `source`, `amount`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `savings`
+--
+
+CREATE TABLE `savings` (
+  `savings_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `goal_name` varchar(100) NOT NULL,
+  `target_amount` decimal(10,2) NOT NULL,
+  `saved_amount` decimal(10,2) DEFAULT 0.00,
+  `start_date` date DEFAULT curdate(),
+  `target_date` date NOT NULL,
+  `note` text DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 1 COMMENT '0 = deleted, 1 = active, 2 = reversed',
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `savings`
+--
+
+INSERT INTO `savings` (`savings_id`, `user_id`, `goal_name`, `target_amount`, `saved_amount`, `start_date`, `target_date`, `note`, `status`, `created_at`, `updated_at`) VALUES
+(1, 23, 'Emergency Fund', 5000.00, 200.00, '2025-05-26', '2025-12-31', 'For unexpected expenses', 1, '2025-05-26 01:56:45', '2025-05-26 08:52:45'),
+(2, 23, 'Vacation in Bali', 3000.00, 1500.00, '2025-05-26', '2025-08-15', 'Trip with friends', 1, '2025-05-26 01:56:45', '2025-05-26 05:40:36'),
+(3, 23, 'New Laptop', 1500.00, 1500.00, '2025-05-26', '2025-06-10', 'Already reached the goal', 2, '2025-05-26 01:56:45', '2025-05-26 05:41:24'),
+(4, 23, 'Car Down Payment', 10000.00, 10000.00, '2025-05-26', '2026-01-01', 'Planning to buy a used car', 2, '2025-05-26 01:56:45', '2025-05-26 05:41:52'),
+(5, 23, 'Online Course Fund', 1000.00, 500.00, '2025-05-26', '2025-05-30', 'Half Stack Development Course', 1, '2025-05-26 01:56:45', '2025-05-26 08:54:16'),
+(6, 23, 'Gift Savings', 500.00, 100.00, '2025-05-26', '2025-12-20', 'Holiday gifts for family', 1, '2025-05-26 01:56:45', '2025-05-26 05:41:03'),
+(7, 23, 'New Phone', 1800.00, 0.00, '2025-05-26', '2025-10-30', 'Buy iPhone 17 Pro Max', 1, '2025-05-26 03:28:11', '2025-05-26 05:28:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `savings_transactions`
+--
+
+CREATE TABLE `savings_transactions` (
+  `transaction_id` int(11) NOT NULL,
+  `savings_id` int(11) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `transaction_date` datetime DEFAULT current_timestamp(),
+  `note` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `savings_transactions`
+--
+
+INSERT INTO `savings_transactions` (`transaction_id`, `savings_id`, `amount`, `transaction_date`, `note`) VALUES
+(1, 1, 500.00, '2025-05-26 01:57:36', 'Initial deposit'),
+(2, 1, 300.00, '2025-05-26 01:57:36', 'Monthly contribution'),
+(3, 1, 400.00, '2025-05-26 01:57:36', 'Bonus added'),
+(4, 2, 1000.00, '2025-05-26 01:57:36', 'Saved from salary'),
+(5, 2, 500.00, '2025-05-26 01:57:36', 'Freelance earnings'),
+(6, 3, 1500.00, '2025-05-26 01:57:36', 'One-time transfer'),
+(7, 4, 1000.00, '2025-05-26 01:57:36', 'Monthly savings'),
+(8, 4, 1500.00, '2025-05-26 01:57:36', 'Tax refund contribution'),
+(9, 5, 400.00, '2025-05-26 01:57:36', 'Part-time job income'),
+(10, 5, 400.00, '2025-05-26 01:57:36', 'Extra savings'),
+(11, 6, 50.00, '2025-05-26 01:57:36', 'Started saving for gifts'),
+(12, 2, 100.00, '2025-05-28 00:00:00', ''),
+(13, 6, 50.00, '2025-05-14 00:00:00', ''),
+(14, 1, 300.00, '2025-05-16 00:00:00', ''),
+(15, 2, 1400.00, '2025-05-20 00:00:00', ''),
+(16, 6, 50.00, '2025-05-14 00:00:00', ''),
+(17, 1, 3500.00, '2025-05-12 00:00:00', ''),
+(18, 5, 200.00, '2025-05-21 00:00:00', ''),
+(19, 2, 1500.00, '2025-05-21 00:00:00', ''),
+(20, 3, 500.00, '2025-05-14 00:00:00', ''),
+(21, 4, 7500.00, '2025-05-09 00:00:00', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -152,21 +264,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `id_type`, `id_number`, `passport_expiry`, `country_code`, `phone`, `email`, `password`, `gender`, `dob`, `address`, `photo_path`, `created_at`, `account_status`, `role`) VALUES
-(11, 'John', 'Doe', 0, '1234567890', '2028-05-15', '+88', '123456789', 'john.doe@gmail.com', '$2y$10$ZfJJZ3uqoflDBBLeFIynf.dtLBQbG71Qobi0S438LPTEXNlBwvV7W', 0, '1995-08-15', 'Uttara, Dhaka', 'images/john.png', '2025-05-17 14:41:31', 0, 'user'),
-(12, 'Jane', 'Doe', 1, 'P1234567', '2028-06-12', '+88', '01777777777', 'jane.doe@gmail.com', 'hashed_password_2', 1, '1997-05-10', '456 Main St, City B', 'images/jane.png', '2025-05-17 14:41:31', 3, 'user'),
-(13, 'David', 'Smith', 0, '9876543210', NULL, '+88', '01666666666', 'david.smith@gmail.com', 'hashed_password_3', 0, '1992-11-22', '789 Main St, City C', 'images/david.png', '2025-05-17 14:41:31', 2, 'user'),
-(14, 'Emily', 'Brown', 0, '1122334455', NULL, '+88', '01444444444', 'emily.brown@gmail.com', 'hashed_password_4', 1, '2000-01-19', '111 Main St, City D', 'images/emily.png', '2025-05-17 14:41:31', 1, 'user'),
-(15, 'Chris', 'Johnson', 1, 'P2233445', '2027-03-18', '+88', '01333333333', 'chris.johnson@gmail.com', 'hashed_password_5', 0, '1998-09-05', '222 Main St, City E', 'images/chris.png', '2025-05-17 14:41:31', 0, 'user'),
-(16, 'Sarah', 'Lee', 0, '5566778899', NULL, '+88', '01888888888', 'sarah.lee@gmail.com', 'hashed_password_6', 1, '2001-07-23', '333 Main St, City F', 'images/sarah.png', '2025-05-17 14:41:31', 0, 'user'),
-(17, 'Michael', 'Clark', 1, 'P4455667', '2029-11-30', '+88', '01999999999', 'michael.clark@gmail.com', 'hashed_password_7', 0, '1990-03-12', '444 Main St, City G', 'images/michael.png', '2025-05-17 14:41:31', 0, 'user'),
-(18, 'Linda', 'Lewis', 0, '2233445566', NULL, '+88', '01222222222', 'linda.lewis@gmail.com', 'hashed_password_8', 1, '1985-12-28', '555 Main St, City H', 'images/linda.png', '2025-05-17 14:41:31', 0, 'user'),
-(19, 'Tom', 'Walker', 0, '3344556677', NULL, '+88', '01111111111', 'tom.walker@gmail.com', 'hashed_password_9', 0, '1993-04-15', '666 Main St, City I', 'images/tom.png', '2025-05-17 14:41:31', 0, 'user'),
-(20, 'Admin', 'User', 0, '4455667788', NULL, '+88', '01010101010', 'admin@gmail.com', '11111111', 0, '1988-02-20', 'Admin HQ, City J', '../../uploads/admin.jpg', '2025-05-17 14:41:31', 0, 'admin'),
-(23, 'Meheraj', 'Hasan', 0, '1111111111', NULL, '+88', '123456789', 'hasanmeheraj639@gmail.com', '$2y$10$W7/WvledZhccGgXVHo8kX.OPPcyfrKDM4SjiHoWoP4dr9SVAbjscC', 0, '2002-10-30', 'Uttara', '../../uploads/hasanmeheraj639.jpeg', '2025-05-21 02:04:47', 0, 'user');
+(23, 'Meheraj', 'Hasan', 0, '1111111111', NULL, '+88', '123456789', 'hasanmeheraj639@gmail.com', '$2y$10$W7/WvledZhccGgXVHo8kX.OPPcyfrKDM4SjiHoWoP4dr9SVAbjscC', 0, '2002-10-30', 'Uttara', '../../uploads/hasanmeheraj639.jpeg', '2025-05-21 02:04:47', 0, 'user'),
+(25, 'Junky', 'Oggy', 0, '0000000000', '0000-00-00', '+65', '123456789', 'junkyoggy@gmail.com', '$2y$10$lhuJn1HyYX7QZHF3CxjOrOPiZwitZycajd9sEqWOuvq7XPex2tU3C', 0, '1999-02-09', 'Khilkhet', '../../uploads/junkyoggy.jpg', '2025-05-23 16:46:01', 3, 'user'),
+(26, 'Admin', 'Hasan', 0, '1111100000', '0000-00-00', '+88', '123456789', 'admin@gmail.com', '$2y$10$afajkcI/LswC4WObRITFt.xmqVyN1UwNe2ouD9maBVCbSXUEh25Fi', 0, '2002-10-30', 'Kuratoli', '../../uploads/admin.jpg', '2025-05-24 20:36:38', 0, 'admin');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `debt`
+--
+ALTER TABLE `debt`
+  ADD PRIMARY KEY (`debt_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `expenses`
@@ -191,6 +302,20 @@ ALTER TABLE `income`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `savings`
+--
+ALTER TABLE `savings`
+  ADD PRIMARY KEY (`savings_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `savings_transactions`
+--
+ALTER TABLE `savings_transactions`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `savings_id` (`savings_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -201,6 +326,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `debt`
+--
+ALTER TABLE `debt`
+  MODIFY `debt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `expenses`
@@ -221,14 +352,32 @@ ALTER TABLE `income`
   MODIFY `income_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `savings`
+--
+ALTER TABLE `savings`
+  MODIFY `savings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `savings_transactions`
+--
+ALTER TABLE `savings_transactions`
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `debt`
+--
+ALTER TABLE `debt`
+  ADD CONSTRAINT `debt_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `expenses`
@@ -248,6 +397,18 @@ ALTER TABLE `expense_categories`
 --
 ALTER TABLE `income`
   ADD CONSTRAINT `income_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `savings`
+--
+ALTER TABLE `savings`
+  ADD CONSTRAINT `savings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `savings_transactions`
+--
+ALTER TABLE `savings_transactions`
+  ADD CONSTRAINT `savings_transactions_ibfk_1` FOREIGN KEY (`savings_id`) REFERENCES `savings` (`savings_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
