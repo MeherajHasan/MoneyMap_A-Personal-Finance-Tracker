@@ -1,3 +1,1 @@
-1. in loginCheck.php, only let the user logged in only if the account status is active
-   else redirect to another page
-
+update the expenseModel.php to to change the spent_amount value of budget table

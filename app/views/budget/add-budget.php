@@ -1,14 +1,13 @@
 <?php
     require_once('../../controllers/userAuth.php');
 
-    $budgetCategory = $budgetAmount = $spentAmount = $budgetStartDate = $budgetEndDate = $budgetNotes = "";
-    $categoryError = $amountError = $spentError = $startDateError = $endDateError = "";
+    $budgetCategory = $budgetAmount = $budgetStartDate = $budgetEndDate = $budgetNotes = "";
+    $categoryError = $amountError = $startDateError = $endDateError = "";
     $successMessage = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $budgetCategory = $_POST["budgetCategory"] ?? "";
         $budgetAmount = $_POST["budgetAmount"] ?? "";
-        $spentAmount = $_POST["spentAmount"] ?? "";
         $budgetStartDate = $_POST["budgetStartDate"] ?? "";
         $budgetEndDate = $_POST["budgetEndDate"] ?? "";
         $budgetNotes = $_POST["budgetNotes"] ?? "";
@@ -22,11 +21,6 @@
 
         if ($budgetAmount === "" || $budgetAmount <= 0) {
             $amountError = "Enter valid amount.";
-            $hasError = true;
-        }
-
-        if ($spentAmount === "" || $spentAmount < 0) {
-            $spentError = "Enter valid spent amount.";
             $hasError = true;
         }
 
@@ -90,15 +84,9 @@
         </div>
 
         <div class="form-group">
-            <label for="budgetAmount">Amount</label>
+            <label for="budgetAmount">Budget Amount</label>
             <input type="number" id="budgetAmount" name="budgetAmount" placeholder="Amount in $" value="<?= htmlspecialchars($budgetAmount) ?>" />
             <p class="error-message"><?= $amountError ?></p>
-        </div>
-
-        <div class="form-group">
-            <label for="spentAmount">Amount Spent</label>
-            <input type="number" id="spentAmount" name="spentAmount" placeholder="Amount Spent" value="<?= htmlspecialchars($spentAmount) ?>" />
-            <p class="error-message"><?= $spentError ?></p>
         </div>
 
         <div class="form-group">

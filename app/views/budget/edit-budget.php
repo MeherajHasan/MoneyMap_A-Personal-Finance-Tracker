@@ -1,8 +1,8 @@
 <?php
     require_once('../../controllers/userAuth.php');
 
-    $category = $amount = $spent = $startDate = $endDate = $notes = "";
-    $categoryError = $amountError = $spentError = $startDateError = $endDateError = $emptyError = "";
+    $category = $amount = $startDate = $endDate = $notes = "";
+    $categoryError = $amountError = $startDateError = $endDateError = $emptyError = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $isValid = true;
@@ -21,17 +21,6 @@
             $amount = $_POST["budgetAmount"];
             if ($amount < 0) {
                 $amountError = "Amount cannot be negative.";
-                $isValid = false;
-            }
-        }
-
-        if (empty($_POST["budgetSpent"])) {
-            $spentError = "Please enter the spent amount.";
-            $isValid = false;
-        } else {
-            $spent = $_POST["budgetSpent"];
-            if ($spent < 0) {
-                $spentError = "Spent amount cannot be negative.";
                 $isValid = false;
             }
         }
@@ -107,25 +96,13 @@
 
             <div class="form-group-row">
                 <div class="form-column">
-                    <label>Previous Amount</label>
+                    <label>Previous Budget Amount</label>
                     <input type="text" value="$300" readonly />
                 </div>
                 <div class="form-column">
-                    <label for="budgetAmount">New Amount</label>
+                    <label for="budgetAmount">New Budget Amount</label>
                     <input type="number" id="budgetAmount" name="budgetAmount" value="<?= htmlspecialchars($amount) ?>" placeholder="Amount in $" />
                     <p id="amountError" class="error-message"><?= $amountError ?></p>
-                </div>
-            </div>
-
-            <div class="form-group-row">
-                <div class="form-column">
-                    <label>Previous Spent Amount</label>
-                    <input type="text" value="$150" readonly />
-                </div>
-                <div class="form-column">
-                    <label for="budgetSpent">New Spent Amount</label>
-                    <input type="number" id="budgetSpent" name="budgetSpent" value="<?= htmlspecialchars($spent) ?>" placeholder="Spent amount in $" />
-                    <p id="spentError" class="error-message"><?= $spentError ?></p>
                 </div>
             </div>
 

@@ -1,5 +1,21 @@
 <?php
-    require_once('../../controllers/userAuth.php');
+require_once('../../controllers/userAuth.php');
+require_once('../../models/budgetModel.php');
+require_once('../../models/expenseCategoryModel.php');
+
+$selectedMonth = $_GET['month'] ?? date('Y-m');
+$selectedCategory = $_GET['category'] ?? 'all';
+$monthlyBudgets = getSelectedMonthBudgets($_SESSION['user']['id'], $selectedMonth);
+$categoryNames = getExpenseCategoryName($_SESSION['user']['id']);
+
+function getSelectedBudgetMonth($monthStr)
+{
+    if (!$monthStr) {
+        return date('F Y');
+    }
+    $date = date_create($monthStr . '-01');
+    return date_format($date, "F Y");
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,16 +35,17 @@
     <main class="main container">
         <section class="summary-cards">
             <div class="card budget-total">
-                <h3>Total Budget</h3>
-                <p>$4,500</p>
+                <h3>Total Budget <br><i>(<?= getSelectedBudgetMonth($selectedMonth) ?>)</i></h3>
+                <p>$<?= getTotalBudgetMonthly($_SESSION['user']['id'], $selectedMonth) ?? '0.00' ?></p>
             </div>
             <div class="card budget-used">
-                <h3>Used Budget</h3>
-                <p>$3,000</p>
+                <h3>Used Budget <br><i>(<?= getSelectedBudgetMonth($selectedMonth) ?>)</i></h3>
+                <p>$<?= getUsedBudgetMonthly($_SESSION['user']['id'], $selectedMonth) ?? '0.00' ?></p>
             </div>
             <div class="card budget-remaining">
-                <h3>Remaining Budget</h3>
-                <p>$1,500</p>
+                <h3>Remaining Budget <br><i>(<?= getSelectedBudgetMonth($selectedMonth) ?>)</i></h3>
+                <p>$<?= number_format(getTotalBudgetMonthly($_SESSION['user']['id'], $selectedMonth) -
+                        getUsedBudgetMonthly($_SESSION['user']['id'], $selectedMonth), 2) ?? '0.00' ?></p>
             </div>
         </section>
 
@@ -37,21 +54,22 @@
             <a href="add-budget.php" class="btn btn-primary">+ Add Budget</a>
         </div>
 
-        <div class="filters">
+        <form method="GET" action="<?= $_SERVER['PHP_SELF'] ?>" class="filters">
             <label for="categoryFilter">Category:</label>
-            <select id="categoryFilter">
-                <option value="all">All</option>
-                <option value="housing">Housing</option>
-                <option value="food">Food</option>
-                <option value="transport">Transport</option>
-                <option value="utilities">Utilities</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="others">Others</option>
+            <select id="categoryFilter" name="category">
+                <option value="all" <?= $selectedCategory == 'all' ? 'selected' : '' ?>>All</option>
+                <?php foreach ($categoryNames as $cat): ?>
+                    <option value="<?= strtolower($cat) ?>" <?= strtolower($selectedCategory) == strtolower($cat) ? 'selected' : '' ?>>
+                        <?= $cat ?>
+                    </option>
+                <?php endforeach; ?>
+
             </select>
 
             <label for="monthFilter">Month:</label>
-            <input type="month" id="monthFilter" />
-        </div>
+            <input type="month" id="monthFilter" name="month" value="<?= $selectedMonth ?: date('Y-m') ?>" onchange="this.form.submit()" />
+
+        </form>
 
         <table class="budget-table">
             <thead>
@@ -67,64 +85,38 @@
                 </tr>
             </thead>
             <tbody id="budgetTableBody">
-                <tr>
-                    <td>Housing</td>
-                    <td>$1,200</td>
-                    <td>$1,000</td>
-                    <td>$200</td>
-                    <td>2025-05-01</td>
-                    <td>2025-05-31</td>
-                    <td>Rent and utilities</td>
-                    <td>
-                        <a href="edit-budget.php?id=1" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Food</td>
-                    <td>$800</td>
-                    <td>$600</td>
-                    <td>$200</td>
-                    <td>2025-05-01</td>
-                    <td>2025-05-31</td>
-                    <td>Groceries and dining out</td>
-                    <td>
-                        <a href="edit-budget.php?id=2" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Transport</td>
-                    <td>$400</td>
-                    <td>$250</td>
-                    <td>$150</td>
-                    <td>2025-05-01</td>
-                    <td>2025-05-31</td>
-                    <td>Gas and public transit</td>
-                    <td>
-                        <a href="edit-budget.php?id=3" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Entertainment</td>
-                    <td>$300</td>
-                    <td>$200</td>
-                    <td>$100</td>
-                    <td>2025-05-01</td>
-                    <td>2025-05-31</td>
-                    <td>Movies, games</td>
-                    <td>
-                        <a href="edit-budget.php?id=4" class="btn-small edit">Edit</a>
-                        <button class="btn-small delete">Delete</button>
-                    </td>
-                </tr>
+                <?php foreach ($monthlyBudgets as $budget): ?>
+                    <?php
+                    $remaining = $budget['amount'] - $budget['spent_amount'];
+                    $categoryName = getCategoryNameById($budget['category_id']);
+                    ?>
+                    <?php if ($selectedCategory == 'all' || strtolower($categoryName) == strtolower($selectedCategory)): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($categoryName) ?></td>
+                            <td>$<?= number_format($budget['amount'], 2) ?></td>
+                            <td>$<?= number_format($budget['spent_amount'], 2) ?></td>
+                            <td>$<?= number_format($remaining, 2) ?></td>
+                            <td><?= $budget['start_date'] ?></td>
+                            <td><?= $budget['target_date'] ?></td>
+                            <td><?= $budget['note'] ?></td>
+                            <td>
+                                <a href="edit-budget.php?id=<?= $budget['budget_id'] ?>&category_id=<?= $budget['category_id'] ?>" class="btn-small edit">Edit</a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <?php if (empty($monthlyBudgets)): ?>
+                    <tr>
+                        <td colspan="8">No budget entries found for this month.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
         <div class="action-buttons">
+            <a href="budget-category.php" class="btn">Manage Categories</a>
             <a href="budget-report.php" class="btn">View Budget Report</a>
-            <a href="budget-category.php" class="btn">View Budget Categories</a>
             <a href="overspend-notify.php" class="btn">Overspend Notification</a>
         </div>
     </main>
