@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/budgetModel.php')
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +21,16 @@ require_once('../../controllers/userAuth.php');
         <div class="notification-container">
             <div class="notification warning">
                 <h2>Budget Overspent!</h2>
-                <p id="overspent-message">You have exceeded your budget in the following categories:</p>
-                <ul id="overspent-categories"></ul>
+                <p id="overspent-message">You have exceeded your budget this month in the following categories:</p>
+                <ul id="overspent-categories">
+                    <?php
+                    $overspentCategories = getOverspentCategoriesByUser($_SESSION['user']['id']);
+                    foreach ($overspentCategories as $cat) {
+                        echo '<li>' . $cat . '</li>';
+                    }
+                    ?>
+                </ul>
+
                 <p><a href="budget-report.php">Review your Budget Report for details.</a></p>
                 <button id="acknowledge-btn">Okay</button>
             </div>

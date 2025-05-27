@@ -1,16 +1,21 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/budgetModel.php');
+require_once('../../models/expenseCategoryModel.php');
 
 $newCategory = '';
 $emptyError = '';
 
-function isValidCategoryName($name) {
+$categories = getExpenseCategories($_SESSION['user']['id']);
+
+function isValidCategoryName($name)
+{
     for ($i = 0; $i < strlen($name); $i++) {
         $char = $name[$i];
         if (!(($char >= 'a' && $char <= 'z') ||
-              ($char >= 'A' && $char <= 'Z') ||
-              ($char >= '0' && $char <= '9') ||
-              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
+            ($char >= 'A' && $char <= 'Z') ||
+            ($char >= '0' && $char <= '9') ||
+            $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
             return false;
         }
     }
@@ -18,6 +23,23 @@ function isValidCategoryName($name) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['deleteCategoryID'])) {
+        $categoryID = $_POST['deleteCategoryID'];
+        $deleteCategoryStatus = deleteExpenseCategory($categoryID, $_SESSION['user']['id']);
+
+        if ($deleteCategoryStatus) {
+            $deleteBudgetStatus = deleteBudgetByCategory($categoryID, $_SESSION['user']['id']);
+            if ($deleteBudgetStatus) {
+                header("Location: budget-category.php");
+                exit();
+            } else {
+                $emptyError = 'Failed to delete budget associated with this category.';
+            }
+        } else {
+            $emptyError = 'Failed to delete category. Please try again.';
+        }
+    }
+
     $newCategory = trim($_POST['newCategory'] ?? '');
 
     if ($newCategory === '') {
@@ -25,11 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif (!isValidCategoryName($newCategory)) {
         $emptyError = 'Category name contains invalid characters.';
     } else {
-        // db
-        header("Location: budget-category.php");
-        exit();
+        $addStatus = addExpenseCategory($_SESSION['user']['id'], $newCategory);
+        if ($addStatus) {
+            header("Location: budget-category.php");
+            exit();
+        } else {
+            $emptyError = 'Failed to add category. Please try again.';
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <main class="main container">
         <div class="section-header">
             <h2>Existing Budget Categories</h2>
+            <h3><i>For editing your personal category names, <a href="../expense/expense-category.php"><u>click here!</u></a></i></h3>
         </div>
 
         <table class="category-table">
@@ -59,56 +87,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </tr>
             </thead>
             <tbody id="categoryTableBody">
-                <!-- Existing categories will be dynamically populated here -->
-                <tr>
-                    <td>Groceries</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Utilities</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Transportation</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Entertainment</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Healthcare</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Education</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Emergency Fund</td>
-                    <td>
-                        <button class="btn btn-edit">Edit</button>
-                        <button class="btn btn-delete">Delete</button>
-                    </td>
-                </tr>
+                <?php foreach ($categories as $cat): ?>
+                    <tr>
+                        <td><?= $cat['name']; ?></td>
+                        <td>
+                            <?php if ($cat['status'] == 1): ?>
+                                <?php if ($cat['status'] == 1): ?>
+                                    <form method="POST" action="<?= $_SERVER["PHP_SELF"]; ?>" class="delete-category-form" onclick="return confirm('Are you sure you want to delete this category?');">
+                                        <input type="hidden" name="deleteCategoryID" value="<?= $cat['category_id']; ?>">
+                                        <button type="submit" class="btn btn-delete">Delete</button>
+                                    </form>
+                                <?php else: ?>
+                                    <span><i>Default categories cannot be edited or deleted</i></span>
+                                <?php endif; ?>
+
+                            <?php else: ?>
+                                <span><i>Default categories cannot be edited or deleted</i></span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+
             </tbody>
         </table>
 
@@ -116,17 +115,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Add New Category</h2>
         </div>
 
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="add-category">
-            <input 
-                type="text" 
-                id="newCategory" 
-                name="newCategory" 
-                placeholder="Enter new category name" 
-                value="<?php echo htmlspecialchars($newCategory); ?>" 
-            />
-            <button id="addCategoryBtn" class="btn btn-primary" type="button">Add Category</button>
+        <form method="POST" action="<?= $_SERVER["PHP_SELF"]; ?>" class="add-category">
+            <input type="text" id="newCategory" name="newCategory" placeholder="Enter new category name" value="<?= $newCategory; ?>" />
+            <button id="addCategoryBtn" class="btn btn-primary" type="submit">+ Add Category</button>
         </form>
-        <p id="emptyError"><?php echo htmlspecialchars($emptyError); ?></p>
+        <p id="emptyError"><?= $emptyError; ?></p>
 
         <div class="navigation-buttons">
             <a href="budget-dashboard.php" class="btn btn-secondary">Back to Budget Dashboard</a>

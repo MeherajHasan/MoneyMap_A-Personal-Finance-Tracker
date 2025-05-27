@@ -87,19 +87,14 @@ function addExpenseCategory($userID, $categoryName) {
 
 function deleteExpenseCategory($categoryID, $userID) {
     $con = getConnection();
-    $sql = "UPDATE expense_categories 
-            SET status = 2
-            WHERE category_id = '$categoryID' AND user_id = '$userID'";
-
+    $sql = "UPDATE expense_categories SET status = 2 WHERE category_id = '$categoryID' AND user_id = '$userID'";
     $result = mysqli_query($con, $sql);
     return $result;
 }
 
 function renameExpenseCategory($categoryID, $userID, $newName) {
     $con = getConnection();
-    $sql = "UPDATE expense_categories 
-            SET name = '$newName' 
-            WHERE category_id = '$categoryID' AND user_id = '$userID'";
+    $sql = "UPDATE expense_categories SET name = '$newName' WHERE category_id = '$categoryID' AND user_id = '$userID'";
 
     $result = mysqli_query($con, $sql);
     return $result;

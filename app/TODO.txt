@@ -1,2 +1,3 @@
 1. update the expenseModel.php to to change the spent_amount value of budget table
 2. category names (already added or not) using AJAX in add-budget.php
+3. deleting category from expense_categories isn't deleting the budget from budget table - done

@@ -90,4 +90,36 @@ function updateBudget($budgetId, $categoryId, $amount, $startDate, $endDate, $no
     
     return mysqli_query($con, $query);
 }
+
+function getOverspentCategoriesByUser($userId) {
+    $con = getConnection();
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    $query = "SELECT ec.name 
+              FROM budget b 
+              JOIN expense_categories ec ON b.category_id = ec.category_id 
+              WHERE b.user_id = $userId 
+                AND b.status = 2 
+                AND MONTH(b.target_date) = $currentMonth 
+                AND YEAR(b.target_date) = $currentYear";
+
+    $result = mysqli_query($con, $query);
+
+    $categories = [];
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $categories[] = $row['name'];
+        }
+    }
+
+    return $categories;
+}
+
+function deleteBudgetByCategory($categoryId, $userId) {
+    $con = getConnection();
+    $query = "DELETE FROM budget WHERE category_id = $categoryId AND user_id = $userId";
+    return mysqli_query($con, $query);
+}
+
 ?>
