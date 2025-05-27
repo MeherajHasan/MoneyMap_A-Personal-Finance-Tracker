@@ -15,6 +15,18 @@ function getExpenseCategoryName($userID) {
     return $categoryNames;
 }
 
+function getExpenseCategoryNameById($categoryID) {
+    $con = getConnection();
+    $sql = "SELECT name FROM expense_categories 
+            WHERE category_id = '$categoryID'";
+
+    $result = mysqli_query($con, $sql);
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row['name'];
+    }
+    return null;
+}
+
 function getExpenseCategoryIdByName($userID, $name) {
     $con = getConnection();
     $sql = "SELECT category_id FROM expense_categories 

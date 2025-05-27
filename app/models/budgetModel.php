@@ -63,4 +63,31 @@ function getSelectedMonthBudgets($userId, $yearMonth) {
     return $budgets;
 }
 
+function addNewBudget($categoryId, $userId, $amount, $startDate, $endDate, $notes) {
+    $con = getConnection();
+    $query = "INSERT INTO budget (category_id, user_id, amount, start_date, target_date, note) 
+              VALUES ($categoryId, $userId, $amount, '$startDate', '$endDate', '$notes')";
+    
+    return mysqli_query($con, $query);
+}
+
+function getBudgetInfoById($budgetId) {
+    $con = getConnection();
+    $query = "SELECT * FROM budget WHERE budget_id = $budgetId LIMIT 1";
+    $result = mysqli_query($con, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row;
+    }
+    return null;
+}
+
+function updateBudget($budgetId, $categoryId, $amount, $startDate, $endDate, $notes) {
+    $con = getConnection();
+    $query = "UPDATE budget 
+              SET category_id = $categoryId, amount = $amount, 
+                  start_date = '$startDate', target_date = '$endDate', note = '$notes' 
+              WHERE budget_id = $budgetId";
+    
+    return mysqli_query($con, $query);
+}
 ?>
