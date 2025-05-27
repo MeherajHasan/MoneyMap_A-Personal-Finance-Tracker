@@ -45,7 +45,7 @@
                             src="../../../public/assets/bill.png" alt="bill-icon">Bills</a></li>
                 <li><a href="../../views/reports/report.php"><img class="menu-icon" id="report-icon"
                             src="../../../public/assets/report.png" alt="report-icon">Analysis & Reports</a></li>
-                <li><a href="../../views/contact/contact.php"><img class="menu-icon" id="support-icon"
+                <li><a href="../../views/contact/support.php"><img class="menu-icon" id="support-icon"
                             src="../../../public/assets/support.png" alt="support-icon">Feedback & Support</a></li>
             </ul>
         </nav>

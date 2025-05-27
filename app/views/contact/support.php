@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once('../../controllers/userAuth.php');
 require_once '../../models/contactModel.php';
 
 $name = $email = $subject = $message = $captcha = "";
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($isValid) {
         $contactStatus = createContactMessage($_SESSION['user']['id'] ?? null, $name, $email, $subject, $message);
         if ($contactStatus) {
-            header("Location: confirmation.php");
+            header("Location: support-confirmation.php");
             exit();
         } else {
             $emptyError = 'Failed to send message. Please try again.';
@@ -103,8 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </header>
 
     <main class="contact-container">
-        <h1>Contact Us</h1>
-        <p>Have questions or feedback? Fill out the form below and we'll get back to you!</p>
+        <h1>Support & Feedback</h1>
+        <p>Facing issues or have feedback? Fill out the form below and we'll get back to you!</p>
 
         <form id="contactForm" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
             <label for="name">Full Name:</label>

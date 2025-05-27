@@ -53,13 +53,13 @@ $fname = strtoupper($_SESSION['user']['fname']);
 
                 <div class="widget" id="categories-widget">
                     <h2 class="widget-title">Categories</h2>
-                    <p class="widget-amount" id="category-count">--</p>
+                    <p class="widget-amount" id="category-count">Click Below</p>
                     <button class="widget-action-btn" onclick="window.location.href='category-management.php'">Manage Categories</button>
                 </div>
 
                 <div class="widget" id="transactions-widget">
                     <h2 class="widget-title">Data Oversight</h2>
-                    <p class="widget-amount" id="transaction-count">--</p>
+                    <p class="widget-amount" id="transaction-count">Click Below</p>
                     <button class="widget-action-btn" onclick="window.location.href='data-oversight.php'">View Data</button>
                 </div>
 
@@ -71,7 +71,7 @@ $fname = strtoupper($_SESSION['user']['fname']);
 
                 <div class="widget" id="feedback-widget">
                     <h2 class="widget-title">Contact Responses</h2>
-                    <p class="widget-amount" id="message-count">--</p>
+                    <p class="widget-amount" id="message-count">Click Below</p>
                     <button class="widget-action-btn" onclick="window.location.href='contact-response.php'">Respond Now</button>
                 </div>
 

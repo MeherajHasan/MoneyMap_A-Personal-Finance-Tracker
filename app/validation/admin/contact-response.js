@@ -22,7 +22,7 @@ const generateRows = () => {
                 <a href="mailto:${response.email}?subject=Reply to your query on MoneyMap" target="_blank" class="action-btn btn-reply">Reply</a>
                 <a href="#" class="action-btn btn-delete" onclick="deleteResponse(${response.id})">Delete</a>
             </td>
-        `;
+        `; 
         tbody.appendChild(row);
     });
 };
