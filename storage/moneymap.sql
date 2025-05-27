@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2025 at 05:56 AM
+-- Generation Time: May 28, 2025 at 12:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,71 @@ SET time_zone = "+00:00";
 --
 -- Database: `moneymap`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `budget`
+--
+
+CREATE TABLE `budget` (
+  `budget_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `spent_amount` decimal(10,2) DEFAULT 0.00,
+  `start_date` date NOT NULL,
+  `target_date` date NOT NULL,
+  `note` text DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 0 COMMENT '0=ongoing, 1=success, 2=overspent'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `budget`
+--
+
+INSERT INTO `budget` (`budget_id`, `category_id`, `user_id`, `amount`, `spent_amount`, `start_date`, `target_date`, `note`, `status`) VALUES
+(1, 1, 23, 300.00, 120.50, '2025-05-01', '2025-05-31', 'Monthly food budget', 0),
+(2, 2, 23, 100.00, 100.00, '2025-04-01', '2025-04-30', 'April transport budget', 1),
+(3, 3, 23, 150.00, 175.25, '2025-05-01', '2025-05-31', 'Electricity + water + gas', 2),
+(4, 4, 23, 80.00, 20.00, '2025-05-15', '2025-06-15', 'Weekend movies & games', 0),
+(5, 5, 23, 200.00, 200.00, '2025-03-01', '2025-03-31', 'Medical checkup', 1),
+(6, 6, 23, 500.00, 250.00, '2025-04-01', '2025-06-30', 'Online course + books', 0),
+(7, 7, 23, 220.00, 260.00, '2025-05-01', '2025-05-31', 'Weekly grocery shopping', 2),
+(8, 8, 23, 1200.00, 600.00, '2025-05-01', '2025-05-31', 'May house rent', 0),
+(9, 14, 23, 150.00, 150.00, '2025-04-10', '2025-04-20', 'NGO donation', 1),
+(10, 16, 23, 900.00, 900.00, '2025-04-01', '2025-04-30', 'Quarterly tax payment', 1),
+(12, 18, 23, 1000.00, 300.00, '2025-06-01', '2025-06-30', 'Summer trip to Goa', 0),
+(13, 2, 23, 1000.00, 0.00, '2025-05-01', '2025-05-31', 'Bus Vara', 0),
+(14, 5, 23, 1500.00, 0.00, '2025-05-01', '2025-05-31', 'Medical Cost', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_messages`
+--
+
+CREATE TABLE `contact_messages` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `subject` varchar(150) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `status` tinyint(1) DEFAULT 0 COMMENT '0 = New, 1 = Replied, 2 = Deleted'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`id`, `user_id`, `full_name`, `email`, `subject`, `message`, `created_at`, `status`) VALUES
+(1, NULL, 'Meheraj Hasan', 'hasanmeheraj639@gmail.com', 'fsdfsdf', 'fsfsdf', '2025-05-28 02:52:46', 1),
+(2, NULL, 'Meheraj LALA', 'lala@gmail.com', 'fsdfsdf', 'fsadfsdf', '2025-05-28 03:00:15', 0),
+(3, 23, 'Junky Oggy', 'junkyoggy@gmail.com', 'fsdfsdf', 'fsfsdfsfsfd', '2025-05-28 03:07:20', 0),
+(4, 23, 'Admin User', 'admin@gmail.com', 'fsfsdf', 'fsfsdfs', '2025-05-28 03:09:40', 1),
+(5, 23, 'Johnyy Doe', 'jane.doe@gmail.com', 'fsfsdfds', 'sdvsdcsd', '2025-05-28 03:11:10', 1);
 
 -- --------------------------------------------------------
 
@@ -47,12 +112,12 @@ CREATE TABLE `debt` (
 --
 
 INSERT INTO `debt` (`debt_id`, `user_id`, `debt_name`, `payee_name`, `total_amount`, `paid_amount`, `debt_date`, `max_pay_date`, `interest_rate`, `min_payment`, `notes`, `status`) VALUES
-(1, 23, 'Car Loan', 'AutoFinance Corp', 15000.00, 3500.00, '2024-01-15', '2026-01-15', 5.50, 300.00, 'Monthly payments ongoing', 0),
-(2, 23, 'Credit Card', 'BankPlus', 3200.00, 1200.00, '2024-03-10', '2025-03-10', 19.90, 150.00, 'Try to clear in 6 months', 0),
+(1, 23, 'Garir Loan', 'Ghushkhor', 15000.00, 3500.00, '2024-01-15', '2026-01-15', 5.50, 300.00, 'Monthly payments ongoing', 0),
+(2, 23, 'Credit Card', 'BankPlus', 3200.00, 1500.00, '2024-03-10', '2025-03-10', 19.90, 150.00, 'Try to clear in 6 months', 0),
 (3, 23, 'Personal Loan', 'QuickCash Inc.', 5000.00, 5000.00, '2023-06-01', '2024-06-01', 12.00, 250.00, 'Paid off early', 1),
 (4, 23, 'Home Renovation', 'RenovateNow', 8000.00, 2000.00, '2024-05-01', '2026-05-01', 6.50, 275.00, 'Used for kitchen upgrade', 0),
 (5, 23, 'Medical Bills', 'HealthCare Central', 4200.00, 1500.00, '2023-12-20', '2024-12-20', 0.00, 200.00, 'No interest on balance', 0),
-(6, 23, 'Business Loan', 'StartUpFund', 20000.00, 18000.00, '2022-08-15', '2025-08-15', 8.50, 500.00, 'Almost done', 0),
+(6, 23, 'Business Loan', 'StartUpFund', 20000.00, 18500.00, '2022-08-15', '2025-08-15', 8.50, 500.00, 'Almost done', 0),
 (7, 23, 'Furniture Financing', 'HomeStyle Ltd.', 2800.00, 2800.00, '2023-01-05', '2024-01-05', 4.00, 233.33, 'Paid in full', 1),
 (8, 23, 'Education Loan', 'EduFund', 10000.00, 3500.00, '2023-09-01', '2027-09-01', 7.00, 275.00, 'Used for online course', 0),
 (9, 23, 'Vacation Debt', 'TravelNow PayLater', 3500.00, 1000.00, '2023-11-20', '2024-11-20', 10.00, 250.00, 'Trip to Europe', 0),
@@ -123,13 +188,15 @@ INSERT INTO `expense_categories` (`category_id`, `user_id`, `name`, `created_at`
 (6, NULL, 'Education', '2025-05-22 21:01:51', 0),
 (7, NULL, 'Groceries', '2025-05-22 21:01:51', 0),
 (8, NULL, 'Rent', '2025-05-22 21:01:51', 0),
-(11, 23, 'Gadgets', '2025-05-22 21:25:44', 2),
+(11, 25, 'Gadgets', '2025-05-22 21:25:44', 1),
 (12, 23, 'Gadgets', '2025-05-22 22:28:17', 2),
 (14, 23, 'Charity', '2025-05-22 22:31:29', 1),
 (15, 23, 'Tax', '2025-05-23 07:54:27', 2),
 (16, 23, 'Tax', '2025-05-23 07:55:02', 1),
-(17, 23, 'Pet', '2025-05-23 08:44:05', 1),
-(18, 23, 'Tour', '2025-05-23 09:31:04', 1);
+(17, 23, 'Pet', '2025-05-23 08:44:05', 2),
+(18, 23, 'Tour', '2025-05-23 09:31:04', 2),
+(19, 25, 'Varsity Fee', '2025-05-27 16:21:04', 1),
+(22, 23, 'abc', '2025-05-27 19:52:46', 2);
 
 -- --------------------------------------------------------
 
@@ -265,12 +332,26 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `id_type`, `id_number`, `passport_expiry`, `country_code`, `phone`, `email`, `password`, `gender`, `dob`, `address`, `photo_path`, `created_at`, `account_status`, `role`) VALUES
 (23, 'Meheraj', 'Hasan', 0, '1111111111', NULL, '+88', '123456789', 'hasanmeheraj639@gmail.com', '$2y$10$W7/WvledZhccGgXVHo8kX.OPPcyfrKDM4SjiHoWoP4dr9SVAbjscC', 0, '2002-10-30', 'Uttara', '../../uploads/hasanmeheraj639.jpeg', '2025-05-21 02:04:47', 0, 'user'),
-(25, 'Junky', 'Oggy', 0, '0000000000', '0000-00-00', '+65', '123456789', 'junkyoggy@gmail.com', '$2y$10$lhuJn1HyYX7QZHF3CxjOrOPiZwitZycajd9sEqWOuvq7XPex2tU3C', 0, '1999-02-09', 'Khilkhet', '../../uploads/junkyoggy.jpg', '2025-05-23 16:46:01', 3, 'user'),
+(25, 'Junky', 'Oggy', 0, '0000000000', '0000-00-00', '+65', '123456789', 'junkyoggy@gmail.com', '$2y$10$lhuJn1HyYX7QZHF3CxjOrOPiZwitZycajd9sEqWOuvq7XPex2tU3C', 0, '1999-02-09', 'Khilkhet', '../../uploads/junkyoggy.jpg', '2025-05-23 16:46:01', 0, 'user'),
 (26, 'Admin', 'Hasan', 0, '1111100000', '0000-00-00', '+88', '123456789', 'admin@gmail.com', '$2y$10$afajkcI/LswC4WObRITFt.xmqVyN1UwNe2ouD9maBVCbSXUEh25Fi', 0, '2002-10-30', 'Kuratoli', '../../uploads/admin.jpg', '2025-05-24 20:36:38', 0, 'admin');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `budget`
+--
+ALTER TABLE `budget`
+  ADD PRIMARY KEY (`budget_id`),
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `debt`
@@ -328,6 +409,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `budget`
+--
+ALTER TABLE `budget`
+  MODIFY `budget_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `debt`
 --
 ALTER TABLE `debt`
@@ -343,7 +436,7 @@ ALTER TABLE `expenses`
 -- AUTO_INCREMENT for table `expense_categories`
 --
 ALTER TABLE `expense_categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `income`
@@ -372,6 +465,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `budget`
+--
+ALTER TABLE `budget`
+  ADD CONSTRAINT `budget_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `expense_categories` (`category_id`),
+  ADD CONSTRAINT `budget_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `debt`

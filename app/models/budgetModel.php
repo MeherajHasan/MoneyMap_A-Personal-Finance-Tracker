@@ -122,4 +122,13 @@ function deleteBudgetByCategory($categoryId, $userId) {
     return mysqli_query($con, $query);
 }
 
+function totalBudget($userId) {
+    $con = getConnection();
+    $query = "SELECT SUM(amount) AS total_budget FROM budget WHERE user_id = $userId";
+    $result = mysqli_query($con, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row['total_budget'];
+    }
+} 
+
 ?>

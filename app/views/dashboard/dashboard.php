@@ -3,6 +3,7 @@
     require_once('../../models/incomeModel.php');
     require_once('../../models/expenseModel.php');
     require_once('../../models/savingsModel.php');
+    require_once('../../models/budgetModel.php');
     require_once('../../models/debtModel.php');
 
     $photoPath = $_SESSION['user']['photo_path'];
@@ -70,27 +71,27 @@
                 <p>Select a feature from the sidebar to get started.</p>
 
                 <div class="widget" id="income-widget">
-                    <h2 class="widget-title">Income</h2>
+                    <h2 class="widget-title">Total Income</h2>
                     <p id="widget-amount" class="widget-amount">$<?= totalIncome($_SESSION['user']['id']) ?? '0.00' ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="expense-widget">
-                    <h2 class="widget-title">Expenses</h2>
+                    <h2 class="widget-title">Total Expenses</h2>
                     <p id="widget-amount" class="widget-amount">$<?= totalExpense($_SESSION['user']['id']) ?? '0.00' ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="budget-widget">
-                    <h2 class="widget-title">Budget Goals</h2>
-                    <p id="widget-amount" class="widget-amount"></p>
+                    <h2 class="widget-title">Total Budget</h2>
+                    <p id="widget-amount" class="widget-amount">$<?= totalBudget($_SESSION['user']['id']) ?? '0.00' ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="savings-widget">
-                    <h2 class="widget-title">Savings</h2>
+                    <h2 class="widget-title">Total Savings</h2>
                     <p id="widget-amount" class="widget-amount">$<?= getTotalSavings($_SESSION['user']['id']) ?? '0.00' ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="debt-widget">
-                    <h2 class="widget-title">Debt</h2>
+                    <h2 class="widget-title">Total Debt</h2>
                     <p id="widget-amount" class="widget-amount">$<?= sumActiveDebtAmounts($_SESSION['user']['id']) ?? '0.00' ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
