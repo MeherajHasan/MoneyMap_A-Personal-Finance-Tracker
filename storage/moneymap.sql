@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2025 at 04:17 PM
+-- Generation Time: May 28, 2025 at 09:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -183,9 +183,9 @@ INSERT INTO `expenses` (`expenseID`, `userID`, `category_id`, `name`, `amount`, 
 (8, 23, 8, 'Monthly rent', 15000.00, '2025-05-05', 'Apartment rent', '2025-05-23 08:52:05', 0),
 (9, 23, 14, 'Donation to orphanage', 2000.00, '2025-05-13', 'Monthly donation', '2025-05-23 08:52:05', 0),
 (10, 23, 16, 'Income tax payment', 3000.00, '2025-05-03', 'Quarterly tax', '2025-05-23 08:52:05', 0),
-(11, 23, 1, 'Burger', 150.00, '0000-00-00', 'Cheap Burger', '2025-05-23 10:49:37', 0),
-(12, 23, 2, 'Uber', 2000.00, '0000-00-00', 'Urgent varsity', '2025-05-23 10:50:53', 0),
-(13, 23, 17, 'Vet bill', 100.00, '0000-00-00', 'why so many times!', '2025-05-23 10:51:41', 0),
+(11, 23, 1, 'Burger', 150.00, '2025-05-05', 'Cheap Burger', '2025-05-23 10:49:37', 0),
+(12, 23, 2, 'Uber', 2000.00, '2025-06-03', 'Urgent varsity', '2025-05-23 10:50:53', 0),
+(13, 23, 17, 'Vet bill', 100.00, '2025-02-03', 'why so many times!', '2025-05-23 10:51:41', 0),
 (18, 23, 3, 'Electricity Bill - May', 5000.00, '2025-05-14', 'Updated via Bill Edit', '2025-05-28 10:25:53', 0),
 (19, 23, 3, 'Gas', 1200.00, '2025-05-02', NULL, '2025-05-28 10:27:13', 1),
 (20, 23, 3, 'Electricity Bill - April', 1000.00, '2025-05-22', NULL, '2025-05-28 11:52:00', 0),
@@ -252,10 +252,11 @@ CREATE TABLE `income` (
 --
 
 INSERT INTO `income` (`income_id`, `user_id`, `income_type`, `source`, `amount`, `income_date`, `note`, `created_at`, `income_status`) VALUES
-(1, 23, 0, 'Salary', 900000.00, '2025-05-03', 'April Salary', '2025-05-22 16:01:32', 0),
+(1, 23, 0, 'Salary', 9000.00, '2025-05-03', 'April Salary', '2025-05-22 16:01:32', 0),
 (2, 23, 1, 'Received Rents', 25000.00, '2025-05-02', 'RBMB Rents', '2025-05-22 16:02:59', 0),
-(5, 23, 2, 'Babayoga', 150000.00, '2025-05-14', 'Won boxing match!', '2025-05-22 19:55:45', 0),
-(6, 23, 2, 'Human Trafficking', 52000.00, '2024-11-06', '2 person', '2025-05-22 19:59:17', 0);
+(5, 23, 2, 'Babayoga', 15000.00, '2025-05-14', 'Won boxing match!', '2025-05-22 19:55:45', 0),
+(6, 23, 2, 'Human Trafficking', 5200.00, '2024-11-06', '2 person', '2025-05-22 19:59:17', 0),
+(7, 23, 0, 'Salary', 10000.00, '2025-06-01', '', '2025-05-28 15:39:40', 0);
 
 -- --------------------------------------------------------
 
@@ -488,7 +489,7 @@ ALTER TABLE `expense_categories`
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-  MODIFY `income_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `income_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `savings`

@@ -131,4 +131,15 @@ function getSavingsDataByUser($userID) {
 
     return $data;
 }
+
+function getAllUserTotalSavings() {
+    $con = getConnection();
+    $sql = "SELECT SUM(saved_amount) AS total_savings FROM savings WHERE status IN (1, 2)";
+    $result = mysqli_query($con, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_savings'];
+    } 
+}
 ?>

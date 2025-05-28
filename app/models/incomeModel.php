@@ -128,4 +128,15 @@ function getMonthlyIncomeByType($userID) {
     }
     return $data;
 }
+
+function getAllUserTotalIncome() {
+    $con = getConnection();
+    $sql = "SELECT SUM(amount) AS total_income FROM income WHERE income_status = 0";
+    $result = mysqli_query($con, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_income'];
+    } 
+}
 ?>

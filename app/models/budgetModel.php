@@ -152,4 +152,15 @@ function getUserBudgetDataGrouped($userId) {
 
     return $data;
 }
+
+function getAllUserTotalBudget() {
+    $con = getConnection();
+    $sql = "SELECT SUM(amount) AS total_budget FROM budget";
+    $result = mysqli_query($con, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_budget'];
+    } 
+}
 ?>

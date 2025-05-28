@@ -96,4 +96,15 @@ function totalBillAmount($userId)
     $row = mysqli_fetch_assoc($result);
     return $row['total'];
 }
+
+function getAllUserTotalBills() {
+    $con = getConnection();
+    $sql = "SELECT SUM(amount) AS total_bill FROM bills";
+    $result = mysqli_query($con, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_bill'];
+    } 
+}
 ?>

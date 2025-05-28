@@ -48,17 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-
-    if (isset($_POST['searchBudgetBtn'])) {
-        if (empty(trim($_POST['searchBudget']))) {
-            $budgetError = "Please enter an email to search.";
-        } else if (!filter_var($_POST['searchBudget'], FILTER_VALIDATE_EMAIL)) {
-            $budgetError = "Please enter a valid email address.";
-        } else {
-            $searchBudget = trim($_POST['searchBudget']);
-            // db
-        }
-    }
 }
 ?>
 
@@ -88,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h3>Default Expense Categories</h3>
     <?= $generalizedExpenseResult; ?>
 
-    <h3>Individual Expense Categories:</h3>
+    <h3>User Specific Expense & Budget Categories:</h3>
     <form method="post" action="<?= $_SERVER["PHP_SELF"]; ?>">
         <input type="text" name="searchExpense" placeholder="Search by User Email" value="<?= $searchExpense; ?>" />
         <button type="submit" name="searchExpenseBtn">Search</button>
@@ -96,16 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div style="color:red;"><?= $expenseError; ?></div>
     <div>
         <?= $specificExpenseResult; ?>
-    </div>
-
-    <h3>Budget Categories:</h3>
-    <form method="post" action="<?= $_SERVER["PHP_SELF"]; ?>">
-        <input type="text" name="searchBudget" placeholder="Search by User Email" value="<?= $searchBudget; ?>" />
-        <button type="submit" name="searchBudgetBtn">Search</button>
-    </form>
-    <div style="color:red;"><?= $budgetError; ?></div>
-    <div>
-        <?= $budgetResult; ?>
     </div>
 
     <?php include '../header-footer/admin-footer.php'; ?>

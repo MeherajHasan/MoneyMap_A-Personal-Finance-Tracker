@@ -41,7 +41,6 @@
         <div class="profile-details">
             <div class="profile-photo">
                 <img id="user-photo" class="profile-img" src="<?= $profileImage ?>" alt="Profile Photo">
-                <button class="upload edit" id="upload">Upload</button>
             </div>
 
             <div class="profile-info">

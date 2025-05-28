@@ -104,4 +104,15 @@ function getDebtDataByUser($userID) {
 
     return $data;
 }
+
+function getAllUserTotalDebt() {
+    $con = getConnection();
+    $sql = "SELECT SUM(total_amount) AS total_debt FROM debt";
+    $result = mysqli_query($con, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['total_debt'];
+    } 
+}
 ?>
