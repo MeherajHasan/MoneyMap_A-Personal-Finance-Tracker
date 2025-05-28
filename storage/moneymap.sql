@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2025 at 12:28 AM
+-- Generation Time: May 28, 2025 at 04:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `moneymap`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bills`
+--
+
+CREATE TABLE `bills` (
+  `bill_id` int(11) NOT NULL,
+  `expense_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT 3,
+  `bill_name` varchar(100) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `payment_date` date NOT NULL,
+  `status` tinyint(1) NOT NULL COMMENT '0 = paid, 1 = unpaid',
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`bill_id`, `expense_id`, `category_id`, `bill_name`, `amount`, `payment_date`, `status`, `user_id`) VALUES
+(9, 20, 3, 'Electricity Bill - April', 1000.00, '2025-05-22', 0, 23),
+(10, 21, 3, 'Gas - April', 500.00, '2025-05-10', 1, 23),
+(11, 25, 3, 'agdsfsd', 200.00, '2025-05-14', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -159,7 +185,12 @@ INSERT INTO `expenses` (`expenseID`, `userID`, `category_id`, `name`, `amount`, 
 (10, 23, 16, 'Income tax payment', 3000.00, '2025-05-03', 'Quarterly tax', '2025-05-23 08:52:05', 0),
 (11, 23, 1, 'Burger', 150.00, '0000-00-00', 'Cheap Burger', '2025-05-23 10:49:37', 0),
 (12, 23, 2, 'Uber', 2000.00, '0000-00-00', 'Urgent varsity', '2025-05-23 10:50:53', 0),
-(13, 23, 17, 'Vet bill', 100.00, '0000-00-00', 'why so many times!', '2025-05-23 10:51:41', 0);
+(13, 23, 17, 'Vet bill', 100.00, '0000-00-00', 'why so many times!', '2025-05-23 10:51:41', 0),
+(18, 23, 3, 'Electricity Bill - May', 5000.00, '2025-05-14', 'Updated via Bill Edit', '2025-05-28 10:25:53', 0),
+(19, 23, 3, 'Gas', 1200.00, '2025-05-02', NULL, '2025-05-28 10:27:13', 1),
+(20, 23, 3, 'Electricity Bill - April', 1000.00, '2025-05-22', NULL, '2025-05-28 11:52:00', 0),
+(21, 23, 3, 'Gas - April', 500.00, '2025-05-10', NULL, '2025-05-28 11:52:17', 0),
+(25, 23, 3, 'agdsfsd', 200.00, '2025-05-14', NULL, '2025-05-28 12:18:11', 0);
 
 -- --------------------------------------------------------
 
@@ -340,6 +371,15 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `id_type`, `id_number`, `passport_e
 --
 
 --
+-- Indexes for table `bills`
+--
+ALTER TABLE `bills`
+  ADD PRIMARY KEY (`bill_id`),
+  ADD KEY `expense_id` (`expense_id`),
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `fk_bills_user` (`user_id`);
+
+--
 -- Indexes for table `budget`
 --
 ALTER TABLE `budget`
@@ -409,6 +449,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `budget`
 --
 ALTER TABLE `budget`
@@ -430,7 +476,7 @@ ALTER TABLE `debt`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `expenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `expenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `expense_categories`
@@ -465,6 +511,14 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bills`
+--
+ALTER TABLE `bills`
+  ADD CONSTRAINT `bills_ibfk_1` FOREIGN KEY (`expense_id`) REFERENCES `expenses` (`expenseID`),
+  ADD CONSTRAINT `bills_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `expense_categories` (`category_id`),
+  ADD CONSTRAINT `fk_bills_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `budget`

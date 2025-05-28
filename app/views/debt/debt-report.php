@@ -1,5 +1,6 @@
 <?php
     require_once('../../controllers/userAuth.php');
+    require_once('../../models/debtModel.php');
 ?>
 
 <!DOCTYPE html>
