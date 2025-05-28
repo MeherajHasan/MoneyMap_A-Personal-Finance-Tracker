@@ -1,118 +1,35 @@
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8;
-    color: #1B263B;
-    line-height: 1.6;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.container {
-    width: 90%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.main {
-    padding: 2rem 0;
-}
-
-.debt-report-container h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    background: #f4f6f8;
     text-align: center;
 }
 
-.report-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.filter-group label {
-    font-weight: bold;
+h1 {
     color: #0D1B2A;
+    margin: 30px 0;
 }
 
-.filter-group select {
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-.filter-group select:focus {
-    border-color: #4FC3F7;
-    outline: none;
-}
-
-#generateReportBtn {
-    grid-column: span 3;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    background-color: #0D1B2A;
-    color: #ffffff;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-
-#generateReportBtn:hover {
-    background-color: #1B263B;
-}
-
-.report-output-section {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    display: none;
-}
-
-#reportOutput {
-    display: grid;
-    gap: 1rem;
-}
-
-.report-item {
-    background-color: #f9fafb;
-    padding: 1rem;
-    border-radius: 8px;
+#debtChartContainer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
 }
 
-.report-item h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
+.chart-section {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 400px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.report-item p {
-    margin-bottom: 0.2rem;
-}
-
-#noReportGenerated {
-    text-align: center;
-    font-style: italic;
-    color: #888;
-    margin-top: 2rem;
+.chart-section h3 {
+    margin-bottom: 15px;
+    color: #1B263B;
 }

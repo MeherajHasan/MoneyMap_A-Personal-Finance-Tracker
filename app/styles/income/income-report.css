@@ -1,116 +1,22 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #f4f6f8; 
-    color: #1B263B; 
+    padding: 0px;
+    background: #f4f6f8;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
+h1 {
+    color: #0D1B2A;
+    text-align: center;
+}
+
+#incomeBarChart {
+    width: 100% !important;
+    max-width: 1000px;
+    height: 600px !important;
+    display: block;
     margin: 0 auto;
-    padding: 20px;
-}
-
-.section-header h2 {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
-    justify-content: space-between;
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    min-width: 180px;
-}
-
-.filter-group label {
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-.filter-group input[type="radio"],
-.filter-group input[type="checkbox"] {
-    margin-right: 8px;
-}
-
-.filter-group select {
-    padding: 8px;
-    border-radius: 8px;
     border: 1px solid #ccc;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.btn-primary {
-    background-color: #4FC3F7; 
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #38b0e6;
-}
-
-.btn-secondary {
-    background-color: #1B263B; 
-    color: #fff;
-    margin-top: 10px;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-}
-
-.btn-secondary:hover {
-    background-color: #324c6b;
-}
-
-.chart-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-#incomeTable {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-#incomeTable th,
-#incomeTable td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
-#incomeTable th {
-    background-color: #1B263B; 
-    color: #ffffff;
-}
-
-#incomeTable tr:hover {
-    background-color: #f1faff;
+    padding: 10px;
 }

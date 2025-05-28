@@ -1,126 +1,92 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const generateBtn = document.getElementById('generateBtn');
-    const expenseTableBody = document.querySelector('#expenseTable tbody');
-    const chartCanvas = document.getElementById('expenseChart');
-    const downloadBtn = document.getElementById('downloadBtn');
-    let expenseChart;
+function fetchExpenseData(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '../../controllers/fetchExpenseData.php', true);
 
-    generateBtn.addEventListener('click', () => {
-        const year = document.getElementById('yearSelect').value;
-        const month = document.getElementById('monthSelect').value;
-        const reportType = document.querySelector('input[name="reportType"]:checked').value;
-
-        const selectedTypes = Array.from(document.querySelectorAll('input[name="expenseCategory"]:checked')) 
-            .map(input => input.value);
-
-        const dummyData = generateDummyData(reportType, year, month, selectedTypes);
-
-        updateExpenseTable(dummyData);
-        updateChart(dummyData, reportType, month, selectedTypes); 
-    });
-
-    downloadBtn.addEventListener('click', () => {
-        const rows = [];
-        rows.push(['Date', 'Expense Type', 'Amount ($)', 'Description']);
-
-        const tableRows = expenseTableBody.querySelectorAll('tr');
-        tableRows.forEach(row => {
-            const rowData = Array.from(row.cells).map(cell => cell.innerText);
-            rows.push(rowData);
-        });
-
-        const csvContent = "data:text/csv;charset=utf-8," + rows.map(row => row.join(',')).join('\n');
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement('a');
-        link.setAttribute('href', encodedUri);
-        link.setAttribute('download', 'expense_report.csv');
-        link.click();
-    });
-
-    function generateDummyData(reportType, year, month, expenseTypes) {
-        const data = [];
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        const loopMonths = reportType === "yearly" ? months : [month];
-
-        loopMonths.forEach(mon => {
-            expenseTypes.forEach(type => {
-                const amount = Math.floor(Math.random() * 500) + 50;
-                const date = `${mon} ${Math.floor(Math.random() * 28) + 1}, ${year}`;
-                data.push({
-                    date: date,
-                    type: type + " Expense", 
-                    amount: amount,
-                    description: `${type} expense for ${mon}`
-                });
-            });
-        });
-
-        return data;
-    }
-
-    function updateExpenseTable(data) {
-        expenseTableBody.innerHTML = "";
-        data.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.date}</td>
-                <td>${item.type}</td>
-                <td>${item.amount}</td>
-                <td>${item.description}</td>
-            `;
-            expenseTableBody.appendChild(row);
-        });
-    }
-
-    function updateChart(data, reportType, selectedMonth, expenseTypes) { 
-        const labels = [...new Set(data.map(d => d.date.split(' ')[0]))];
-        const grouped = {};
-
-        data.forEach(item => {
-            const key = reportType === 'yearly' ? item.date.split(' ')[0] : item.date.split(' ')[1];
-            if (!grouped[key]) grouped[key] = {};
-            if (!grouped[key][item.type]) grouped[key][item.type] = 0;
-            grouped[key][item.type] += item.amount;
-        });
-
-        const chartLabels = Object.keys(grouped);
-        const chartData = [];
-
-        expenseTypes.forEach(type => { 
-            const typeData = chartLabels.map(label => grouped[label][type + " Expense"] || 0); // Adjust key if you kept the suffix
-            chartData.push(typeData);
-        });
-
-        if (expenseChart) expenseChart.destroy();
-
-        expenseChart = new Chart(chartCanvas, {
-            type: 'bar',
-            data: {
-                labels: chartLabels,
-                datasets: expenseTypes.map((type, index) => ({ 
-                    label: type,
-                    data: chartData[index],
-                    backgroundColor: ['#FFB74D', '#E57373', '#64B5F6', '#A1887F', '#BA68C8', '#4DB6AC', '#F06292', '#9575CD'][index % 8], // More colors
-                }))
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: true },
-                    title: {
-                        display: true,
-                        text: reportType === 'yearly' ? 'Monthly Expense Overview' : `${selectedMonth} Expense Breakdown`
-                    }
-                },
-                scales: {
-                    x: { title: { display: true, text: reportType === 'yearly' ? 'Month' : 'Date' } },
-                    y: { title: { display: true, text: 'Expense ($)' } }
-                }
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                callback(data);
+            } else {
+                console.error('Error fetching expense data');
             }
+        }
+    };
+    xhr.send();
+}
+
+fetchExpenseData(function (data) {
+    // Step 1: Extract unique months (raw keys)
+    const monthsRaw = Array.from(new Set(data.map(item => item.month))).sort();
+
+    // Format months for display like "May 2025"
+    const monthLabels = monthsRaw.map(month => {
+        const [year, monthNum] = month.split('-');
+        const date = new Date(year, monthNum - 1);
+        return date.toLocaleString('default', { month: 'short', year: 'numeric' });
+    });
+
+    // Step 2: Extract unique category names
+    const categories = Array.from(new Set(data.map(item => item.category_name))).sort();
+
+    // Step 3: Build datasets array for Chart.js
+    const colors = [
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(153, 102, 255, 0.7)',
+        'rgba(255, 159, 64, 0.7)',
+        'rgba(201, 203, 207, 0.7)',
+        'rgba(255, 99, 71, 0.7)',
+        'rgba(60, 179, 113, 0.7)',
+        'rgba(106, 90, 205, 0.7)',
+        'rgba(238, 130, 238, 0.7)',
+        'rgba(255, 215, 0, 0.7)',
+        'rgba(0, 191, 255, 0.7)',
+        'rgba(220, 20, 60, 0.7)',
+        'rgba(128, 0, 0, 0.7)',
+        'rgba(0, 128, 128, 0.7)'
+    ];
+
+    const datasets = categories.map((cat, index) => {
+        const amounts = monthsRaw.map(month => {
+            const record = data.find(d => d.month === month && d.category_name === cat);
+            return record ? Number(record.total_amount) : 0;
         });
-    }
+        return {
+            label: cat,
+            backgroundColor: colors[index % colors.length],
+            data: amounts
+        };
+    });
+
+    // Step 4: Render the chart
+    const ctx = document.getElementById('expenseBarChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: monthLabels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: false,
+                    title: { display: true, text: 'Month' }
+                },
+                y: {
+                    stacked: false,
+                    beginAtZero: true,
+                    title: { display: true, text: 'Expense Amount' }
+                }
+            },
+            plugins: {
+                title: { display: true, text: 'Monthly Expense by Category' },
+                legend: { position: 'top' }
+            }
+        }
+    });
 });

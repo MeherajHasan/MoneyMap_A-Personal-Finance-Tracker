@@ -89,4 +89,27 @@ function addExpenseReturnId($userID, $category_id, $name, $amount, $expense_date
         return false;
     }
 }
+
+function getMonthlyExpenseByCategory($userID) {
+    $con = getConnection();
+
+    $query = "
+        SELECT 
+            DATE_FORMAT(expense_date, '%Y-%m') AS month,
+            ec.name AS category_name,
+            SUM(e.amount) AS total_amount
+        FROM expenses e
+        JOIN expense_categories ec ON e.category_id = ec.category_id
+        WHERE e.userID = $userID AND e.status = 0
+        GROUP BY month, ec.category_id, ec.name
+        ORDER BY month ASC, ec.name ASC
+    ";
+
+    $result = mysqli_query($con, $query);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    return $data;
+}
 ?>

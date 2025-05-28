@@ -107,4 +107,25 @@ function updateIncome($incomeId, $incomeType, $source, $amount, $incomeDate, $no
     return $result;
 }
 
+function getMonthlyIncomeByType($userID) {
+    $con = getConnection();
+
+    $query = "
+        SELECT 
+            DATE_FORMAT(income_date, '%Y-%m') AS month,
+            income_type,
+            SUM(amount) AS total_amount
+        FROM income
+        WHERE user_id = $userID
+        GROUP BY month, income_type
+        ORDER BY month ASC
+    ";
+
+    $result = mysqli_query($con, $query);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    return $data;
+}
 ?>

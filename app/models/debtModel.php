@@ -85,4 +85,23 @@ function paymentDebt($debtID, $paymentAmount) {
     return mysqli_query($con, $query);
 }
 
+function getDebtDataByUser($userID) {
+    $con = getConnection();
+
+    $query = "
+        SELECT debt_name, total_amount, paid_amount
+        FROM debt
+        WHERE user_id = $userID";
+
+    $result = mysqli_query($con, $query);
+
+    $data = [];
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+    }
+
+    return $data;
+}
 ?>
