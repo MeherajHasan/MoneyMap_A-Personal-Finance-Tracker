@@ -1,8 +1,10 @@
 function fetchExpenseData(callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../../controllers/fetchExpenseData.php', true);
+    xhr.open('POST', '../../controllers/fetchExpenseData.php', true);
 
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -13,24 +15,21 @@ function fetchExpenseData(callback) {
             }
         }
     };
-    xhr.send();
+
+    xhr.send(JSON.stringify({}));
 }
 
 fetchExpenseData(function (data) {
-    // Step 1: Extract unique months (raw keys)
     const monthsRaw = Array.from(new Set(data.map(item => item.month))).sort();
 
-    // Format months for display like "May 2025"
     const monthLabels = monthsRaw.map(month => {
         const [year, monthNum] = month.split('-');
         const date = new Date(year, monthNum - 1);
         return date.toLocaleString('default', { month: 'short', year: 'numeric' });
     });
 
-    // Step 2: Extract unique category names
     const categories = Array.from(new Set(data.map(item => item.category_name))).sort();
 
-    // Step 3: Build datasets array for Chart.js
     const colors = [
         'rgba(255, 99, 132, 0.7)',
         'rgba(54, 162, 235, 0.7)',
@@ -62,7 +61,6 @@ fetchExpenseData(function (data) {
         };
     });
 
-    // Step 4: Render the chart
     const ctx = document.getElementById('expenseBarChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',

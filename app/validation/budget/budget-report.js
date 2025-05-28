@@ -1,15 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
     function fetchBudgetData(callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '../../controllers/fetchBudgetData.php', true);
-        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.open('POST', '../../controllers/fetchBudgetData.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');  // Tell server we send JSON
+        xhr.setRequestHeader('Accept', 'application/json');        // Tell server we want JSON response
+
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                callback(data);
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    callback(data);
+                } else {
+                    console.error('Error fetching budget data:', xhr.status);
+                }
             }
         };
-        xhr.send();
+
+        xhr.send(JSON.stringify({}));
     }
 
     fetchBudgetData(function (data) {

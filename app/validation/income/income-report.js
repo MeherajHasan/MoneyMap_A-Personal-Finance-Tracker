@@ -1,8 +1,9 @@
-function fetchIncomeData(callback) {
+function fetchIncomeData(filterParams, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', '../../controllers/fetchIncomeData.php', true);
-
+    xhr.open('POST', '../../controllers/fetchIncomeData.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -13,7 +14,8 @@ function fetchIncomeData(callback) {
             }
         }
     };
-    xhr.send();
+
+    xhr.send(JSON.stringify(filterParams));
 }
 
 const incomeTypeLabels = {
@@ -28,18 +30,16 @@ const incomeTypeColors = {
     2: 'rgba(75, 192, 192, 0.7)'   // green
 };
 
-fetchIncomeData(function(data) {
-    // Step 1: Extract unique raw month keys like "2025-05"
+// Example: Fetch for year 2025, you can make this dynamic
+fetchIncomeData({ year: "2025" }, function(data) {
     const monthsRaw = Array.from(new Set(data.map(item => item.month))).sort();
 
-    // Step 2: Format for labels like "May 2025"
     const monthLabels = monthsRaw.map(month => {
         const [year, monthNum] = month.split('-');
         const date = new Date(year, monthNum - 1);
-        return date.toLocaleString('default', { month: 'short', year: 'numeric' }); // "May 2025"
+        return date.toLocaleString('default', { month: 'short', year: 'numeric' });
     });
 
-    // Step 3: Prepare datasets per income_type
     const datasets = [0, 1, 2].map(type => {
         const amounts = monthsRaw.map(month => {
             const record = data.find(d => d.month === month && Number(d.income_type) === type);
@@ -52,7 +52,6 @@ fetchIncomeData(function(data) {
         };
     });
 
-    // Step 4: Render chart
     const ctx = document.getElementById('incomeBarChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
@@ -64,7 +63,7 @@ fetchIncomeData(function(data) {
             responsive: true,
             scales: {
                 x: {
-                    stacked: false, // Bars side-by-side
+                    stacked: false,
                     title: { display: true, text: 'Month' }
                 },
                 y: {

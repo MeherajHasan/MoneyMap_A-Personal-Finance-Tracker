@@ -1,6 +1,6 @@
 <?php
 require_once('../models/userModel.php');
-header('Content-Type: application/json');
+header('Content-Type: application/json'); 
 
 if (isset($_POST['email'])) {
     $email = trim($_POST['email']);
@@ -12,5 +12,5 @@ if (isset($_POST['email'])) {
     } else {
         echo json_encode(['available' => true]);
     }
-}
+} 
 ?>
