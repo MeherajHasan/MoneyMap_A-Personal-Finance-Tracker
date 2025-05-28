@@ -131,4 +131,25 @@ function totalBudget($userId) {
     }
 } 
 
+function getUserBudgetDataGrouped($userId) {
+    $conn = getConnection();
+
+    $query = "SELECT 
+                c.name AS category_name,
+                b.amount,
+                b.spent_amount,
+                DATE_FORMAT(b.start_date, '%b %Y') AS month_label
+              FROM budget b, expense_categories c
+              WHERE b.category_id = c.category_id AND b.user_id = $userId
+              ORDER BY b.start_date ASC";
+
+    $result = mysqli_query($conn, $query);
+    
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
 ?>

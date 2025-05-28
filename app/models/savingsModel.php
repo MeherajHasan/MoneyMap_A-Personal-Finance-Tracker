@@ -111,4 +111,24 @@ function reverseCompleteStatus ($savingsID)
     $sql = "UPDATE savings SET status = 1 WHERE savings_id = '$savingsID'";
     return mysqli_query($con, $sql);
 }
+
+function getSavingsDataByUser($userID) {
+    $con = getConnection();
+    $query = "
+        SELECT goal_name, target_amount, saved_amount
+        FROM savings
+        WHERE user_id = $userID
+    ";
+
+    $result = mysqli_query($con, $query);
+    $data = [];
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+    }
+
+    return $data;
+}
 ?>

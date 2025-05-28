@@ -1,161 +1,33 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f6f8;
-    color: #1B263B;
-    line-height: 1.6;
-}
-
-.container {
-    width: 95%;
-    max-width: 900px;
-    margin: 30px auto;
-}
-
-.savings-report-container {
-    background-color: #fff;
-    padding: 30px 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.savings-report-container h2 {
-    color: #0D1B2A;
-    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0px;
     text-align: center;
-    font-weight: 700;
+}
+
+h1 {
+    color: #0D1B2A;
+    margin-bottom: 30px;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.chart-section {
+    width: 80%;
+    max-width: 700px;
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 h3 {
-    color: #0D1B2A;
     margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.report-overview .overview-metrics {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
-
-.metric-card {
-    flex: 1 1 45%;
-    background-color: #f9f9f9;
-    padding: 20px 18px;
-    border-radius: 6px;
-    text-align: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-
-.metric-card h4 {
     color: #1B263B;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.metric-card p {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #4FC3F7;
-}
-
-.goal-progress-summary ul {
-    list-style: none;
-    margin-bottom: 30px;
-}
-
-.goal-progress-summary li {
-    margin-bottom: 20px;
-}
-
-.goal-progress-summary span:first-child {
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: block;
-    color: #1B263B;
-}
-
-.progress-bar-container {
-    background-color: #e1e7f0;
-    border-radius: 8px;
-    height: 20px;
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.progress-bar {
-    background-color: #4FC3F7;
-    height: 100%;
-    border-radius: 8px 0 0 8px;
-    transition: width 0.4s ease;
-}
-
-.progress-bar-container span:last-child {
-    position: absolute;
-    right: 10px;
-    font-weight: 600;
-    color: #0D1B2A;
-    font-size: 0.9rem;
-}
-
-.recent-transactions {
-    overflow-x: auto;
-}
-
-.transactions-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.transactions-table thead {
-    background-color: #0D1B2A;
-    color: white;
-}
-
-.transactions-table th,
-.transactions-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    font-size: 0.95rem;
-}
-
-.transactions-table tbody tr:hover {
-    background-color: #f4f9ff;
-}
-
-#noTransactions {
-    text-align: center;
-    color: #dc3545;
-    font-weight: 600;
-    margin-top: 20px;
-}
-
-.actions {
-    margin-top: 25px;
-    text-align: center;
-}
-
-.btn-secondary {
-    background-color: #0D1B2A;
-    color: #ffffff;
-    padding: 12px 25px;
-    font-weight: 600;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-}
-
-.btn-secondary:hover {
-    background-color: #1B263B;
 }
