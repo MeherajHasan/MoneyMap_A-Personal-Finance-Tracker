@@ -1,81 +1,68 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const generateBtn = document.getElementById('generate-custom-report');
-    const errorDiv = document.querySelector('.custom-range .error');
-    const tableBody = document.getElementById('transaction-table-body');
-    const chartCanvas = document.getElementById('income-expense-chart');
+    fetch('../../controllers/fetchAnalysisData.php')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('income').innerText = 'Total Income: $' + data.total_income;
+            document.getElementById('expense').innerText = 'Total Expenses: $' + data.total_expense;
+            document.getElementById('balance').innerText = 'Net Balance: $' + data.net_balance;
 
-    let chart;
+            const lineCtx = document.getElementById('lineChart').getContext('2d');
+            new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [
+                        {
+                            label: 'Income',
+                            borderColor: '#0D47A1',
+                            data: data.monthly_income
+                        },
+                        {
+                            label: 'Expenses',
+                            borderColor: '#F44336',
+                            data: data.monthly_expense
+                        }
+                    ]
 
-    generateBtn.addEventListener('click', function () {
-        const fromDate = document.getElementById('custom-start-date').value;
-        const toDate = document.getElementById('custom-end-date').value;
-
-        errorDiv.textContent = '';
-
-        if (!fromDate || !toDate) {
-            errorDiv.textContent = 'Both From and To dates are required.';
-            return;
-        }
-
-        if (fromDate > toDate) {
-            errorDiv.textContent = 'From date must be earlier than To date.';
-            return;
-        }
-
-        const transactions = [
-            { date: '2025-05-01', type: 'Income', category: 'Salary', title: 'May Salary', amount: 3000 },
-            { date: '2025-05-05', type: 'Expense', category: 'Groceries', title: 'Supermarket', amount: 150 },
-            { date: '2025-05-10', type: 'Expense', category: 'Utilities', title: 'Electricity', amount: 90 },
-            { date: '2025-05-15', type: 'Income', category: 'Freelance', title: 'Project Payment', amount: 800 },
-            { date: '2025-05-20', type: 'Expense', category: 'Transport', title: 'Gas & Bus', amount: 70 },
-        ];
-
-        const filtered = transactions.filter(tx => tx.date >= fromDate && tx.date <= toDate);
-
-        tableBody.innerHTML = '';
-        filtered.forEach(tx => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${tx.date}</td>
-                <td>${tx.type}</td>
-                <td>${tx.category}</td>
-                <td>${tx.title}</td>
-                <td>${tx.amount.toFixed(2)}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-
-        let incomeTotal = 0, expenseTotal = 0;
-        filtered.forEach(tx => {
-            if (tx.type === 'Income') incomeTotal += tx.amount;
-            else if (tx.type === 'Expense') expenseTotal += tx.amount;
-        });
-
-        if (chart) chart.destroy();
-
-        chart = new Chart(chartCanvas, {
-            type: 'bar',
-            data: {
-                labels: ['Income', 'Expense'],
-                datasets: [{
-                    label: 'Amount ($)',
-                    data: [incomeTotal, expenseTotal],
-                    backgroundColor: ['#4CAF50', '#F44336']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false },
-                    title: { display: true, text: 'Income vs Expense Summary' }
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { stepSize: 500 }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Income vs. Expenses Over Time',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            },
+                            color: '#333'
+                        }
                     }
                 }
-            }
+            });
+
+            const pieConfig = (ctx, label1, val1, label2, val2, color1, color2) => ({
+                type: 'pie',
+                data: {
+                    labels: [label1, label2],
+                    datasets: [{
+                        data: [val1, val2],
+                        backgroundColor: [color1, color2]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            new Chart(document.getElementById('budgetPie'), pieConfig(
+                null, 'Used', data.total_spent, 'Remaining', data.total_budget - data.total_spent, '#42A5F5', '#90CAF9'
+            ));
+            new Chart(document.getElementById('debtPie'), pieConfig(
+                null, 'Paid', data.debt_paid, 'Payable', data.debt_payable, '#66BB6A', '#EF5350'
+            ));
+            new Chart(document.getElementById('savingsPie'), pieConfig(
+                null, 'Saved', data.savings, 'Remaining Goal', data.savings_goal - data.savings, '#FFCA28', '#FFA726'
+            ));
         });
-    });
 });
