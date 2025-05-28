@@ -74,13 +74,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td><?= $msg['message']; ?></td>
                             <td><?= $msg['created_at']; ?></td>
                             <td>
-                                <form method="POST" action="<?=$_SERVER['PHP_SELF']?>" style="display:inline;">
+                                <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" style="display:inline;">
                                     <input type="hidden" name="messageID" value="<?= $msg['id']; ?>">
                                     <input type="hidden" name="action" value="reply">
-                                    <button type="submit" class="btn btn-reply">Replied</button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-reply"
+                                        onclick="handleReply(<?= $msg['id'] ?>, '<?= addslashes($msg['email']) ?>', '<?= addslashes($msg['subject']) ?>')">
+                                        Reply
+                                    </button>
+
                                 </form>
 
-                                <form method="POST" action="<?=$_SERVER['PHP_SELF']?>" style="display:inline;">
+                                <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" style="display:inline;">
                                     <input type="hidden" name="messageID" value="<?= $msg['id']; ?>">
                                     <input type="hidden" name="action" value="delete">
                                     <button type="submit" class="btn btn-delete" onclick="return confirm('Delete this message?');">Delete</button>
@@ -122,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td><?= $msg['message']; ?></td>
                             <td><?= $msg['created_at']; ?></td>
                             <td>
-                                <form method="POST" action="<?=$_SERVER['PHP_SELF']?>" style="display:inline;">
+                                <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" style="display:inline;">
                                     <input type="hidden" name="messageID" value="<?= $msg['id']; ?>">
                                     <input type="hidden" name="action" value="delete">
                                     <button type="submit" class="btn btn-delete" onclick="return confirm('Delete this message?');">Delete</button>
@@ -162,13 +168,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td><?= $msg['message']; ?></td>
                             <td><?= $msg['created_at']; ?></td>
                             <td>
-                                <form method="POST" action="<?=$_SERVER['PHP_SELF']?>" style="display:inline;">
-                                    <input type="hidden" name="messageID" value="<?= $msg['id']; ?>">
-                                    <input type="hidden" name="action" value="reply">
-                                    <button type="submit" class="btn btn-reply">Replied</button>
-                                </form>
+                                <button
+                                    type="button"
+                                    class="btn btn-reply"
+                                    onclick="handleReply(<?= $msg['id'] ?>, '<?= addslashes($msg['email']) ?>', '<?= addslashes($msg['subject']) ?>')">
+                                    Reply
+                                </button>
 
-                                <form method="POST" action="<?=$_SERVER['PHP_SELF']?>" style="display:inline;">
+
+                                <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" style="display:inline;">
                                     <input type="hidden" name="messageID" value="<?= $msg['id']; ?>">
                                     <input type="hidden" name="action" value="delete">
                                     <button type="submit" class="btn btn-delete" onclick="return confirm('Delete this message?');">Delete</button>
@@ -207,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <td><?= $msg['message']; ?></td>
                             <td><?= $msg['created_at']; ?></td>
                             <td>
-                                <form method="POST" action="<?=$_SERVER['PHP_SELF']?>" style="display:inline;">
+                                <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?>" style="display:inline;">
                                     <input type="hidden" name="messageID" value="<?= $msg['id']; ?>">
                                     <input type="hidden" name="action" value="delete">
                                     <button type="submit" class="btn btn-delete" onclick="return confirm('Delete this message?');">Delete</button>
@@ -227,6 +235,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <?php include '../header-footer/admin-footer.php'; ?>
+
+    <script src="../../validation/admin/contact-response.js"></script>
 </body>
 
 </html>

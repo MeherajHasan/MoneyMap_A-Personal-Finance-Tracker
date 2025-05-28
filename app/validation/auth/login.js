@@ -31,7 +31,7 @@ function validateForm() {
     } else if (!validateEmail(emailInput.value.trim())) {
         emailError.textContent = "Please enter a valid email address.";
         valid = false;
-    } else {
+    } else { 
         emailError.textContent = "";
     }
 

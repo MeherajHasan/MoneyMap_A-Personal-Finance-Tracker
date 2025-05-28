@@ -32,10 +32,12 @@ h2 {
 
 .btn:hover {
     background-color: #56bce5;
+    cursor: pointer;
 }
 
 .btn-delete:hover {
     background-color: #e14a4a;
+    cursor: pointer;
 }
 
 .styled-table {
