@@ -2,6 +2,7 @@
 require_once('../../controllers/userAuth.php');
 require_once('../../models/expenseCategoryModel.php');
 require_once('../../models/expenseModel.php');
+require_once('../../models/billModel.php');
 
 $categoryNames = getExpenseCategoryName($_SESSION['user']['id']);
 
@@ -69,6 +70,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($categoryID === null) {
             $categoryError = "Invalid category.";
             $hasError = true;
+        } elseif ($categoryID === '3') {
+           $expenseId = addExpenseReturnId($_SESSION['user']['id'], $categoryID, $name, $amount, $_POST['expenseDate']);
+
+            $addBillStatus = addBillViaExpense($_SESSION['user']['id'], $expenseId, $name, $amount, $_POST['expenseDate'], $notes);
+            if ($addBillStatus) {
+                header("Location: expense-dashboard.php");
+                exit();
+            } else {
+                $categoryError = "Failed to add bill. Please try again.";
+            }
         } else {
             $addExpense = addExpense($_SESSION['user']['id'], $categoryID, $name, $amount, $notes);
             if ($addExpense) {

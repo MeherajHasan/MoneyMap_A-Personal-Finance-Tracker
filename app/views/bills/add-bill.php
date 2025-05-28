@@ -1,5 +1,6 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/billModel.php');
 
 $billName = $amount = $dueDate = $status = '';
 $errors = ['bill_name' => '', 'amount' => '', 'due_date' => '', 'status' => ''];
@@ -44,10 +45,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (!array_filter($errors)) {
-        // db
-        
-        header("Location: bill-dashboard.php");
-        exit();
+        $statusValue = $status === 'Paid' ? 0 : 1;
+
+        $addStatus = addBill($_SESSION['user']['id'], $billName, $amount, $dueDate, $statusValue);
+        if ($addStatus) {
+            header('Location: bill-dashboard.php');
+            exit();
+        } else {
+            $errors['general'] = 'Failed to add the bill. Please try again.';
+        }
     }
 }
 ?>

@@ -1,150 +1,165 @@
 <?php
 require_once('../../controllers/userAuth.php');
+require_once('../../models/billModel.php');
 
-$bills = [
-    1 => ['name' => 'Electricity Bill - April', 'amount' => 1200, 'dueDate' => '2025-04-10', 'status' => 'Paid'],
-    2 => ['name' => 'Internet Bill - April', 'amount' => 800, 'dueDate' => '2025-04-15', 'status' => 'Due'],
-    3 => ['name' => 'Water Bill - April', 'amount' => 400, 'dueDate' => '2025-04-05', 'status' => 'Paid'],
-    4 => ['name' => 'Gas Bill - April', 'amount' => 600, 'dueDate' => '2025-04-20', 'status' => 'Due'],
-];
+$billID = $_GET['id'] ?? null;
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$currentBill = getBillById($billID);
 
-if ($id === 0 || !isset($bills[$id])) {
-    echo "Invalid Bill ID.";
+if (!$currentBill || $currentBill['user_id'] != $_SESSION['user']['id']) {
+    echo "Invalid Bill ID or unauthorized access.";
     exit();
 }
 
-$currentBill = $bills[$id];
+$billName = $currentBill['bill_name'];
+$billAmount = $currentBill['amount'];
+$billDueDate = $currentBill['payment_date'];
+$billStatus = $currentBill['status'] === 0 ? 'Paid' : 'Due';
+$billStatusInput = "";
+$nameError = "";
+$amountError = "";
+$dateError = "";
+$statusError = "";
+$noChangeError = "";
 
-$errors = [
-    'name' => '',
-    'amount' => '',
-    'due_date' => '',
-    'status' => '',
-    'no_change' => '',
-];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $billName = trim($_POST['bill_name'] ?? '');
+    $billAmount = trim($_POST['amount'] ?? '');
+    $billDueDate = trim($_POST['due_date'] ?? '');
+    $billStatusInput = trim($_POST['status'] ?? '');
+    if ($billStatusInput === 'Paid' || $billStatusInput === 'Due') {
+        $billStatus = $billStatusInput;
+    } else {
+        $billStatus = $currentBill['status'] === 0 ? 'Paid' : 'Due';
+    }
 
-function isValidBillName($name) {
-    for ($i = 0; $i < strlen($name); $i++) {
-        $char = $name[$i];
-        if (!(($char >= 'a' && $char <= 'z') ||
-              ($char >= 'A' && $char <= 'Z') ||
-              ($char >= '0' && $char <= '9') ||
-              $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
-            return false;
+    $hasError = false;
+
+    if ($billName === "") {
+        $nameError = "Bill name cannot be empty.";
+        $hasError = true;
+    } else {
+        for ($i = 0; $i < strlen($billName); $i++) {
+            $c = $billName[$i];
+            if (!(($c >= 'a' && $c <= 'z') || ($c >= 'A' && $c <= 'Z') || ($c >= '0' && $c <= '9') || $c === ' ' || $c === '.' || $c === ',' || $c === '-')) {
+                $nameError = "Bill name contains invalid characters.";
+                $hasError = true;
+                break;
+            }
         }
     }
-    return true;
-}
 
-$bill_name = $currentBill['name'];
-$amount = $currentBill['amount'];
-$due_date = $currentBill['dueDate'];
-$status = $currentBill['status'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $bill_name = isset($_POST['bill_name']) ? trim($_POST['bill_name']) : '';
-    $amount = isset($_POST['amount']) ? trim($_POST['amount']) : '';
-    $due_date = isset($_POST['due_date']) ? trim($_POST['due_date']) : '';
-    $status = isset($_POST['status']) ? trim($_POST['status']) : '';
-
-    $isValid = true;
-
-    if ($bill_name === '') {
-        $errors['name'] = 'Bill name cannot be empty.';
-        $isValid = false;
-    } elseif (!isValidBillName($bill_name)) {
-        $errors['name'] = 'Bill name contains invalid characters.';
-        $isValid = false;
+    if ($billAmount === "") {
+        $amountError = "Amount is required.";
+        $hasError = true;
+    } elseif (!is_numeric($billAmount) || floatval($billAmount) <= 0) {
+        $amountError = "Amount must be a positive number.";
+        $hasError = true;
     }
 
-    if ($amount === '' || !is_numeric($amount) || floatval($amount) <= 0) {
-        $errors['amount'] = 'Amount must be a positive number.';
-        $isValid = false;
+    if ($billDueDate === "") {
+        $dateError = "Due date is required.";
+        $hasError = true;
     }
 
-    if ($due_date === '') {
-        $errors['due_date'] = 'Due date must be selected.';
-        $isValid = false;
+    if (!in_array($billStatus, ['Paid', 'Due'])) {
+        $statusError = "Status must be either Paid or Due.";
+        $hasError = true;
     }
 
-    if ($status !== 'Paid' && $status !== 'Due') {
-        $errors['status'] = 'Status must be either Paid or Due.';
-        $isValid = false;
+    if (
+        !$hasError &&
+        $billName === $currentBill['bill_name'] &&
+        floatval($billAmount) == $currentBill['amount'] &&
+        $billDueDate === $currentBill['payment_date'] &&
+        $billStatus === ($currentBill['status'] == 0 ? 'Paid' : 'Due')
+    ) {
+        $noChangeError = "Please change at least one field before submitting.";
+        $hasError = true;
     }
 
-    if ($bill_name === $currentBill['name'] &&
-        floatval($amount) == $currentBill['amount'] &&
-        $due_date === $currentBill['dueDate'] &&
-        $status === $currentBill['status']) {
-        $errors['no_change'] = 'Please change at least one field before submitting.';
-        $isValid = false;
-    }
+    if (!$hasError) {
+        $statusValue = $billStatus === 'Paid' ? 0 : 1;
 
-    if ($isValid) {
-        // db
-        header('Location: bill-dashboard.php');
-        exit();
+        $expenseID = $currentBill['expense_id']; 
+        $note = "Updated via Bill Edit";  
+
+        $updated = updateBill($billID, $_SESSION['user']['id'], $billName, floatval($billAmount), $billDueDate, $statusValue, $expenseID, $note);
+        if ($updated) {
+            header("Location: bill-dashboard.php");
+            exit;
+        } else {
+            $noChangeError = "Failed to update bill. Please try again.";
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Edit Bill - MoneyMap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyMap || Edit Bill</title>
     <link rel="stylesheet" href="../../styles/bills/edit-bill.css" />
-    <link rel="icon" href="../../../public/assets/logo.png" />
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
+
 <body>
-    <?php include '../header-footer/header.php'; ?>
+    <?php include '../header-footer/header.php' ?>
 
-    <main class="edit-bill-container">
-        <section class="current-bill">
-            <h2>Current Bill Info</h2>
-            <p><strong>Bill Name:</strong> <?= htmlspecialchars($currentBill['name']) ?></p>
-            <p><strong>Amount ($):</strong> <?= htmlspecialchars($currentBill['amount']) ?></p>
-            <p><strong>Due Date:</strong> <?= htmlspecialchars($currentBill['dueDate']) ?></p>
-            <p><strong>Status:</strong> <?= htmlspecialchars($currentBill['status']) ?></p>
-        </section>
-
-        <section class="edit-bill-form">
+    <main class="main container">
+        <div class="section-header">
             <h2>Edit Bill</h2>
-            <form action="" method="POST" id="edit-bill-form" novalidate>
-                <label for="bill-name">Bill Name:</label>
-                <input type="text" id="bill-name" name="bill_name" value="<?= htmlspecialchars($bill_name) ?>" />
-                <div class="error" id="error-name"><?= $errors['name'] ?></div>
+        </div>
 
-                <label for="amount">Amount ($):</label>
-                <input type="number" id="amount" name="amount" step="0.01" value="<?= htmlspecialchars($amount) ?>" />
-                <div class="error" id="error-amount"><?= $errors['amount'] ?></div>
-
-                <label for="due-date">Due Date:</label>
-                <input type="date" id="due-date" name="due_date" value="<?= htmlspecialchars($due_date) ?>" />
-                <div class="error" id="error-date"><?= $errors['due_date'] ?></div>
-
-                <label for="status">Status:</label>
-                <select id="status" name="status">
-                    <option value="">-- Select Status --</option>
-                    <option value="Paid" <?= $status === 'Paid' ? 'selected' : '' ?>>Paid</option>
-                    <option value="Due" <?= $status === 'Due' ? 'selected' : '' ?>>Due</option>
-                </select>
-                <div class="error" id="error-status"><?= $errors['status'] ?></div>
-
-                <div class="error" id="error-no-change" style="color:red; margin-top:10px;"><?= $errors['no_change'] ?></div>
-
-                <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="bill-dashboard.php" class="btn btn-secondary">Cancel</a>
-                </div>
-            </form>
+        <section class="current-bill-info">
+            <h3>Current Bill Info</h3>
+            <p><strong>Name:</strong> <?= $currentBill['bill_name'] ?></p>
+            <p><strong>Amount:</strong> $<?= number_format($currentBill['amount'], 2) ?></p>
+            <p><strong>Due Date:</strong> <?= $currentBill['payment_date'] ?></p>
+            <p><strong>Status:</strong> <?= $currentBill['status'] == 0 ? 'Paid' : 'Due' ?></p>
         </section>
+
+        <form action="<?= $_SERVER['PHP_SELF'] . '?id=' . urlencode($billID) ?>" method="POST">
+            <label for="bill-name">Bill Name:</label>
+            <input type="text" id="bill-name" name="bill_name" value="<?= $billName ?>" />
+            <div class="error"><?= $nameError ?></div>
+
+            <label for="amount">Amount ($):</label>
+            <input type="number" id="amount" name="amount" step="0.01" value="<?= $billAmount ?>" />
+            <div class="error"><?= $amountError ?></div>
+
+            <label for="due-date">Due Date:</label>
+            <input type="date" id="due-date" name="due_date" value="<?= $billDueDate ?>" />
+            <div class="error"><?= $dateError ?></div>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="" disabled>-- Select Status --</option>
+                <?php
+                $selectedStatus = $_SERVER["REQUEST_METHOD"] === "POST" ? $billStatusInput : ($currentBill['status'] == 0 ? 'Paid' : 'Due');
+                ?>
+                <option value="Paid" <?= $selectedStatus === 'Paid' ? 'selected' : '' ?>>Paid</option>
+                <option value="Due" <?= $selectedStatus === 'Due' ? 'selected' : '' ?>>Due</option>
+
+            </select>
+
+
+            <div class="error"><?= $statusError ?></div>
+
+            <div class="error" style="margin-top: 10px; color: red;"><?= $noChangeError ?></div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="bill-dashboard.php" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
     </main>
 
-    <?php include '../header-footer/footer.php'; ?>
+    <?php include '../header-footer/footer.php' ?>
     <script src="../../validation/bills/edit-bill.js"></script>
 </body>
+
 </html>
