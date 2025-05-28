@@ -248,3 +248,4 @@ function countUsersByStatus($status)
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_assoc($result)['count'];
 }
+?>

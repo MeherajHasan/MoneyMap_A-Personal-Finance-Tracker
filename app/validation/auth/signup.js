@@ -1,6 +1,7 @@
 const form = document.getElementById("signupForm");
 const idTypeSelect = document.getElementById("idType");
 const passportExpiryGroup = document.getElementById("passportExpiryContainer");
+let isEmailAvailable = false;
 
 function sanitize(str) {
     return str.trim();
@@ -169,6 +170,10 @@ function validateForm() {
         }
     }
 
+    if (!isEmailAvailable) {
+        errors.push("Email is already registered.");
+    }
+
     if (errors.length > 0) {
         alert(errors.join("\n"));
         return false;
@@ -179,9 +184,46 @@ function validateForm() {
 
 idTypeSelect.addEventListener("change", handleIDSelection);
 
+const emailInput = document.getElementById("email");
+const emailError = document.getElementById("emailError");
+const submitBtn = document.getElementById("submitBtn");
+
+emailInput.addEventListener("input", function () {
+    const email = emailInput.value.trim();
+
+    if (!isValidEmailSimple(email)) {
+        emailError.textContent = "Enter a valid email.";
+        isEmailAvailable = false;
+        submitBtn.disabled = true;
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "../../controllers/checkEmail.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+
+            isEmailAvailable = response.available;
+
+            if (isEmailAvailable) {
+                emailError.textContent = "";
+                submitBtn.disabled = false;
+            } else {
+                emailError.textContent = "Email already registered.";
+                submitBtn.disabled = true;
+            }
+        }
+    };
+
+    xhr.send("email=" + encodeURIComponent(email));
+});
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (validateForm()) {
-        form.submit();
+        form.submit(); 
     }
 });
