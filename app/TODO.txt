@@ -7,3 +7,5 @@ When the "Reply" button is clicked:
 Open mailto: link.
 Send AJAX request to PHP to update status.
 Then, add a new row or table using JavaScript.
+
+4. optional: sync bill and "expense" edit 

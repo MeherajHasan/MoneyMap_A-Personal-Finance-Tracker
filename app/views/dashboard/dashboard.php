@@ -5,6 +5,7 @@
     require_once('../../models/savingsModel.php');
     require_once('../../models/budgetModel.php');
     require_once('../../models/debtModel.php');
+    require_once('../../models/billModel.php');
 
     $photoPath = $_SESSION['user']['photo_path'];
     //var_dump($photoPath); 
@@ -97,7 +98,7 @@
                 </div>
                 <div class="widget" id="bills-widget">
                     <h2 class="widget-title">Bills</h2>
-                    <p id="widget-amount" class="widget-amount"></p>
+                    <p id="widget-amount" class="widget-amount">$<?= totalBillAmount($_SESSION['user']['id']) ?? '0.00' ?></p>
                     <button class="widget-action-btn">View Details</button>
                 </div>
                 <div class="widget" id="reports-widget">

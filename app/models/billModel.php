@@ -87,3 +87,13 @@ function deleteBill($billID, $expenseID)
         return mysqli_query($con, $sql);
     }
 }
+
+function totalBillAmount($userId)
+{
+    $con = getConnection();
+    $query = "SELECT SUM(amount) AS total FROM bills WHERE user_id = $userId";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    return $row['total'];
+}
+?>
