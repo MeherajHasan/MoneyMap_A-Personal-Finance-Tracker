@@ -1,4 +1,0 @@
-view
-controller -> logic/flow control -> loginCheck.php, logout.php
-model -> database related code and query
-assets -> fixed file  -> css js
