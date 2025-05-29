@@ -15,3 +15,4 @@ $data = getMonthlyIncomeByType($userID, $yearFilter);
 echo json_encode($data);
 exit;
 ?>
+ 
