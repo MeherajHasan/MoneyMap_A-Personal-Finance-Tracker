@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Clear previous errors
         errorName.textContent = '';
         errorAmount.textContent = '';
         errorDate.textContent = '';
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let isValid = true;
 
-        // Required fields
         if (billName.value.trim() === '') {
             errorName.textContent = 'Bill name is required.';
             isValid = false;
@@ -55,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
     }
 
-        // Amount validation
         const amountVal = amount.value.trim();
         if (amountVal !== '' && (isNaN(amountVal) || Number(amountVal) <= 0)) {
             errorAmount.textContent = 'Amount must be a positive number.';

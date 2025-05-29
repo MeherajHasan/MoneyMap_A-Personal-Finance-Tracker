@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         const backgroundColors = {
-            amount: '#0D47A1',   // dark blue
-            spent: '#29B6F6'     // light blue
+            amount: '#0D47A1',  
+            spent: '#29B6F6'     
         };
 
         const datasets = [

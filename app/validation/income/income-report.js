@@ -25,12 +25,11 @@ const incomeTypeLabels = {
 };
 
 const incomeTypeColors = {
-    0: 'rgba(54, 162, 235, 0.7)',  // blue
-    1: 'rgba(255, 206, 86, 0.7)',  // yellow
-    2: 'rgba(75, 192, 192, 0.7)'   // green
+    0: 'rgba(54, 162, 235, 0.7)', 
+    1: 'rgba(255, 206, 86, 0.7)', 
+    2: 'rgba(75, 192, 192, 0.7)'  
 };
 
-// Example: Fetch for year 2025, you can make this dynamic
 fetchIncomeData({ year: "2025" }, function(data) {
     const monthsRaw = Array.from(new Set(data.map(item => item.month))).sort();
 

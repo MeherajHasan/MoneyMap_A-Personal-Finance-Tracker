@@ -1,4 +1,3 @@
-/* General Styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f0f0;
@@ -42,7 +41,6 @@ ul li:last-child {
     border-bottom: none;
 }
 
-/* Forms */
 form {
     display: flex;
     justify-content: center;
@@ -72,7 +70,6 @@ button:hover {
     background-color: #3c0a0a;
 }
 
-/* Display Areas */
 #expense-category-list,
 #budget-category-list {
     max-width: 600px;
@@ -84,7 +81,6 @@ button:hover {
     text-align: center;
 }
 
-/* Category Item Styling */
 .category-item {
     display: flex;
     justify-content: space-between;
@@ -128,7 +124,6 @@ button:hover {
     background-color: #a62626;
 }
 
-/* Error Message Styling */
 .error-msg {
     color: red;
     font-weight: bold;
@@ -136,7 +131,6 @@ button:hover {
     text-align: center;
 }
 
-/* Save Button Styling */
 .save-btn {
     background-color: #2a9d8f;
     color: white;

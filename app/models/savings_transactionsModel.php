@@ -14,5 +14,4 @@ function addSavingsTransaction($savingsID, $amount, $transactionDate, $note)
 
     return $result1 && $result2;
 }
- 
 ?>
