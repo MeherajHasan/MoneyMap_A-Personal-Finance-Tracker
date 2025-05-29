@@ -12,14 +12,14 @@ if (isset($_COOKIE['remember_password'])) {
     $password = $_COOKIE['remember_password'];
 }
 
-
 $emailError = $_SESSION['emailError'] ?? '';
 $passwordError = $_SESSION['passwordError'] ?? '';
-session_unset(); 
+session_unset();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,6 +27,7 @@ session_unset();
     <link rel="stylesheet" href="../../styles/auth/login.css">
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
 </head>
+
 <body>
     <header>
         <img id="MoneyMap-logo" src="../../../public/assets/fullLogo.png" alt="MoneyMap-logo">
@@ -42,7 +43,7 @@ session_unset();
 
             <label for="password">Password:</label>
             <input id="password" type="password" name="password" placeholder="Enter your password"
-            value="<?= $password; ?>" />
+                value="<?= $password; ?>" />
             <p id="passwordError" class="error"><?= $passwordError; ?></p>
 
             <div class="remember-me">
@@ -65,4 +66,5 @@ session_unset();
     <?php include '../header-footer/footer.php' ?>
     <script src="../../validation/auth/login.js"></script>
 </body>
+
 </html>
