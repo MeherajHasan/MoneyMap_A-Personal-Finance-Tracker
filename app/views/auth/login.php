@@ -37,16 +37,16 @@ session_unset();
         <form action="../../controllers/loginCheck.php" method="POST" id="loginForm">
             <label for="email">Email:</label>
             <input id="email" type="email" name="email" placeholder="xyz@gmail.com"
-                value="<?php echo htmlspecialchars($email); ?>" />
-            <p id="emailError" class="error"><?php echo htmlspecialchars($emailError); ?></p>
+                value="<?= $email; ?>" />
+            <p id="emailError" class="error"><?= $emailError; ?></p>
 
             <label for="password">Password:</label>
             <input id="password" type="password" name="password" placeholder="Enter your password"
-            value="<?php echo htmlspecialchars($password); ?>" />
-            <p id="passwordError" class="error"><?php echo htmlspecialchars($passwordError); ?></p>
+            value="<?= $password; ?>" />
+            <p id="passwordError" class="error"><?= $passwordError; ?></p>
 
             <div class="remember-me">
-                <input id="remember" type="checkbox" name="remember" <?php echo isset($_COOKIE['remember_email']) ? 'checked' : ''; ?> />
+                <input id="remember" type="checkbox" name="remember" <?= isset($_COOKIE['remember_email']) ? 'checked' : ''; ?> />
                 <label for="remember">Remember me</label>
             </div>
 
