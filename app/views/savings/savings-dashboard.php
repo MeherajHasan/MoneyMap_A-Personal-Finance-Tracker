@@ -63,14 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['savingsID'])) {
                         echo '<tr><td colspan="6">No savings goals found.</td></tr>';
                     } else {
                         foreach ($savingsList as $saving) {
-                            // Calculate progress percentage safely
                             $progress = 0;
                             if ($saving['target_amount'] > 0) {
                                 $progress = ($saving['saved_amount'] / $saving['target_amount']) * 100;
                                 if ($progress > 100) $progress = 100;
                             }
 
-                            // Format amounts and date
                             $targetAmount = number_format($saving['target_amount'], 2);
                             $savedAmount = number_format($saving['saved_amount'], 2);
                             $targetDate = date("M Y", strtotime($saving['target_date']));

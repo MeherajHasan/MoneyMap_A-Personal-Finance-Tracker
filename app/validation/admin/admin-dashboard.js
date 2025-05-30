@@ -14,7 +14,7 @@ notificationBtn.addEventListener('click', () => {
 logoutBtn.addEventListener('click', () => {
   // window.location.href = '../../controllers/auth/logout.php';
 });
-
+ 
 sidebarItems.forEach(item => {
   item.addEventListener('click', event => {
     const submenu = item.nextElementSibling;

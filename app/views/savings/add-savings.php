@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <?php include '../header-footer/footer.php'; ?>
-    <script src="../../scripts/savings/add-savings.js"></script>
+    <script src="../../validation/savings/add-savings.js"></script>
 </body>
 
 </html>

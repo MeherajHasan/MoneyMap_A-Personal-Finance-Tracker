@@ -148,50 +148,50 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <form action="" id="addDebtForm" method="POST" novalidate>
                 <div class="form-group">
                     <label for="debtName">Debt Name:</label>
-                    <input type="text" id="debtName" name="debtName" value="<?php echo htmlspecialchars($debtName); ?>" />
-                    <p class="error-message"><?php echo $debtNameError; ?></p>
+                    <input type="text" id="debtName" name="debtName" value="<?= $debtName; ?>" />
+                    <p class="error-message"><?= $debtNameError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="payeeName">Payee Name:</label>
-                    <input type="text" id="payeeName" name="payeeName" value="<?php echo htmlspecialchars($payeeName); ?>" />
-                    <p class="error-message"><?php echo $payeeNameError; ?></p>
+                    <input type="text" id="payeeName" name="payeeName" value="<?= $payeeName; ?>" />
+                    <p class="error-message"><?= $payeeNameError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="debtDate">Debt Date:</label>
-                    <input type="date" id="debtDate" name="debtDate" value="<?php echo htmlspecialchars($debtDate); ?>" />
-                    <p class="error-message"><?php echo $debtDateError; ?></p>
+                    <input type="date" id="debtDate" name="debtDate" value="<?= $debtDate; ?>" />
+                    <p class="error-message"><?= $debtDateError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="maxPaymentDate">Maximum Payment Date (Optional):</label>
-                    <input type="date" id="maxPaymentDate" name="maxPaymentDate" value="<?php echo htmlspecialchars($maxPaymentDate); ?>" />
-                    <p class="error-message"><?php echo $maxPaymentDateError; ?></p>
+                    <input type="date" id="maxPaymentDate" name="maxPaymentDate" value="<?= $maxPaymentDate; ?>" />
+                    <p class="error-message"><?= $maxPaymentDateError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="principalAmount">Principal Amount:</label>
-                    <input type="number" id="principalAmount" name="principalAmount" step="0.01" value="<?php echo htmlspecialchars($principalAmount); ?>" />
-                    <p class="error-message"><?php echo $principalAmountError; ?></p>
+                    <input type="number" id="principalAmount" name="principalAmount" step="0.01" value="<?= $principalAmount; ?>" />
+                    <p class="error-message"><?= $principalAmountError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="interestRate">Interest Rate (%):</label>
-                    <input type="number" id="interestRate" name="interestRate" step="0.01" value="<?php echo htmlspecialchars($interestRate); ?>" />
-                    <p class="error-message"><?php echo $interestRateError; ?></p>
+                    <input type="number" id="interestRate" name="interestRate" step="0.01" value="<?= $interestRate; ?>" />
+                    <p class="error-message"><?= $interestRateError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="minimumPayment">Minimum Payment:</label>
-                    <input type="number" id="minimumPayment" name="minimumPayment" step="0.01" value="<?php echo htmlspecialchars($minimumPayment); ?>" />
-                    <p class="error-message"><?php echo $minimumPaymentError; ?></p>
+                    <input type="number" id="minimumPayment" name="minimumPayment" step="0.01" value="<?= $minimumPayment; ?>" />
+                    <p class="error-message"><?= $minimumPaymentError; ?></p>
                 </div>
 
                 <div class="form-group">
                     <label for="notes">Notes (Optional):</label>
-                    <textarea id="notes" name="notes"><?php echo htmlspecialchars($notes); ?></textarea>
-                    <p class="error-message"><?php echo $notesError; ?></p>
+                    <textarea id="notes" name="notes"><?= $notes; ?></textarea>
+                    <p class="error-message"><?= $notesError; ?></p>
                 </div>
 
                 <div class="form-actions">

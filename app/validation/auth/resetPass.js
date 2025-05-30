@@ -25,7 +25,7 @@ document.getElementById('resetPassForm').addEventListener('submit', function (e)
     if (confirmPass.length === 0) {
         error2.textContent = 'Confirm password is required.';
         valid = false;
-        if (valid) confirmPassInput.focus(); // focus only if not already focused
+        if (valid) confirmPassInput.focus(); 
     } else if (newPass !== confirmPass) {
         error2.textContent = 'Passwords do not match.';
         valid = false;

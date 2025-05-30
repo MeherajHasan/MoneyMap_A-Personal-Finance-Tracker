@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>We're sorry to see you go.</p>
         <p>Please mention the reason for deleting your account:</p>
 
-        <form id="accDelete-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <form id="accDelete-form" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="reason">
                 <label><input type="checkbox" name="reason[]" value="Account is no longer needed"> Account is no longer needed</label><br>
                 <label><input type="checkbox" name="reason[]" value="Privacy concerns"> Privacy concerns</label><br>
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <p id="errorMSG" style="color: red;"><?= htmlspecialchars($errorMSG) ?></p>
+            <p id="errorMSG" style="color: red;"><?= $errorMSG ?></p>
             
             <button type="submit" class="delete-button">Delete Account</button>
         </form>

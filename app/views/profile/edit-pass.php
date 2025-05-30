@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Password</h1>
-        <form id="edit-password" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form id="edit-password" action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
             <label for="current-password"><strong>Current Password:</strong></label>
             <input type="password" id="current-password" name="current-password" class="password" value="" />
             <br />
@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" id="confirm-password" name="confirm-password" class="password" value="" />
             <br />
 
-            <p id="errorMSG" style="color:red;"><?php echo htmlspecialchars($errorMSG); ?></p>
-            <p id="successMSG" style="color:green;"><?php echo htmlspecialchars($successMSG); ?></p>
+            <p id="errorMSG" style="color:red;"><?= $errorMSG; ?></p>
+            <p id="successMSG" style="color:green;"><?= $successMSG; ?></p>
 
             <div class="btn-container">
                 <button type="submit" class="btn" id="save-btn">Save</button>

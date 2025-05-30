@@ -59,15 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Address</h1>
-        <form id="edit-address" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form id="edit-address" action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
             <p><strong>Current Address: </strong> <span id="current-address"><?= $currentAddress ?></span></p>
 
             <label for="address"><strong>New Address: </strong></label>
-            <textarea id="address" name="address" class="address" rows="4"><?php echo htmlspecialchars($_POST['address'] ?? ''); ?></textarea>
+            <textarea id="address" name="address" class="address" rows="4"><?= $_POST['address'] ?? ''; ?></textarea>
 
-            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
+            <p id="errorMSG" style="color:red;"><?= $errorMSG; ?></p>
             <?php if ($successMSG): ?>
-                <p style="color:green;"><?php echo $successMSG; ?></p>
+                <p style="color:green;"><?= $successMSG; ?></p>
             <?php endif; ?>
 
             <div class="btn-container">

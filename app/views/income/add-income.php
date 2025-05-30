@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Add Income</h2>
         </div>
 
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" class="income-form" novalidate>
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="income-form" novalidate>
             <div class="form-group">
                 <label for="incomeType">Income Type</label>
                 <select id="incomeType" name="incomeType" required>
@@ -101,29 +101,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <div class="form-group">
                 <label for="incomeSource">Source</label>
-                <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Job Salary, Freelancing" value="<?= htmlspecialchars($incomeSource) ?>" />
-                <p id="sourceError" class="error-message" style="color: red;"><?= htmlspecialchars($sourceError) ?></p>
+                <input type="text" id="incomeSource" name="incomeSource" placeholder="e.g., Job Salary, Freelancing" value="<?= $incomeSource ?>" />
+                <p id="sourceError" class="error-message" style="color: red;"><?= $sourceError ?></p>
             </div>
 
             <div class="form-group">
                 <label for="incomeAmount">Amount</label>
-                <input type="number" step="0.01" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" value="<?= htmlspecialchars($incomeAmount) ?>" />
-                <p id="amountError" class="error-message" style="color: red;"><?= htmlspecialchars($amountError) ?></p>
+                <input type="number" step="0.01" id="incomeAmount" name="incomeAmount" placeholder="Amount in $" value="<?= $incomeAmount ?>" />
+                <p id="amountError" class="error-message" style="color: red;"><?= $amountError ?></p>
             </div>
 
             <div class="form-group">
                 <label for="incomeDate">Date</label>
-                <input type="date" id="incomeDate" name="incomeDate" value="<?= htmlspecialchars($incomeDate) ?>" />
-                <p id="dateError" class="error-message" style="color: red;"><?= htmlspecialchars($dateError) ?></p>
+                <input type="date" id="incomeDate" name="incomeDate" value="<?= $incomeDate ?>" />
+                <p id="dateError" class="error-message" style="color: red;"><?= $dateError ?></p>
             </div>
 
             <div class="form-group">
                 <label for="incomeNotes">Notes (Optional)</label>
-                <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"><?= htmlspecialchars($incomeNotes) ?></textarea>
+                <textarea id="incomeNotes" name="incomeNotes" placeholder="Optional details about the income"><?= $incomeNotes ?></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Add Income</button>
-            <p id="emptyError" class="error-message" style="color: red;"><?= htmlspecialchars($emptyError) ?></p>
+            <p id="emptyError" class="error-message" style="color: red;"><?= $emptyError ?></p>
 
             <div class="navigation-buttons">
                 <a href="income-dashboard.php" class="btn btn-secondary">Back to Dashboard</a>

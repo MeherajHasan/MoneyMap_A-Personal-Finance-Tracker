@@ -16,10 +16,12 @@
         <h1>Your Account is not active!</h1>
         <p>Your account is currently <strong>inactive</strong>, <strong>pending approval</strong>, or has been <strong>suspended</strong>.  
         Please contact the admin if you believe this is a mistake or have any questions.</p>
-        <a href="mailto:hasanmeheraj639@gmail.com?subject=Query%20on%20account" target="_blank" class="contact-btn">Contact Admin</a>
+        <a id="contactAdminBtn" class="contact-btn">Contact Admin</a>
     </div>
     </main>
 
     <?php include '../header-footer/footer.php'; ?>
+
+    <script src="../../validation/auth/waiting.js"></script>
 </body>
 </html>

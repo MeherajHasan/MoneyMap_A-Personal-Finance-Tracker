@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         for ($i = 0; $i < strlen($idNumber); $i++) {
             $char = $idNumber[$i];
             if (!(('a' <= $char && $char <= 'z') ||
-                  ('A' <= $char && $char <= 'Z') ||
-                  ('0' <= $char && $char <= '9') )) {
+                ('A' <= $char && $char <= 'Z') ||
+                ('0' <= $char && $char <= '9'))) {
                 $valid = false;
                 break;
             }
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Identity</h1>
-        <form id="edit-identity" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form id="edit-identity" action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
             <p><strong>Current Identity Type: </strong> <span id="current-idType"><?= $currentIdType ?></span></p>
             <p><strong>Current ID Number: </strong> <span id="current-idNumber"><?= $currentIdNumber ?></span></p>
             <?php if ($currentIdType === 'Passport' && !empty($passportExpiry)): ?>
@@ -94,16 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="id-number"><strong>New ID Number: </strong></label>
             <input type="text" id="id-number" name="id-number" class="id-number"
-                value="<?php echo htmlspecialchars($_POST['id-number'] ?? ''); ?>">
+                value="<?= $_POST['id-number'] ?? ''; ?>">
 
             <div id="passport-expiry"
-                style="<?php echo ($_POST['id-type'] ?? '') === 'Passport' ? 'display: block;' : 'display: none;'; ?>">
+                style="<?= (isset($_POST['id-type']) && $_POST['id-type'] === 'Passport') ? 'display: block;' : 'display: none;'; ?>">
                 <label for="passport-expiry-date"><strong>Passport Expiry Date: </strong></label>
                 <input type="date" id="passport-expiry-date" name="passport-expiry-date"
-                    value="<?php echo htmlspecialchars($_POST['passport-expiry-date'] ?? ''); ?>">
+                    value="<?= $_POST['passport-expiry-date'] ?? ''; ?>">
             </div>
 
-            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
+            <p id="errorMSG" style="color:red;"><?= $errorMSG; ?></p>
 
             <div class="btn-container">
                 <button type="button" class="btn" id="save-btn">Save</button>

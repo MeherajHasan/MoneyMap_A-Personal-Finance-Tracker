@@ -82,11 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                     <div class="detail-item">
                         <span class="label">Remaining Payable Amount:</span>
-                        <span class="value">$<?= number_format($remainingPayableAmount, 2) ?></span>
+                        <span id="remainingAmount" class="value">$<?= number_format($remainingPayableAmount, 2) ?></span>
                     </div>
                     <div class="detail-item">
                         <span class="label">Minimum Payment Amount:</span>
-                        <span class="value">$<?= number_format($min_payment, 2) ?></span>
+                        <span id="minAmount" class="value">$<?= number_format($min_payment, 2) ?></span>
                     </div>
                     <div class="payment-form">
                         <label for="paymentAmount">Payment Amount:</label>
@@ -106,6 +106,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <?php include '../header-footer/footer.php'; ?>
 
-    <!-- <script src="../../scripts/debt/debt-pay.js"></script> -->
+    <script src="../../validation/debt/debt-pay.js"></script>
 </body>
 </html>

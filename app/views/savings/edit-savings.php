@@ -211,7 +211,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </main>
 
     <?php include '../header-footer/footer.php' ?>
-    <script src="../../scripts/savings/edit-savings.js"></script>
+    
+    <script src="../../validation/savings/edit-savings.js"></script>
 </body>
 
 </html>

@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $categoryError = "Invalid category.";
             $hasError = true;
         } elseif ($categoryID === '3') {
-           $expenseId = addExpenseReturnId($_SESSION['user']['id'], $categoryID, $name, $amount, $_POST['expenseDate']);
+            $expenseId = addExpenseReturnId($_SESSION['user']['id'], $categoryID, $name, $amount, $_POST['expenseDate']);
 
             $addBillStatus = addBillViaExpense($_SESSION['user']['id'], $expenseId, $name, $amount, $_POST['expenseDate'], $notes);
             if ($addBillStatus) {
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Add Expense</h2>
         </div>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="expense-form"
+        <form action="<?= $_SERVER["PHP_SELF"]; ?>" method="POST" class="expense-form"
             novalidate>
             <div class="form-group">
                 <label for="expenseCategory">Category:</label>
@@ -126,33 +126,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     ?>
                 </select>
 
-                <p id="categoryError" class="error-message"><?php echo $categoryError; ?></p>
+                <p id="categoryError" class="error-message"><?= $categoryError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseName">Name</label>
                 <input type="text" id="expenseName" name="expenseName" placeholder="e.g., Rent, Groceries"
-                    value="<?php echo htmlspecialchars($name); ?>" />
-                <p id="nameError" class="error-message"><?php echo $nameError; ?></p>
+                    value="<?= $name; ?>" />
+                <p id="nameError" class="error-message"><?= $nameError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseAmount">Amount</label>
                 <input type="number" id="expenseAmount" name="expenseAmount" placeholder="Amount in $"
-                    value="<?php echo htmlspecialchars($amount); ?>" step="0.01" />
-                <p id="amountError" class="error-message"><?php echo $amountError; ?></p>
+                    value="<?= $amount; ?>" step="0.01" />
+                <p id="amountError" class="error-message"><?= $amountError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseDate">Date</label>
-                <input type="date" id="expenseDate" name="expenseDate" value="<?php echo htmlspecialchars($date); ?>" />
-                <p id="dateError" class="error-message"><?php echo $dateError; ?></p>
+                <input type="date" id="expenseDate" name="expenseDate" value="<?= $date; ?>" />
+                <p id="dateError" class="error-message"><?= $dateError; ?></p>
             </div>
 
             <div class="form-group">
                 <label for="expenseNotes">Notes (Optional)</label>
                 <textarea id="expenseNotes" name="expenseNotes"
-                    placeholder="Optional details about the expense"><?php echo htmlspecialchars($notes); ?></textarea>
+                    placeholder="Optional details about the expense"><?= $notes; ?></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Add Expense</button>
@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <?php include '../header-footer/footer.php' ?>
 
-    <script src="../../scripts/expense/add-expense.js"></script>
+    <script src="../../validation/expense/add-expense.js"></script>
 </body>
 
 </html>

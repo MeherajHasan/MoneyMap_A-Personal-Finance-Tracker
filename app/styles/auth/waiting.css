@@ -63,4 +63,5 @@ main {
 
 .contact-btn:hover {
     background-color: #0D1B2A;
+    cursor: pointer;
 }

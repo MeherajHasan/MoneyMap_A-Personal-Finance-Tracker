@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h2>Edit Income</h2>
         </div>
 
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?id=' . urlencode($incomeID) ?>" method="POST" class="income-form two-column-form">
+        <form action="<?= $_SERVER['PHP_SELF'] . '?id=' . urlencode($incomeID) ?>" method="POST" class="income-form two-column-form">
 
             <div class="form-group-row">
                 <div class="form-column">

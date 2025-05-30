@@ -3,3 +3,7 @@
 2. category names (already added or not) using AJAX in add-budget.php 
 
 4. optional: sync bill and "expense" edit 
+
+*** admin/user-management ->search option not working
+
+5. remove sql command from income-dashboard.php

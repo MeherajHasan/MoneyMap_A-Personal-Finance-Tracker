@@ -49,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Email</h1>
-        <form id="edit-mail" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form id="edit-mail" action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
             <p><strong>Current Email: </strong> <span id="current-email"><?= $currentEmail ?></span></p>
 
             <label for="email"><strong>New Email: </strong></label>
-            <input type="email" id="email" name="email" class="email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+            <input type="email" id="email" name="email" class="email" value="<?= $_POST['email'] ?? ''; ?>">
 
-            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
-            <p id="successMSG" style="color:green;"><?php echo $successMSG; ?></p>
+            <p id="errorMSG" style="color:red;"><?= $errorMSG; ?></p>
+            <p id="successMSG" style="color:green;"><?= $successMSG; ?></p>
 
             <div class="btn-container">
                 <button type="submit" class="btn" id="save-btn">Save</button>

@@ -66,15 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Name</h1>
-        <form id="edit-name" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <p><strong>Current Name: </strong> <span id="current-name"><?php echo $currentName; ?></span></p>
+        <form id="edit-name" action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+            <p><strong>Current Name: </strong> <span id="current-name"><?= $currentName; ?></span></p>
 
             <label for="name"><strong>New Name: </strong></label>
-            <input type="text" id="name" name="name" class="name" value="<?php echo $_POST['name'] ?? ''; ?>" />
+            <input type="text" id="name" name="name" class="name" value="<?= $_POST['name'] ?? ''; ?>" />
 
-            <p id="errorMSG" style="color:red;"><?php echo $errorMSG; ?></p>
+            <p id="errorMSG" style="color:red;"><?= $errorMSG; ?></p>
             <?php if ($successMSG): ?>
-                <p style="color:green;"><?php echo $successMSG; ?></p>
+                <p style="color:green;"><?= $successMSG; ?></p>
             <?php endif; ?>
 
             <div class="btn-container">

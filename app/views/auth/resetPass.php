@@ -75,6 +75,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </main>
 
     <?php include '../header-footer/footer.php' ?>
+    
+    <script src="../../validation/auth/resetPass.js"></script>
 </body>
 
 </html>

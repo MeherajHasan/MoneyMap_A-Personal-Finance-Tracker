@@ -63,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1>Edit Phone Number</h1>
-        <form id="edit-phone" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-            <p><strong>Current Phone Number: </strong> <span id="current-phone"><?php echo $currentPhoneDisplay; ?></span></p>
+        <form id="edit-phone" action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
+            <p><strong>Current Phone Number: </strong> <span id="current-phone"><?= $currentPhoneDisplay; ?></span></p>
 
             <label for="phone"><strong>New Phone Number: </strong></label>
-            <input type="tel" id="phone" name="phone" class="phone" value="<?php echo htmlspecialchars($_POST['phone'] ?? ''); ?>" />
+            <input type="tel" id="phone" name="phone" class="phone" value="<?= $_POST['phone'] ?? ''; ?>" />
 
-            <p id="errorMSG" style="color:red;"><?php echo htmlspecialchars($errorMSG); ?></p>
-            <p id="successMSG" style="color:green;"><?php echo htmlspecialchars($successMSG); ?></p>
+            <p id="errorMSG" style="color:red;"><?= $errorMSG; ?></p>
+            <p id="successMSG" style="color:green;"><?= $successMSG; ?></p>
 
             <div class="btn-container">
                 <button type="submit" class="btn" id="save-btn">Save</button>
