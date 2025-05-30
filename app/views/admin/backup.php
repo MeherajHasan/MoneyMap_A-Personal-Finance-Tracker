@@ -2,10 +2,10 @@
 require_once('../../controllers/adminAuth.php');
 include '../../models/userModel.php';
 
-if (isset($_POST['backup'])) {
-    backupDatabase();
-    exit();
-}
+// if (isset($_POST['backup'])) {
+//     backupDatabase();
+//     exit();
+// }
 ?>
 
 <!DOCTYPE html>

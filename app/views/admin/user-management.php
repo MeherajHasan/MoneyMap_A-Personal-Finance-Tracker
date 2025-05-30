@@ -31,19 +31,22 @@ $searchError = "";
         <p id="searchError"></p>
     </form>
 
-    <!-- Edit Form -->
     <div id="editUserFormContainer"></div>
     <p id="updateError"></p>
     <p id="updateSuccess"></p>
 
-
-    <!-- Grid Views -->
     <?php
     $tables = fetchUserCategoryWise();
 
     foreach ($tables as $title => $result) {
         echo "<h3>$title:</h3>";
-        echo "<table border='1'><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr>";
+        echo "<table border='1'><tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                </tr>";
         foreach ($result as $row) {
             echo "<tr>
             <td>{$row['id']}</td>
