@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2025 at 09:41 PM
+-- Generation Time: May 30, 2025 at 10:30 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -365,7 +365,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `fname`, `lname`, `id_type`, `id_number`, `passport_expiry`, `country_code`, `phone`, `email`, `password`, `gender`, `dob`, `address`, `photo_path`, `created_at`, `account_status`, `role`) VALUES
 (23, 'Meheraj', 'Hasan', 0, '1111111111', NULL, '+88', '123456789', 'hasanmeheraj639@gmail.com', '$2y$10$W7/WvledZhccGgXVHo8kX.OPPcyfrKDM4SjiHoWoP4dr9SVAbjscC', 0, '2002-10-30', 'Uttara', '../../uploads/hasanmeheraj639.jpeg', '2025-05-21 02:04:47', 0, 'user'),
 (25, 'Junky', 'Oggy', 0, '0000000000', '0000-00-00', '+65', '123456789', 'junkyoggy@gmail.com', '$2y$10$lhuJn1HyYX7QZHF3CxjOrOPiZwitZycajd9sEqWOuvq7XPex2tU3C', 0, '1999-02-09', 'Khilkhet', '../../uploads/junkyoggy.jpg', '2025-05-23 16:46:01', 0, 'user'),
-(26, 'Admin', 'Hasan', 0, '1111100000', '0000-00-00', '+88', '123456789', 'admin@gmail.com', '$2y$10$afajkcI/LswC4WObRITFt.xmqVyN1UwNe2ouD9maBVCbSXUEh25Fi', 0, '2002-10-30', 'Kuratoli', '../../uploads/admin.jpg', '2025-05-24 20:36:38', 0, 'admin');
+(26, 'Admin', 'Hasan', 0, '1111100000', '0000-00-00', '+88', '123456789', 'admin@gmail.com', '$2y$10$afajkcI/LswC4WObRITFt.xmqVyN1UwNe2ouD9maBVCbSXUEh25Fi', 0, '2002-10-30', 'Kuratoli', '../../uploads/admin.jpg', '2025-05-24 20:36:38', 0, 'admin'),
+(27, 'Meheraj', 'Doe', 0, '1120456820', '0000-00-00', '+88', '01455694233', 'mdoe@gmail.com', '$2y$10$U3jIuuBTYS6D.1itaoC0dOsmxXjwiTXGpuAUmmnOnhO3/.NOcS6h2', 0, '1998-01-22', 'Airport er goli', '../../uploads/mdoe.jpeg', '2025-05-30 13:43:36', 3, 'user');
 
 --
 -- Indexes for dumped tables
@@ -507,7 +508,7 @@ ALTER TABLE `savings_transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables

@@ -1,21 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const searchForm = document.querySelector('form[action="' + location.pathname + '"]');
-  const searchEmailInput = searchForm ? searchForm.querySelector('input[name="searchEmail"]') : null;
+  const searchForm = document.getElementById('searchForm');
   const searchError = document.getElementById('searchError');
-
-  const updateForm = document.querySelector('form[method="post"]:not([action])');
   const updateError = document.getElementById('updateError');
+  const updateSuccess = document.getElementById('updateSuccess');
+  const editContainer = document.getElementById('editUserFormContainer');
 
   function isValidName(name) {
     for (let i = 0; i < name.length; i++) {
       const ch = name[i];
       if (
-        !(
-          (ch >= 'a' && ch <= 'z') ||
-          (ch >= 'A' && ch <= 'Z') ||
-          ch === '.' ||
-          ch === '-'
-        )
+        !((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch === '.' || ch === '-')
       ) {
         return false;
       }
@@ -25,96 +19,163 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function isDigitsOnly(str) {
     for (let i = 0; i < str.length; i++) {
-      const ch = str[i];
-      if (ch < '0' || ch > '9') {
-        return false;
-      }
+      if (str[i] < '0' || str[i] > '9') return false;
     }
     return true;
   }
 
-  function manualEmailCheck(email) {
-    const atPos = email.indexOf('@');
-    const dotPos = email.lastIndexOf('.');
-    if (atPos < 1 || dotPos < atPos + 2 || dotPos === email.length - 1) {
-      return false;
-    }
-    return true;
+  function isValidDOB(dobStr) {
+    const dob = new Date(dobStr);
+    const now = new Date();
+    const ageLimit = new Date(now.getFullYear() - 12, now.getMonth(), now.getDate());
+    return dob <= ageLimit;
   }
 
-  if (searchForm) {
-    searchForm.addEventListener('submit', e => {
-      const email = searchEmailInput.value.trim();
-      if (email === '') {
-        e.preventDefault();
-        searchError.textContent = 'Email field is required';
-      } else if (!manualEmailCheck(email)) {
-        e.preventDefault();
-        searchError.textContent = 'Invalid email address';
-      } else {
-        searchError.textContent = '';
-      }
+  searchForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = searchForm.searchEmail.value.trim();
+
+    if (email === '') {
+      searchError.textContent = 'Email field is required';
+      return;
+    }
+
+    const res = await fetch('../../controllers/user-management-controller.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'search', searchEmail: email })
     });
-  }
 
-  if (updateForm) {
-    updateForm.addEventListener('submit', e => {
-      let errorMsg = '';
-      const fname = updateForm.elements['fname'].value.trim();
-      const lname = updateForm.elements['lname'].value.trim();
-      const phone = updateForm.elements['phone'].value.trim();
-      const gender = updateForm.elements['gender'].value;
-      const dob = updateForm.elements['dob'].value;
-      const address = updateForm.elements['address'].value.trim();
-      const account_status = updateForm.elements['account_status'].value;
-      const role = updateForm.elements['role'].value;
+    const data = await res.json();
+    if (data.success) {
+      searchError.textContent = '';
+      renderEditForm(data.user);
+    } else {
+      searchError.textContent = data.message || 'User not found';
+    }
+  });
+
+  function renderEditForm(user) {
+    editContainer.innerHTML = `
+      <form id="updateForm">
+        <input type="hidden" name="email" value="${user.email}" />
+        <label>First Name:</label><input type="text" name="fname" value="${user.fname}" /><br />
+        <label>Last Name:</label><input type="text" name="lname" value="${user.lname}" /><br />
+        <label>Phone:</label><input type="text" name="phone" value="${user.phone}" /><br />
+        <label>Gender:</label>
+        <select name="gender">
+          <option value="0" ${user.gender == 0 ? 'selected' : ''}>Male</option>
+          <option value="1" ${user.gender == 1 ? 'selected' : ''}>Female</option>
+        </select><br />
+        <label>Date of Birth:</label><input type="date" name="dob" value="${user.dob}" /><br />
+        <label>Address:</label><input type="text" name="address" value="${user.address}" /><br />
+        <label>Account Status:</label>
+        <select name="account_status">
+          <option value="0" ${user.account_status == 0 ? 'selected' : ''}>Active</option>
+          <option value="2" ${user.account_status == 2 ? 'selected' : ''}>Suspended</option>
+        </select><br />
+        <label>Role:</label>
+        <select name="role">
+          <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+          <option value="user" ${user.role === 'user' ? 'selected' : ''}>User</option>
+        </select><br />
+        <button type="submit">Save Changes</button>
+      </form>
+    `;
+
+    const updateForm = document.getElementById('updateForm');
+
+    updateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(updateForm);
+      const userData = Object.fromEntries(fd.entries());
+
+      const fname = userData.fname.trim();
+      const lname = userData.lname.trim();
+      const phone = userData.phone.trim();
+      const gender = userData.gender;
+      const dob = userData.dob;
+      const address = userData.address.trim();
+      const account_status = userData.account_status;
+      const role = userData.role;
+
+      updateError.textContent = '';
+      updateSuccess.textContent = '';
 
       if (fname === '') {
-        errorMsg = 'First name is required';
-      } else if (!isValidName(fname)) {
-        errorMsg = 'First name must contain only letters';
-      } else if (lname === '') {
-        errorMsg = 'Last name is required';
-      } else if (!isValidName(lname)) {
-        errorMsg = 'Last name must contain only letters';
-      } else if (phone === '') {
-        errorMsg = 'Phone number is required';
-      } else if (!isDigitsOnly(phone)) {
-        errorMsg = 'Phone number must be digits only';
-      } else if (phone.length < 6) {
-        errorMsg = 'Phone number must be at least 6 digits';
-      } else if (gender === '') {
-        errorMsg = 'Gender is required';
-      } else if (!['0', '1'].includes(gender)) {
-        errorMsg = 'Invalid gender selected';
-      } else if (address === '') {
-        errorMsg = 'Address is required';
-      } else if (dob === '') {
-        errorMsg = 'Date of birth is required';
-      } else {
-        const dobDate = new Date(dob);
-        const today = new Date();
-        const minDob = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate());
-        if (dobDate > minDob) {
-          errorMsg = 'User must be at least 12 years old';
-        }
-      } 
-
-      if (account_status === '') {
-        errorMsg = 'Account status is required';
-      } else if (!['0', '2'].includes(account_status)) {
-        errorMsg = 'Invalid account status';
-      } else if (role === '') {
-        errorMsg = 'Role is required';
-      } else if (!['admin', 'user'].includes(role)) {
-        errorMsg = 'Invalid role selected';
+        updateError.textContent = 'First name is required';
+        return;
+      }
+      if (!isValidName(fname)) {
+        updateError.textContent = 'First name must contain only letters';
+        return;
       }
 
-      if (errorMsg !== '') {
-        e.preventDefault();
-        updateError.textContent = errorMsg;
-      } else {
+      if (lname === '') {
+        updateError.textContent = 'Last name is required';
+        return;
+      }
+      if (!isValidName(lname)) {
+        updateError.textContent = 'Last name must contain only letters';
+        return;
+      }
+
+      if (phone === '') {
+        updateError.textContent = 'Phone number is required';
+        return;
+      }
+      if (!isDigitsOnly(phone)) {
+        updateError.textContent = 'Phone number must be digits only';
+        return;
+      }
+      if (phone.length < 6) {
+        updateError.textContent = 'Phone number must be at least 6 digits';
+        return;
+      }
+
+      if (gender !== '0' && gender !== '1') {
+        updateError.textContent = 'Invalid gender selected';
+        return;
+      }
+
+      if (dob === '') {
+        updateError.textContent = 'Date of birth is required';
+        return;
+      }
+      if (!isValidDOB(dob)) {
+        updateError.textContent = 'User must be at least 12 years old';
+        return;
+      }
+
+      if (address === '') {
+        updateError.textContent = 'Address is required';
+        return;
+      }
+
+      if (account_status !== '0' && account_status !== '2') {
+        updateError.textContent = 'Invalid account status';
+        return;
+      }
+
+      if (role !== 'admin' && role !== 'user') {
+        updateError.textContent = 'Invalid role selected';
+        return;
+      }
+
+      userData.action = 'update';
+      const res = await fetch('../../controllers/user-management-controller.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData)
+      });
+
+      const data = await res.json();
+      if (data.success) {
         updateError.textContent = '';
+        updateSuccess.textContent = data.message;
+      } else {
+        updateSuccess.textContent = '';
+        updateError.textContent = data.message;
       }
     });
   }

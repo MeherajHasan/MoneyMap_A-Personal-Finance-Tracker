@@ -198,7 +198,7 @@ function updateUserInfo_byAdmin($searchEmail, $fname, $lname, $phone, $gender, $
 }
 
 function fetchUserCategoryWise()
-{
+{ 
     $con = getConnection();
     $allUsers = mysqli_query($con, "SELECT * FROM users");
     $adminUsers = mysqli_query($con, "SELECT * FROM users WHERE role = 'admin'");
