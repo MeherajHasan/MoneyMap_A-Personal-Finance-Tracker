@@ -114,7 +114,7 @@ MoneyMap_A-Personal-Finance-Tracker
 
 ## ⚙️  Clone the repository
 ```bash
-git clone https://github.com/your-username/MoneyMap.git
+git clone https://github.com/MeherajHasan/MoneyMap_A-Personal-Finance-Tracker.git
 ```
 ---
 
