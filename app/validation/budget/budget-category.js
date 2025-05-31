@@ -12,7 +12,7 @@ function isValidCategoryName(name) {
     }
     return true;
 }
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.add-category');
     const input = document.getElementById('newCategory');

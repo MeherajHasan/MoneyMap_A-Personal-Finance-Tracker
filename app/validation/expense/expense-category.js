@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!isValidCategoryName(trimmedName)) {
-                alert("Category name contains invalid characters.\nAllowed: A-Z, a-z, 0-9, space, '.', ',', '-'");
+                alert("Category name contains invalid characters.");
                 return;
             }
 
             if (trimmedName === oldCategoryName) {
                 alert("No changes were made.");
                 return;
-            }
+            } 
 
             // Create form and submit
             const form = document.createElement('form');

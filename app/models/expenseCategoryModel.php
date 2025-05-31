@@ -36,7 +36,7 @@ function getExpenseCategoryIdByName($userID, $name) {
         return $row['category_id'];
     }
     return null;
-}
+} 
 
 function getGeneralizedExpenseCategoryName() {
     $con = getConnection();

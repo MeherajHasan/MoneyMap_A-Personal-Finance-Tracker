@@ -7,6 +7,7 @@ $newCategory = '';
 $emptyError = '';
 
 $categories = getExpenseCategories($_SESSION['user']['id']);
+$categoryNames = getExpenseCategoryName($_SESSION['user']['id']);
 
 function isValidCategoryName($name)
 {
@@ -46,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $emptyError = 'Category name is required.';
     } elseif (!isValidCategoryName($newCategory)) {
         $emptyError = 'Category name contains invalid characters.';
+    } elseif (in_array($newCategory, $categoryNames)) { 
+        $emptyError = 'Category already exists.';
     } else {
         $addStatus = addExpenseCategory($_SESSION['user']['id'], $newCategory);
         if ($addStatus) {
@@ -56,12 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
