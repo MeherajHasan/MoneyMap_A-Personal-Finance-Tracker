@@ -52,37 +52,69 @@
 ## 📁 Project Structure
 
 <pre>
-MoneyMap/
-├── app/
-│   ├── controllers/
-│   │   └── auth/
-│   ├── helpers/
-│   ├── models/
-│   ├── services/
-│   ├── styles/
-│   └── view/
-│       └── auth/
-│           ├── emailVerify.html
-│           ├── forgetPass.html
-│           ├── login.html
-│           ├── resetPass.html
-│           └── singup.html
-├── config/
-├── core/
-├── files/
-├── public/
-│   ├── assets/
-│   ├── index.html
-│   └── loader.js
-├── storage/
-└── README.md
+MoneyMap_A-Personal-Finance-Tracker
+├───app
+│   ├───controllers
+│   ├───helpers
+│   ├───models
+│   ├───services
+│   ├───styles
+│   │   ├───admin
+│   │   ├───auth
+│   │   ├───bills
+│   │   ├───budget
+│   │   ├───contact
+│   │   ├───dashboard
+│   │   ├───debt
+│   │   ├───expense
+│   │   ├───income
+│   │   ├───landing
+│   │   ├───profile
+│   │   ├───reports
+│   │   └───savings
+│   ├───validation
+│   │   ├───admin
+│   │   ├───auth
+│   │   ├───bills
+│   │   ├───budget
+│   │   ├───contact
+│   │   ├───dashboard
+│   │   ├───debt
+│   │   ├───expense
+│   │   ├───income
+│   │   ├───landing
+│   │   ├───profile
+│   │   ├───reports
+│   │   └───savings
+│   └───views
+│       ├───admin
+│       ├───auth
+│       ├───bills
+│       ├───budget
+│       ├───contact
+│       ├───dashboard
+│       ├───debt
+│       ├───expense
+│       ├───header-footer
+│       ├───income
+│       ├───landing
+│       ├───profile
+│       ├───reports
+│       └───savings
+├───config
+├───core
+├───files
+├───public
+│   └───assets
+├───storage
+└───uploads
 </pre>
 
 ---
 
 ## ⚙️  Clone the repository
 ```bash
-git clone https://github.com/your-username/MoneyMap.git
+git clone https://github.com/MeherajHasan/MoneyMap_A-Personal-Finance-Tracker.git
 ```
 ---
 
