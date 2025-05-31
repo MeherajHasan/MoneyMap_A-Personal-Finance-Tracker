@@ -7,7 +7,7 @@ function getTotalSavings($userID)
     $sql = "SELECT SUM(saved_amount) AS total FROM savings WHERE user_id = '$userID' AND (status = 1 OR STATUS = 2)"; // 0=deleted, 1=active, 2=achieved
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_assoc($result)['total'];
-}
+} 
 
 function getTotalGoals($userID)
 {

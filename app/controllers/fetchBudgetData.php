@@ -10,3 +10,4 @@ $data = getUserBudgetDataGrouped($userID);
 echo json_encode($data);
 exit;
 ?>
+ 

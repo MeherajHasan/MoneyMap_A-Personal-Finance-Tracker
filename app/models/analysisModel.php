@@ -12,9 +12,17 @@ function totalBudget($userId)
 function totalSpent($userId)
 {
     $con = getConnection();
-    $query = "SELECT SUM(spent_amount) AS total_spent FROM budget WHERE user_id = $userId";
+    $query = "
+        SELECT SUM(e.amount) AS total_spent
+        FROM expenses e
+        JOIN budget b ON e.category_id = b.category_id
+            AND e.expense_date BETWEEN b.start_date AND b.target_date
+        WHERE b.user_id = $userId
+    ";
     $result = mysqli_query($con, $query);
-    if ($row = mysqli_fetch_assoc($result)) return $row['total_spent'] ?? 0;
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row['total_spent'] ?? 0;
+    }
 }
 
 function totalExpense($userId)

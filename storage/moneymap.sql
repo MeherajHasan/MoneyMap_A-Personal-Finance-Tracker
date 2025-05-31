@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2025 at 04:43 PM
+-- Generation Time: May 31, 2025 at 07:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,7 +58,6 @@ CREATE TABLE `budget` (
   `category_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
-  `spent_amount` decimal(10,2) DEFAULT 0.00,
   `start_date` date NOT NULL,
   `target_date` date NOT NULL,
   `note` text DEFAULT NULL,
@@ -69,20 +68,20 @@ CREATE TABLE `budget` (
 -- Dumping data for table `budget`
 --
 
-INSERT INTO `budget` (`budget_id`, `category_id`, `user_id`, `amount`, `spent_amount`, `start_date`, `target_date`, `note`, `status`) VALUES
-(1, 1, 23, 300.00, 120.50, '2025-05-01', '2025-05-31', 'Monthly food budget', 0),
-(2, 2, 23, 100.00, 100.00, '2025-04-01', '2025-04-30', 'April transport budget', 1),
-(3, 3, 23, 150.00, 175.25, '2025-05-01', '2025-05-31', 'Electricity + water + gas', 2),
-(4, 4, 23, 80.00, 20.00, '2025-05-15', '2025-06-15', 'Weekend movies & games', 0),
-(5, 5, 23, 200.00, 200.00, '2025-03-01', '2025-03-31', 'Medical checkup', 1),
-(6, 6, 23, 500.00, 250.00, '2025-04-01', '2025-06-30', 'Online course + books', 0),
-(7, 7, 23, 220.00, 260.00, '2025-05-01', '2025-05-31', 'Weekly grocery shopping', 2),
-(8, 8, 23, 1200.00, 600.00, '2025-05-01', '2025-05-31', 'May house rent', 0),
-(9, 14, 23, 150.00, 150.00, '2025-04-10', '2025-04-20', 'NGO donation', 1),
-(10, 16, 23, 900.00, 900.00, '2025-04-01', '2025-04-30', 'Quarterly tax payment', 1),
-(12, 18, 23, 1000.00, 300.00, '2025-06-01', '2025-06-30', 'Summer trip to Goa', 0),
-(13, 2, 23, 1000.00, 0.00, '2025-05-01', '2025-05-31', 'Bus Vara', 0),
-(14, 5, 23, 1500.00, 0.00, '2025-05-01', '2025-05-31', 'Medical Cost', 0);
+INSERT INTO `budget` (`budget_id`, `category_id`, `user_id`, `amount`, `start_date`, `target_date`, `note`, `status`) VALUES
+(1, 1, 23, 500.00, '2025-05-01', '2025-05-31', 'Monthly food', 0),
+(2, 2, 23, 100.00, '2025-04-01', '2025-04-30', 'April transport budget', 1),
+(3, 3, 23, 150.00, '2025-05-01', '2025-05-31', 'Electricity + water + gas', 2),
+(4, 4, 23, 80.00, '2025-05-15', '2025-06-15', 'Weekend movies & games', 0),
+(5, 5, 23, 200.00, '2025-03-01', '2025-03-31', 'Medical checkup', 1),
+(6, 6, 23, 500.00, '2025-04-01', '2025-06-30', 'Online course + books', 0),
+(7, 7, 23, 220.00, '2025-05-01', '2025-05-31', 'Weekly grocery shopping', 2),
+(8, 8, 23, 1200.00, '2025-05-01', '2025-05-31', 'May house rent', 0),
+(9, 14, 23, 150.00, '2025-04-10', '2025-04-20', 'NGO donation', 1),
+(10, 16, 23, 900.00, '2025-04-01', '2025-04-30', 'Quarterly tax payment', 1),
+(12, 18, 23, 1000.00, '2025-06-01', '2025-06-30', 'Summer trip to Goa', 0),
+(13, 2, 23, 1000.00, '2025-05-01', '2025-05-31', 'Bus Vara', 0),
+(14, 5, 23, 1500.00, '2025-05-01', '2025-05-31', 'Medical Cost', 0);
 
 -- --------------------------------------------------------
 
@@ -217,7 +216,6 @@ INSERT INTO `expense_categories` (`category_id`, `user_id`, `name`, `created_at`
 (7, NULL, 'Groceries', '2025-05-22 21:01:51', 0),
 (8, NULL, 'Rent', '2025-05-22 21:01:51', 0),
 (11, 25, 'Gadgets', '2025-05-22 21:25:44', 1),
-(12, 23, 'Gadgets', '2025-05-22 22:28:17', 2),
 (14, 23, 'Charity', '2025-05-22 22:31:29', 1),
 (15, 23, 'Tax', '2025-05-23 07:54:27', 2),
 (16, 23, 'Tax', '2025-05-23 07:55:02', 1),

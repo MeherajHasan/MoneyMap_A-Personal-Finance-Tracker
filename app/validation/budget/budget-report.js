@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         const datasets = [
-            {
+            { 
                 label: 'Target Amount',
                 data: allLabels.map(label => grouped[label]?.amount || 0),
                 backgroundColor: backgroundColors.amount

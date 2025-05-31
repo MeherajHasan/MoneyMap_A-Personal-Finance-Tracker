@@ -5,7 +5,7 @@
     <title>Analysis & Reports</title>
     <link rel="stylesheet" href="../../styles/reports/report.css">
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
-</head>
+</head> 
 
 <body>
     <?php include '../header-footer/header.php' ?>

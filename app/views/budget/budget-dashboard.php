@@ -87,14 +87,17 @@ function getSelectedBudgetMonth($monthStr)
             <tbody id="budgetTableBody">
                 <?php foreach ($monthlyBudgets as $budget): ?>
                     <?php
-                    $remaining = $budget['amount'] - $budget['spent_amount'];
+                    $usedAmount = getUsedBudgetByCategory($_SESSION['user']['id'], $budget['category_id'], $selectedMonth);
+                    $remaining = $budget['amount'] - $usedAmount;
+
+
                     $categoryName = getCategoryNameById($budget['category_id']);
                     ?>
                     <?php if ($selectedCategory == 'all' || strtolower($categoryName) == strtolower($selectedCategory)): ?>
                         <tr>
-                            <td><?= htmlspecialchars($categoryName) ?></td>
+                            <td><?= $categoryName ?></td>
                             <td>$<?= number_format($budget['amount'], 2) ?></td>
-                            <td>$<?= number_format($budget['spent_amount'], 2) ?></td>
+                            <td>$<?= number_format($usedAmount, 2) ?></td>
                             <td>$<?= number_format($remaining, 2) ?></td>
                             <td><?= $budget['start_date'] ?></td>
                             <td><?= $budget['target_date'] ?></td>

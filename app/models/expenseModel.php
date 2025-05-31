@@ -83,6 +83,7 @@ function addExpenseReturnId($userID, $category_id, $name, $amount, $expense_date
     $con = getConnection();
     $sql = "INSERT INTO expenses (userID, category_id, name, amount, expense_date, note)
             VALUES ('$userID', '$category_id', '$name', '$amount', '$expense_date', '$notes')";
+    
     if (mysqli_query($con, $sql)) {
         return mysqli_insert_id($con);
     } else {

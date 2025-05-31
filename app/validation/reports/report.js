@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             borderColor: '#F44336',
                             data: data.monthly_expense
                         }
-                    ]
+                    ] 
 
                 },
                 options: {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             new Chart(document.getElementById('budgetPie'), pieConfig(
-                null, 'Used', data.total_spent, 'Remaining', data.total_budget - data.total_spent, '#42A5F5', '#90CAF9'
+                null, 'Used', data.total_spent, 'Remaining', Math.max(data.total_budget - data.total_spent, 0), '#42A5F5', '#90CAF9'    
             ));
             new Chart(document.getElementById('debtPie'), pieConfig(
                 null, 'Paid', data.debt_paid, 'Payable', data.debt_payable, '#66BB6A', '#EF5350'
