@@ -2,6 +2,7 @@
 require_once('../../controllers/userAuth.php');
 require_once('../../models/expenseCategoryModel.php');
 require_once('../../models/expenseModel.php');
+require_once('../../models/billModel.php');
 
 $prevCategory = $prevName = $prevAmount = $prevDate = $prevNotes = $expenseID = "";
 $category = $name = $amount = $date = $notes = "";
@@ -45,10 +46,23 @@ if (isset($_GET['id'])) {
         $date = $prevDate;
         $notes = $prevNotes;
     }
-} 
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $expenseID = (int)$_POST['expenseID'];
+    $expense = getExpenseById($expenseID);
+    if ($expense) {
+        $prevCategory = $expense['category_name'];
+        //var_dump($prevCategory);
+        $prevName = $expense['name'];
+        $prevAmount = $expense['amount'];
+        $prevDate = $expense['expense_date'];
+        $prevNotes = $expense['note'];
+    } else { 
+        header("Location: expense-dashboard.php");
+        exit();
+    }
+
     if (empty($_POST['expenseCategory'])) {
         $categoryError = "Please select a category.";
         $hasError = true;
@@ -95,16 +109,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $date = $_POST['expenseDate'];
     }
 
-    
+
     $notes = $_POST['expenseNotes'] ?? '';
 
     if (!$hasError) {
         if (
-            $category === $prevCategory &&
-            $name === $prevName &&
-            floatval($amount) === floatval($prevAmount) &&
-            $date === $prevDate &&
-            $notes === $prevNotes
+            $category === $prevCategory && $name === $prevName && floatval($amount) === floatval($prevAmount) &&
+            $date === $prevDate && $notes === $prevNotes
         ) {
             $emptyError = "No changes detected. Please update at least one field.";
             $hasError = true;
@@ -113,15 +124,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!$hasError) {
         $category_id = (int)getExpenseCategoryIdByName($_SESSION['user']['id'], $category);
-
         // OK -> category_id
         //var_dump($expenseID, $category_id, $name, $amount, $notes, $date);
+        var_dump($prevCategory);
+        $prevCategoryId = getExpenseCategoryIdByName($_SESSION['user']['id'], $prevCategory);
 
-        $updateResult = updateExpense($expenseID, $category_id, $name, $amount, $notes, $date);
-        if ($updateResult) {
-            echo "<script>alert('Expense updated successfully!');</script>";
-            header("Location: expense-dashboard.php?msg=update_success");
-            exit;
+        $updateExpense = updateExpense($expenseID, $category_id, $name, $amount, $notes, $date);
+
+        if ($updateExpense) {
+            if ($prevCategoryId != 3 && $category_id == 3) {
+                addBillViaExpense($_SESSION['user']['id'], $expenseID, $name, $amount, $date, 0);
+                header("Location: expense-dashboard.php?msg=update_success");
+                exit; 
+            } 
+
+            //var_dump($prevCategoryId, $category_id);
+
+            elseif ($prevCategoryId == 3 && $category_id != 3) {
+                deleteBillByExpenseId($expenseID);
+                header("Location: expense-dashboard.php?msg=update_success");
+                exit;
+            } 
+
+            else {
+                $updateBill = updateBillViaExpense($expenseID, $name, $amount, $date);
+                if ($updateBill) {
+                    header("Location: expense-dashboard.php?msg=update_success");
+                    exit; 
+                } else {
+                    $emptyError = "Failed to update bill.";
+                }
+            }
         } else {
             $emptyError = "Failed to update expense. Please try again.";
         }
@@ -149,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
         <form action="<?= $_SERVER["PHP_SELF"]; ?>" method="POST" class="expense-form two-column-form">
-            <input type="hidden" name="expenseID" value="<?= $expenseID; ?>">   
+            <input type="hidden" name="expenseID" value="<?= $expenseID; ?>">
             <div class="form-group-row">
                 <div class="form-column">
                     <label>Previous Category</label>

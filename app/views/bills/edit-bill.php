@@ -154,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="form-buttons">
                 <button type="submit" class="btn btn-primary">Save</button>
                 <a href="bill-dashboard.php" class="btn btn-secondary">Cancel</a>
-            </div>
+            </div> 
         </form>
     </main>
 

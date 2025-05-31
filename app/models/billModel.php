@@ -4,7 +4,7 @@ require_once 'expenseCategoryModel.php';
 require_once 'expenseModel.php';
 
 function getAllBills($userId)
-{
+{ 
     $con = getConnection();
     $query = "SELECT * FROM bills WHERE user_id = $userId ORDER BY payment_date DESC";
     $result = mysqli_query($con, $query);
@@ -107,4 +107,19 @@ function getAllUserTotalBills() {
         return $row['total_bill'];
     } 
 }
+
+function deleteBillByExpenseId($expenseID) {
+    $con = getConnection();
+    $sql = "DELETE FROM bills WHERE expense_id = '$expenseID'";
+    return mysqli_query($con, $sql);
+}
+
+function updateBillViaExpense($expenseID, $billName, $amount, $paymentDate) {
+    $con = getConnection();
+    $sql = "UPDATE bills 
+            SET bill_name = '$billName', amount = '$amount', payment_date = '$paymentDate'
+            WHERE expense_id = '$expenseID'";
+    return mysqli_query($con, $sql);
+}
 ?>
+ 

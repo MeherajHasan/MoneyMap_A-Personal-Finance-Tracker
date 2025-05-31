@@ -58,7 +58,7 @@ function deleteExpense($expenseID) {
     $con = getConnection();
     $sql = "UPDATE expenses SET status = 1 WHERE expenseID = '$expenseID'";
     return mysqli_query($con, $sql);
-}
+} 
 
 function getExpenseById($expenseID) {
     $con = getConnection();

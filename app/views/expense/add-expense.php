@@ -168,6 +168,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php include '../header-footer/footer.php' ?>
 
     <script src="../../validation/expense/add-expense.js"></script>
-</body>
+</body> 
 
 </html>

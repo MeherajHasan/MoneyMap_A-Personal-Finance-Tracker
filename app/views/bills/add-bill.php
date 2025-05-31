@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <button type="submit" class="btn btn-primary">Add Bill</button>
                 <a href="bill-dashboard.php" class="btn btn-secondary">Cancel</a>
             </div>
-        </form>
+        </form> 
     </main>
 
     <?php include '../header-footer/footer.php'; ?>
