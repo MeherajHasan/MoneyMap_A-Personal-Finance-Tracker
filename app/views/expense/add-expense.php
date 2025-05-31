@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $categoryError = "Invalid category.";
             $hasError = true;
         } elseif ($categoryID === '3') {
-            $expenseId = addExpenseReturnId($_SESSION['user']['id'], $categoryID, $name, $amount, $_POST['expenseDate']);
+            $expenseId = addExpenseReturnId($_SESSION['user']['id'], $categoryID, $name, $amount, $_POST['expenseDate'], $notes);
 
             $addBillStatus = addBillViaExpense($_SESSION['user']['id'], $expenseId, $name, $amount, $_POST['expenseDate'], $notes);
             if ($addBillStatus) {

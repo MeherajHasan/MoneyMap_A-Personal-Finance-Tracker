@@ -2,6 +2,7 @@
 require_once('../../controllers/userAuth.php');
 require_once('../../models/expenseCategoryModel.php');
 require_once('../../models/expenseModel.php');
+require_once('../../models/billModel.php');
 
 $expenseCategoryNames = getExpenseCategoryName($_SESSION['user']['id']);
 $expenses = getAllExpenses($_SESSION['user']['id']);
@@ -11,11 +12,24 @@ $totalExpense = array_sum($categoryTotals);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['expenseID'])) {
     $expenseID = $_POST['expenseID'];
+    $expense = getExpenseById($expenseID);
+    $categoryId = $expense['category_id'];
+
+
     if (deleteExpense($expenseID)) {
-        echo 'success';
-        header('Location: expense-dashboard.php');
+        if ($categoryId == 3) {
+            $deleteBill = deleteBillByExpenseId($expenseID);
+            if ($deleteBill) {
+                header("Location: expense-dashboard.php?message=Expense deleted successfully.");
+                exit();
+            } else {
+                header("Location: expense-dashboard.php?error=Failed to delete bill associated with the expense.");
+                exit();
+            }
+        }
+        header("Location: expense-dashboard.php?message=Expense deleted successfully.");
         exit();
-    } 
+    }
 }
 ?>
 

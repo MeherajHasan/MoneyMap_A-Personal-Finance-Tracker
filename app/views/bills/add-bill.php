@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors['general'] = 'Failed to add the bill. Please try again.';
         }
     }
-}
+} 
 ?>
 
 <!DOCTYPE html>

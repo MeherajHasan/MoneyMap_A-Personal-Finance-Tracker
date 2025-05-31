@@ -20,7 +20,7 @@ function getAllBills($userId)
 function addBill($userId, $billName, $amount, $paymentDate, $status)
 {
     $con = getConnection();
-    $expenseId = addExpenseReturnId($userId, 3, $billName, $amount, $paymentDate);
+    $expenseId = addExpenseReturnId($userId, 3, $billName, $amount, $paymentDate, 'added via bill');
 
     if ($expenseId) {
         $sql = "INSERT INTO bills (user_id, expense_id, category_id, bill_name, amount, payment_date, status)

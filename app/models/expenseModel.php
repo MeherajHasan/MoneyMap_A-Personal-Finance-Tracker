@@ -79,10 +79,10 @@ function updateExpense($expenseID, $category_id, $name, $amount, $note, $date) {
     return mysqli_query($con, $sql);
 }
 
-function addExpenseReturnId($userID, $category_id, $name, $amount, $expense_date) {
+function addExpenseReturnId($userID, $category_id, $name, $amount, $expense_date, $notes) {
     $con = getConnection();
-    $sql = "INSERT INTO expenses (userID, category_id, name, amount, expense_date)
-            VALUES ('$userID', '$category_id', '$name', '$amount', '$expense_date')";
+    $sql = "INSERT INTO expenses (userID, category_id, name, amount, expense_date, note)
+            VALUES ('$userID', '$category_id', '$name', '$amount', '$expense_date', '$notes')";
     if (mysqli_query($con, $sql)) {
         return mysqli_insert_id($con);
     } else {

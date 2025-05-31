@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2025 at 10:30 PM
+-- Generation Time: May 31, 2025 at 04:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,9 +43,9 @@ CREATE TABLE `bills` (
 --
 
 INSERT INTO `bills` (`bill_id`, `expense_id`, `category_id`, `bill_name`, `amount`, `payment_date`, `status`, `user_id`) VALUES
-(9, 20, 3, 'Electricity Bill - April', 1000.00, '2025-05-22', 0, 23),
-(10, 21, 3, 'Gas - April', 500.00, '2025-05-10', 1, 23),
-(11, 25, 3, 'agdsfsd', 200.00, '2025-05-14', 0, 23);
+(20, 27, 3, 'Electricity Bill - May', 500.00, '2025-05-20', 0, 23),
+(21, 28, 3, 'Gas', 500.00, '2025-05-30', 0, 23),
+(22, 29, 3, 'Moylar Bill', 200.00, '2025-05-29', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -175,7 +175,6 @@ CREATE TABLE `expenses` (
 INSERT INTO `expenses` (`expenseID`, `userID`, `category_id`, `name`, `amount`, `expense_date`, `note`, `created_at`, `status`) VALUES
 (1, 23, 1, 'Brunch', 750.00, '2025-05-15', 'Office lunch', '2025-05-23 08:52:05', 0),
 (2, 23, 2, 'Bus fare', 60.00, '2025-05-16', 'Commute to work', '2025-05-23 08:52:05', 0),
-(3, 23, 3, 'Electricity bill', 3200.00, '2025-05-10', 'Monthly bill', '2025-05-23 08:52:05', 0),
 (4, 23, 4, 'Movie ticket', 550.00, '2025-05-12', 'Weekend entertainment', '2025-05-23 08:52:05', 0),
 (5, 23, 5, 'Doctor visit', 1200.00, '2025-05-14', 'General checkup', '2025-05-23 08:52:05', 0),
 (6, 23, 6, 'Course fee', 7500.00, '2025-05-01', 'Online programming course', '2025-05-23 08:52:05', 0),
@@ -186,11 +185,9 @@ INSERT INTO `expenses` (`expenseID`, `userID`, `category_id`, `name`, `amount`, 
 (11, 23, 1, 'Burger', 150.00, '2025-05-05', 'Cheap Burger', '2025-05-23 10:49:37', 0),
 (12, 23, 2, 'Uber', 2000.00, '2025-06-03', 'Urgent varsity', '2025-05-23 10:50:53', 0),
 (13, 23, 17, 'Vet bill', 100.00, '2025-02-03', 'why so many times!', '2025-05-23 10:51:41', 0),
-(18, 23, 3, 'Electricity Bill - May', 5000.00, '2025-05-14', 'Updated via Bill Edit', '2025-05-28 10:25:53', 0),
-(19, 23, 3, 'Gas', 1200.00, '2025-05-02', NULL, '2025-05-28 10:27:13', 1),
-(20, 23, 3, 'Electricity Bill - April', 1000.00, '2025-05-22', NULL, '2025-05-28 11:52:00', 0),
-(21, 23, 3, 'Gas - April', 500.00, '2025-05-10', NULL, '2025-05-28 11:52:17', 0),
-(25, 23, 3, 'agdsfsd', 200.00, '2025-05-14', NULL, '2025-05-28 12:18:11', 0);
+(27, 23, 3, 'Electricity Bill - May', 500.00, '2025-05-20', 'ungabunga', '2025-05-31 14:26:43', 0),
+(28, 23, 3, 'Gas', 500.00, '2025-05-30', '', '2025-05-31 14:27:13', 0),
+(29, 23, 3, 'Moylar Bill', 200.00, '2025-05-29', 'Updated via Bill Edit', '2025-05-31 14:27:44', 0);
 
 -- --------------------------------------------------------
 
@@ -224,7 +221,7 @@ INSERT INTO `expense_categories` (`category_id`, `user_id`, `name`, `created_at`
 (14, 23, 'Charity', '2025-05-22 22:31:29', 1),
 (15, 23, 'Tax', '2025-05-23 07:54:27', 2),
 (16, 23, 'Tax', '2025-05-23 07:55:02', 1),
-(17, 23, 'Pet', '2025-05-23 08:44:05', 2),
+(17, 23, 'Pet', '2025-05-23 08:44:05', 1),
 (18, 23, 'Tour', '2025-05-23 09:31:04', 2),
 (19, 25, 'Varsity Fee', '2025-05-27 16:21:04', 1),
 (22, 23, 'abc', '2025-05-27 19:52:46', 2);
@@ -454,7 +451,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `budget`
@@ -478,7 +475,7 @@ ALTER TABLE `debt`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `expenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `expenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `expense_categories`
