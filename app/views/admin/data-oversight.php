@@ -71,12 +71,8 @@ include '../../models/billModel.php';
             <p>$<?= getAllUserTotalBills() ?></p>
         </div>
     </div>
-        </form>
-    </div>
 
     <?php include '../header-footer/admin-footer.php'; ?>
 </body>
-
-<script src="../../validation/admin/data-oversight.js"></script>
 
 </html>

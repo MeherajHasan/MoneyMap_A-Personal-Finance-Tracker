@@ -8,7 +8,7 @@ $password = trim($_POST['password'] ?? '');
 
 unset($_SESSION['emailError'], $_SESSION['passwordError'], $_SESSION['email']);
 
-$hasError = false;
+$hasError = false; 
 
 if (empty($email)) {
     $_SESSION['emailError'] = "Email is required!";

@@ -20,7 +20,7 @@ function validateEmail(email) {
         if (!part || part.length > 63) return false;
     }
     return true;
-}
+} 
 
 function validateForm() {
     let valid = true;

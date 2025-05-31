@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     verifyMsg.textContent = "";     
     verifyMsg.style.color = "red";    
-
+ 
     const code = verifyCodeInput.value.trim();
 
     if (code.length === 0) {

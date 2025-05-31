@@ -5,7 +5,7 @@ $old = $_SESSION['signup_old'] ?? [];
 $success = $_SESSION['signup_success'] ?? false;
 
 unset($_SESSION['signup_errors'], $_SESSION['signup_old'], $_SESSION['signup_success']);
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">

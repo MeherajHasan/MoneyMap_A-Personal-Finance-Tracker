@@ -3,7 +3,7 @@ require_once('../../models/db.php');
 
 $verifyCode = "";
 $verifyCodeError = "";
-$verifyMsg = "";
+$verifyMsg = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $verifyCode = trim($_POST["verifyCode"] ?? "");
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </header>
 
     <main id="emailVerifyMain">
-        <form action="" id="emailVerifyForm" method="post" novalidate>
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" id="emailVerifyForm" method="post" novalidate>
             <h1 id="verificationTitle">Email Verification</h1>
             <label for="verifyCode" class="inputLabel">Enter Verification Code:</label>
             <input id="verifyCode" class="inputField" type="text" name="verifyCode" placeholder="Must be 6 digits"

@@ -15,7 +15,7 @@ if (isset($_COOKIE['remember_password'])) {
 $emailError = $_SESSION['emailError'] ?? '';
 $passwordError = $_SESSION['passwordError'] ?? '';
 session_unset();
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">

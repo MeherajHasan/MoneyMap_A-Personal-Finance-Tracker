@@ -177,6 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSuccess.textContent = '';
         updateError.textContent = data.message;
       }
-    });
+    }); 
   }
 });

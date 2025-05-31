@@ -5,7 +5,7 @@ let isEmailAvailable = false;
 
 function sanitize(str) {
     return str.trim();
-}
+} 
 
 function isOnlyLettersAndSpaces(str) {
     for (let i = 0; i < str.length; i++) {

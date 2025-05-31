@@ -6,7 +6,7 @@ require_once('../models/userModel.php');
 
 function sanitize($data) {
     return htmlspecialchars(trim($data));
-} 
+}  
 
 function isOnlyLettersAndSpaces($str) {
     for ($i = 0; $i < strlen($str); $i++) {
@@ -164,7 +164,7 @@ if ($photo && $photo['error'] == 0) {
 if (!empty($errors)) {
     $_SESSION['signup_errors'] = $errors;
     $_SESSION['signup_old'] = $_POST;
-    header("Location: ../../views/auth/signup.php");
+    header("Location: ../views/auth/signup.php");
     exit;
 }
 

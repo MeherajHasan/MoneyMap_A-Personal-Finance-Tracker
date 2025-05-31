@@ -49,7 +49,7 @@ function isPhoneValid($phone)
     }
     if (strlen($phone) < 8 || strlen($phone) > 15) {
         return false;
-    }
+    } 
     return true;
 }
 
@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="profile-container">
         <h1>Admin Profile</h1>
 
-        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data"
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data"
             class="profile-form">
             <div class="profile-photo">
                 <img id="admin-photo" src="<?= $profileImage ?>" alt="Admin Photo" />
