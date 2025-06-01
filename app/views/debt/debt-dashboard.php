@@ -30,7 +30,7 @@ require_once('../../models/debtModel.php');
                     </div>
                     <div class="metric-card">
                         <h4>Total Active Debt Amount</h4>
-                        <p id="totalMinimumPayment">$<?= sumActiveDebtAmounts($_SESSION['user']['id']) ?? '$0.00' ?></p>
+                        <p id="totalMinimumPayment">$<?= sumActiveDebtAmounts($_SESSION['user']['id']) ?? '0.00' ?></p>
                     </div>
                     <div class="metric-card">
                         <h4>Total Payable Amount</h4>
