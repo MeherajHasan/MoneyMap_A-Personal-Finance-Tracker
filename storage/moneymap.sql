@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2025 at 07:22 PM
+-- Generation Time: Jun 01, 2025 at 06:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,8 @@ CREATE TABLE `bills` (
 INSERT INTO `bills` (`bill_id`, `expense_id`, `category_id`, `bill_name`, `amount`, `payment_date`, `status`, `user_id`) VALUES
 (20, 27, 3, 'Electricity Bill - May', 500.00, '2025-05-20', 0, 23),
 (21, 28, 3, 'Gas', 500.00, '2025-05-30', 0, 23),
-(22, 29, 3, 'Moylar Bill', 200.00, '2025-05-29', 0, 23);
+(22, 29, 3, 'Moylar Bill', 200.00, '2025-05-29', 0, 23),
+(26, 33, 3, 'Electricity Bill - June', 500.00, '2025-06-01', 0, 28);
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,8 @@ INSERT INTO `budget` (`budget_id`, `category_id`, `user_id`, `amount`, `start_da
 (10, 16, 23, 900.00, '2025-04-01', '2025-04-30', 'Quarterly tax payment', 1),
 (12, 18, 23, 1000.00, '2025-06-01', '2025-06-30', 'Summer trip to Goa', 0),
 (13, 2, 23, 1000.00, '2025-05-01', '2025-05-31', 'Bus Vara', 0),
-(14, 5, 23, 1500.00, '2025-05-01', '2025-05-31', 'Medical Cost', 0);
+(14, 5, 23, 1500.00, '2025-05-01', '2025-05-31', 'Medical Cost', 0),
+(15, 3, 28, 250.00, '2025-06-01', '2025-06-30', 'Total bill budget', 0);
 
 -- --------------------------------------------------------
 
@@ -186,7 +188,8 @@ INSERT INTO `expenses` (`expenseID`, `userID`, `category_id`, `name`, `amount`, 
 (13, 23, 17, 'Vet bill', 100.00, '2025-02-03', 'why so many times!', '2025-05-23 10:51:41', 0),
 (27, 23, 3, 'Electricity Bill - May', 500.00, '2025-05-20', 'ungabunga', '2025-05-31 14:26:43', 0),
 (28, 23, 3, 'Gas', 500.00, '2025-05-30', '', '2025-05-31 14:27:13', 0),
-(29, 23, 3, 'Moylar Bill', 200.00, '2025-05-29', 'Updated via Bill Edit', '2025-05-31 14:27:44', 0);
+(29, 23, 3, 'Moylar Bill', 200.00, '2025-05-29', 'Updated via Bill Edit', '2025-05-31 14:27:44', 0),
+(33, 28, 3, 'Electricity Bill - June', 500.00, '2025-06-01', 'added via bill', '2025-06-01 04:07:23', 0);
 
 -- --------------------------------------------------------
 
@@ -222,7 +225,9 @@ INSERT INTO `expense_categories` (`category_id`, `user_id`, `name`, `created_at`
 (17, 23, 'Pet', '2025-05-23 08:44:05', 1),
 (18, 23, 'Tour', '2025-05-23 09:31:04', 2),
 (19, 25, 'Varsity Fee', '2025-05-27 16:21:04', 1),
-(22, 23, 'abc', '2025-05-27 19:52:46', 2);
+(22, 23, 'abc', '2025-05-27 19:52:46', 2),
+(23, 23, 'Pet', '2025-05-31 18:15:13', 2),
+(24, 23, 'Pe', '2025-05-31 18:20:20', 2);
 
 -- --------------------------------------------------------
 
@@ -251,7 +256,8 @@ INSERT INTO `income` (`income_id`, `user_id`, `income_type`, `source`, `amount`,
 (2, 23, 1, 'Received Rents', 25000.00, '2025-05-02', 'RBMB Rents', '2025-05-22 16:02:59', 0),
 (5, 23, 2, 'Babayoga', 15000.00, '2025-05-14', 'Won boxing match!', '2025-05-22 19:55:45', 0),
 (6, 23, 2, 'Human Trafficking', 5200.00, '2024-11-06', '2 person', '2025-05-22 19:59:17', 0),
-(7, 23, 0, 'Salary', 10000.00, '2025-06-01', '', '2025-05-28 15:39:40', 0);
+(7, 23, 0, 'Salary', 10000.00, '2025-06-01', '', '2025-05-28 15:39:40', 0),
+(8, 28, 0, 'Salary', 50000.00, '2025-06-02', 'Monthly request', '2025-06-01 04:06:41', 0);
 
 -- --------------------------------------------------------
 
@@ -361,7 +367,8 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `id_type`, `id_number`, `passport_e
 (23, 'Meheraj', 'Hasan', 0, '1111111111', NULL, '+88', '123456789', 'hasanmeheraj639@gmail.com', '$2y$10$W7/WvledZhccGgXVHo8kX.OPPcyfrKDM4SjiHoWoP4dr9SVAbjscC', 0, '2002-10-30', 'Uttara', '../../uploads/hasanmeheraj639.jpeg', '2025-05-21 02:04:47', 0, 'user'),
 (25, 'Junky', 'Oggy', 0, '0000000000', '0000-00-00', '+65', '123456789', 'junkyoggy@gmail.com', '$2y$10$lhuJn1HyYX7QZHF3CxjOrOPiZwitZycajd9sEqWOuvq7XPex2tU3C', 0, '1999-02-09', 'Khilkhet', '../../uploads/junkyoggy.jpg', '2025-05-23 16:46:01', 0, 'user'),
 (26, 'Admin', 'Hasan', 0, '1111100000', '0000-00-00', '+88', '123456789', 'admin@gmail.com', '$2y$10$afajkcI/LswC4WObRITFt.xmqVyN1UwNe2ouD9maBVCbSXUEh25Fi', 0, '2002-10-30', 'Kuratoli', '../../uploads/admin.jpg', '2025-05-24 20:36:38', 0, 'admin'),
-(27, 'Meheraj', 'Doe', 0, '1120456820', '0000-00-00', '+88', '01455694233', 'mdoe@gmail.com', '$2y$10$U3jIuuBTYS6D.1itaoC0dOsmxXjwiTXGpuAUmmnOnhO3/.NOcS6h2', 0, '1998-01-22', 'Airport er goli', '../../uploads/mdoe.jpeg', '2025-05-30 13:43:36', 3, 'user');
+(27, 'Meheraj', 'Doe', 0, '1120456820', '0000-00-00', '+88', '01455694233', 'mdoe@gmail.com', '$2y$10$U3jIuuBTYS6D.1itaoC0dOsmxXjwiTXGpuAUmmnOnhO3/.NOcS6h2', 0, '1998-01-22', 'Airport er goli', '../../uploads/mdoe.jpeg', '2025-05-30 13:43:36', 3, 'user'),
+(28, 'John', 'Doe', 0, '1241241241', '0000-00-00', '+88', '0156198389', 'johndoe@gmail.com', '$2y$10$1L2NlADzLRlxJ270IhsbbeASeFWcQ6gj/w.fOf2ezbQv4Dd7S8lSG', 0, '2001-06-05', 'Dhaka', '../../uploads/johndoe.png', '2025-06-01 06:03:30', 0, 'user');
 
 --
 -- Indexes for dumped tables
@@ -449,13 +456,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `budget`
 --
 ALTER TABLE `budget`
-  MODIFY `budget_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `budget_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -473,19 +480,19 @@ ALTER TABLE `debt`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `expenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `expenseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `expense_categories`
 --
 ALTER TABLE `expense_categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `income`
 --
 ALTER TABLE `income`
-  MODIFY `income_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `income_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `savings`
@@ -503,7 +510,7 @@ ALTER TABLE `savings_transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
