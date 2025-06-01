@@ -15,7 +15,7 @@ if (isset($_GET['delete'], $_GET['expense']) && is_numeric($_GET['delete']) && i
         header("Location: bill-dashboard.php?error=Failed to delete bill");
         exit();
     }
-}
+} 
 
 $bills = getAllBills($_SESSION['user']['id']);
 ?>
@@ -86,6 +86,7 @@ $bills = getAllBills($_SESSION['user']['id']);
     </main>
 
     <?php include '../header-footer/footer.php'; ?>
+    
     <script src="../../validation/bills/bill-dashboard.js"></script>
 </body>
 

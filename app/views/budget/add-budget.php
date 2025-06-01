@@ -127,4 +127,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../../validation/budget/add-budget.js"></script>
 </body>
 
-</html>
+</html> 

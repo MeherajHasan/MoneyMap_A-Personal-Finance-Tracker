@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         };
-        xhr.send();
+        xhr.send(); 
     }
 
     fetchDebtData(function(data) {
@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const title = document.createElement('h3');
             title.textContent = debt.debt_name;
-
+ 
             const canvas = document.createElement('canvas');
             canvas.id = chartId;
-            canvas.width = 400; // Set explicit width
-            canvas.height = 400; // Set explicit height
+            canvas.width = 400; 
+            canvas.height = 400; 
 
             chartSection.appendChild(title);
             chartSection.appendChild(canvas);

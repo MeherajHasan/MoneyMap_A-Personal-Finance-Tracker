@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const backgroundColors = {
             amount: '#0D47A1',  
             spent: '#29B6F6'     
-        };
+        }; 
 
         const datasets = [
             { 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 backgroundColor: backgroundColors.spent
             }
         ];
-
+ 
         new Chart(ctx, {
             type: 'bar',
             data: {

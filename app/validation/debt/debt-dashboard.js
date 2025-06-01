@@ -8,6 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
             noDebtsMessage.style.display = 'block';
         } else {
             noDebtsMessage.style.display = 'none';
-        }
+        } 
     }
 });

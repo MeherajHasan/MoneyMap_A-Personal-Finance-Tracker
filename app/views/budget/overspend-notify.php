@@ -12,7 +12,7 @@ require_once('../../models/budgetModel.php')
     <title>MoneyMap || Budget Overspent!</title>
     <link rel="stylesheet" href="../../styles/budget/overspend-notify.css">
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
-</head>
+</head> 
 
 <body>
     <?php include '../header-footer/header.php' ?>

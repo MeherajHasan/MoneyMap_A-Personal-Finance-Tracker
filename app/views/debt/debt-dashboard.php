@@ -51,7 +51,7 @@ require_once('../../models/debtModel.php');
                             $formattedAmount = number_format($debt['total_amount'], 2);
                             echo "<li>
                                 <div class='debt-info'>
-                                    <span class='debt-name'>" . htmlspecialchars($debt['debt_name']) . "</span>
+                                    <span class='debt-name'>" . $debt['debt_name'] . "</span>
                                     <span class='debt-amount'>\${$formattedAmount}</span>
                                 </div>
                                 <div class='debt-actions'>

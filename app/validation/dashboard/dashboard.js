@@ -22,7 +22,7 @@ syncBtn.addEventListener('click', () => {
         syncStatus.innerHTML = `Last Synced: ${lastSyncedDate}`;
         syncBtn.disabled = false;
     }, 2000);
-});
+}); 
 
 profileBtn.addEventListener('click', () => {
     window.location.href = '../../views/profile/profile.php';
@@ -71,14 +71,3 @@ widgetButtons.forEach(button => {
         }
     });
 });
-
-const setWidgetData = () => {
-    if (reportsWidget) {
-        const amountElement = reportsWidget.querySelector('.widget-amount');
-        if (amountElement) {
-            amountElement.textContent = "View Detailed Reports"; 
-        }
-    }
-};
-
-setWidgetData();

@@ -2,7 +2,7 @@
 require_once('../../controllers/userAuth.php');
 require_once('../../models/budgetModel.php');
 require_once('../../models/expenseCategoryModel.php');
-
+ 
 $newCategory = '';
 $emptyError = '';
 

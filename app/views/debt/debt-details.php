@@ -94,7 +94,7 @@ if ($selectedDebt !== null) {
                     <span class="label">Remaining Payable Amount:</span>
                     <span class="value"><?= $selectedDebt['total_amount'] - $selectedDebt['paid_amount'] ?? '-' ?>.00</span>
                 </div>
-                <div class="detail-item">
+                <div class="detail-item"> 
                     <span class="label">Estimated Total with Interest:</span>
                     <span class="value"><?= $totalWithInterest ?? '-' ?></span>
                 </div>

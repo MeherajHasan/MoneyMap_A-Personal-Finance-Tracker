@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         floatval($billAmount) == $currentBill['amount'] &&
         $billDueDate === $currentBill['payment_date'] &&
         $billStatus === ($currentBill['status'] == 0 ? 'Paid' : 'Due')
-    ) {
+    ) { 
         $noChangeError = "Please change at least one field before submitting.";
         $hasError = true;
     }

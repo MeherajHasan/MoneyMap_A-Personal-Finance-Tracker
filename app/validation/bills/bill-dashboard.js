@@ -7,6 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!confirmDelete) {
                 e.preventDefault();
             }
-        });
+        }); 
     });
 });

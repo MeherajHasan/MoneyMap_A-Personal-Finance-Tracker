@@ -13,7 +13,7 @@ function isValidBillName($name) {
               ($char >= '0' && $char <= '9') ||
               $char === ' ' || $char === '.' || $char === ',' || $char === '-')) {
             return false;
-        }
+        } 
     }
     return true;
 }
@@ -73,17 +73,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <main class="add-bill-container">
         <h1>Add New Bill</h1>
 
-        <form id="add-bill-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" class="bill-form">
+        <form id="add-bill-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="bill-form">
             <label for="bill-name"><strong>Bill Name:</strong></label>
-            <input type="text" id="bill-name" name="bill_name" value="<?= htmlspecialchars($billName) ?>" />
+            <input type="text" id="bill-name" name="bill_name" value="<?= $billName ?>" />
             <div class="error"><?= $errors['bill_name'] ?></div>
 
             <label for="amount"><strong>Amount ($):</strong></label>
-            <input type="number" id="amount" name="amount" step="0.01" value="<?= htmlspecialchars($amount) ?>" />
+            <input type="number" id="amount" name="amount" step="0.01" value="<?= $amount ?>" />
             <div class="error"><?= $errors['amount'] ?></div>
 
             <label for="due-date"><strong>Due Date:</strong></label>
-            <input type="date" id="due-date" name="due_date" value="<?= htmlspecialchars($dueDate) ?>" />
+            <input type="date" id="due-date" name="due_date" value="<?= $dueDate ?>" />
             <div class="error"><?= $errors['due_date'] ?></div>
 
             <label for="status"><strong>Status:</strong></label>

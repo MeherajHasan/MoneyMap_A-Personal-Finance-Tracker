@@ -3,4 +3,4 @@ document.addEventListener('DOMContentLoaded', () => {
   acknowledgeBtn.addEventListener('click', () => {
     window.location.href = 'budget-dashboard.php';
   });
-});
+}); 

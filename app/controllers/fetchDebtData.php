@@ -8,4 +8,4 @@ $data = getDebtDataByUser($userID);
 
 echo json_encode($data);
 exit;
-?>
+?> 

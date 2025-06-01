@@ -15,7 +15,7 @@ function getSelectedBudgetMonth($monthStr)
     }
     $date = date_create($monthStr . '-01');
     return date_format($date, "F Y");
-}
+} 
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +89,6 @@ function getSelectedBudgetMonth($monthStr)
                     <?php
                     $usedAmount = getUsedBudgetByCategory($_SESSION['user']['id'], $budget['category_id'], $selectedMonth);
                     $remaining = $budget['amount'] - $usedAmount;
-
 
                     $categoryName = getCategoryNameById($budget['category_id']);
                     ?>

@@ -7,7 +7,7 @@ $category = $amount = $startDate = $endDate = $notes = "";
 $prevCategory = $prevAmount = $prevStartDate = $prevEndDate = $prevNotes = "";
 $categoryError = $amountError = $startDateError = $endDateError = $emptyError = "";
 
-$categoryId = $_GET['category_id'] ?? '';
+$categoryId = $_GET['category_id'] ?? ''; 
 $budgetId = $_GET['id'] ?? '';
 $categories = getExpenseCategoryName($_SESSION['user']['id']);
 //var_dump($categoryId, $budgetId);

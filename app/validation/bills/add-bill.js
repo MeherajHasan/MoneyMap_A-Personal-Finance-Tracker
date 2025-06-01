@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const billName = document.getElementById('bill-name');
     const amount = document.getElementById('amount');
     const dueDate = document.getElementById('due-date');
-    const status = document.getElementById('status');
+    const status = document.getElementById('status'); 
 
     const errorName = billName.nextElementSibling;
     const errorAmount = amount.nextElementSibling;

@@ -12,7 +12,7 @@ const spentError = document.getElementById('spentError');
 const startDateError = document.getElementById('startDateError');
 const endDateError = document.getElementById('endDateError');
 const emptyError = document.getElementById('emptyError');
-
+ 
 function clearErrors() {
     categoryError.textContent = '';
     amountError.textContent = '';

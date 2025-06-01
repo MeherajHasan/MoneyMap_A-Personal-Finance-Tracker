@@ -5,7 +5,7 @@
     <title>Budget Report</title>
     <link rel="stylesheet" href="../../styles/budget/budget-report.css">
     <link rel="icon" href="../../../public/assets/logo.png" type="image/x-icon" />
-</head>
+</head> 
 <body>
     <?php include '../header-footer/header.php' ?>
     
@@ -19,5 +19,5 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../validation/budget/budget-report.js"></script>
 </body>
-</html>
+</html> 
  
